@@ -1,4 +1,4 @@
-WellDone - A GTD-client with tootledo-sync for Mac OS X
+WellDone - A GTD-client with toodledo-sync for Mac OS X
 =======
 
 Short project description here...
