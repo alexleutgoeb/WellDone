@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
 		42262ECA109C818B005E4997 /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
-		770B37ED0679A11B001EADE2 /* WellDone_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* WellDone_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,12 +38,12 @@
 		42262EB5109C8049005E4997 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
-		770B37EC0679A11B001EADE2 /* WellDone_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellDone_AppDelegate.h; sourceTree = "<group>"; };
 		77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellDone_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WellDone-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "WellDone-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* WellDone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellDone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,7 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				770B37EC0679A11B001EADE2 /* WellDone_DataModel.xcdatamodel */,
+				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */,
-				770B37ED0679A11B001EADE2 /* WellDone_DataModel.xcdatamodel in Sources */,
+				B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
