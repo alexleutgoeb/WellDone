@@ -104,6 +104,8 @@
 		29B97314FDCFA39411CA2CEA /* WellDone */ = {
 			isa = PBXGroup;
 			children = (
+				6F5D249210AC588D002E9514 /* View Classes */,
+				6F5D249110AC5873002E9514 /* ViewController Classes */,
 				7756732906782D8800D1FEB8 /* Models */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				FACCD7BF10A050B900A36C87 /* TestClasses */,
@@ -142,6 +144,20 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F5D249110AC5873002E9514 /* ViewController Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "ViewController Classes";
+			sourceTree = "<group>";
+		};
+		6F5D249210AC588D002E9514 /* View Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View Classes";
 			sourceTree = "<group>";
 		};
 		7756732906782D8800D1FEB8 /* Models */ = {
