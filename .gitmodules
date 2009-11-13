@@ -1,0 +1,3 @@
+[submodule "src/Extern/toodledo-objc"]
+	path = src/Extern/toodledo-objc
+	url = git://github.com/alexleutgoeb/toodledo-objc.git
