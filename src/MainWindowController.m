@@ -13,7 +13,13 @@
 
 - (void) awakeFromNib {
 
-	// Insert Window init code here.		
+	[self willChangeValueForKey:@"simpleListController"];
+	  simpleListController = [[SimpleListController alloc] initWithNibName:@"SimpleListView" bundle:nil];
+	//NSLog([simpleListController description]);
+	[simpleListController loadView];
+	[self didChangeValueForKey:@"simpleListController"];
+	[targetView addSubview:[simpleListController view]];
+	
 }
 
 @end

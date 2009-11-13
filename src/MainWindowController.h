@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "SimpleListController.h";
 
 @interface MainWindowController : NSWindowController {
-
+	IBOutlet NSView *targetView;
+	SimpleListController *simpleListController;
 }
+
 
 @end
