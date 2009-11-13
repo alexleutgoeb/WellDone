@@ -14,9 +14,8 @@
 - (void) awakeFromNib {
 
 	[self willChangeValueForKey:@"simpleListController"];
-	  simpleListController = [[SimpleListController alloc] initWithNibName:@"SimpleListView" bundle:nil];
-	//NSLog([simpleListController description]);
-	[simpleListController loadView];
+	simpleListController = [[SimpleListController alloc] initWithNibName:@"SimpleListView" bundle:nil];
+	simpleListController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 	[self didChangeValueForKey:@"simpleListController"];
 	[targetView addSubview:[simpleListController view]];
 	

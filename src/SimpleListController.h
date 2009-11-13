@@ -10,7 +10,9 @@
 
 
 @interface SimpleListController : NSViewController {
-	//IBOutlet NSOutlineView *outlineView;
+	NSManagedObjectContext *moc;
 }
+
+@property (nonatomic, retain) NSManagedObjectContext *moc;
 
 @end
