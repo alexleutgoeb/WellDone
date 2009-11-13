@@ -143,6 +143,8 @@
 // Called after start
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	DLog(@"Debug log message.");
+	mainWindowController = [[MainWindowController alloc] init];
+	[mainWindowController showWindow: nil];
 }
 
 

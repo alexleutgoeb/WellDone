@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MainWindowController.h";
 
 @interface WellDone_AppDelegate : NSObject 
 {
@@ -15,6 +16,7 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+	MainWindowController *mainWindowController;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow *window;
