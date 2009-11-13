@@ -70,6 +70,9 @@
 			children = (
 				77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */,
+				6F5D249210AC588D002E9514 /* View Classes */,
+				6F5D249110AC5873002E9514 /* ViewController Classes */,
+				7756732906782D8800D1FEB8 /* Models */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -104,9 +107,6 @@
 		29B97314FDCFA39411CA2CEA /* WellDone */ = {
 			isa = PBXGroup;
 			children = (
-				6F5D249210AC588D002E9514 /* View Classes */,
-				6F5D249110AC5873002E9514 /* ViewController Classes */,
-				7756732906782D8800D1FEB8 /* Models */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				FACCD7BF10A050B900A36C87 /* TestClasses */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
