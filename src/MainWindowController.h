@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "SimpleListController.h";
 #import "GTDListController.h";
+#import "TaskEditorController.h"
 
 @interface MainWindowController : NSWindowController {
 	IBOutlet NSView *targetView;
 	SimpleListController *simpleListController;
 	GTDListController *gtdListController;
+	TaskEditorController *taskeditorController;
 }
 
 

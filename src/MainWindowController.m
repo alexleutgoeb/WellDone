@@ -9,17 +9,22 @@
 #import "MainWindowController.h"
 
 
-
 @implementation MainWindowController
 
 - (void) awakeFromNib {
-/*
+
 	[self willChangeValueForKey:@"simpleListController"];
 	simpleListController = [[SimpleListController alloc] initWithNibName:@"SimpleListView" bundle:nil];
 	simpleListController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 	[self didChangeValueForKey:@"simpleListController"];
 	[targetView addSubview:[simpleListController view]];
-	*/
+	
+	taskeditorController = [[TaskEditorController alloc] initWithWindowNibName:@"TaskEditor"];
+	
+	[[taskeditorController window ]orderFront:self]; 
+	taskeditorController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+	
+	/*
 	[self willChangeValueForKey:@"gtdListController"];
 	gtdListController = [[GTDListController alloc] initWithNibName:@"GTDListView" bundle:nil];
 	gtdListController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
@@ -44,7 +49,7 @@
 		[[anObject view] setFrameOrigin: point];
 		[[gtdListController view] addSubview:[anObject view]];
 	}
-	
+	*/
 	
 }
 
