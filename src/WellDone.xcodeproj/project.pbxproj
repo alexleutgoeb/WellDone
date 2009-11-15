@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
 		42262ECA109C818B005E4997 /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
+		6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
+		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6FB1626010AD82EB00961A94 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1625F10AD82EB00961A94 /* MainWindowController.m */; };
 		6FB1626110AD82EB00961A94 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1625F10AD82EB00961A94 /* MainWindowController.m */; };
 		6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB162E410AD8E5800961A94 /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB162E310AD8E5800961A94 /* SimpleListController.m */; };
 		6FB162E510AD8E5800961A94 /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB162E310AD8E5800961A94 /* SimpleListController.m */; };
+		6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
+		6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
+		6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
+		6FB8A94710B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
 		77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -44,11 +50,16 @@
 		42262EB5109C8049005E4997 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
+		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
+		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
 		6FB1625E10AD82EB00961A94 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		6FB1625F10AD82EB00961A94 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB162E210AD8E5800961A94 /* SimpleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListController.h; sourceTree = "<group>"; };
 		6FB162E310AD8E5800961A94 /* SimpleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListController.m; sourceTree = "<group>"; };
+		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
+		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
+		6FB8A94510B0194E00B0F240 /* GTDListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTDListView.xib; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellDone_AppDelegate.h; sourceTree = "<group>"; };
 		77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellDone_AppDelegate.m; sourceTree = "<group>"; };
@@ -145,6 +156,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
 				6FB162D910AD8CF200961A94 /* SimpleListView.xib */,
+				6FB8A94510B0194E00B0F240 /* GTDListView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -165,6 +177,8 @@
 				6FB1625F10AD82EB00961A94 /* MainWindowController.m */,
 				6FB162E210AD8E5800961A94 /* SimpleListController.h */,
 				6FB162E310AD8E5800961A94 /* SimpleListController.m */,
+				6FB8A94010B0143F00B0F240 /* GTDListController.h */,
+				6FB8A94110B0143F00B0F240 /* GTDListController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -172,6 +186,8 @@
 		6F5D249210AC588D002E9514 /* View Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6F2E521810B01F7B005B118B /* GTDListView.h */,
+				6F2E521910B01F7B005B118B /* GTDListView.m */,
 			);
 			name = "View Classes";
 			sourceTree = "<group>";
@@ -257,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */,
+				6FB8A94710B0194E00B0F240 /* GTDListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +284,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
 				6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */,
+				6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +314,8 @@
 				42262ECA109C818B005E4997 /* templateTestCases.m in Sources */,
 				6FB1626010AD82EB00961A94 /* MainWindowController.m in Sources */,
 				6FB162E410AD8E5800961A94 /* SimpleListController.m in Sources */,
+				6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */,
+				6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +328,8 @@
 				B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */,
 				6FB1626110AD82EB00961A94 /* MainWindowController.m in Sources */,
 				6FB162E510AD8E5800961A94 /* SimpleListController.m in Sources */,
+				6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */,
+				6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
