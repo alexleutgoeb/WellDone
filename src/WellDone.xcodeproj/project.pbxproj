@@ -25,6 +25,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4317EBB10B1544900C9841F /* SidebarTask.xib */; };
+		B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4317ED910B163F900C9841F /* SidebarTaskController.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1ED7F0310B0905B0065D79B /* TaskEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1ED7F0210B0905B0065D79B /* TaskEditorController.m */; };
@@ -67,6 +69,9 @@
 		77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellDone_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WellDone-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "WellDone-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* WellDone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellDone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4317EBB10B1544900C9841F /* SidebarTask.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTask.xib; sourceTree = "<group>"; };
+		B4317ED810B163F900C9841F /* SidebarTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTaskController.h; sourceTree = "<group>"; };
+		B4317ED910B163F900C9841F /* SidebarTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTaskController.m; sourceTree = "<group>"; };
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 		D1ED7EFE10B090020065D79B /* TaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskEditor.xib; sourceTree = "<group>"; };
 		D1ED7F0110B0905B0065D79B /* TaskEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskEditorController.h; sourceTree = "<group>"; };
@@ -156,6 +161,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
 				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
 				42262EB5109C8049005E4997 /* UnitTests-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -187,6 +193,8 @@
 				6FB8A94110B0143F00B0F240 /* GTDListController.m */,
 				D1ED7F0110B0905B0065D79B /* TaskEditorController.h */,
 				D1ED7F0210B0905B0065D79B /* TaskEditorController.m */,
+				B4317ED810B163F900C9841F /* SidebarTaskController.h */,
+				B4317ED910B163F900C9841F /* SidebarTaskController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -294,6 +302,7 @@
 				6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */,
 				6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */,
 				D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */,
+				B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +349,7 @@
 				6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */,
 				D1ED7F0310B0905B0065D79B /* TaskEditorController.m in Sources */,
+				B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

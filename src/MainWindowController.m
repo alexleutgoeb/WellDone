@@ -13,16 +13,29 @@
 
 - (void) awakeFromNib {
 
+	
 	[self willChangeValueForKey:@"simpleListController"];
 	simpleListController = [[SimpleListController alloc] initWithNibName:@"SimpleListView" bundle:nil];
 	simpleListController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 	[self didChangeValueForKey:@"simpleListController"];
 	[targetView addSubview:[simpleListController view]];
 	
+
+	
 	taskeditorController = [[TaskEditorController alloc] initWithWindowNibName:@"TaskEditor"];
 	
 	[[taskeditorController window ]orderFront:self]; 
 	taskeditorController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+	
+	 
+	 
+	// Sidebar Task	
+	[self willChangeValueForKey:@"sidebarTaskController"];
+	sidebarTaskController = [[SidebarTaskController alloc] initWithNibName:@"SidebarTask" bundle:nil];
+	sidebarTaskController.moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+	[self didChangeValueForKey:@"sidebarTaskController"];
+	[sidebarTaskView addSubview:[sidebarTaskController view]];
+	
 	
 	/*
 	[self willChangeValueForKey:@"gtdListController"];

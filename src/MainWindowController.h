@@ -10,12 +10,15 @@
 #import "SimpleListController.h";
 #import "GTDListController.h";
 #import "TaskEditorController.h"
+#import "SidebarTaskController.h"
 
 @interface MainWindowController : NSWindowController {
 	IBOutlet NSView *targetView;
+	IBOutlet NSView *sidebarTaskView;
 	SimpleListController *simpleListController;
 	GTDListController *gtdListController;
 	TaskEditorController *taskeditorController;
+	SidebarTaskController *sidebarTaskController;
 }
 
 
