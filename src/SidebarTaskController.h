@@ -10,10 +10,7 @@
 
 
 @interface SidebarTaskController : NSViewController {
-	NSManagedObjectContext *moc;
-	IBOutlet NSTextField *temp;
+	IBOutlet NSObjectController* taskObjectController;
 }
-
-@property (nonatomic, retain) NSManagedObjectContext *moc;
 
 @end

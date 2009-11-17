@@ -10,9 +10,7 @@
 
 
 @interface SimpleListController : NSViewController {
-	NSManagedObjectContext *moc;
+	IBOutlet NSTreeController* treeController;
 }
-
-@property (nonatomic, retain) NSManagedObjectContext *moc;
 
 @end

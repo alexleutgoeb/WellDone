@@ -7,19 +7,22 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MainWindowController.h";
+#import <SidebarTaskController.h>
+#import <SimpleListController.h>
 
 @interface WellDone_AppDelegate : NSObject 
 {
-    NSWindow *window;
+    IBOutlet NSWindow *window;
+	IBOutlet NSView* sidebarTaskPlaceholderView;
+	IBOutlet NSView* simpleListPlaceholderView;
     
+	SidebarTaskController* sidebarTaskController;
+	SimpleListController* simpleListController;
+	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
-	MainWindowController *mainWindowController;
 }
-
-@property (nonatomic, retain) IBOutlet NSWindow *window;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

@@ -7,10 +7,77 @@
 //
 
 #import "WellDone_AppDelegate.h"
+#import "SidebarTaskController.h"
+#import "SimpleListController.h"
+
+@interface WellDone_AppDelegate (PrivateAPI)
+
+- (void) replacePlaceholder:(NSView*) placeholder withView:(NSView*) view;
+
+@end
 
 @implementation WellDone_AppDelegate
 
-@synthesize window;
+#pragma mark Initialization & disposal
+
+
+//TODO: - (void) dealloc
+
+- (void) awakeFromNib
+{
+	// A couple of asserts to make sure the nib is properly assigned. These are easily
+	// forgotten and may take some time to verify.
+	NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
+	NSAssert(simpleListPlaceholderView != nil, @"Forgot to link the gtdList placeholder view!");
+	
+	// When the main window is loaded from nib, we create our children views. This
+	// loads the views from their nibs so we can access their data. Note that in apps
+	// that use many custom views, we don't have to load all at once. Instead we should
+	// lazily load the subviews (i.e. create the view controllers) when they are needed.
+	// This should speed up the application loading time . Note that we don't have to 
+	// assert the actual views IB mapping since that is done by NSViewController.
+	
+	simpleListController = [[SimpleListController alloc] init];
+	sidebarTaskController = [[SidebarTaskController alloc] init];
+	
+	// Replace the placeholder views with the actual views from the controllers.
+
+	[self replacePlaceholder:simpleListPlaceholderView withView:[simpleListController view]];
+		[self replacePlaceholder:sidebarTaskPlaceholderView withView:[sidebarTaskController view]];
+}
+
+/*
+ 
+#pragma mark User actions
+
+- (IBAction) saveAction:(id)sender
+{
+	NSError *error = nil;
+	if (![[self managedObjectContext] save:&error])
+	{
+		[NSApp presentError:error];
+	}
+}
+*/
+
+#pragma mark PrivateAPI
+
+- (void) replacePlaceholder:(NSView*) placeholder withView:(NSView*) view
+{
+	NSParameterAssert(placeholder != nil);
+	NSParameterAssert(view != nil);
+	
+	// Copy the relevant settings from placeholder to the view.
+	[view setFrame:[placeholder frame]];
+	[view setAutoresizingMask:[placeholder autoresizingMask]];
+	
+	// Replace the placeholder with the actual view.
+	NSView* superview = [placeholder superview];
+	[placeholder removeFromSuperview];
+	[superview addSubview:view];
+}
+
+#pragma mark CoreData handling
 
 /**
     Returns the support directory for the application, used to store the Core Data
@@ -139,13 +206,14 @@
     }
 }
 
-
+/*
 // Called after start
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	DLog(@"Debug log message.");
 	mainWindowController = [[MainWindowController alloc] init];
 	[mainWindowController showWindow: nil];
 }
+ */
 
 
 /**

@@ -11,12 +11,13 @@
 
 @implementation SimpleListController
 
-@synthesize moc;
-
-/*
-- (void) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-	[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
-}*/
+- (id) init
+{
+	self = [super initWithNibName:@"SimpleListView" bundle:nil];
+	if (self != nil)
+	{		
+	}
+	return self;
+}
 
 @end

@@ -11,12 +11,8 @@
 		42262ECA109C818B005E4997 /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
 		6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
-		6FB1626010AD82EB00961A94 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1625F10AD82EB00961A94 /* MainWindowController.m */; };
-		6FB1626110AD82EB00961A94 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1625F10AD82EB00961A94 /* MainWindowController.m */; };
 		6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
-		6FB162E410AD8E5800961A94 /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB162E310AD8E5800961A94 /* SimpleListController.m */; };
-		6FB162E510AD8E5800961A94 /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB162E310AD8E5800961A94 /* SimpleListController.m */; };
 		6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
 		6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
 		6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
@@ -25,11 +21,11 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BE2AA10B2FFC000B288EE /* SimpleListController.m */; };
 		B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4317EBB10B1544900C9841F /* SidebarTask.xib */; };
 		B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4317ED910B163F900C9841F /* SidebarTaskController.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
-		D1ED7F0310B0905B0065D79B /* TaskEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1ED7F0210B0905B0065D79B /* TaskEditorController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,11 +52,7 @@
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
-		6FB1625E10AD82EB00961A94 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
-		6FB1625F10AD82EB00961A94 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
-		6FB162E210AD8E5800961A94 /* SimpleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListController.h; sourceTree = "<group>"; };
-		6FB162E310AD8E5800961A94 /* SimpleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListController.m; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
 		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
 		6FB8A94510B0194E00B0F240 /* GTDListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTDListView.xib; sourceTree = "<group>"; };
@@ -69,13 +61,13 @@
 		77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellDone_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WellDone-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "WellDone-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* WellDone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellDone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B41BE2A910B2FFC000B288EE /* SimpleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListController.h; sourceTree = "<group>"; };
+		B41BE2AA10B2FFC000B288EE /* SimpleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListController.m; sourceTree = "<group>"; };
 		B4317EBB10B1544900C9841F /* SidebarTask.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTask.xib; sourceTree = "<group>"; };
 		B4317ED810B163F900C9841F /* SidebarTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTaskController.h; sourceTree = "<group>"; };
 		B4317ED910B163F900C9841F /* SidebarTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTaskController.m; sourceTree = "<group>"; };
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 		D1ED7EFE10B090020065D79B /* TaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskEditor.xib; sourceTree = "<group>"; };
-		D1ED7F0110B0905B0065D79B /* TaskEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskEditorController.h; sourceTree = "<group>"; };
-		D1ED7F0210B0905B0065D79B /* TaskEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskEditorController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,14 +177,10 @@
 		6F5D249110AC5873002E9514 /* ViewController Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6FB1625E10AD82EB00961A94 /* MainWindowController.h */,
-				6FB1625F10AD82EB00961A94 /* MainWindowController.m */,
-				6FB162E210AD8E5800961A94 /* SimpleListController.h */,
-				6FB162E310AD8E5800961A94 /* SimpleListController.m */,
+				B41BE2A910B2FFC000B288EE /* SimpleListController.h */,
+				B41BE2AA10B2FFC000B288EE /* SimpleListController.m */,
 				6FB8A94010B0143F00B0F240 /* GTDListController.h */,
 				6FB8A94110B0143F00B0F240 /* GTDListController.m */,
-				D1ED7F0110B0905B0065D79B /* TaskEditorController.h */,
-				D1ED7F0210B0905B0065D79B /* TaskEditorController.m */,
 				B4317ED810B163F900C9841F /* SidebarTaskController.h */,
 				B4317ED910B163F900C9841F /* SidebarTaskController.m */,
 			);
@@ -330,8 +318,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				42262ECA109C818B005E4997 /* templateTestCases.m in Sources */,
-				6FB1626010AD82EB00961A94 /* MainWindowController.m in Sources */,
-				6FB162E410AD8E5800961A94 /* SimpleListController.m in Sources */,
 				6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */,
 			);
@@ -344,12 +330,10 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */,
 				B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */,
-				6FB1626110AD82EB00961A94 /* MainWindowController.m in Sources */,
-				6FB162E510AD8E5800961A94 /* SimpleListController.m in Sources */,
 				6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */,
-				D1ED7F0310B0905B0065D79B /* TaskEditorController.m in Sources */,
 				B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */,
+				B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

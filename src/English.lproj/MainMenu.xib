@@ -130,14 +130,14 @@
 								<object class="NSCustomView" id="347331265">
 									<reference key="NSNextResponder" ref="17684303"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{131, 0}, {522, 493}}</string>
+									<string key="NSFrame">{{131, 0}, {351, 493}}</string>
 									<reference key="NSSuperview" ref="17684303"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 								<object class="NSCustomView" id="742645384">
 									<reference key="NSNextResponder" ref="17684303"/>
 									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{654, 0}, {135, 493}}</string>
+									<string key="NSFrame">{{483, 0}, {306, 493}}</string>
 									<reference key="NSSuperview" ref="17684303"/>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -1296,9 +1296,6 @@
 			<object class="NSUserDefaultsController" id="1030857795">
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
-			<object class="NSCustomObject" id="960655629">
-				<string key="NSClassName">MainWindowController</string>
-			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -1937,27 +1934,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">window</string>
-						<reference key="source" ref="960655629"/>
-						<reference key="destination" ref="483958638"/>
-					</object>
-					<int key="connectionID">555</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">targetView</string>
-						<reference key="source" ref="960655629"/>
-						<reference key="destination" ref="347331265"/>
-					</object>
-					<int key="connectionID">559</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">sidebarTaskView</string>
-						<reference key="source" ref="960655629"/>
+						<string key="label">sidebarTaskPlaceholderView</string>
+						<reference key="source" ref="612578685"/>
 						<reference key="destination" ref="742645384"/>
 					</object>
-					<int key="connectionID">563</int>
+					<int key="connectionID">566</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">simpleListPlaceholderView</string>
+						<reference key="source" ref="612578685"/>
+						<reference key="destination" ref="347331265"/>
+					</object>
+					<int key="connectionID">567</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2912,11 +2901,6 @@
 						<reference key="parent" ref="734058192"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">554</int>
-						<reference key="object" ref="960655629"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">556</int>
 						<reference key="object" ref="17684303"/>
 						<object class="NSMutableArray" key="children">
@@ -3183,9 +3167,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{218, -76}, {789, 673}}</string>
+					<string>{{260, -75}, {789, 673}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{218, -76}, {789, 673}}</string>
+					<string>{{260, -75}, {789, 673}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
@@ -3363,32 +3347,11 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">563</int>
+			<int key="maxID">567</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">MainWindowController</string>
-					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>sidebarTaskView</string>
-							<string>targetView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>NSView</string>
-							<string>NSView</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">MainWindowController.h</string>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">WellDone_AppDelegate</string>
 					<string key="superclassName">NSObject</string>
@@ -3397,8 +3360,19 @@
 						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">window</string>
-						<string key="NS.object.0">NSWindow</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>sidebarTaskPlaceholderView</string>
+							<string>simpleListPlaceholderView</string>
+							<string>window</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSView</string>
+							<string>NSView</string>
+							<string>NSWindow</string>
+						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -3991,18 +3965,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSWindowScripting.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSWindowController</string>
-					<string key="superclassName">NSResponder</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">showWindow:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSWindowController.h</string>
 					</object>
 				</object>
 			</object>

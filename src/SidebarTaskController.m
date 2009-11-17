@@ -10,5 +10,14 @@
 
 
 @implementation SidebarTaskController
-@synthesize moc;
+
+- (id) init
+{
+	self = [super initWithNibName:@"SidebarTask" bundle:nil];
+	if (self != nil)
+	{		
+	}
+	return self;
+}
+
 @end
