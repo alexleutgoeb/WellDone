@@ -499,6 +499,71 @@
 			};
 			name = Release;
 		};
+		42A24DA710B2A1FB00B4CB95 /* GCov_Build-CodeCoverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = "GCov_Build-CodeCoverage";
+		};
+		42A24DA810B2A1FB00B4CB95 /* GCov_Build-CodeCoverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WellDone_Prefix.pch;
+				INFOPLIST_FILE = "WellDone-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = WellDone;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "GCov_Build-CodeCoverage";
+		};
+		42A24DA910B2A1FB00B4CB95 /* GCov_Build-CodeCoverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WellDone.app/Contents/MacOS/WellDone";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "UnitTests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-lgcov",
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = UnitTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WellDone.app/Contents/MacOS/WellDone";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "GCov_Build-CodeCoverage";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -506,6 +571,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26FC0A850875C7B200E6366F /* Debug */,
+				42A24DA810B2A1FB00B4CB95 /* GCov_Build-CodeCoverage */,
 				26FC0A860875C7B200E6366F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -515,6 +581,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26FC0A890875C7B200E6366F /* Debug */,
+				42A24DA710B2A1FB00B4CB95 /* GCov_Build-CodeCoverage */,
 				26FC0A8A0875C7B200E6366F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -524,6 +591,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42262EB7109C8049005E4997 /* Debug */,
+				42A24DA910B2A1FB00B4CB95 /* GCov_Build-CodeCoverage */,
 				42262EB8109C8049005E4997 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
