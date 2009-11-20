@@ -19,6 +19,10 @@
 		6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
 		6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
 		6FB8A94710B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
+		6FCE287010B6FE42002355CF /* TestDataGeneratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */; };
+		6FCE287110B6FE42002355CF /* TestDataGeneratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */; };
+		6FCE287310B6FE53002355CF /* TestDataGenerator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCE287210B6FE53002355CF /* TestDataGenerator.xib */; };
+		6FCE287410B6FE53002355CF /* TestDataGenerator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCE287210B6FE53002355CF /* TestDataGenerator.xib */; };
 		77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -61,6 +65,9 @@
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
 		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
 		6FB8A94510B0194E00B0F240 /* GTDListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTDListView.xib; sourceTree = "<group>"; };
+		6FCE286E10B6FE42002355CF /* TestDataGeneratorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDataGeneratorController.h; sourceTree = "<group>"; };
+		6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDataGeneratorController.m; sourceTree = "<group>"; };
+		6FCE287210B6FE53002355CF /* TestDataGenerator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestDataGenerator.xib; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellDone_AppDelegate.h; sourceTree = "<group>"; };
 		77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellDone_AppDelegate.m; sourceTree = "<group>"; };
@@ -158,6 +165,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
 				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
 				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
 				42262EB5109C8049005E4997 /* UnitTests-Info.plist */,
@@ -183,6 +191,8 @@
 		6F5D249110AC5873002E9514 /* ViewController Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6FCE286E10B6FE42002355CF /* TestDataGeneratorController.h */,
+				6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */,
 				B41BE2A910B2FFC000B288EE /* SimpleListController.h */,
 				B41BE2AA10B2FFC000B288EE /* SimpleListController.m */,
 				6FB8A94010B0143F00B0F240 /* GTDListController.h */,
@@ -286,6 +296,7 @@
 			files = (
 				6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */,
 				6FB8A94710B0194E00B0F240 /* GTDListView.xib in Resources */,
+				6FCE287410B6FE53002355CF /* TestDataGenerator.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +311,7 @@
 				D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */,
 				B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */,
 				42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */,
+				6FCE287310B6FE53002355CF /* TestDataGenerator.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +341,7 @@
 				42262ECA109C818B005E4997 /* templateTestCases.m in Sources */,
 				6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */,
+				6FCE287110B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +357,7 @@
 				B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */,
 				B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */,
 				42112DAB10B6DF4000B19CC0 /* SidebarFolderController.m in Sources */,
+				6FCE287010B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -288,5 +288,13 @@
     [super dealloc];
 }
 
+/**
+  Implements the First responder chain call for "showTestdatagenerator". The corresponding controller is initialized
+  and the window is shown.
+ */
+- (void)showTestdatagenerator:(id)sender {
+	TestDataGeneratorController *testDataGeneratorController = [[TestDataGeneratorController alloc] init];
+	[[testDataGeneratorController window] orderFront:self];
+}
 
 @end

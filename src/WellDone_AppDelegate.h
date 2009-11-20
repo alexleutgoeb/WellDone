@@ -10,6 +10,7 @@
 #import <SidebarTaskController.h>
 #import <SimpleListController.h>
 #import <SidebarFolderController.h>
+#import <TestDataGeneratorController.h>
 
 @interface WellDone_AppDelegate : NSObject 
 {
@@ -32,5 +33,6 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)saveAction:sender;
+- (void)showTestdatagenerator:(id)sender;
 
 @end
