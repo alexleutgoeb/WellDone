@@ -9,6 +9,7 @@
 #import "WellDone_AppDelegate.h"
 #import "SidebarTaskController.h"
 #import "SimpleListController.h"
+#import "SidebarFolderController.h"
 
 @interface WellDone_AppDelegate (PrivateAPI)
 
@@ -29,6 +30,7 @@
 	// forgotten and may take some time to verify.
 	NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
 	NSAssert(simpleListPlaceholderView != nil, @"Forgot to link the gtdList placeholder view!");
+	NSAssert(sidebarFolderPlaceholderView != nil, @"Forgot to link the sidebarFolder placeholder view!");
 	
 	// When the main window is loaded from nib, we create our children views. This
 	// loads the views from their nibs so we can access their data. Note that in apps
@@ -39,11 +41,13 @@
 	
 	simpleListController = [[SimpleListController alloc] init];
 	sidebarTaskController = [[SidebarTaskController alloc] init];
+	sidebarFolderController = [[SidebarFolderController alloc] init];
 	
 	// Replace the placeholder views with the actual views from the controllers.
-
+	[self replacePlaceholder:sidebarFolderPlaceholderView withView:[sidebarFolderController view]];
 	[self replacePlaceholder:simpleListPlaceholderView withView:[simpleListController view]];
-		[self replacePlaceholder:sidebarTaskPlaceholderView withView:[sidebarTaskController view]];
+	[self replacePlaceholder:sidebarTaskPlaceholderView withView:[sidebarTaskController view]];
+	
 }
 
 /*

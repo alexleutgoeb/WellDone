@@ -9,15 +9,18 @@
 #import <Cocoa/Cocoa.h>
 #import <SidebarTaskController.h>
 #import <SimpleListController.h>
+#import <SidebarFolderController.h>
 
 @interface WellDone_AppDelegate : NSObject 
 {
     IBOutlet NSWindow *window;
 	IBOutlet NSView* sidebarTaskPlaceholderView;
 	IBOutlet NSView* simpleListPlaceholderView;
+	IBOutlet NSView* sidebarFolderPlaceholderView;
     
 	SidebarTaskController* sidebarTaskController;
 	SimpleListController* simpleListController;
+	SidebarFolderController* sidebarFolderController;
 	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;

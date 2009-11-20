@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -39,7 +38,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1053,7 +1052,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{487, 626}</string>
-				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSObjectController" id="784584499">
@@ -1689,7 +1687,6 @@
 							<reference ref="1032999739"/>
 							<reference ref="915005005"/>
 							<reference ref="708447714"/>
-							<reference ref="672306683"/>
 							<reference ref="958756497"/>
 							<reference ref="439637026"/>
 							<reference ref="253010338"/>
@@ -1717,6 +1714,7 @@
 							<reference ref="586710871"/>
 							<reference ref="404665166"/>
 							<reference ref="1026346897"/>
+							<reference ref="672306683"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 					</object>

@@ -61,7 +61,7 @@
 						<object class="NSButton" id="76549686">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{622, 40}, {146, 32}}</string>
+							<string key="NSFrame">{{297, 58}, {146, 32}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="758740282">
@@ -85,7 +85,7 @@
 						<object class="NSTextField" id="734058192">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{454, 46}, {157, 22}}</string>
+							<string key="NSFrame">{{138, 64}, {157, 22}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="486068643">
@@ -123,14 +123,14 @@
 								<object class="NSCustomView" id="1069466688">
 									<reference key="NSNextResponder" ref="17684303"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrameSize">{130, 493}</string>
+									<string key="NSFrameSize">{146, 493}</string>
 									<reference key="NSSuperview" ref="17684303"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 								<object class="NSCustomView" id="347331265">
 									<reference key="NSNextResponder" ref="17684303"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{131, 0}, {351, 493}}</string>
+									<string key="NSFrame">{{147, 0}, {335, 493}}</string>
 									<reference key="NSSuperview" ref="17684303"/>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -1948,6 +1948,14 @@
 					</object>
 					<int key="connectionID">567</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sidebarFolderPlaceholderView</string>
+						<reference key="source" ref="612578685"/>
+						<reference key="destination" ref="1069466688"/>
+					</object>
+					<int key="connectionID">569</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1992,9 +2000,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="17684303"/>
-							<reference ref="76549686"/>
-							<reference ref="734058192"/>
 							<reference ref="1023902543"/>
+							<reference ref="734058192"/>
+							<reference ref="76549686"/>
 						</object>
 						<reference key="parent" ref="483958638"/>
 					</object>
@@ -3167,9 +3175,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{260, -75}, {789, 673}}</string>
+					<string>{{254, 89}, {789, 673}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{260, -75}, {789, 673}}</string>
+					<string>{{254, 89}, {789, 673}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
@@ -3187,7 +3195,7 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{437, 808}, {432, 20}}</string>
+					<string>{{297, 789}, {432, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3347,7 +3355,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">567</int>
+			<int key="maxID">569</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3363,12 +3371,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>sidebarFolderPlaceholderView</string>
 							<string>sidebarTaskPlaceholderView</string>
 							<string>simpleListPlaceholderView</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSWindow</string>
