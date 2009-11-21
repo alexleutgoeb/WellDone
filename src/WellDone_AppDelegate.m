@@ -9,6 +9,7 @@
 #import "WellDone_AppDelegate.h"
 #import "SidebarTaskController.h"
 #import "SimpleListController.h"
+#import "GTDListController.h"
 #import "SidebarFolderController.h"
 
 @interface WellDone_AppDelegate (PrivateAPI)
@@ -23,6 +24,7 @@
 
 
 //TODO: - (void) dealloc
+
 
 - (void) awakeFromNib
 {
@@ -40,12 +42,14 @@
 	// assert the actual views IB mapping since that is done by NSViewController.
 	
 	simpleListController = [[SimpleListController alloc] init];
+	//gtdListController = [[GTDListController alloc] init];
 	sidebarTaskController = [[SidebarTaskController alloc] init];
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	
 	// Replace the placeholder views with the actual views from the controllers.
 	[self replacePlaceholder:sidebarFolderPlaceholderView withView:[sidebarFolderController view]];
 	[self replacePlaceholder:simpleListPlaceholderView withView:[simpleListController view]];
+	
 	[self replacePlaceholder:sidebarTaskPlaceholderView withView:[sidebarTaskController view]];
 	
 }
@@ -295,6 +299,22 @@
 - (void)showTestdatagenerator:(id)sender {
 	TestDataGeneratorController *testDataGeneratorController = [[TestDataGeneratorController alloc] init];
 	[[testDataGeneratorController window] orderFront:self];
+}
+
+- (IBAction) changeViewController:(id) sender {
+	static int selectedSegment = -1;
+	if ([sender isKindOfClass:[NSSegmentedControl class]]) {
+		selectedSegment = [sender selectedSegment];
+		
+		//NSLog(@"Debug segment %d ", selectedSegment);
+		
+		if (selectedSegment == 0) {
+			NSLog(@"Debug: replace gtdlistview with simplelistview");
+		} else if (selectedSegment == 1) {
+			NSLog(@"Debug: replace simplelistview with gtdlistview");
+		}
+	}
+
 }
 
 @end

@@ -10,12 +10,10 @@
 
 
 @interface GTDListController : NSViewController {
-	NSManagedObjectContext *moc;
 	NSMutableArray *subViewControllers;
 
 }
 
-@property (nonatomic, retain) NSManagedObjectContext *moc;
 @property (nonatomic, retain) NSMutableArray *subViewControllers;
 
 @end

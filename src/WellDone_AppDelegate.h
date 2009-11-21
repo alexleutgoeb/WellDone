@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <SidebarTaskController.h>
 #import <SimpleListController.h>
+#import <GTDListController.h>
 #import <SidebarFolderController.h>
 #import <TestDataGeneratorController.h>
 
@@ -22,6 +23,7 @@
 	SidebarTaskController* sidebarTaskController;
 	SimpleListController* simpleListController;
 	SidebarFolderController* sidebarFolderController;
+	GTDListController* gtdListController;
 	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
@@ -33,6 +35,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)saveAction:sender;
+- (IBAction) changeViewController:(id)sender;
 - (void)showTestdatagenerator:(id)sender;
 
 @end

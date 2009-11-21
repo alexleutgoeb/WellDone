@@ -12,7 +12,15 @@
 
 @implementation GTDListController
 
-@synthesize moc, subViewControllers;
+@synthesize subViewControllers;
 
+- (id) init
+{
+	self = [super initWithNibName:@"GTDListView" bundle:nil];
+	if (self != nil)
+	{		
+	}
+	return self;
+}
 
 @end
