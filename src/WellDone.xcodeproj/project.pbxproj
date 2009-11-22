@@ -32,6 +32,8 @@
 		B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4317ED910B163F900C9841F /* SidebarTaskController.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
+		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
+		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,9 @@
 		B4317ED910B163F900C9841F /* SidebarTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTaskController.m; sourceTree = "<group>"; };
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 		D1ED7EFE10B090020065D79B /* TaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskEditor.xib; sourceTree = "<group>"; };
+		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
+		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
+		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +180,7 @@
 				6FB8A94510B0194E00B0F240 /* GTDListView.xib */,
 				D1ED7EFE10B090020065D79B /* TaskEditor.xib */,
 				42112E5910B6E5F100B19CC0 /* FolderView.xib */,
+				D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -201,6 +207,8 @@
 				B4317ED910B163F900C9841F /* SidebarTaskController.m */,
 				42112DA910B6DF4000B19CC0 /* SidebarFolderController.h */,
 				42112DAA10B6DF4000B19CC0 /* SidebarFolderController.m */,
+				D1F2E93710B8A838009D4B4B /* FolderManagementController.h */,
+				D1F2E93810B8A838009D4B4B /* FolderManagementController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -312,6 +320,7 @@
 				B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */,
 				42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */,
 				6FCE287310B6FE53002355CF /* TestDataGenerator.xib in Resources */,
+				D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +367,7 @@
 				B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */,
 				42112DAB10B6DF4000B19CC0 /* SidebarFolderController.m in Sources */,
 				6FCE287010B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
+				D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

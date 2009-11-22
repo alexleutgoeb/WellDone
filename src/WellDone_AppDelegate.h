@@ -12,6 +12,7 @@
 #import <GTDListController.h>
 #import <SidebarFolderController.h>
 #import <TestDataGeneratorController.h>
+#import <FolderManagementController.h>
 
 @interface WellDone_AppDelegate : NSObject 
 {
@@ -19,11 +20,14 @@
 	IBOutlet NSView* sidebarTaskPlaceholderView;
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
+	
+	IBOutlet NSPanel* foldermanagement;
     
 	SidebarTaskController* sidebarTaskController;
 	SimpleListController* simpleListController;
 	SidebarFolderController* sidebarFolderController;
 	GTDListController* gtdListController;
+	FolderManagementController* foldermanagementController;
 	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
@@ -37,5 +41,6 @@
 - (IBAction)saveAction:sender;
 - (IBAction) changeViewController:(id)sender;
 - (void)showTestdatagenerator:(id)sender;
+- (void)showFolderManagement:(id)sender;
 
 @end

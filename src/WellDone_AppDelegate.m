@@ -11,6 +11,7 @@
 #import "SimpleListController.h"
 #import "GTDListController.h"
 #import "SidebarFolderController.h"
+#import <FolderManagementController.h>
 
 @interface WellDone_AppDelegate (PrivateAPI)
 
@@ -289,6 +290,7 @@
     [persistentStoreCoordinator release];
     [managedObjectModel release];
 	
+	
     [super dealloc];
 }
 
@@ -299,6 +301,11 @@
 - (void)showTestdatagenerator:(id)sender {
 	TestDataGeneratorController *testDataGeneratorController = [[TestDataGeneratorController alloc] init];
 	[[testDataGeneratorController window] orderFront:self];
+}
+
+- (void)showFolderManagement:(id)sender {
+	foldermanagementController = [[FolderManagementController alloc] init];
+	[[foldermanagementController window] orderFront:self];
 }
 
 - (IBAction) changeViewController:(id) sender {
