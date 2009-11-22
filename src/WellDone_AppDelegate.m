@@ -12,6 +12,8 @@
 #import "GTDListController.h"
 #import "SidebarFolderController.h"
 #import <FolderManagementController.h>
+#import <TagManagementController.h>
+#import <ContextManagementController.h>
 
 @interface WellDone_AppDelegate (PrivateAPI)
 
@@ -303,9 +305,28 @@
 	[[testDataGeneratorController window] orderFront:self];
 }
 
+/**
+  Shows the Folder Management Window after the Context Menu is clicked.
+ */
 - (void)showFolderManagement:(id)sender {
 	foldermanagementController = [[FolderManagementController alloc] init];
 	[[foldermanagementController window] orderFront:self];
+}
+
+/**
+ Shows the Tag Management Window after the Context Menu is clicked.
+ */
+- (void)showTagManagement:(id)sender {
+	tagmanagementController = [[TagManagementController alloc] init];
+	[[tagmanagementController window] orderFront:self];
+}
+
+/**
+ Shows the Context Management Window after the Context Menu is clicked.
+ */
+- (void)showContextManagement:(id)sender {
+	contextmanagementController = [[ContextManagementController alloc] init];
+	[[contextmanagementController window] orderFront:self];
 }
 
 - (IBAction) changeViewController:(id) sender {

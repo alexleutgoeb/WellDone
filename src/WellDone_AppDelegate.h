@@ -13,6 +13,8 @@
 #import <SidebarFolderController.h>
 #import <TestDataGeneratorController.h>
 #import <FolderManagementController.h>
+#import <TagManagementController.h>
+#import <ContextManagementController.h>
 
 @interface WellDone_AppDelegate : NSObject 
 {
@@ -21,6 +23,7 @@
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
 	
+	
 	IBOutlet NSPanel* foldermanagement;
     
 	SidebarTaskController* sidebarTaskController;
@@ -28,6 +31,8 @@
 	SidebarFolderController* sidebarFolderController;
 	GTDListController* gtdListController;
 	FolderManagementController* foldermanagementController;
+	TagManagementController* tagmanagementController;
+	ContextManagementController* contextmanagementController;
 	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
@@ -42,5 +47,7 @@
 - (IBAction) changeViewController:(id)sender;
 - (void)showTestdatagenerator:(id)sender;
 - (void)showFolderManagement:(id)sender;
+- (void)showTagManagement:(id)sender;
+- (void)showContextManagement:(id)sender;
 
 @end
