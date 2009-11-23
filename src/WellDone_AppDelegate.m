@@ -23,6 +23,8 @@
 
 @implementation WellDone_AppDelegate
 
+@synthesize simpleListController;
+
 #pragma mark Initialization & disposal
 
 

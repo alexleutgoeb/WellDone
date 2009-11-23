@@ -14,6 +14,7 @@
 	IBOutlet NSOutlineView* myview;
 }
 
+@property (nonatomic, retain, readonly) NSTreeController *treeController;
 - (id)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 

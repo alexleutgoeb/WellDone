@@ -31,6 +31,7 @@
 		B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4317EBB10B1544900C9841F /* SidebarTask.xib */; };
 		B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4317ED910B163F900C9841F /* SidebarTaskController.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
+		B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */; };
 		D110F46A10B8D72300304B4C /* TagManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D110F46910B8D72300304B4C /* TagManagement.xib */; };
 		D110F47110B8D92600304B4C /* TagManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F47010B8D92600304B4C /* TagManagementController.m */; };
 		D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D110F48410B8DA6800304B4C /* ContextManagement.xib */; };
@@ -85,6 +86,8 @@
 		B4317ED810B163F900C9841F /* SidebarTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTaskController.h; sourceTree = "<group>"; };
 		B4317ED910B163F900C9841F /* SidebarTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTaskController.m; sourceTree = "<group>"; };
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
+		B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListOutlineView.h; sourceTree = "<group>"; };
+		B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListOutlineView.m; sourceTree = "<group>"; };
 		D110F46910B8D72300304B4C /* TagManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagManagement.xib; sourceTree = "<group>"; };
 		D110F46F10B8D92600304B4C /* TagManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagManagementController.h; sourceTree = "<group>"; };
 		D110F47010B8D92600304B4C /* TagManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagManagementController.m; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 			children = (
 				6F2E521810B01F7B005B118B /* GTDListView.h */,
 				6F2E521910B01F7B005B118B /* GTDListView.m */,
+				B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */,
+				B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */,
 			);
 			name = "View Classes";
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */,
 				D110F47110B8D92600304B4C /* TagManagementController.m in Sources */,
 				D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */,
+				B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

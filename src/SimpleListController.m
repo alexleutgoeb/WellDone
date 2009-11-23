@@ -11,6 +11,8 @@
 
 @implementation SimpleListController
 
+@synthesize treeController;
+
 - (id) init {
 	self = [super initWithNibName:@"SimpleListView" bundle:nil];
 	if (self != nil)

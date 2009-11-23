@@ -42,6 +42,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) SimpleListController *simpleListController;
 
 - (IBAction)saveAction:sender;
 - (IBAction) changeViewController:(id)sender;
