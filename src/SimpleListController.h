@@ -11,6 +11,10 @@
 
 @interface SimpleListController : NSViewController {
 	IBOutlet NSTreeController* treeController;
+	IBOutlet NSOutlineView* myview;
 }
+
+- (id)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 
 @end
