@@ -17,7 +17,7 @@
 
 @interface WellDone_AppDelegate (PrivateAPI)
 
-- (void) replaceLocation:(int)location withView:(NSView*)view;
+- (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
 @end
 
@@ -52,10 +52,9 @@
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	
 	// Replace the placeholder views with the actual views from the controllers.
-	[self replaceLocation:1 withView:[sidebarFolderController view]];
-	[self replaceLocation:2 withView:[simpleListController view]];
-		
-	[self replaceLocation:3 withView:[sidebarTaskController view]];
+	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];
+	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
+	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
 	
 }
 
@@ -76,28 +75,26 @@
 #pragma mark PrivateAPI
 
 /*
- location: 1 for folder view, 2 for task view, 3 for sidebar right
+ Replace the given placeholder view with the view of the given NSViewController.
+ placeholder: give a pointer to the pointer to the placeholder NSView
+ locationCode: 1 for folder view, 2 for task view, 3 for right sidebar
 */
-- (void) replaceLocation:(int)location withView:(NSView*)view
+- (void) replacePlaceholderView:(NSView**)placeholder withViewOfController:(NSViewController*)viewController
 {
-	NSParameterAssert(view != nil);
-	NSParameterAssert(location == 1 || location == 2 || location == 3);
+	NSParameterAssert(viewController != nil);
+	NSParameterAssert(*placeholder != nil);
 	
-	NSView *placeholder;
-	if (location == 1) placeholder = sidebarFolderPlaceholderView;
-	else if (location == 2) placeholder = simpleListPlaceholderView;
-	else placeholder = sidebarTaskPlaceholderView;
+	NSView *newView = [viewController view];
+	NSView *superview = [*placeholder superview];
 	
 	// Copy the relevant settings from placeholder to the view.
-	NSRect test = [placeholder frame];
-	[view setFrame:test];
-	[view setAutoresizingMask:[placeholder autoresizingMask]];
+	[newView setFrame:[*placeholder frame]];
+	[newView setAutoresizingMask:[*placeholder autoresizingMask]];
 	
 	// Replace the placeholder with the actual view.
-	NSView* superview = [placeholder superview];
-	[placeholder removeFromSuperview];
-	[superview addSubview:view];
-	currentListView = view;	
+	[superview replaceSubview:*placeholder with:newView];
+	
+	*placeholder = newView;
 }
 
 #pragma mark CoreData handling
@@ -108,7 +105,6 @@
     the content, either in the NSApplicationSupportDirectory location or (if the
     former cannot be found), the system's temporary directory.
  */
-
 - (NSString *)applicationSupportDirectory {
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
@@ -346,14 +342,12 @@
 	if ([sender isKindOfClass:[NSSegmentedControl class]]) {
 		selectedSegment = [sender selectedSegment];
 		
-		//NSLog(@"Debug segment %d ", selectedSegment);
-		
 		if (selectedSegment == 0) {
 			NSLog(@"Debug: replace gtdlistview with simplelistview");
-			//[self replaceLocation:2 withView:[simpleListController view]];
+			[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 		} else if (selectedSegment == 1) {
 			NSLog(@"Debug: replace simplelistview with gtdlistview");
-			//[self replaceLocation:2 withView:[gtdListController view]];
+			[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:gtdListController];
 		}
 	}
 
