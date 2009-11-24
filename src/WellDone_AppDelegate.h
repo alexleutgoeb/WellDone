@@ -23,6 +23,8 @@
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
 	
+	//is necessary for setting the first responder (focus) to the current view, e.g. after inserting new task:
+	NSView* currentListView;
 	
 	IBOutlet NSPanel* foldermanagement;
     
@@ -50,5 +52,6 @@
 - (void)showFolderManagement:(id)sender;
 - (void)showTagManagement:(id)sender;
 - (void)showContextManagement:(id)sender;
+- (void)addNewTask:(id)sender;
 
 @end

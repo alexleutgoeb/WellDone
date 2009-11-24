@@ -47,7 +47,7 @@
 	// assert the actual views IB mapping since that is done by NSViewController.
 	
 	simpleListController = [[SimpleListController alloc] init];
-	//gtdListController = [[GTDListController alloc] init];
+	gtdListController = [[GTDListController alloc] init];
 	sidebarTaskController = [[SidebarTaskController alloc] init];
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	
@@ -88,6 +88,8 @@
 	NSView* superview = [placeholder superview];
 	[placeholder removeFromSuperview];
 	[superview addSubview:view];
+	//placeholder = view;
+	currentListView = view;	
 }
 
 #pragma mark CoreData handling
@@ -340,11 +342,21 @@
 		
 		if (selectedSegment == 0) {
 			NSLog(@"Debug: replace gtdlistview with simplelistview");
+			[self replacePlaceholder:simpleListPlaceholderView withView:[simpleListController view]];
 		} else if (selectedSegment == 1) {
 			NSLog(@"Debug: replace simplelistview with gtdlistview");
+			[self replacePlaceholder:simpleListPlaceholderView withView:[gtdListController view]];
 		}
 	}
 
+}
+
+- (void)addNewTask:(id)sender {
+	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext]; 
+	NSString *title = [sender stringValue];
+	[task setValue:title forKey:@"title"]; 
+	[sender setStringValue:@""];
+	[window makeFirstResponder:currentListView];
 }
 
 @end
