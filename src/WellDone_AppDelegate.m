@@ -17,7 +17,7 @@
 
 @interface WellDone_AppDelegate (PrivateAPI)
 
-- (void) replacePlaceholder:(NSView*) placeholder withView:(NSView*) view;
+- (void) replaceLocation:(int)location withView:(NSView*)view;
 
 @end
 
@@ -52,10 +52,10 @@
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	
 	// Replace the placeholder views with the actual views from the controllers.
-	[self replacePlaceholder:sidebarFolderPlaceholderView withView:[sidebarFolderController view]];
-	[self replacePlaceholder:simpleListPlaceholderView withView:[simpleListController view]];
-	
-	[self replacePlaceholder:sidebarTaskPlaceholderView withView:[sidebarTaskController view]];
+	[self replaceLocation:1 withView:[sidebarFolderController view]];
+	[self replaceLocation:2 withView:[simpleListController view]];
+		
+	[self replaceLocation:3 withView:[sidebarTaskController view]];
 	
 }
 
@@ -75,20 +75,28 @@
 
 #pragma mark PrivateAPI
 
-- (void) replacePlaceholder:(NSView*) placeholder withView:(NSView*) view
+/*
+ location: 1 for folder view, 2 for task view, 3 for sidebar right
+*/
+- (void) replaceLocation:(int)location withView:(NSView*)view
 {
-	NSParameterAssert(placeholder != nil);
 	NSParameterAssert(view != nil);
+	NSParameterAssert(location == 1 || location == 2 || location == 3);
+	
+	NSView *placeholder;
+	if (location == 1) placeholder = sidebarFolderPlaceholderView;
+	else if (location == 2) placeholder = simpleListPlaceholderView;
+	else placeholder = sidebarTaskPlaceholderView;
 	
 	// Copy the relevant settings from placeholder to the view.
-	[view setFrame:[placeholder frame]];
+	NSRect test = [placeholder frame];
+	[view setFrame:test];
 	[view setAutoresizingMask:[placeholder autoresizingMask]];
 	
 	// Replace the placeholder with the actual view.
 	NSView* superview = [placeholder superview];
 	[placeholder removeFromSuperview];
 	[superview addSubview:view];
-	//placeholder = view;
 	currentListView = view;	
 }
 
@@ -342,10 +350,10 @@
 		
 		if (selectedSegment == 0) {
 			NSLog(@"Debug: replace gtdlistview with simplelistview");
-			[self replacePlaceholder:simpleListPlaceholderView withView:[simpleListController view]];
+			//[self replaceLocation:2 withView:[simpleListController view]];
 		} else if (selectedSegment == 1) {
 			NSLog(@"Debug: replace simplelistview with gtdlistview");
-			[self replacePlaceholder:simpleListPlaceholderView withView:[gtdListController view]];
+			//[self replaceLocation:2 withView:[gtdListController view]];
 		}
 	}
 
