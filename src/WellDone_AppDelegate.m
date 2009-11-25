@@ -15,6 +15,16 @@
 #import <TagManagementController.h>
 #import <ContextManagementController.h>
 
+#define LEFT_VIEW_INDEX 0
+#define LEFT_VIEW_PRIORITY 2
+#define LEFT_VIEW_MINIMUM_WIDTH 200.0
+#define MAIN_VIEW_INDEX 1
+#define MAIN_VIEW_PRIORITY 0
+#define MAIN_VIEW_MINIMUM_WIDTH 200.0
+#define RIGHT_VIEW_INDEX 2
+#define RIGHT_VIEW_PRIORITY 1
+#define RIGHT_VIEW_MINIMUM_WIDTH 200.0
+
 @interface WellDone_AppDelegate (PrivateAPI)
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
@@ -55,6 +65,32 @@
 	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
+	
+	
+	splitViewDelegate =
+	[[PrioritySplitViewDelegate alloc] init];
+	
+	[splitViewDelegate
+	 setPriority:LEFT_VIEW_PRIORITY
+	 forViewAtIndex:LEFT_VIEW_INDEX];
+	[splitViewDelegate
+	 setMinimumLength:LEFT_VIEW_MINIMUM_WIDTH
+	 forViewAtIndex:LEFT_VIEW_INDEX];
+	[splitViewDelegate
+	 setPriority:MAIN_VIEW_PRIORITY
+	 forViewAtIndex:MAIN_VIEW_INDEX];
+	[splitViewDelegate
+	 setMinimumLength:MAIN_VIEW_MINIMUM_WIDTH
+	 forViewAtIndex:MAIN_VIEW_INDEX];
+	[splitViewDelegate
+	 setPriority:RIGHT_VIEW_PRIORITY
+	 forViewAtIndex:RIGHT_VIEW_INDEX];
+	[splitViewDelegate
+	 setMinimumLength:RIGHT_VIEW_MINIMUM_WIDTH
+	 forViewAtIndex:RIGHT_VIEW_INDEX];
+	
+	
+	[splitView setDelegate:splitViewDelegate];
 	
 }
 

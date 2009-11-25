@@ -15,11 +15,14 @@
 #import <FolderManagementController.h>
 #import <TagManagementController.h>
 #import <ContextManagementController.h>
+#import <PrioritySplitViewDelegate.h>
 
 @interface WellDone_AppDelegate : NSObject 
 {
     IBOutlet NSWindow *window;
-	IBOutlet NSView* sidebarTaskPlaceholderView;
+	IBOutlet NSSplitView *splitView;
+	PrioritySplitViewDelegate *splitViewDelegate;
+ 	IBOutlet NSView* sidebarTaskPlaceholderView;
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
 	

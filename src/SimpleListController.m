@@ -31,17 +31,25 @@
 	NSTextFieldCell *acell = [tableColumn dataCell];
 
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
-		if ([[item representedObject] valueForKey:@"completed"]) {
-			NSLog(@"Test");
-			[acell setTextColor:[NSColor lightGrayColor]];
-
+		Task *task = [item representedObject];
+		if ([task.completed boolValue] == YES) {
+			[self setTaskDone:acell];
 		} else {
-			[acell setTextColor:[NSColor blackColor]];
-		} 
-	}
+			[self setTaskUndone:acell];
+		}
+		
+}
 
 
 	
+}
+
+- (void)setTaskDone:(NSTextFieldCell*)cell {
+	[cell setTextColor:[NSColor lightGrayColor]];
+}
+
+- (void)setTaskUndone:(NSTextFieldCell*)cell {
+	[cell setTextColor:[NSColor blackColor]];
 }
 
 @end

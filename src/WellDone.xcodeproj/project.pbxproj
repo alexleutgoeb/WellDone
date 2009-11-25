@@ -13,6 +13,8 @@
 		42262ECA109C818B005E4997 /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
 		6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
+		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
+		6FAEAF3810BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
 		6FAF892810BD52E500478F02 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF891F10BD52E500478F02 /* Folder.m */; };
 		6FAF892910BD52E500478F02 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892110BD52E500478F02 /* Tag.m */; };
 		6FAF892A10BD52E500478F02 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892310BD52E500478F02 /* Context.m */; };
@@ -94,6 +96,8 @@
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
+		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
+		6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioritySplitViewDelegate.m; sourceTree = "<group>"; };
 		6FAF891E10BD52E500478F02 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		6FAF891F10BD52E500478F02 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		6FAF892010BD52E500478F02 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
@@ -279,6 +283,8 @@
 				6F2E521910B01F7B005B118B /* GTDListView.m */,
 				B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */,
 				B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */,
+				6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */,
+				6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */,
 			);
 			name = "View Classes";
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				6FAF892A10BD52E500478F02 /* Context.m in Sources */,
 				6FAF892B10BD52E500478F02 /* Task.m in Sources */,
 				6FAF892C10BD52E500478F02 /* Note.m in Sources */,
+				6FAEAF3810BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +462,7 @@
 				6FAF892F10BD52E500478F02 /* Context.m in Sources */,
 				6FAF893010BD52E500478F02 /* Task.m in Sources */,
 				6FAF893110BD52E500478F02 /* Note.m in Sources */,
+				6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
