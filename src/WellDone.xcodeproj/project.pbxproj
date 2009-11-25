@@ -13,6 +13,16 @@
 		42262ECA109C818B005E4997 /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
 		6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
+		6FAF892810BD52E500478F02 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF891F10BD52E500478F02 /* Folder.m */; };
+		6FAF892910BD52E500478F02 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892110BD52E500478F02 /* Tag.m */; };
+		6FAF892A10BD52E500478F02 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892310BD52E500478F02 /* Context.m */; };
+		6FAF892B10BD52E500478F02 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892510BD52E500478F02 /* Task.m */; };
+		6FAF892C10BD52E500478F02 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892710BD52E500478F02 /* Note.m */; };
+		6FAF892D10BD52E500478F02 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF891F10BD52E500478F02 /* Folder.m */; };
+		6FAF892E10BD52E500478F02 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892110BD52E500478F02 /* Tag.m */; };
+		6FAF892F10BD52E500478F02 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892310BD52E500478F02 /* Context.m */; };
+		6FAF893010BD52E500478F02 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892510BD52E500478F02 /* Task.m */; };
+		6FAF893110BD52E500478F02 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892710BD52E500478F02 /* Note.m */; };
 		6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
@@ -68,6 +78,16 @@
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
+		6FAF891E10BD52E500478F02 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		6FAF891F10BD52E500478F02 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
+		6FAF892010BD52E500478F02 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		6FAF892110BD52E500478F02 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		6FAF892210BD52E500478F02 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		6FAF892310BD52E500478F02 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
+		6FAF892410BD52E500478F02 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		6FAF892510BD52E500478F02 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		6FAF892610BD52E500478F02 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		6FAF892710BD52E500478F02 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
 		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
@@ -246,6 +266,16 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6FAF891E10BD52E500478F02 /* Folder.h */,
+				6FAF891F10BD52E500478F02 /* Folder.m */,
+				6FAF892010BD52E500478F02 /* Tag.h */,
+				6FAF892110BD52E500478F02 /* Tag.m */,
+				6FAF892210BD52E500478F02 /* Context.h */,
+				6FAF892310BD52E500478F02 /* Context.m */,
+				6FAF892410BD52E500478F02 /* Task.h */,
+				6FAF892510BD52E500478F02 /* Task.m */,
+				6FAF892610BD52E500478F02 /* Note.h */,
+				6FAF892710BD52E500478F02 /* Note.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
 			);
 			name = Models;
@@ -374,6 +404,11 @@
 				6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */,
 				6FCE287110B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
+				6FAF892810BD52E500478F02 /* Folder.m in Sources */,
+				6FAF892910BD52E500478F02 /* Tag.m in Sources */,
+				6FAF892A10BD52E500478F02 /* Context.m in Sources */,
+				6FAF892B10BD52E500478F02 /* Task.m in Sources */,
+				6FAF892C10BD52E500478F02 /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +429,11 @@
 				D110F47110B8D92600304B4C /* TagManagementController.m in Sources */,
 				D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */,
 				B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */,
+				6FAF892D10BD52E500478F02 /* Folder.m in Sources */,
+				6FAF892E10BD52E500478F02 /* Tag.m in Sources */,
+				6FAF892F10BD52E500478F02 /* Context.m in Sources */,
+				6FAF893010BD52E500478F02 /* Task.m in Sources */,
+				6FAF893110BD52E500478F02 /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
