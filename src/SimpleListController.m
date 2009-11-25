@@ -17,6 +17,7 @@
 	self = [super initWithNibName:@"SimpleListView" bundle:nil];
 	if (self != nil)
 	{		
+		[myview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
 	}
 	return self;
 }

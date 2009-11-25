@@ -23,6 +23,9 @@
 		6FAF892F10BD52E500478F02 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892310BD52E500478F02 /* Context.m */; };
 		6FAF893010BD52E500478F02 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892510BD52E500478F02 /* Task.m */; };
 		6FAF893110BD52E500478F02 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892710BD52E500478F02 /* Note.m */; };
+		6FAF89DA10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
+		6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
 		6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
@@ -61,6 +64,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6FAF89A310BD60F400478F02 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -88,6 +104,7 @@
 		6FAF892510BD52E500478F02 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		6FAF892610BD52E500478F02 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		6FAF892710BD52E500478F02 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
 		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
@@ -125,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAF89DA10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +181,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */,
 				77C82804067257F0000B614F /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
@@ -319,6 +339,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				6FAF89A310BD60F400478F02 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -472,6 +493,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -491,6 +516,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -534,7 +563,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WellDone.app/Contents/MacOS/WellDone";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -564,7 +596,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;

@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">740</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="64"/>
+			<integer value="67"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -214,7 +214,7 @@
 										<bool key="NSIsResizeable">YES</bool>
 										<bool key="NSIsEditable">YES</bool>
 										<reference key="NSTableView" ref="848461419"/>
-										<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+										<object class="NSSortDescriptor" key="NSSortDescriptorPrototype" id="676454055">
 											<bool key="NSAscending">YES</bool>
 											<string key="NSSelector">setTextColor:</string>
 										</object>
@@ -310,10 +310,15 @@
 										<bytes key="NSWhite">MC41AA</bytes>
 									</object>
 								</object>
-								<double key="NSRowHeight">22</double>
-								<int key="NSTvFlags">-759169024</int>
+								<double key="NSRowHeight">20</double>
+								<int key="NSTvFlags">-767557632</int>
 								<reference key="NSDelegate"/>
 								<reference key="NSDataSource"/>
+								<object class="NSArray" key="NSSortDescriptors">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<reference ref="676454055"/>
+									<reference ref="676454055"/>
+								</object>
 								<int key="NSColumnAutoresizingStyle">4</int>
 								<int key="NSDraggingSourceMaskForLocal">15</int>
 								<int key="NSDraggingSourceMaskForNonLocal">0</int>
@@ -376,7 +381,7 @@
 				<reference key="NSContentView" ref="963355143"/>
 				<reference key="NSHeaderClipView" ref="538321996"/>
 				<reference key="NSCornerView" ref="953206512"/>
-				<bytes key="NSScrollAmts">QSAAAEEgAABBsAAAQbAAAA</bytes>
+				<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 			</object>
 			<object class="NSCustomObject" id="1039256776">
 				<string key="NSClassName">SimpleListController</string>
