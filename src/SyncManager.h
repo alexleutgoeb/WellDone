@@ -19,7 +19,7 @@
 @interface SyncManager : NSObject {
 @private
 	id delegate;
-	NSDictionary *syncServices;
+	NSMutableDictionary *syncServices;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -29,18 +29,34 @@
  Initializes a new SyncManager object with the given delegate. The delegate must 
  implement the SyncManagerDelegate protocol and is used to inform about sync 
  conflicts.
- @param aDelegate the delegate to be set
- @return the initialized object, or nil if an error occured
+ @param aDelegate		the delegate to be set
+ @return				the initialized object, or nil if an error occured
  */
 -(id)initWithDelegate:(id)aDelegate;
-
 
 /**
  Adds a sync service to the manager
  The method adds a sync servce, which must confrom to the GtdApi-protocol, to 
  the sync manager. The new service will be used for the next triggered syncing.
- @param aSyncService the sync service which should be added
+ @param aSyncService	the sync service which should be added
  */
 - (void)registerSyncService:(id<GtdApi>)aSyncService;
+
+/**
+ Removes a sync service reference from the manager
+ After calling this method, the specific sync service will be removed from the 
+ sync service list, so that the service will not be synchronized in future calls.
+ @param aSyncService	the sync service object which should be unregistered
+ */
+- (void)unregisterSyncService:(id<GtdApi>)aSyncService;
+
+/**
+ Removes a sync service reference from the manager
+ After calling this method, the specific sync service will be removed from the 
+ sync service list, so that the service will not be synchronized in future calls.
+ @param anIdentifier	the sync service identifier of the object which should be 
+						unregistered
+ */
+- (void)unregisterSyncServiceWithIdentifier:(NSString *)anIdentifier;
 
 @end

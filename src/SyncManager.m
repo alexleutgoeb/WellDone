@@ -10,7 +10,7 @@
 
 @interface SyncManager()
 
-@property (nonatomic, retain) NSDictionary *syncServices;
+@property (nonatomic, retain) NSMutableDictionary *syncServices;
 
 @end
 
@@ -28,7 +28,7 @@
 -(id)initWithDelegate:(id)aDelegate {
 	if (self = [self init]) {
 		self.delegate = aDelegate;
-		self.syncServices = [[NSDictionary alloc] init];
+		self.syncServices = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -48,10 +48,22 @@
 	
 	if ([(NSObject *)aSyncService conformsToProtocol:@protocol(GtdApi)] != NO) {
 		// syncService is a valid GtdApi implementation
-		[syncServices setValue:aSyncService forKey:[aSyncService identifier]];
+		[syncServices setObject:aSyncService forKey:[aSyncService identifier]];
 	}
 	else {
 		// syncService does not conform to protocol, not added
+	}
+}
+
+- (void)unregisterSyncService:(id<GtdApi>)aSyncService {
+	if ([syncServices objectForKey:aSyncService.identifier] != nil) {
+		[syncServices removeObjectForKey:aSyncService.identifier];
+	}
+}
+
+- (void)unregisterSyncServiceWithIdentifier:(NSString *)anIdentifier {
+	if ([syncServices objectForKey:anIdentifier] != nil) {
+		[syncServices removeObjectForKey:anIdentifier];
 	}
 }
 
