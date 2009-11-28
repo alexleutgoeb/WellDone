@@ -67,4 +67,9 @@
 	}
 }
 
+- (NSManagedObjectContext *)syncDataFromManagedObjectContext:(NSManagedObjectContext *)aManagedObjectContext {
+	// TODO: implement
+	return nil;
+}
+
 @end

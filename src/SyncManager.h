@@ -59,4 +59,11 @@
  */
 - (void)unregisterSyncServiceWithIdentifier:(NSString *)anIdentifier;
 
+/**
+ Main method for sync
+ This method is the main method for syncing a managed object context with remote 
+ data, fetched from the different sync services.
+ */
+- (NSManagedObjectContext *)syncDataFromManagedObjectContext:(NSManagedObjectContext *)aManagedObjectContext;
+
 @end
