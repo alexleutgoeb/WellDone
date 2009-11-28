@@ -55,6 +55,7 @@
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
 		FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
+		FABE3FF810C1A87E000D72E9 /* libToodledoAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = WellDone;
+		};
+		FABE3FE910C1A869000D72E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAF874B31096478600C4C137 /* libToodledoAPI.a */;
+			remoteInfo = libToodledoAPI;
+		};
+		FABE3FEB10C1A869000D72E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAA9E6ED10A88C7C001925AB /* UnitTests.octest */;
+			remoteInfo = UnitTests;
+		};
+		FABE400710C1A8BC000D72E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FAF874B21096478600C4C137 /* libToodledoAPI */;
+			remoteInfo = libToodledoAPI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -142,6 +164,7 @@
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
 		FABE3F9310C1A33E000D72E9 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		FABE3F9410C1A33E000D72E9 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
+		FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ToodledoAPI.xcodeproj; path = "Extern/toodledo-objc/src/ToodledoAPI.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +182,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */,
+				FABE3FF810C1A87E000D72E9 /* libToodledoAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +233,7 @@
 		29B97314FDCFA39411CA2CEA /* WellDone */ = {
 			isa = PBXGroup;
 			children = (
+				FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				FACCD7BF10A050B900A36C87 /* TestClasses */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -320,6 +345,15 @@
 			name = "Logic Classes";
 			sourceTree = "<group>";
 		};
+		FABE3FE510C1A869000D72E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */,
+				FABE3FEC10C1A869000D72E9 /* UnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FACCD7BF10A050B900A36C87 /* TestClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +397,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FABE400810C1A8BC000D72E9 /* PBXTargetDependency */,
 			);
 			name = WellDone;
 			productInstallPath = "$(HOME)/Applications";
@@ -380,6 +415,12 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* WellDone */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FABE3FE510C1A869000D72E9 /* Products */;
+					ProjectRef = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* WellDone */,
@@ -387,6 +428,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libToodledoAPI.a;
+			remoteRef = FABE3FE910C1A869000D72E9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FABE3FEC10C1A869000D72E9 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = FABE3FEB10C1A869000D72E9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		42262EAF109C8049005E4997 /* Resources */ = {
@@ -488,6 +546,11 @@
 			target = 8D1107260486CEB800E47090 /* WellDone */;
 			targetProxy = 42262EBA109C804F005E4997 /* PBXContainerItemProxy */;
 		};
+		FABE400810C1A8BC000D72E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libToodledoAPI;
+			targetProxy = FABE400710C1A8BC000D72E9 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -527,6 +590,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WellDone_Prefix.pch;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Extern/toodledo-objc/src/build/${BUILD_STYLE}/usr/local/include";
 				INFOPLIST_FILE = "WellDone-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = WellDone;
@@ -546,6 +610,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WellDone_Prefix.pch;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Extern/toodledo-objc/src/build/${BUILD_STYLE}/usr/local/include";
 				INFOPLIST_FILE = "WellDone-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = WellDone;

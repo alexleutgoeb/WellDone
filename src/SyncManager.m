@@ -7,7 +7,7 @@
 //
 
 #import "SyncManager.h"
-
+#import "GtdApi.h"
 
 @interface SyncManager()
 
@@ -31,7 +31,6 @@
 		self.delegate = aDelegate;
 		self.syncServices = [[NSDictionary alloc] init];
 	}
-	
 	return self;
 }
 
