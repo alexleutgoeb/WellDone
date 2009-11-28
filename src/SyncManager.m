@@ -44,11 +44,11 @@
 #pragma mark -
 #pragma mark sync manager methods
 
-- (void)registerSyncService:(id<GtdApi>)syncService {
+- (void)registerSyncService:(id<GtdApi>)aSyncService {
 	
-	if ([(NSObject *)syncService conformsToProtocol:@protocol(GtdApi)] != NO) {
+	if ([(NSObject *)aSyncService conformsToProtocol:@protocol(GtdApi)] != NO) {
 		// syncService is a valid GtdApi implementation
-		[syncServices setValue:syncService forKey:[syncService identifier]];
+		[syncServices setValue:aSyncService forKey:[aSyncService identifier]];
 	}
 	else {
 		// syncService does not conform to protocol, not added
