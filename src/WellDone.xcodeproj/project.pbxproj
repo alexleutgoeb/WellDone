@@ -54,6 +54,7 @@
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
+		FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,8 @@
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
+		FABE3F9310C1A33E000D72E9 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
+		FABE3F9410C1A33E000D72E9 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,7 @@
 				77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */,
 				6F5D249210AC588D002E9514 /* View Classes */,
 				6F5D249110AC5873002E9514 /* ViewController Classes */,
+				FABE3F9210C1A323000D72E9 /* Logic Classes */,
 				7756732906782D8800D1FEB8 /* Models */,
 			);
 			name = Classes;
@@ -305,6 +309,15 @@
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		FABE3F9210C1A323000D72E9 /* Logic Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FABE3F9310C1A33E000D72E9 /* SyncManager.h */,
+				FABE3F9410C1A33E000D72E9 /* SyncManager.m */,
+			);
+			name = "Logic Classes";
 			sourceTree = "<group>";
 		};
 		FACCD7BF10A050B900A36C87 /* TestClasses */ = {
@@ -463,6 +476,7 @@
 				6FAF893010BD52E500478F02 /* Task.m in Sources */,
 				6FAF893110BD52E500478F02 /* Note.m in Sources */,
 				6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
+				FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
