@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GtdApi.h"
 
 
 @interface SyncManager : NSObject {
@@ -18,6 +19,6 @@
 @property (nonatomic, assign) id delegate;
 
 -(id)initWithDelegate:(id)aDelegate;
-- (void)registerSyncService:(id)syncService;
+- (void)registerSyncService:(id<GtdApi>)syncService;
 
 @end

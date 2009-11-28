@@ -7,7 +7,6 @@
 //
 
 #import "SyncManager.h"
-#import "GtdApi.h"
 
 @interface SyncManager()
 
@@ -45,8 +44,15 @@
 #pragma mark -
 #pragma mark sync manager methods
 
-- (void)registerSyncService:(id)syncService {
+- (void)registerSyncService:(id<GtdApi>)syncService {
 	
+	if ([(NSObject *)syncService conformsToProtocol:@protocol(GtdApi)] != NO) {
+		// syncService is a valid GtdApi implementation
+		[syncServices setValue:syncService forKey:[syncService identifier]];
+	}
+	else {
+		// syncService does not conform to protocol, not added
+	}
 }
 
 @end

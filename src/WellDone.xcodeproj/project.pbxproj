@@ -70,21 +70,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = FAF874B31096478600C4C137 /* libToodledoAPI.a */;
+			remoteGlobalIDString = FAF874B31096478600C4C137;
 			remoteInfo = libToodledoAPI;
 		};
 		FABE3FEB10C1A869000D72E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = FAA9E6ED10A88C7C001925AB /* UnitTests.octest */;
+			remoteGlobalIDString = FAA9E6ED10A88C7C001925AB;
 			remoteInfo = UnitTests;
 		};
 		FABE400710C1A8BC000D72E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = FAF874B21096478600C4C137 /* libToodledoAPI */;
+			remoteGlobalIDString = FAF874B21096478600C4C137;
 			remoteInfo = libToodledoAPI;
 		};
 /* End PBXContainerItemProxy section */
