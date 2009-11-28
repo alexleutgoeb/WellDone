@@ -10,7 +10,14 @@
 
 
 @interface SyncManager : NSObject {
-
+@private
+	id delegate;
+	NSDictionary *syncServices;
 }
+
+@property (nonatomic, assign) id delegate;
+
+-(id)initWithDelegate:(id)aDelegate;
+- (void)registerSyncService:(id)syncService;
 
 @end
