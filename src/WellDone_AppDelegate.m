@@ -11,9 +11,12 @@
 #import "SimpleListController.h"
 #import "GTDListController.h"
 #import "SidebarFolderController.h"
-#import <FolderManagementController.h>
-#import <TagManagementController.h>
-#import <ContextManagementController.h>
+#import "FolderManagementController.h"
+#import "TagManagementController.h"
+#import "ContextManagementController.h"
+#import "TDApi.h"
+#import "SyncManager.h"
+
 
 #define LEFT_VIEW_INDEX 0
 #define LEFT_VIEW_PRIORITY 2
@@ -25,24 +28,54 @@
 #define RIGHT_VIEW_PRIORITY 1
 #define RIGHT_VIEW_MINIMUM_WIDTH 200.0
 
-@interface WellDone_AppDelegate (PrivateAPI)
+
+// Anonymous class category for private methods and properties
+@interface WellDone_AppDelegate ()
+
+@property (nonatomic, retain) NSMutableDictionary *syncServices;
+@property (nonatomic, retain) SyncManager *syncManager;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
 @end
 
+
 @implementation WellDone_AppDelegate
 
 @synthesize simpleListController;
+@synthesize syncManager, syncServices;
 
+
+#pragma mark -
 #pragma mark Initialization & disposal
 
 
-//TODO: - (void) dealloc
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
+	
+	// Init available sync services and add to list
+	self.syncServices = [[NSMutableDictionary alloc] init];
+	[syncServices setObject:[TDApi class] forKey:[TDApi identifier]];
+	
+	// Init sync manager
+	self.syncManager = [[SyncManager alloc] init];
+}
 
+/**
+ Implementation of dealloc, to release the retained variables.
+ */
+- (void)dealloc {
+	[syncServices removeAllObjects];
+	[syncServices release];
+	[syncManager release];
+	
+    [window release];
+    [managedObjectContext release];
+    [persistentStoreCoordinator release];
+    [managedObjectModel release];
+    [super dealloc];
+}
 
-- (void) awakeFromNib
-{
+- (void) awakeFromNib {
 	// A couple of asserts to make sure the nib is properly assigned. These are easily
 	// forgotten and may take some time to verify.
 	NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
@@ -91,8 +124,9 @@
 	
 	
 	[splitView setDelegate:splitViewDelegate];
-	
 }
+
+
 
 /*
  
@@ -108,6 +142,7 @@
 }
 */
 
+#pragma mark -
 #pragma mark PrivateAPI
 
 /*
@@ -324,21 +359,6 @@
     return NSTerminateNow;
 }
 
-
-/**
-    Implementation of dealloc, to release the retained variables.
- */
- 
-- (void)dealloc {
-
-    [window release];
-    [managedObjectContext release];
-    [persistentStoreCoordinator release];
-    [managedObjectModel release];
-	
-	
-    [super dealloc];
-}
 
 /**
   Implements the First responder chain call for "showTestdatagenerator". The corresponding controller is initialized

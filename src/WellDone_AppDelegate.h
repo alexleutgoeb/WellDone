@@ -17,8 +17,9 @@
 #import <ContextManagementController.h>
 #import <PrioritySplitViewDelegate.h>
 
-@interface WellDone_AppDelegate : NSObject 
-{
+@class TDApi, SyncManager;
+
+@interface WellDone_AppDelegate : NSObject {
     IBOutlet NSWindow *window;
 	IBOutlet NSSplitView *splitView;
 	PrioritySplitViewDelegate *splitViewDelegate;
@@ -42,6 +43,10 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+	
+@private
+	NSMutableDictionary *syncServices;
+	SyncManager *syncManager;
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
