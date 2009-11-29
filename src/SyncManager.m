@@ -69,7 +69,42 @@
 
 - (NSManagedObjectContext *)syncDataFromManagedObjectContext:(NSManagedObjectContext *)aManagedObjectContext {
 	// TODO: implement
-	return nil;
+	
+	if ([syncServices count] > 0) {
+		
+		// Take only the first sync service from the list
+		id<GtdApi> syncService = [[syncServices objectForKey:[syncServices allKeys]] objectAtIndex:0];
+		NSError *error = nil;
+		
+		// last edited dates
+		NSDictionary *lastDates = [syncService getLastModificationsDates:&error];
+		
+		if (lastDates != nil && error == nil) {
+				
+			// folder sync
+			
+			// TODO: check if remote folders have changed since last sync, dummy var:
+			BOOL remoteFoldersHaveChanged = YES;
+			
+			if (remoteFoldersHaveChanged) {
+				// pull folders from server
+				NSArray *remoteFolders = [syncService getFolders:&error];
+				if (remoteFolders != nil && error == nil) {
+					// check remote folders and local folders
+					
+				}
+			}
+			else {
+				// remote folders not changed, send local changes to remote if exist
+			}
+		}
+		
+		return aManagedObjectContext;
+	}
+	else {
+		// no sync service registered, return nil
+		return nil;
+	}
 }
 
 @end
