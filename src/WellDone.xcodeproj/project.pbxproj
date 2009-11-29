@@ -54,8 +54,8 @@
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
+		FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
 		FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
-		FABE3FF810C1A87E000D72E9 /* libToodledoAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +65,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = WellDone;
+		};
+		FA649BF410C30D790051F758 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FA649BBA10C30B250051F758;
+			remoteInfo = libToodledoAPIMac;
+		};
+		FA649C2710C30E7F0051F758 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FA649B9610C30B250051F758 /* libToodledoAPIMac */;
+			remoteInfo = libToodledoAPIMac;
 		};
 		FABE3FE910C1A869000D72E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -79,13 +93,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = FAA9E6ED10A88C7C001925AB;
 			remoteInfo = UnitTests;
-		};
-		FABE400710C1A8BC000D72E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = FAF874B21096478600C4C137;
-			remoteInfo = libToodledoAPI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -182,7 +189,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */,
-				FABE3FF810C1A87E000D72E9 /* libToodledoAPI.a in Frameworks */,
+				FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */,
+				FA649BF510C30D790051F758 /* libToodledoAPIMac.a */,
 				FABE3FEC10C1A869000D72E9 /* UnitTests.octest */,
 			);
 			name = Products;
@@ -397,7 +405,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FABE400810C1A8BC000D72E9 /* PBXTargetDependency */,
+				FA649C2810C30E7F0051F758 /* PBXTargetDependency */,
 			);
 			name = WellDone;
 			productInstallPath = "$(HOME)/Applications";
@@ -430,6 +438,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		FA649BF510C30D790051F758 /* libToodledoAPIMac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libToodledoAPIMac.a;
+			remoteRef = FA649BF410C30D790051F758 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -546,10 +561,10 @@
 			target = 8D1107260486CEB800E47090 /* WellDone */;
 			targetProxy = 42262EBA109C804F005E4997 /* PBXContainerItemProxy */;
 		};
-		FABE400810C1A8BC000D72E9 /* PBXTargetDependency */ = {
+		FA649C2810C30E7F0051F758 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = libToodledoAPI;
-			targetProxy = FABE400710C1A8BC000D72E9 /* PBXContainerItemProxy */;
+			name = libToodledoAPIMac;
+			targetProxy = FA649C2710C30E7F0051F758 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
