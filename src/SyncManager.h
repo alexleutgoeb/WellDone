@@ -66,4 +66,12 @@
  */
 - (NSManagedObjectContext *)syncDataFromManagedObjectContext:(NSManagedObjectContext *)aManagedObjectContext;
 
+/**
+ Overrides local data with remote
+ The method replaces the local data with remote entries. Warning: All local 
+ data will be deleted.
+ */
+- (NSManagedObjectContext *)replaceLocalDataWithRemoteData:(NSManagedObjectContext *)aManagedObjectContext;
+
+
 @end

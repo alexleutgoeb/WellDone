@@ -56,8 +56,22 @@
 	self.syncServices = [[NSMutableDictionary alloc] init];
 	[syncServices setObject:[TDApi class] forKey:[TDApi identifier]];
 	
+	
+	/////////////////////////////////////////////////
+	
+	// Für Überschreiben der lokalen fodler mit remote folder die 4 Zeilen 
+	// unkommentieren und user und password in zeile 69 eintragen.
+	
 	// Init sync manager
-	self.syncManager = [[SyncManager alloc] init];
+	
+	// self.syncManager = [[SyncManager alloc] init];
+	// NSError *error = nil;
+	// [syncManager registerSyncService:[[TDApi alloc] initWithUsername:@"" password:@"" error:&error]];
+	// NSManagedObjectContext *c = [syncManager replaceLocalDataWithRemoteData:self.managedObjectContext];
+	
+	/////////////////////////////////////////////////
+	
+	
 }
 
 /**
