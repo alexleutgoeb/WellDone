@@ -11,8 +11,8 @@
 
 @implementation RemoteObject 
 
-@dynamic serviceIdentifier;
-@dynamic remoteUid;
 @dynamic lastsyncDate;
+@dynamic remoteUid;
+@dynamic serviceIdentifier;
 
 @end

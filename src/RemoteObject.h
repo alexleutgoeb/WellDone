@@ -13,9 +13,9 @@
 {
 }
 
-@property (nonatomic, retain) NSString * serviceIdentifier;
-@property (nonatomic, retain) NSNumber * remoteUid;
 @property (nonatomic, retain) NSDate * lastsyncDate;
+@property (nonatomic, retain) NSNumber * remoteUid;
+@property (nonatomic, retain) NSString * serviceIdentifier;
 
 @end
 
