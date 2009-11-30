@@ -12,7 +12,7 @@
 @implementation RemoteObject 
 
 @dynamic serviceIdentifier;
-@dynamic remotUid;
+@dynamic remoteUid;
 @dynamic lastsyncDate;
 
 @end
