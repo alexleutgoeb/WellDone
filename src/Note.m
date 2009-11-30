@@ -2,21 +2,23 @@
 //  Note.m
 //  WellDone
 //
-//  Created by Manuel Maly on 25.11.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Alex Leutgöb on 30.11.09.
+//  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
 #import "Note.h"
 
 #import "Folder.h"
+#import "RemoteNote.h"
 
 @implementation Note 
 
-@dynamic text;
-@dynamic private;
+@dynamic modifiedDate;
 @dynamic title;
-@dynamic date_created;
-@dynamic date_modified;
+@dynamic text;
+@dynamic createDate;
+@dynamic private;
 @dynamic folder;
+@dynamic remoteNotes;
 
 @end

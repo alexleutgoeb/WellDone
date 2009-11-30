@@ -15,16 +15,6 @@
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
 		6FAEAF3810BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
-		6FAF892810BD52E500478F02 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF891F10BD52E500478F02 /* Folder.m */; };
-		6FAF892910BD52E500478F02 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892110BD52E500478F02 /* Tag.m */; };
-		6FAF892A10BD52E500478F02 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892310BD52E500478F02 /* Context.m */; };
-		6FAF892B10BD52E500478F02 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892510BD52E500478F02 /* Task.m */; };
-		6FAF892C10BD52E500478F02 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892710BD52E500478F02 /* Note.m */; };
-		6FAF892D10BD52E500478F02 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF891F10BD52E500478F02 /* Folder.m */; };
-		6FAF892E10BD52E500478F02 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892110BD52E500478F02 /* Tag.m */; };
-		6FAF892F10BD52E500478F02 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892310BD52E500478F02 /* Context.m */; };
-		6FAF893010BD52E500478F02 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892510BD52E500478F02 /* Task.m */; };
-		6FAF893110BD52E500478F02 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF892710BD52E500478F02 /* Note.m */; };
 		6FAF89DA10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
 		6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
@@ -55,6 +45,16 @@
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
 		FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
+		FA90D40410C4124D00309192 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F110C4124D00309192 /* Folder.m */; };
+		FA90D40510C4124D00309192 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F310C4124D00309192 /* Note.m */; };
+		FA90D40610C4124D00309192 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F510C4124D00309192 /* Tag.m */; };
+		FA90D40710C4124D00309192 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F710C4124D00309192 /* Task.m */; };
+		FA90D40810C4124D00309192 /* RemoteContext.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F910C4124D00309192 /* RemoteContext.m */; };
+		FA90D40910C4124D00309192 /* RemoteTask.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3FB10C4124D00309192 /* RemoteTask.m */; };
+		FA90D40A10C4124D00309192 /* RemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3FD10C4124D00309192 /* RemoteObject.m */; };
+		FA90D40B10C4124D00309192 /* RemoteNote.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3FF10C4124D00309192 /* RemoteNote.m */; };
+		FA90D40C10C4124D00309192 /* RemoteFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D40110C4124D00309192 /* RemoteFolder.m */; };
+		FA90D40D10C4124D00309192 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D40310C4124D00309192 /* Context.m */; };
 		FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
 /* End PBXBuildFile section */
 
@@ -128,16 +128,6 @@
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
 		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
 		6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioritySplitViewDelegate.m; sourceTree = "<group>"; };
-		6FAF891E10BD52E500478F02 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
-		6FAF891F10BD52E500478F02 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
-		6FAF892010BD52E500478F02 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		6FAF892110BD52E500478F02 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
-		6FAF892210BD52E500478F02 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
-		6FAF892310BD52E500478F02 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
-		6FAF892410BD52E500478F02 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		6FAF892510BD52E500478F02 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
-		6FAF892610BD52E500478F02 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		6FAF892710BD52E500478F02 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
@@ -169,6 +159,26 @@
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
+		FA90D3F010C4124D00309192 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		FA90D3F110C4124D00309192 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
+		FA90D3F210C4124D00309192 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		FA90D3F310C4124D00309192 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		FA90D3F410C4124D00309192 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		FA90D3F510C4124D00309192 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		FA90D3F610C4124D00309192 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		FA90D3F710C4124D00309192 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		FA90D3F810C4124D00309192 /* RemoteContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteContext.h; sourceTree = "<group>"; };
+		FA90D3F910C4124D00309192 /* RemoteContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteContext.m; sourceTree = "<group>"; };
+		FA90D3FA10C4124D00309192 /* RemoteTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteTask.h; sourceTree = "<group>"; };
+		FA90D3FB10C4124D00309192 /* RemoteTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteTask.m; sourceTree = "<group>"; };
+		FA90D3FC10C4124D00309192 /* RemoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteObject.h; sourceTree = "<group>"; };
+		FA90D3FD10C4124D00309192 /* RemoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteObject.m; sourceTree = "<group>"; };
+		FA90D3FE10C4124D00309192 /* RemoteNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteNote.h; sourceTree = "<group>"; };
+		FA90D3FF10C4124D00309192 /* RemoteNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteNote.m; sourceTree = "<group>"; };
+		FA90D40010C4124D00309192 /* RemoteFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFolder.h; sourceTree = "<group>"; };
+		FA90D40110C4124D00309192 /* RemoteFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFolder.m; sourceTree = "<group>"; };
+		FA90D40210C4124D00309192 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		FA90D40310C4124D00309192 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
 		FABE3F9310C1A33E000D72E9 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		FABE3F9410C1A33E000D72E9 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 		FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ToodledoAPI.xcodeproj; path = "Extern/toodledo-objc/src/ToodledoAPI.xcodeproj"; sourceTree = "<group>"; };
@@ -328,17 +338,27 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6FAF891E10BD52E500478F02 /* Folder.h */,
-				6FAF891F10BD52E500478F02 /* Folder.m */,
-				6FAF892010BD52E500478F02 /* Tag.h */,
-				6FAF892110BD52E500478F02 /* Tag.m */,
-				6FAF892210BD52E500478F02 /* Context.h */,
-				6FAF892310BD52E500478F02 /* Context.m */,
-				6FAF892410BD52E500478F02 /* Task.h */,
-				6FAF892510BD52E500478F02 /* Task.m */,
-				6FAF892610BD52E500478F02 /* Note.h */,
-				6FAF892710BD52E500478F02 /* Note.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
+				FA90D3F010C4124D00309192 /* Folder.h */,
+				FA90D3F110C4124D00309192 /* Folder.m */,
+				FA90D3F210C4124D00309192 /* Note.h */,
+				FA90D3F310C4124D00309192 /* Note.m */,
+				FA90D3F410C4124D00309192 /* Tag.h */,
+				FA90D3F510C4124D00309192 /* Tag.m */,
+				FA90D3F610C4124D00309192 /* Task.h */,
+				FA90D3F710C4124D00309192 /* Task.m */,
+				FA90D3F810C4124D00309192 /* RemoteContext.h */,
+				FA90D3F910C4124D00309192 /* RemoteContext.m */,
+				FA90D3FA10C4124D00309192 /* RemoteTask.h */,
+				FA90D3FB10C4124D00309192 /* RemoteTask.m */,
+				FA90D3FC10C4124D00309192 /* RemoteObject.h */,
+				FA90D3FD10C4124D00309192 /* RemoteObject.m */,
+				FA90D3FE10C4124D00309192 /* RemoteNote.h */,
+				FA90D3FF10C4124D00309192 /* RemoteNote.m */,
+				FA90D40010C4124D00309192 /* RemoteFolder.h */,
+				FA90D40110C4124D00309192 /* RemoteFolder.m */,
+				FA90D40210C4124D00309192 /* Context.h */,
+				FA90D40310C4124D00309192 /* Context.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -517,11 +537,6 @@
 				6FB8A94310B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */,
 				6FCE287110B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
-				6FAF892810BD52E500478F02 /* Folder.m in Sources */,
-				6FAF892910BD52E500478F02 /* Tag.m in Sources */,
-				6FAF892A10BD52E500478F02 /* Context.m in Sources */,
-				6FAF892B10BD52E500478F02 /* Task.m in Sources */,
-				6FAF892C10BD52E500478F02 /* Note.m in Sources */,
 				6FAEAF3810BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,13 +558,18 @@
 				D110F47110B8D92600304B4C /* TagManagementController.m in Sources */,
 				D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */,
 				B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */,
-				6FAF892D10BD52E500478F02 /* Folder.m in Sources */,
-				6FAF892E10BD52E500478F02 /* Tag.m in Sources */,
-				6FAF892F10BD52E500478F02 /* Context.m in Sources */,
-				6FAF893010BD52E500478F02 /* Task.m in Sources */,
-				6FAF893110BD52E500478F02 /* Note.m in Sources */,
 				6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
 				FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */,
+				FA90D40410C4124D00309192 /* Folder.m in Sources */,
+				FA90D40510C4124D00309192 /* Note.m in Sources */,
+				FA90D40610C4124D00309192 /* Tag.m in Sources */,
+				FA90D40710C4124D00309192 /* Task.m in Sources */,
+				FA90D40810C4124D00309192 /* RemoteContext.m in Sources */,
+				FA90D40910C4124D00309192 /* RemoteTask.m in Sources */,
+				FA90D40A10C4124D00309192 /* RemoteObject.m in Sources */,
+				FA90D40B10C4124D00309192 /* RemoteNote.m in Sources */,
+				FA90D40C10C4124D00309192 /* RemoteFolder.m in Sources */,
+				FA90D40D10C4124D00309192 /* Context.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

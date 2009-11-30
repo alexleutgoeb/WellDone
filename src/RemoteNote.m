@@ -1,19 +1,17 @@
 // 
-//  Tag.m
+//  RemoteNote.m
 //  WellDone
 //
 //  Created by Alex Leutgöb on 30.11.09.
 //  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
-#import "Tag.h"
+#import "RemoteNote.h"
 
-#import "Task.h"
+#import "Note.h"
 
-@implementation Tag 
+@implementation RemoteNote 
 
-@dynamic deleted;
-@dynamic text;
-@dynamic tasks;
+@dynamic localNote;
 
 @end

@@ -1,19 +1,17 @@
 // 
-//  Tag.m
+//  RemoteFolder.m
 //  WellDone
 //
 //  Created by Alex Leutgöb on 30.11.09.
 //  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
-#import "Tag.h"
+#import "RemoteFolder.h"
 
-#import "Task.h"
+#import "Folder.h"
 
-@implementation Tag 
+@implementation RemoteFolder 
 
-@dynamic deleted;
-@dynamic text;
-@dynamic tasks;
+@dynamic localFolder;
 
 @end

@@ -1,19 +1,17 @@
 // 
-//  Tag.m
+//  RemoteTask.m
 //  WellDone
 //
 //  Created by Alex Leutgöb on 30.11.09.
 //  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
-#import "Tag.h"
+#import "RemoteTask.h"
 
 #import "Task.h"
 
-@implementation Tag 
+@implementation RemoteTask 
 
-@dynamic deleted;
-@dynamic text;
-@dynamic tasks;
+@dynamic localTask;
 
 @end

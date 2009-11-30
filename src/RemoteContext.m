@@ -1,19 +1,17 @@
 // 
-//  Tag.m
+//  RemoteContext.m
 //  WellDone
 //
 //  Created by Alex Leutgöb on 30.11.09.
 //  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
-#import "Tag.h"
+#import "RemoteContext.h"
 
-#import "Task.h"
+#import "Context.h"
 
-@implementation Tag 
+@implementation RemoteContext 
 
-@dynamic deleted;
-@dynamic text;
-@dynamic tasks;
+@dynamic localContext;
 
 @end

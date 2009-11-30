@@ -2,16 +2,19 @@
 //  Context.m
 //  WellDone
 //
-//  Created by Manuel Maly on 25.11.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Alex Leutgöb on 30.11.09.
+//  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
 #import "Context.h"
 
+#import "RemoteContext.h"
+#import "Task.h"
 
 @implementation Context 
 
 @dynamic title;
-@dynamic Task;
+@dynamic tasks;
+@dynamic remoteContexts;
 
 @end

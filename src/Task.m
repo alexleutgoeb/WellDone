@@ -2,36 +2,38 @@
 //  Task.m
 //  WellDone
 //
-//  Created by Manuel Maly on 25.11.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Alex Leutgöb on 30.11.09.
+//  Copyright 2009 alexleutgoeb.com. All rights reserved.
 //
 
 #import "Task.h"
 
 #import "Context.h"
 #import "Folder.h"
+#import "RemoteTask.h"
 #import "Tag.h"
 
 @implementation Task 
 
-@dynamic reminder;
-@dynamic note;
-@dynamic date_modified;
-@dynamic star;
-@dynamic repeat;
-@dynamic priority;
-@dynamic length;
+@dynamic status;
 @dynamic title;
-@dynamic date_start;
 @dynamic completed;
 @dynamic deleted;
-@dynamic date_created;
-@dynamic date_due;
-@dynamic status;
+@dynamic dueDate;
+@dynamic repeat;
+@dynamic priority;
+@dynamic modifiedDate;
+@dynamic reminder;
+@dynamic length;
+@dynamic starred;
+@dynamic note;
+@dynamic startDate;
+@dynamic createDate;
 @dynamic folder;
 @dynamic context;
-@dynamic tag;
-@dynamic childTask;
 @dynamic parentTask;
+@dynamic tags;
+@dynamic childTasks;
+@dynamic remoteTasks;
 
 @end

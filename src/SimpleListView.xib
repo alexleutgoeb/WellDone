@@ -49,6 +49,7 @@
 					<string>date_due</string>
 					<string>completed</string>
 					<string>tag</string>
+					<string>dueDate</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -85,7 +86,7 @@
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<string key="NSTreeContentChildrenKey">childTask</string>
+				<string key="NSTreeContentChildrenKey">childTasks</string>
 			</object>
 			<object class="NSScrollView" id="858312636">
 				<reference key="NSNextResponder"/>
@@ -220,7 +221,7 @@
 										</object>
 									</object>
 									<object class="NSTableColumn" id="566750403">
-										<string key="NSIdentifier">due_date</string>
+										<string key="NSIdentifier">dueDate</string>
 										<double key="NSWidth">58</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028234663852886e+38</double>
@@ -416,22 +417,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.date_due</string>
-						<reference key="source" ref="566750403"/>
-						<reference key="destination" ref="867985473"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="566750403"/>
-							<reference key="NSDestination" ref="867985473"/>
-							<string key="NSLabel">value: arrangedObjects.date_due</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.date_due</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">325</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: delegate.managedObjectContext</string>
 						<reference key="source" ref="867985473"/>
 						<reference key="destination" ref="1004"/>
@@ -485,6 +470,22 @@
 						<reference key="destination" ref="848461419"/>
 					</object>
 					<int key="connectionID">342</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.dueDate</string>
+						<reference key="source" ref="566750403"/>
+						<reference key="destination" ref="867985473"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="566750403"/>
+							<reference key="NSDestination" ref="867985473"/>
+							<string key="NSLabel">value: arrangedObjects.dueDate</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.dueDate</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">343</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -650,7 +651,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{451, 366}, {400, 400}}</string>
+					<string>{{440, 118}, {400, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -678,7 +679,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">342</int>
+			<int key="maxID">343</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -764,6 +765,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSUserInterfaceItemSearching.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSApplication</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">BWToolkitFramework.framework/Headers/NSApplication+BWAdditions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1180,6 +1188,13 @@
 					<string key="className">NSView</string>
 					<string key="superclassName">NSResponder</string>
 					<reference key="sourceIdentifier" ref="560994202"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">BWToolkitFramework.framework/Headers/NSView+BWAdditions.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSViewController</string>
