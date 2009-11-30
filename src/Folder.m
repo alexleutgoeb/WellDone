@@ -24,4 +24,9 @@
 @dynamic notebooks;
 @dynamic remoteFolders;
 
+- (void)awakeFromInsert {
+	self.createDate = [NSDate date];
+	self.modifiedDate = [NSDate date];
+}
+
 @end
