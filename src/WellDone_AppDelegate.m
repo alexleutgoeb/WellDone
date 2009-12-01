@@ -109,7 +109,7 @@
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	
 	// Replace the placeholder views with the actual views from the controllers.
-	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];
+ 	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
 	
