@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -39,7 +38,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -199,7 +198,6 @@
 								</object>
 								<string key="NSFrame">{{1, 17}, {203, 568}}</string>
 								<reference key="NSSuperview" ref="434971663"/>
-								<reference key="NSNextKeyView" ref="863614680"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<reference key="NSDocView" ref="863614680"/>
 								<reference key="NSBGColor" ref="465733809"/>
@@ -233,7 +231,6 @@
 								</object>
 								<string key="NSFrame">{{1, 0}, {203, 17}}</string>
 								<reference key="NSSuperview" ref="434971663"/>
-								<reference key="NSNextKeyView" ref="256852568"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<reference key="NSDocView" ref="256852568"/>
 								<reference key="NSBGColor" ref="1020348987"/>
@@ -243,7 +240,6 @@
 						</object>
 						<string key="NSFrame">{{20, 42}, {205, 586}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSNextKeyView" ref="193410830"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<int key="NSsFlags">2</int>
 						<reference key="NSVScroller" ref="291467695"/>
@@ -329,7 +325,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{262, 628}</string>
-				<reference key="NSSuperview"/>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSClassName">NSView</string>
 			</object>
