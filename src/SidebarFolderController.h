@@ -10,7 +10,7 @@
 
 
 @interface SidebarFolderController : NSViewController {
-IBOutlet NSObjectController* folderArrayController;
+	IBOutlet NSObjectController* folderArrayController;
 }
 
 @end

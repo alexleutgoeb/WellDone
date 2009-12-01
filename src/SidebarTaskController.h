@@ -11,6 +11,7 @@
 
 @interface SidebarTaskController : NSViewController {
 	IBOutlet NSObjectController* taskObjectController;
+	IBOutlet NSTextField* note;
 }
 
 @end

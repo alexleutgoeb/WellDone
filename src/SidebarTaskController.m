@@ -16,8 +16,14 @@
 	self = [super initWithNibName:@"SidebarTask" bundle:nil];
 	if (self != nil)
 	{		
+		note.delegate = self;
 	}
 	return self;
+}
+
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
+{
+	NSLog(@"wtf");
 }
 
 @end
