@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ActivePerspectiveName</key>
-	<string>Project</string>
+	<string>Debug</string>
 	<key>AllowedModules</key>
 	<array>
 		<dict>
@@ -197,128 +197,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>42CFBE7D10C5556A00B5982D</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>SidebarTaskController.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>42CFBE7E10C5556A00B5982D</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>SidebarTaskController.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>42CFBE8B10C555AB00B5982D</string>
-						<key>history</key>
-						<array>
-							<string>42CFBE7910C5553900B5982D</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1198, 729}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>191 96 1198 770 0 0 1440 878 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>42CFBD6610C5370200B5982D</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WellDone.xcdatamodel</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>42CFBD6710C5370200B5982D</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WellDone.xcdatamodel</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>42CFBE8C10C555AB00B5982D</string>
-						<key>history</key>
-						<array>
-							<string>42CFBE2D10C54FCD00B5982D</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1198, 729}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>147 97 1198 770 0 0 1440 878 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>42CFBDB110C53E1600B5982D</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WellDone_AppDelegate.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>42CFBDB210C53E1600B5982D</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WellDone_AppDelegate.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>42CFBE8D10C555AB00B5982D</string>
-						<key>history</key>
-						<array>
-							<string>42CFBDD010C53FD100B5982D</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1198, 729}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>15 103 1198 770 0 0 1440 878 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>1440</integer>
@@ -352,8 +231,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -424,8 +301,6 @@
 							<string>MainColumn</string>
 							<real>350</real>
 						</array>
-						<key>RubberWindowFrame</key>
-						<string>-2 107 1440 771 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -453,7 +328,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>42CFBE8A10C555AB00B5982D</string>
+										<string>42CFBE9110C55A9500B5982D</string>
 										<key>history</key>
 										<array>
 											<string>42F5E19810C52E950079A456</string>
@@ -474,8 +349,6 @@
 							<dict>
 								<key>Frame</key>
 								<string>{{0, 0}, {1068, 521}}</string>
-								<key>RubberWindowFrame</key>
-								<string>-2 107 1440 771 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -515,8 +388,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1068, 177}}</string>
-										<key>RubberWindowFrame</key>
-										<string>-2 107 1440 771 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -627,6 +498,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
@@ -638,6 +511,8 @@
 					<dict>
 						<key>Frame</key>
 						<string>{{0, 0}, {1440, 270}}</string>
+						<key>RubberWindowFrame</key>
+						<string>-2 107 1440 771 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugCLIModule</string>
@@ -712,7 +587,11 @@
 							</array>
 							<key>Frame</key>
 							<string>{{703, 0}, {737, 221}}</string>
+							<key>RubberWindowFrame</key>
+							<string>-2 107 1440 771 0 0 1440 878 </string>
 						</dict>
+						<key>RubberWindowFrame</key>
+						<string>-2 107 1440 771 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugSessionModule</string>
@@ -776,11 +655,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>42CFBE9210C55A9500B5982D</string>
 		<string>42CFBD3010C52F4200B5982D</string>
 		<string>42CFBD3110C52F4200B5982D</string>
-		<string>42CFBDB110C53E1600B5982D</string>
-		<string>42CFBD6610C5370200B5982D</string>
-		<string>42CFBE7D10C5556A00B5982D</string>
 		<string>/Users/hatti/git/WellDone/src/WellDone.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
