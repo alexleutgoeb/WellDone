@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="67"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -103,12 +102,14 @@
 								<int key="NSvFlags">272</int>
 								<string key="NSFrameSize">{398, 382}</string>
 								<reference key="NSSuperview" ref="963355143"/>
+								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTableHeaderView" key="NSHeaderView" id="279691375">
 									<reference key="NSNextResponder" ref="538321996"/>
 									<int key="NSvFlags">256</int>
 									<string key="NSFrameSize">{398, 17}</string>
 									<reference key="NSSuperview" ref="538321996"/>
+									<reference key="NSWindow"/>
 									<reference key="NSTableView" ref="848461419"/>
 								</object>
 								<object class="_NSCornerView" key="NSCornerView" id="953206512">
@@ -116,6 +117,7 @@
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{224, 0}, {16, 17}}</string>
 									<reference key="NSSuperview" ref="858312636"/>
+									<reference key="NSWindow"/>
 								</object>
 								<object class="NSMutableArray" key="NSTableColumns">
 									<bool key="EncodedWithXMLCoder">YES</bool>
@@ -332,6 +334,7 @@
 						</object>
 						<string key="NSFrame">{{1, 17}, {398, 382}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="848461419"/>
 						<reference key="NSDocView" ref="848461419"/>
 						<reference key="NSBGColor" ref="1036994668"/>
@@ -342,6 +345,7 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
+						<reference key="NSWindow"/>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSCurValue">37</double>
@@ -352,6 +356,7 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{1, 503}, {601, 15}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
+						<reference key="NSWindow"/>
 						<int key="NSsFlags">1</int>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
@@ -366,6 +371,7 @@
 						</object>
 						<string key="NSFrame">{{1, 0}, {398, 17}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="279691375"/>
 						<reference key="NSDocView" ref="279691375"/>
 						<reference key="NSBGColor" ref="1036994668"/>
@@ -375,6 +381,7 @@
 				</object>
 				<string key="NSFrameSize">{400, 400}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="963355143"/>
 				<int key="NSsFlags">562</int>
 				<reference key="NSVScroller" ref="783213421"/>
@@ -632,6 +639,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="NSArray" key="dict.sortedKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>330.IBAttributePlaceholdersKey</string>
 					<string>330.IBPluginDependency</string>
 					<string>338.IBPluginDependency</string>
 					<string>63.IBPluginDependency</string>
@@ -648,10 +656,18 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="646195127"/>
+							<string key="toolTip">Task Completed</string>
+						</object>
+					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{440, 118}, {400, 400}}</string>
+					<string>{{323, 118}, {400, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

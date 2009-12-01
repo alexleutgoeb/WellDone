@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface SidebarTaskController : NSViewController {
 	IBOutlet NSObjectController* taskObjectController;
 	IBOutlet NSTextField* note;
+	IBOutlet NSTextField* datedue;
 }
+
+@property (nonatomic, retain) NSTextField* datedue;
 
 @end

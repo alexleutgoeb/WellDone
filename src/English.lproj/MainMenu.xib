@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
@@ -15,13 +15,13 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>732</string>
+				<string>740</string>
 				<string>1.2.2</string>
 			</object>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="885"/>
+			<integer value="856"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -53,7 +53,7 @@
 			<object class="NSWindowTemplate" id="483958638">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{288, 110}, {861, 717}}</string>
+				<string key="NSWindowRect">{{288, 114}, {861, 690}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">WellDone</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -70,7 +70,7 @@
 						<object class="NSSegmentedControl" id="1023902543">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">269</int>
-							<string key="NSFrame">{{343, 683}, {311, 25}}</string>
+							<string key="NSFrame">{{343, 656}, {311, 25}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
@@ -352,7 +352,7 @@
 								<object class="NSTextField" id="734058192">
 									<reference key="NSNextResponder" ref="204738622"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{203, 1}, {215, 19}}</string>
+									<string key="NSFrame">{{260, 1}, {215, 19}}</string>
 									<reference key="NSSuperview" ref="204738622"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<bool key="NSEnabled">YES</bool>
@@ -401,7 +401,7 @@
 												<object class="BWCustomView" id="792634739">
 													<reference key="NSNextResponder" ref="1817"/>
 													<int key="NSvFlags">272</int>
-													<string key="NSFrameSize">{287, 508}</string>
+													<string key="NSFrameSize">{287, 481}</string>
 													<reference key="NSSuperview" ref="1817"/>
 													<int key="NSViewLayerContentsRedrawPolicy">2</int>
 													<string key="NSClassName">NSView</string>
@@ -409,13 +409,13 @@
 												<object class="BWCustomView" id="912414122">
 													<reference key="NSNextResponder" ref="1817"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{0, 518}, {287, 139}}</string>
+													<string key="NSFrame">{{0, 491}, {287, 139}}</string>
 													<reference key="NSSuperview" ref="1817"/>
 													<int key="NSViewLayerContentsRedrawPolicy">2</int>
 													<string key="NSClassName">NSView</string>
 												</object>
 											</object>
-											<string key="NSFrameSize">{287, 657}</string>
+											<string key="NSFrameSize">{287, 630}</string>
 											<reference key="NSSuperview" ref="279165087"/>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<reference key="BWSVColor" ref="5414122"/>
@@ -462,7 +462,7 @@
 											<bool key="BWSVDividerCanCollapse">NO</bool>
 										</object>
 									</object>
-									<string key="NSFrameSize">{262, 657}</string>
+									<string key="NSFrameSize">{262, 630}</string>
 									<reference key="NSSuperview" ref="107424906"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSClassName">NSView</string>
@@ -470,7 +470,7 @@
 								<object class="BWCustomView" id="123063147">
 									<reference key="NSNextResponder" ref="107424906"/>
 									<int key="NSvFlags">258</int>
-									<string key="NSFrame">{{263, 0}, {311, 657}}</string>
+									<string key="NSFrame">{{263, 0}, {311, 630}}</string>
 									<reference key="NSSuperview" ref="107424906"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSClassName">NSView</string>
@@ -478,14 +478,14 @@
 								<object class="BWCustomView" id="343399795">
 									<reference key="NSNextResponder" ref="107424906"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{575, 0}, {286, 657}}</string>
+									<string key="NSFrame">{{575, 0}, {286, 630}}</string>
 									<reference key="NSSuperview" ref="107424906"/>
 									<bool key="NSViewIsLayerTreeHost">YES</bool>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{0, 20}, {861, 657}}</string>
+							<string key="NSFrame">{{0, 20}, {861, 630}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -555,7 +555,7 @@
 						<object class="NSButton" id="920024111">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">265</int>
-							<string key="NSFrame">{{811, 683}, {38, 25}}</string>
+							<string key="NSFrame">{{811, 656}, {38, 25}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
@@ -582,7 +582,7 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{861, 717}</string>
+					<string key="NSFrameSize">{861, 690}</string>
 					<reference key="NSSuperview"/>
 					<bool key="NSViewIsLayerTreeHost">YES</bool>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -4010,9 +4010,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{37, 139}, {861, 717}}</string>
+					<string>{{34, 66}, {861, 690}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{37, 139}, {861, 717}}</string>
+					<string>{{34, 66}, {861, 690}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>

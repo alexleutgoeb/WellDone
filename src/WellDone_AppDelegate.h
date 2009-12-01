@@ -61,5 +61,6 @@
 - (void)showTagManagement:(id)sender;
 - (void)showContextManagement:(id)sender;
 - (void)addNewTask:(id)sender;
+- (void)addNewFolder:(id)sender;
 
 @end
