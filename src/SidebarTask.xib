@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
+		<string key="IBDocument.InterfaceBuilderVersion">732</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">740</string>
+			<string key="NS.object.0">732</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -46,7 +46,7 @@
 					<object class="NSPopUpButton" id="295288972">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{129, 253}, {138, 27}}</string>
+						<string key="NSFrame">{{129, 263}, {138, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
@@ -128,7 +128,7 @@
 					<object class="NSPopUpButton" id="87569431">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{129, 395}, {138, 27}}</string>
+						<string key="NSFrame">{{129, 399}, {138, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
@@ -196,7 +196,7 @@
 					<object class="NSPopUpButton" id="525898359">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{128, 491}, {138, 27}}</string>
+						<string key="NSFrame">{{128, 494}, {138, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
@@ -252,7 +252,7 @@
 					<object class="NSPopUpButton" id="636525185">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{128, 516}, {138, 27}}</string>
+						<string key="NSFrame">{{128, 519}, {138, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
@@ -331,7 +331,7 @@
 					<object class="NSButton" id="856100978">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{127, 277}, {63, 32}}</string>
+						<string key="NSFrame">{{127, 287}, {63, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
@@ -359,7 +359,7 @@
 					<object class="NSBox" id="814236383">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">12</int>
-						<string key="NSFrame">{{5, 235}, {260, 5}}</string>
+						<string key="NSFrame">{{5, 245}, {260, 5}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSOffsets">{0, 0}</string>
@@ -3983,7 +3983,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{286, 620}</string>
+				<string key="NSFrameSize">{286, 630}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSShadow" key="NSViewShadow">
 					<object class="NSColor" key="NSShadowColor" id="174624900">
@@ -4604,8 +4604,8 @@
 							<reference ref="737481268"/>
 							<reference ref="87569431"/>
 							<reference ref="996889020"/>
-							<reference ref="1026346897"/>
 							<reference ref="295288972"/>
+							<reference ref="1026346897"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -5323,7 +5323,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{430, 136}, {286, 620}}</string>
+					<string>{{430, 126}, {286, 630}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<reference ref="174624900"/>
