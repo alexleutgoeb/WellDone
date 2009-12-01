@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="549"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -70,7 +70,7 @@
 						<object class="NSSegmentedControl" id="1023902543">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">269</int>
-							<string key="NSFrame">{{343, 656}, {311, 25}}</string>
+							<string key="NSFrame">{{266, 656}, {311, 25}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
@@ -2611,10 +2611,10 @@
 						<reference key="object" ref="823886803"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1023902543"/>
 							<reference ref="107424906"/>
 							<reference ref="920024111"/>
 							<reference ref="204738622"/>
+							<reference ref="1023902543"/>
 						</object>
 						<reference key="parent" ref="483958638"/>
 					</object>
@@ -4010,9 +4010,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{206, 66}, {861, 690}}</string>
+					<string>{{6, 66}, {861, 690}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{206, 66}, {861, 690}}</string>
+					<string>{{6, 66}, {861, 690}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
