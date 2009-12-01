@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ActivePerspectiveName</key>
-	<string>Project</string>
+	<string>Debug</string>
 	<key>AllowedModules</key>
 	<array>
 		<dict>
@@ -231,8 +231,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -303,8 +301,6 @@
 							<string>MainColumn</string>
 							<real>350</real>
 						</array>
-						<key>RubberWindowFrame</key>
-						<string>0 107 1440 771 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -332,7 +328,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>42832C6C10C55B2A00310DE0</string>
+										<string>42832C7010C55B5D00310DE0</string>
 										<key>history</key>
 										<array>
 											<string>42F5E19810C52E950079A456</string>
@@ -353,8 +349,6 @@
 							<dict>
 								<key>Frame</key>
 								<string>{{0, 0}, {1068, 515}}</string>
-								<key>RubberWindowFrame</key>
-								<string>0 107 1440 771 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -378,8 +372,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1068, 183}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 107 1440 771 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -506,6 +498,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
@@ -517,6 +511,8 @@
 					<dict>
 						<key>Frame</key>
 						<string>{{0, 0}, {1440, 257}}</string>
+						<key>RubberWindowFrame</key>
+						<string>0 107 1440 771 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugCLIModule</string>
@@ -591,7 +587,11 @@
 							</array>
 							<key>Frame</key>
 							<string>{{703, 0}, {737, 228}}</string>
+							<key>RubberWindowFrame</key>
+							<string>0 107 1440 771 0 0 1440 878 </string>
 						</dict>
+						<key>RubberWindowFrame</key>
+						<string>0 107 1440 771 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugSessionModule</string>
@@ -655,6 +655,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>42832C7110C55B5D00310DE0</string>
+		<string>42832C7210C55B5D00310DE0</string>
+		<string>42832C7310C55B5D00310DE0</string>
 		<string>/Users/hatti/git/WellDone/src/WellDone.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
