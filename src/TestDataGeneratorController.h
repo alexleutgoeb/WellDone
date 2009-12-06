@@ -20,4 +20,5 @@
 - (void) performAll:(id)sender;
 - (NSManagedObject *) createTask:(NSString *)title;
 - (void) deleteAllObjects: (NSString *) entityName;
+
 @end

@@ -1,16 +1,19 @@
 //
-//  FolderController.h
+//  SidebarFolderController.h
 //  WellDone
 //
-//  Created by Christian Hattinger on 20.11.09.
-//  Copyright 2009 TU Wien. All rights reserved.
+//  Created by Manuel Maly on 06.12.09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
+#import <SidebarFolderTreeView.h>
 
 
 @interface SidebarFolderController : NSViewController {
-	IBOutlet NSObjectController* folderArrayController;
+	IBOutlet SidebarFolderTreeView *sidebar;
 }
+
+- (IBAction)addChild: (id)sender;
 
 @end

@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
-		42112DAB10B6DF4000B19CC0 /* SidebarFolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42112DAA10B6DF4000B19CC0 /* SidebarFolderController.m */; };
 		42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42112E5910B6E5F100B19CC0 /* FolderView.xib */; };
 		42262ECA109C818B005E4997 /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
+		6F22C18D10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
+		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
+		6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */; };
+		6F22C1BB10CC01DD00ABFE19 /* SidebarBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */; };
+		6F22C1E610CC044100ABFE19 /* SidebarFolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */; };
+		6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */; };
+		6F22C29E10CC1A2A00ABFE19 /* SidebarFolderNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */; };
 		6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
@@ -117,13 +123,20 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* WellDone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellDone_Prefix.pch; sourceTree = "<group>"; };
-		42112DA910B6DF4000B19CC0 /* SidebarFolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarFolderController.h; sourceTree = "<group>"; };
-		42112DAA10B6DF4000B19CC0 /* SidebarFolderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderController.m; sourceTree = "<group>"; };
 		42112E5910B6E5F100B19CC0 /* FolderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderView.xib; sourceTree = "<group>"; };
 		42262EB4109C8049005E4997 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42262EB5109C8049005E4997 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
+		6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderSourceListView.xib; sourceTree = "<group>"; };
+		6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderTreeView.m; sourceTree = "<group>"; };
+		6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarBadgeCell.m; sourceTree = "<group>"; };
+		6F22C1B710CC01DD00ABFE19 /* SidebarBadgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarBadgeCell.h; sourceTree = "<group>"; };
+		6F22C1B810CC01DD00ABFE19 /* SidebarFolderNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarFolderNode.h; sourceTree = "<group>"; };
+		6F22C1B910CC01DD00ABFE19 /* SidebarFolderTreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarFolderTreeView.h; sourceTree = "<group>"; };
+		6F22C1E410CC044100ABFE19 /* SidebarFolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarFolderController.h; sourceTree = "<group>"; };
+		6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderController.m; sourceTree = "<group>"; };
+		6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderNode.m; sourceTree = "<group>"; };
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
 		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
@@ -286,6 +299,7 @@
 				D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */,
 				D110F46910B8D72300304B4C /* TagManagement.xib */,
 				D110F48410B8DA6800304B4C /* ContextManagement.xib */,
+				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -310,14 +324,14 @@
 				6FB8A94110B0143F00B0F240 /* GTDListController.m */,
 				B4317ED810B163F900C9841F /* SidebarTaskController.h */,
 				B4317ED910B163F900C9841F /* SidebarTaskController.m */,
-				42112DA910B6DF4000B19CC0 /* SidebarFolderController.h */,
-				42112DAA10B6DF4000B19CC0 /* SidebarFolderController.m */,
 				D1F2E93710B8A838009D4B4B /* FolderManagementController.h */,
 				D1F2E93810B8A838009D4B4B /* FolderManagementController.m */,
 				D110F46F10B8D92600304B4C /* TagManagementController.h */,
 				D110F47010B8D92600304B4C /* TagManagementController.m */,
 				D110F48A10B8DBDB00304B4C /* ContextManagementController.h */,
 				D110F48B10B8DBDB00304B4C /* ContextManagementController.m */,
+				6F22C1E410CC044100ABFE19 /* SidebarFolderController.h */,
+				6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -325,6 +339,12 @@
 		6F5D249210AC588D002E9514 /* View Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6F22C1B910CC01DD00ABFE19 /* SidebarFolderTreeView.h */,
+				6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */,
+				6F22C1B710CC01DD00ABFE19 /* SidebarBadgeCell.h */,
+				6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */,
+				6F22C1B810CC01DD00ABFE19 /* SidebarFolderNode.h */,
+				6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */,
 				6F2E521810B01F7B005B118B /* GTDListView.h */,
 				6F2E521910B01F7B005B118B /* GTDListView.m */,
 				B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */,
@@ -489,6 +509,7 @@
 				6FB162DA10AD8CF200961A94 /* SimpleListView.xib in Resources */,
 				6FB8A94710B0194E00B0F240 /* GTDListView.xib in Resources */,
 				6FCE287410B6FE53002355CF /* TestDataGenerator.xib in Resources */,
+				6F22C18D10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +528,7 @@
 				D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */,
 				D110F46A10B8D72300304B4C /* TagManagement.xib in Resources */,
 				D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */,
+				6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +560,7 @@
 				6F2E521A10B01F7B005B118B /* GTDListView.m in Sources */,
 				6FCE287110B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
 				6FAEAF3810BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
+				6F22C1E610CC044100ABFE19 /* SidebarFolderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,14 +568,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22C29E10CC1A2A00ABFE19 /* SidebarFolderNode.m in Sources */,
+				6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				6F22C1BB10CC01DD00ABFE19 /* SidebarBadgeCell.m in Sources */,
 				77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */,
 				B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */,
 				6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */,
 				B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */,
 				B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */,
-				42112DAB10B6DF4000B19CC0 /* SidebarFolderController.m in Sources */,
 				6FCE287010B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
 				D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */,
 				D110F47110B8D92600304B4C /* TagManagementController.m in Sources */,
@@ -570,6 +595,7 @@
 				FA90D40C10C4124D00309192 /* RemoteFolder.m in Sources */,
 				FA90D40D10C4124D00309192 /* Context.m in Sources */,
 				FA90D4A410C41E8400309192 /* RemoteObject.m in Sources */,
+				6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
