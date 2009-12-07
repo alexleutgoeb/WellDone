@@ -39,9 +39,9 @@
 	//TODO;
 }
 - (void) generateFolders:(id)sender {
-	NSManagedObject *folder1 = [self createFolder:@"Test Folder 1"];
-	NSManagedObject *folder2 = [self createFolder:@"Test Folder 2"];
-	NSManagedObject *folder3 = [self createFolder:@"Test Folder 3"];
+	[self createFolder:@"Test Folder 1"];
+	[self createFolder:@"Test Folder 2"];
+	[self createFolder:@"Test Folder 3"];
 }
 
 - (void) deleteAll:(id)sender {
