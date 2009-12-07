@@ -13,6 +13,7 @@
 @interface SimpleListController : NSViewController {
 	IBOutlet NSTreeController* treeController;
 	IBOutlet NSOutlineView* myview;
+	NSManagedObjectContext *moc;
 }
 
 @property (nonatomic, retain, readonly) NSTreeController *treeController;
