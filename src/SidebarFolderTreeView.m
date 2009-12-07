@@ -9,8 +9,10 @@
 #import "SidebarBadgeCell.h"
 #import "SidebarFolderNode.h"
 #import "SidebarFolderTreeView.h"
+#import <Task.h>
 
 #define kSidebarPBoardType		@"SidebarNodePBoardType"
+#define rootNodeTaskFolders		@"1"
 
 @implementation SidebarFolderTreeView
 
@@ -42,11 +44,102 @@
 	// drag and drop support
 	[self registerForDraggedTypes:[NSArray arrayWithObjects:kSidebarPBoardType, nil]];
 	
-	// Sup Delegates & Data Source
+	// Sub Delegates & Data Source
 	[self setDataSource:self];
 	[self setDelegate:self];
 	
+	// Insert initial root nodes
+	[self initializeRootNodes];
+	
+	// Initialize listening to notifications by managedObjectContext
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	
+	[nc addObserver:self
+		   selector:@selector(reactToMOCUpdate:)
+			   name:NSManagedObjectContextObjectsDidChangeNotification
+			 object:nil];
+	
 	return self;
+}
+
+/*
+ * Initialize all root nodes which group items in the source list view.
+*/
+- (void) initializeRootNodes {
+	[self addSection:rootNodeTaskFolders caption:@"FOLDERS"];
+	
+	/*
+	NSManagedObjectContext * moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+
+	
+	NSEntityDescription *entityDescription = [NSEntityDescription
+											  entityForName:@"Folder" inManagedObjectContext:moc];
+	
+		
+	Folder *folder = [[Folder alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+	folder.name =@"TestFolder";
+	[self addNewFolderEntity:folder toSection:rootNodeTaskFolders];
+	*/
+	
+	[self reloadData];
+	[self expandItem:rootNodeTaskFolders];
+	
+	//TODO: Insert more sections
+}
+
+/*
+ * This method will be called when any update is done to the managedObjectContext.
+ * It reacts to some of these changes with updates to the folder tree view.
+*/
+- (void) reactToMOCUpdate:(NSNotification *)notification {
+	//NSEnumerator *enumerator = [[notification object]
+	//							objectEnumerator];
+	id object;
+	NSDictionary *userInfo = [notification userInfo];
+	
+	NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
+	while (object = [updatedObjects nextObject]) {
+		if ([object isKindOfClass: [Folder class]]) {
+			NSLog(@"Updated Folder with name: %@", [object name]);
+			// TODO: handle updated objects
+			// TODO: handle deleted objects (flag: delete), they are not really deleted until synchronisation
+		}
+	}
+	
+	NSEnumerator *insertedObjects = [[userInfo objectForKey:NSInsertedObjectsKey] objectEnumerator];
+	while (object = [insertedObjects nextObject]) {
+		if ([object isKindOfClass: [Folder class]]) {
+			NSLog(@"Inserted Folder with name: %@", [object name]);
+			[self addNewFolderEntity:object toSection:rootNodeTaskFolders];
+			[self reloadData];			
+		}
+	}
+	
+	NSEnumerator *deletedObjects = [[userInfo objectForKey:NSDeletedObjectsKey] objectEnumerator];
+	while (object = [deletedObjects nextObject]) {
+		if ([object isKindOfClass: [Folder class]]) {
+			NSLog(@"Deleted Folder with name: %@", [object name]);
+			[self removeFolderEntity: object];
+		}
+	}
+}
+
+- (void) addNewFolderEntity:(Folder *) folder toSection:(NSString *)section {
+	if([[folder objectID] isTemporaryID] == YES) {
+		NSLog(@"New Folder has temporary objectid!");
+	}
+	
+	[self addChild:section 
+			 key:[folder name]  // TODO: change to real unique key!
+			 caption:[folder name]
+			 icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]
+			 action:@selector(buttonPres:) 
+			 target:self];
+}
+
+- (void) removeFolderEntity:(Folder *) folder {
+	[self removeItem: [folder name]];  // TODO: change to real unique key!
 }
 
 - (void)setDefaultAction:(SEL)action target:(id)target {

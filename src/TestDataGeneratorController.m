@@ -39,8 +39,11 @@
 	//TODO;
 }
 - (void) generateFolders:(id)sender {
-	//TODO;
+	NSManagedObject *folder1 = [self createFolder:@"Test Folder 1"];
+	NSManagedObject *folder2 = [self createFolder:@"Test Folder 2"];
+	NSManagedObject *folder3 = [self createFolder:@"Test Folder 3"];
 }
+
 - (void) deleteAll:(id)sender {
 	[self deleteAllObjects:@"Note"];
 	[self deleteAllObjects:@"Folder"];
@@ -60,6 +63,12 @@
 	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:moc]; 
 	[task setValue:title forKey:@"title"]; 
 	return task;
+}
+
+- (NSManagedObject *) createFolder:(NSString *)name {
+	NSManagedObject *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:moc]; 
+	[folder setValue:name forKey:@"name"]; 
+	return folder;
 }
 
 - (void) deleteAllObjects: (NSString *) entityName  {

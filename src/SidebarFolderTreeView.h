@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Folder.h>
 
 @interface SidebarFolderTreeView : NSOutlineView {
 @private
@@ -111,5 +112,9 @@
 - (void)setBadge:(id)key count:(NSInteger)badgeValue;
 - (void)unsetBadge:(id)key;
 
+- (void) initializeRootNodes;
+- (void) reactToMOCUpdate:(NSNotification *)notification;
+- (void) addNewFolderEntity:(Folder *)folder toSection:(NSString *)section;
+- (void) removeFolderEntity:(Folder *) folder;
 @end
 

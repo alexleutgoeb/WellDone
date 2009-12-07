@@ -24,6 +24,7 @@
 
 		[sidebar setDefaultAction:@selector(buttonDefaultHandler:) target:self];
 		
+	/*
 		[sidebar addSection:@"1" caption:@"DEVICES"];
 		[sidebar addSection:@"2" caption:@"PLACES"];
 		
@@ -47,7 +48,8 @@
 		[sidebar addChild:@"3" key:@"3.3" caption:@"Users" icon:[NSImage imageNamed:NSImageNameUserGroup]];
 		[sidebar addChild:@"3" key:@"3.4" caption:@"Everyone" icon:[NSImage imageNamed:NSImageNameEveryone]];
 		[sidebar addChild:@"3" key:@"3.5" caption:@"Smart" icon:[NSImage imageNamed:NSImageNameSmartBadgeTemplate]];
-		
+		[sidebar addChild:@"3.5" key:@"3.5.1" caption:@"SmartX" icon:[NSImage imageNamed:NSImageNameSmartBadgeTemplate]];
+	
 		[sidebar setBadge:@"1.2" count:5];
 		[sidebar setBadge:@"2.3" count:3];
 		[sidebar setBadge:@"3.1" count:4];
@@ -55,7 +57,7 @@
 		[sidebar reloadData];
 		
 		[sidebar expandItem:@"3"];
-		
+		*/
 		
 }
 

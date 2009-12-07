@@ -19,6 +19,7 @@
 - (void) deleteAll:(id)sender;
 - (void) performAll:(id)sender;
 - (NSManagedObject *) createTask:(NSString *)title;
+- (NSManagedObject *) createFolder:(NSString *)name;
 - (void) deleteAllObjects: (NSString *) entityName;
 
 @end
