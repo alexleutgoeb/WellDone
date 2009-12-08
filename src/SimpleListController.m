@@ -7,7 +7,9 @@
 //
 
 #import "SimpleListController.h"
-
+#import <AppKit/NSTokenField.h>
+#import <AppKit/NSTokenFieldCell.h>
+#import <Tag.h>
 
 @implementation SimpleListController
 
@@ -53,31 +55,128 @@
 	[cell setTextColor:[NSColor blackColor]];
 }
 
-- (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject {
-	NSLog(@"test2");
-	return @"Tagname";
 
+
+//TODO: might not need this stuff
+/*
+- (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject {
+	NSLog(@"displayStringForRepresentedObject");
+	return representedObject; 	
+}
+ */
+
+
+/*
+- (NSTokenStyle)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell styleForRepresentedObject:(id)representedObject{
+	NSLog(@"styleForRepresentedObject");
+	NSTokenFieldCell *newCell = [[NSTokenFieldCell alloc]init];
+	[newCell setTokenStyle: [tokenFieldCell tokenStyle]];
+	[newCell setTextColor:[NSColor redColor]];
+	[newCell setTokenStyle:NSRoundedTokenStyle];	
+	[tokenFieldCell setTextColor:[NSColor redColor]];
+	return [newCell tokenStyle];	
+}
+*/
+
+
+//TODO: methodenkopf, unit tests
+- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
+		   shouldAddObjects:(NSArray *)tokens 
+					atIndex:(NSUInteger)index{
+	
+	NSLog(@"shouldAddObjects");
+	NSString *currentTagName = [[NSString alloc]init];
+	NSArray *currentTags = [self getCurrentTags]; 
+	NSMutableArray  *currentTagNames = [[NSMutableArray alloc]init];
+	NSMutableArray  *result = [[NSMutableArray alloc]init];
+	
+	//copy all the current TagNames into the currentTagNames array
+	for (int i = 0; i < [currentTags count]; i++){
+		if ([[currentTags objectAtIndex:i] text]!=nil ){ 
+			[currentTagNames addObject: ((NSString *) [[currentTags objectAtIndex:i] text])];
+		}
+	}
+	
+	// go through all tokens (it might come more than one because of copy&paste)
+	for (int i = 0; i < [tokens count]; i++) {
+		
+		//check if tag already exisits
+		currentTagName = (NSString *) [tokens objectAtIndex:i];
+		if (![currentTagNames containsObject:currentTagName]){
+			
+			//add to core data and to return result
+			NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+			[tag setValue:currentTagName forKey:@"text"]; 
+		}
+		
+		[result addObject:currentTagName]; 
+	
+//		[self getTagByName: currentTagName];//TODO
+		
+		//add tag to current task if not already done (no double tagging alowed)
+		//TODO
+	}
+	// return An array of validated tokens (pasteboard)
+	return result;
+	
+	//NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+	//[tag setValue:(NSString *) [tokenFieldCell text] forKey:@"Text"]; 
+	
 }
 
-- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex {
-	NSLog(@"tokenFieldCell");
+
+//TODO: methodenkopf, unit tests, copy&paste
+- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
+	completionsForSubstring:(NSString *)substring 
+			   indexOfToken:(NSInteger)tokenIndex 
+		indexOfSelectedItem:(NSInteger *)selectedIndex {
+	
+	NSLog(@"completionsForSubstring");
+	
+		// get all the saved tags from core data and save them into the item array
+	NSArray *items = [self getCurrentTags]; 
+	NSMutableArray  *result = [[NSMutableArray alloc]init];
+	NSString *currentTagName = [[NSString alloc]init];
+		
+	for (int i = 0; i < [items count]; i++) {
+		currentTagName = (NSString *) [[items objectAtIndex:i] text];
+		
+		// avoid to put the tagname twice into the list (in case that the typed name was in core data)
+		// also filter the tags out of the list which are not substrings of the user typed tagname
+		if (currentTagName != nil && ![currentTagName isEqualToString: substring] && !([currentTagName rangeOfString:substring].location == NSNotFound)){ 
+			[result addObject: currentTagName];
+		}
+	}	
+	
+	[result sortUsingSelector:@selector(compare:)];
+	
+	// add the current typed string from the user (substring param) as the first item
+	[result insertObject:substring atIndex:0];
+	return result;
+ }
+
+//TODO: comments, tests
+- (NSArray *) getCurrentTags {
 	
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
-    [fetchRequest setEntity:entity];
-	
+	[fetchRequest setEntity:entity];	
 	NSError *error;
-    NSArray *items = [moc executeFetchRequest:fetchRequest error:&error];
+	return [moc executeFetchRequest:fetchRequest error:&error]; 
+}
+
+//TODO: comments, tests
+- (Tag *) getTagByName: (NSString *)tagName {
 	
-	
-	NSArray * result = [NSArray arrayWithObjects:substring,nil];
-	
-	//for (int i = 0; i < [items count]; i++) {
-	//	[result [[items objectAtIndex:i] text];
-	//}	
-	
-	return result;
-	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
+//	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text == %@)", tagName];
+	[fetchRequest setEntity:entity];	
+//	[fetchRequest setPredicate:predicate];	
+	NSError *error;
+	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
+	//TODO: errorhandling (if !=1)
+	return  [result objectAtIndex:0];
 }
 
 @end
