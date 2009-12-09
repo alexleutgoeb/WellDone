@@ -121,7 +121,7 @@
 		//		[self getTagByName: currentTagName];//TODO
 		
 	}
-	
+	/*
 	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:moc]; 
 	[task setValue:@"das ist der temp task" forKey:@"title"]; 
 	NSSet *tasks = [NSSet setWithObject:task];
@@ -131,7 +131,7 @@
 	[tag setValue:@"tempNameForTagToLink" forKey:@"text"]; 		
 	
 	[tag setValue:tasks  forKey:@"tasks"];
-	
+	*/
 	
 	
 	// return An array of validated tokens (pasteboard)

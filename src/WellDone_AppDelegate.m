@@ -248,7 +248,7 @@
 												  configuration:nil 
 															URL:url 
 														options:nil 
-														  error:&error]){
+														  error:&error]){//change between XML and DB saved local
         [[NSApplication sharedApplication] presentError:error];
         [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
         return nil;
