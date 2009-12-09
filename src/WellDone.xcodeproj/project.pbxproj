@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
 		42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42112E5910B6E5F100B19CC0 /* FolderView.xib */; };
-		424209B710CFB96D00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
 		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
@@ -112,7 +111,7 @@
 		42262EB5109C8049005E4997 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
-		4242098910CFB7A000DB9F3F /* UnitTestCases.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = UnitTestCases.octest; path = build/Debug/UnitTestCases.octest; sourceTree = "<group>"; };
+		4242098910CFB7A000DB9F3F /* UnitTestCases.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestCases.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTestCases-Info.plist"; sourceTree = "<group>"; };
 		424209B610CFB96D00DB9F3F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderSourceListView.xib; sourceTree = "<group>"; };
@@ -200,7 +199,6 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */,
 				FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */,
-				424209B710CFB96D00DB9F3F /* SenTestingKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
