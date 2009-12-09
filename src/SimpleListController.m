@@ -26,13 +26,12 @@
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-
 	return nil;
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 	NSTextFieldCell *acell = [tableColumn dataCell];
-
+	
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
 		Task *task = [item representedObject];
 		if ([task.completed boolValue] == YES) {
@@ -40,10 +39,9 @@
 		} else {
 			[self setTaskUndone:acell];
 		}
-		
-}
-
-
+	}
+	
+	
 	
 }
 
@@ -57,37 +55,43 @@
 
 
 
+/**
+ NSTokenFieldCellDelegate Delegate Methoden
+ */
+
 //TODO: might not need this stuff
 /*
-- (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject {
-	NSLog(@"displayStringForRepresentedObject");
-	return representedObject; 	
-}
+ - (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject {
+ NSLog(@"displayStringForRepresentedObject");
+ return representedObject; 	
+ }
  */
 
 
 /*
-- (NSTokenStyle)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell styleForRepresentedObject:(id)representedObject{
-	NSLog(@"styleForRepresentedObject");
-	NSTokenFieldCell *newCell = [[NSTokenFieldCell alloc]init];
-	[newCell setTokenStyle: [tokenFieldCell tokenStyle]];
-	[newCell setTextColor:[NSColor redColor]];
-	[newCell setTokenStyle:NSRoundedTokenStyle];	
-	[tokenFieldCell setTextColor:[NSColor redColor]];
-	return [newCell tokenStyle];	
-}
-*/
+ - (NSTokenStyle)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell styleForRepresentedObject:(id)representedObject{
+ NSLog(@"styleForRepresentedObject");
+ NSTokenFieldCell *newCell = [[NSTokenFieldCell alloc]init];
+ [newCell setTokenStyle: [tokenFieldCell tokenStyle]];
+ [newCell setTextColor:[NSColor redColor]];
+ [newCell setTokenStyle:NSRoundedTokenStyle];	
+ [tokenFieldCell setTextColor:[NSColor redColor]];
+ return [newCell tokenStyle];	
+ }
+ */
 
 
-//TODO: methodenkopf, unit tests
+//TODO: methodenkopf, unit tests, soll sie threadsave sein?
 - (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
 		   shouldAddObjects:(NSArray *)tokens 
 					atIndex:(NSUInteger)index{
 	
 	NSLog(@"shouldAddObjects");
 	NSString *currentTagName = [[NSString alloc]init];
-	NSArray *currentTags = [self getCurrentTags]; 
-	NSMutableArray  *currentTagNames = [[NSMutableArray alloc]init];
+	
+	NSArray *currentTags = [self getCurrentTags]; //from core data
+	NSMutableArray  *currentTagNames = [[NSMutableArray alloc]init]; //tag 'text' from currentTags is copied in there
+	
 	NSMutableArray  *result = [[NSMutableArray alloc]init];
 	
 	//copy all the current TagNames into the currentTagNames array
@@ -97,30 +101,41 @@
 		}
 	}
 	
-	// go through all tokens (it might come more than one because of copy&paste)
+	// go through all tokens (it might come more than one because of copy&paste) which the user entered (tokens)
 	for (int i = 0; i < [tokens count]; i++) {
 		
-		//check if tag already exisits
+		//check if tag already exisits (a task can't be tagged twice with the same tag name, this could be possible with copy&paste)
 		currentTagName = (NSString *) [tokens objectAtIndex:i];
 		if (![currentTagNames containsObject:currentTagName]){
 			
-			//add to core data and to return result
+			//add tag to core data
 			NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
-			[tag setValue:currentTagName forKey:@"text"]; 
-		}
-		
+			[tag setValue:currentTagName forKey:@"text"]; 		
+			
+		}		
+		// add tag to the result list and link it with the task (if not already done, double tagging not allowed)
 		[result addObject:currentTagName]; 
-	
-//		[self getTagByName: currentTagName];//TODO
 		
-		//add tag to current task if not already done (no double tagging alowed)
-		//TODO
+		
+		
+		//		[self getTagByName: currentTagName];//TODO
+		
 	}
+	
+	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:moc]; 
+	[task setValue:@"das ist der temp task" forKey:@"title"]; 
+	NSSet *tasks = [NSSet setWithObject:task];
+	
+	
+	NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+	[tag setValue:@"tempNameForTagToLink" forKey:@"text"]; 		
+	
+	[tag setValue:tasks  forKey:@"tasks"];
+	
+	
+	
 	// return An array of validated tokens (pasteboard)
 	return result;
-	
-	//NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
-	//[tag setValue:(NSString *) [tokenFieldCell text] forKey:@"Text"]; 
 	
 }
 
@@ -133,11 +148,11 @@
 	
 	NSLog(@"completionsForSubstring");
 	
-		// get all the saved tags from core data and save them into the item array
+	// get all the saved tags from core data and save them into the item array
 	NSArray *items = [self getCurrentTags]; 
 	NSMutableArray  *result = [[NSMutableArray alloc]init];
 	NSString *currentTagName = [[NSString alloc]init];
-		
+	
 	for (int i = 0; i < [items count]; i++) {
 		currentTagName = (NSString *) [[items objectAtIndex:i] text];
 		
@@ -153,11 +168,10 @@
 	// add the current typed string from the user (substring param) as the first item
 	[result insertObject:substring atIndex:0];
 	return result;
- }
+}
 
 //TODO: comments, tests
 - (NSArray *) getCurrentTags {
-	
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
 	[fetchRequest setEntity:entity];	
@@ -170,9 +184,9 @@
 	
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
-//	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text == %@)", tagName];
+	//	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text == %@)", tagName];
 	[fetchRequest setEntity:entity];	
-//	[fetchRequest setPredicate:predicate];	
+	//	[fetchRequest setPredicate:predicate];	
 	NSError *error;
 	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
 	//TODO: errorhandling (if !=1)
