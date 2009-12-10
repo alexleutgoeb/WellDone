@@ -11,6 +11,7 @@
 		42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42112E5910B6E5F100B19CC0 /* FolderView.xib */; };
 		424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
+		4263A72410D1179D00C5FD7B /* SimpleListControllerTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */; };
 		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
 		6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */; };
 		6F22C1BB10CC01DD00ABFE19 /* SidebarBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */; };
@@ -114,6 +115,7 @@
 		4242098910CFB7A000DB9F3F /* UnitTestCases.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestCases.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTestCases-Info.plist"; sourceTree = "<group>"; };
 		424209B610CFB96D00DB9F3F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListControllerTestCases.m; sourceTree = "<group>"; };
 		6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderSourceListView.xib; sourceTree = "<group>"; };
 		6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderTreeView.m; sourceTree = "<group>"; };
 		6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarBadgeCell.m; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			children = (
 				42262EC8109C818B005E4997 /* templateTestCases.h */,
 				42262EC9109C818B005E4997 /* templateTestCases.m */,
+				4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */,
 			);
 			name = TestClasses;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */,
+				4263A72410D1179D00C5FD7B /* SimpleListControllerTestCases.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -244,11 +244,11 @@
     
 	NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"WellDone.welldonedoc"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType 
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType
 												  configuration:nil 
 															URL:url 
 														options:nil 
-														  error:&error]){//change between XML and DB saved local
+														  error:&error]){//change between XML and DB saved local (NSSQLiteStoreType vs. NSXMLStoreType)
         [[NSApplication sharedApplication] presentError:error];
         [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
         return nil;

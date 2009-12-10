@@ -41,8 +41,6 @@
 		}
 	}
 	
-	
-	
 }
 
 - (void)setTaskDone:(NSTextFieldCell*)cell {
@@ -118,24 +116,21 @@
 		
 		
 		
-		//		[self getTagByName: currentTagName];//TODO
-		
+		Tag *tag =[self getTagByName: currentTagName] ;//TODO
+		NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects ];
+		NSSet *selectedTask = [NSSet setWithObject: [selectedTasks objectAtIndex:0]];
+		[tag addTasks:selectedTask];
 	}
 	/*
 	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:moc]; 
-	[task setValue:@"das ist der temp task" forKey:@"title"]; 
+	[task setValue:@"tempTask" forKey:@"title"]; 
 	NSSet *tasks = [NSSet setWithObject:task];
-	
-	
 	NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
-	[tag setValue:@"tempNameForTagToLink" forKey:@"text"]; 		
-	
-	[tag setValue:tasks  forKey:@"tasks"];
-	*/
-	
-	
-	// return An array of validated tokens (pasteboard)
+*/
+
+ // return An array of validated tokens (pasteboard)
 	return result;
+	//return nil;
 	
 }
 
@@ -184,9 +179,9 @@
 	
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
-	//	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text == %@)", tagName];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text == %@)", tagName];
 	[fetchRequest setEntity:entity];	
-	//	[fetchRequest setPredicate:predicate];	
+	[fetchRequest setPredicate:predicate];	
 	NSError *error;
 	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
 	//TODO: errorhandling (if !=1)
