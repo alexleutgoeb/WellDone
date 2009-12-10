@@ -16,6 +16,7 @@
 #import "ContextManagementController.h"
 #import "TDApi.h"
 #import "SyncManager.h"
+#import "TaskValueTransformer.h";
 
 
 #define LEFT_VIEW_INDEX 0
@@ -55,6 +56,15 @@
 	// Init available sync services and add to list
 	self.syncServices = [[NSMutableDictionary alloc] init];
 	[syncServices setObject:[TDApi class] forKey:[TDApi identifier]];
+	
+	/* Init the custum transformer (for token-tags) */
+	TaskValueTransformer *taskValueTransformer;
+	// create an autoreleased instance of our value transformer
+	taskValueTransformer = [[[TaskValueTransformer alloc] init]  autorelease];
+	// register it with the name that we refer to it with
+	[NSValueTransformer setValueTransformer:taskValueTransformer
+	 
+									forName:@"TaskValueTransformer"];
 	
 	
 	/////////////////////////////////////////////////

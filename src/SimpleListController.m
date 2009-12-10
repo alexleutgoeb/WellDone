@@ -79,6 +79,7 @@
  */
 
 
+/*
 //TODO: methodenkopf, unit tests, soll sie threadsave sein?
 - (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
 		   shouldAddObjects:(NSArray *)tokens 
@@ -121,18 +122,18 @@
 		NSSet *selectedTask = [NSSet setWithObject: [selectedTasks objectAtIndex:0]];
 		[tag addTasks:selectedTask];
 	}
-	/*
-	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:moc]; 
-	[task setValue:@"tempTask" forKey:@"title"]; 
-	NSSet *tasks = [NSSet setWithObject:task];
-	NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
-*/
+
+//	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:moc]; 
+//	[task setValue:@"tempTask" forKey:@"title"]; 
+//	NSSet *tasks = [NSSet setWithObject:task];
+//	NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+
 
  // return An array of validated tokens (pasteboard)
 	return result;
 	//return nil;
 	
-}
+}*/
 
 
 //TODO: methodenkopf, unit tests, copy&paste

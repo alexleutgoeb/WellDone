@@ -12,6 +12,7 @@
 		424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
 		4263A72410D1179D00C5FD7B /* SimpleListControllerTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */; };
+		4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */; };
 		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
 		6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */; };
 		6F22C1BB10CC01DD00ABFE19 /* SidebarBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */; };
@@ -116,6 +117,8 @@
 		4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTestCases-Info.plist"; sourceTree = "<group>"; };
 		424209B610CFB96D00DB9F3F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListControllerTestCases.m; sourceTree = "<group>"; };
+		4263AABC10D1495200C5FD7B /* TaskValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskValueTransformer.h; sourceTree = "<group>"; };
+		4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskValueTransformer.m; sourceTree = "<group>"; };
 		6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderSourceListView.xib; sourceTree = "<group>"; };
 		6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderTreeView.m; sourceTree = "<group>"; };
 		6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarBadgeCell.m; sourceTree = "<group>"; };
@@ -252,6 +255,7 @@
 		29B97314FDCFA39411CA2CEA /* WellDone */ = {
 			isa = PBXGroup;
 			children = (
+				42B57FBB10D157A400EF6391 /* ValueTransformer */,
 				FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				FACCD7BF10A050B900A36C87 /* TestClasses */,
@@ -301,6 +305,15 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42B57FBB10D157A400EF6391 /* ValueTransformer */ = {
+			isa = PBXGroup;
+			children = (
+				4263AABC10D1495200C5FD7B /* TaskValueTransformer.h */,
+				4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */,
+			);
+			name = ValueTransformer;
 			sourceTree = "<group>";
 		};
 		6F5D249110AC5873002E9514 /* ViewController Classes */ = {
@@ -578,6 +591,7 @@
 				FA90D40D10C4124D00309192 /* Context.m in Sources */,
 				FA90D4A410C41E8400309192 /* RemoteObject.m in Sources */,
 				6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */,
+				4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
