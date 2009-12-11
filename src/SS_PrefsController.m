@@ -1,6 +1,11 @@
 #import "SS_PrefsController.h"
 #import "SS_PreferencePaneProtocol.h"
 
+
+@interface SS_PrefsController ()
+- (id)initWithPanes:(NSArray *)inArray delegate:(id)inDelegate;
+@end
+
 @implementation SS_PrefsController
 
 #define Last_Pane_Defaults_Key	[[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@"_Preferences_Last_Pane_Defaults_Key"]
@@ -10,11 +15,9 @@
 // ************************************************
 
 
-+ (int)version
++ (NSInteger)version
 {
-    // Version 1 was released on 28th June 2003.
-    // Version 2 was released on 14th November 2007.
-    return 2;
+    return 1; // 28th June 2003
 }
 
 
@@ -41,12 +44,10 @@
     return [[[SS_PrefsController alloc] init] autorelease];
 }
 
-
-- (id)init
++ (id)preferencesWithPanes:(NSArray *)inArray delegate:(id)inDelegate
 {
-    return [self initWithPanesSearchPath:nil bundleExtension:nil];
+	return [[[SS_PrefsController alloc] initWithPanes:inArray delegate:inDelegate] autorelease];
 }
-
 
 - (id)initWithPanesSearchPath:(NSString*)path
 {
@@ -59,12 +60,10 @@
     return [self initWithPanesSearchPath:nil bundleExtension:ext];
 }
 
-
-// Designated initializer
-- (id)initWithPanesSearchPath:(NSString*)path bundleExtension:(NSString *)ext
+- (id)init
 {
-    if (self = [super init]) {
-        [self setDebug:NO];
+	if ((self = [super init])) {
+		[self setDebug:NO];
         preferencePanes = [[NSMutableDictionary alloc] init];
         panesOrder = [[NSMutableArray alloc] init];
         
@@ -74,8 +73,16 @@
 #endif
         [self setUsesTexturedWindow:NO];
         [self setAlwaysShowsToolbar:NO];
-        [self setAlwaysOpensCentered:YES];
-        
+        [self setAlwaysOpensCentered:YES];		
+	}
+	
+	return self;
+}
+
+// Designated initializer
+- (id)initWithPanesSearchPath:(NSString*)path bundleExtension:(NSString *)ext
+{
+    if ((self = [self init])) {
         if (!ext || [ext isEqualToString:@""]) {
             bundleExtension = [[NSString alloc] initWithString:@"preferencePane"];
         } else {
@@ -101,30 +108,32 @@
     return nil;
 }
 
+- (id)initWithPanes:(NSArray *)inArray delegate:(id)inDelegate
+{
+	if ((self = [self init])) {
+		id <SS_PreferencePaneProtocol> aPane;
+		
+		for (aPane in inArray) {
+			[panesOrder addObject:[aPane paneIdentifier]];
+			[preferencePanes setObject:aPane forKey:[aPane paneIdentifier]];
+		}
+		
+		delegate = inDelegate;
+	}
+	
+	return self;
+}
 
 - (void)dealloc
 {
-    if (prefsWindow) {
-        [prefsWindow release];
-    }
-    if (prefsToolbar) {
-        [prefsToolbar release];
-    }
-    if (prefsToolbarItems) {
-        [prefsToolbarItems release];
-    }
-    if (preferencePanes) {
-        [preferencePanes release];
-    }
-    if (panesOrder) {
-        [panesOrder release];
-    }
-    if (bundleExtension) {
-        [bundleExtension release];
-    }
-    if (searchPath) {
-        [searchPath release];
-    }
+	[prefsWindow close]; prefsWindow = nil;
+	[prefsToolbar release];
+	[prefsToolbarItems release];
+	[preferencePanes release];
+	[panesOrder release];
+	[bundleExtension release];
+	[searchPath release];
+	
     [super dealloc];
 }
 
@@ -145,6 +154,22 @@
     [self createPreferencesWindowAndDisplay:YES];
 }
 
+- (void)sizeWindowForToolbar
+{
+	NSToolbar	*windowToolbar = [prefsWindow toolbar];
+	NSRect		windowFrame = [prefsWindow frame];
+	
+	while ([[windowToolbar visibleItems] count] < [[windowToolbar items] count]) {
+		//Each toolbar item is 32x32; we expand by one toolbar item width repeatedly until they all fit
+		windowFrame.origin.x -= 16;
+		windowFrame.size.width += 16;
+		
+		[prefsWindow setFrame:windowFrame display:NO];
+	}
+	minimumWidthForToolbar = windowFrame.size.width;
+	
+	[prefsWindow displayIfNeeded];
+}
 
 - (void)createPreferencesWindowAndDisplay:(BOOL)shouldDisplay
 {
@@ -157,7 +182,7 @@
     }
     
     // Create prefs window
-    unsigned int styleMask = (NSClosableWindowMask | NSResizableWindowMask);
+    unsigned int styleMask = (NSClosableWindowMask | NSResizableWindowMask | NSMiniaturizableWindowMask);
     if (usesTexturedWindow) {
         styleMask = (styleMask | NSTexturedBackgroundWindowMask);
     }
@@ -165,13 +190,14 @@
                                               styleMask:styleMask
                                                 backing:NSBackingStoreBuffered
                                                   defer:NO];
-    
-    [prefsWindow setReleasedWhenClosed:NO];
+    [prefsWindow setDelegate:self];
+    [prefsWindow setReleasedWhenClosed:YES];
     [prefsWindow setTitle:@"Preferences"]; // initial default title
-    
-    [prefsWindow center];
+	
     [self createPrefsToolbar];
-
+	[self sizeWindowForToolbar];
+    [prefsWindow center];
+	
     // Register defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (panesOrder && ([panesOrder count] > 0)) {
@@ -183,29 +209,30 @@
     // Load last view
     NSString *lastViewName = [defaults objectForKey:Last_Pane_Defaults_Key];
     
-    if ([panesOrder containsObject:lastViewName] && [self loadPrefsPaneNamed:lastViewName display:NO]) {
+    if ([panesOrder containsObject:lastViewName] && [self loadPrefsWithIdentifier:lastViewName display:NO]) {
         if (shouldDisplay) {
             [prefsWindow makeKeyAndOrderFront:nil];
         }
+		[prefsToolbar setSelectedItemIdentifier:lastViewName];
         return;
     }
-
+	
     [self debugLog:[NSString stringWithFormat:@"Could not load last-used preference pane \"%@\". Trying to load another pane instead.", lastViewName]];
     
     // Try to load each prefpane in turn if loading the last-viewed one fails.
-    NSEnumerator* panes = [panesOrder objectEnumerator];
     NSString *pane;
-    while (pane = [panes nextObject]) {
+    for (pane in panesOrder) {
         if (![pane isEqualToString:lastViewName]) {
-            if ([self loadPrefsPaneNamed:pane display:NO]) {
+            if ([self loadPrefsWithIdentifier:pane display:NO]) {
                 if (shouldDisplay) {
                     [prefsWindow makeKeyAndOrderFront:nil];
                 }
+				[prefsToolbar setSelectedItemIdentifier:pane];
                 return;
             }
         }
     }
-
+	
     [self debugLog:[NSString stringWithFormat:@"Could not load any valid preference panes. The preference pane bundle extension was \"%@\" and the search path was: %@", bundleExtension, searchPath]];
     
     // Show alert dialog.
@@ -215,19 +242,35 @@
                     @"OK",
                     nil,
                     nil);
-    [prefsWindow release];
+    [prefsWindow close];
     prefsWindow = nil;
 }
 
 
 - (void)destroyPreferencesWindow
 {
-    if (prefsWindow) {
-        [prefsWindow release];
-    }
+	//Closing the window could release us; make sure we get to the end of the method to avoid double-releases
+	[self retain];
+	
+	[prefsWindow close];
     prefsWindow = nil;
+	
+	[self release];
 }
 
+- (void)windowWillClose:(NSNotification *)aNotification
+{
+	//Don't continue to work with prefsWindow
+	prefsWindow = nil;
+	
+	//Let the preference panes know we're closing	
+	[[preferencePanes allValues] makeObjectsPerformSelector:@selector(closeView)];
+	
+	//Tell the delegate
+	if ([delegate respondsToSelector:@selector(prefsWindowWillClose:)]) {
+		[delegate prefsWindowWillClose:self];		
+	}
+}
 
 - (void)activatePane:(NSString*)path {
     NSBundle* paneBundle = [NSBundle bundleWithPath:path];
@@ -241,12 +284,11 @@
                 if ([paneClass conformsToProtocol:@protocol(SS_PreferencePaneProtocol)] && [paneClass isKindOfClass:[NSObject class]]) {
                     NSArray *panes = [paneClass preferencePanes];
                     
-                    NSEnumerator *enumerator = [panes objectEnumerator];
                     id <SS_PreferencePaneProtocol> aPane;
                     
-                    while (aPane = [enumerator nextObject]) {
-                        [panesOrder addObject:[aPane paneName]];
-                        [preferencePanes setObject:aPane forKey:[aPane paneName]];
+                    for (aPane in panes) {
+                        [panesOrder addObject:[aPane paneIdentifier]];
+                        [preferencePanes setObject:aPane forKey:[aPane paneIdentifier]];
                     }
                 } else {
                     [self debugLog:[NSString stringWithFormat:@"Did not load bundle: %@ because its Principal Class is either not an NSObject subclass, or does not conform to the PreferencePane Protocol.", paneBundle]];
@@ -265,7 +307,7 @@
 
 - (BOOL)loadPreferencePaneNamed:(NSString *)name
 {
-    return [self loadPrefsPaneNamed:(NSString *)name display:YES];
+    return [self loadPrefsWithIdentifier:name display:YES];
 }
 
 
@@ -278,14 +320,14 @@
 }
 
 
-- (BOOL)loadPrefsPaneNamed:(NSString *)name display:(BOOL)disp
+- (BOOL)loadPrefsWithIdentifier:(NSString *)name display:(BOOL)disp
 {
     if (!prefsWindow) {
         NSBeep();
         [self debugLog:[NSString stringWithFormat:@"Could not load \"%@\" preference pane because the Preferences window seems to no longer exist.", name]];
         return NO;
     }
-
+	
     id tempPane = nil;
     tempPane = [preferencePanes objectForKey:name];
     if (!tempPane) {
@@ -302,6 +344,9 @@
     
     // Get rid of old view before resizing, for display purposes.
     if (disp) {
+		//Clear the first responder to make sure any changes are saved
+		[prefsWindow makeFirstResponder:nil];
+		
         NSView *tempView = [[NSView alloc] initWithFrame:[[prefsWindow contentView] frame]];
         [prefsWindow setContentView:tempView];
         [tempView release]; 
@@ -311,6 +356,8 @@
     NSRect newFrame = [prefsWindow frame];
     newFrame.size.height = [prefsView frame].size.height + ([prefsWindow frame].size.height - [[prefsWindow contentView] frame].size.height);
     newFrame.size.width = [prefsView frame].size.width;
+	//Ensure the full toolbar still fits
+	if (newFrame.size.width < minimumWidthForToolbar) newFrame.size.width =  minimumWidthForToolbar;
     newFrame.origin.y += ([[prefsWindow contentView] frame].size.height - [prefsView frame].size.height);
     
     id <SS_PreferencePaneProtocol> pane = [preferencePanes objectForKey:name];
@@ -336,26 +383,28 @@
     }
     [prefsWindow setMaxSize:theSize];
     [prefsWindow setShowsResizeIndicator:canResize];
-
+	
     if ((prefsToolbarItems && ([prefsToolbarItems count] > 1)) || alwaysShowsToolbar) {
-        [prefsWindow setTitle:name];
+        [prefsWindow setTitle:[pane paneName]];
+		[[prefsWindow toolbar] setSelectedItemIdentifier:name];
     }
     
     // Update defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:name forKey:Last_Pane_Defaults_Key];
     
-    [prefsToolbar setSelectedItemIdentifier:name];
-    
+	//Disable the zoom button
+    [[prefsWindow standardWindowButton:NSWindowZoomButton] setEnabled:NO];
+	
     return YES;
 }
 
 
 - (void)debugLog:(NSString*)msg
 {
-    if (debug) {
-        NSLog(@"[--- PREFERENCES DEBUG MESSAGE ---]\r%@\r\r", msg);
-    }
+	//    if (debug) {
+	NSLog(@"[--- PREFERENCES DEBUG MESSAGE ---]\r%@\r\r", msg);
+	//    }
 }
 
 
@@ -377,9 +426,9 @@ float ToolbarHeightForWindow(NSWindow *window)
         windowFrame = [NSWindow contentRectForFrameRect:[window frame]
                                               styleMask:[window styleMask]];
         toolbarHeight = NSHeight(windowFrame)
-            - NSHeight([[window contentView] frame]);
+		- NSHeight([[window contentView] frame]);
     }
-
+	
     return toolbarHeight;
 }
 
@@ -388,30 +437,34 @@ float ToolbarHeightForWindow(NSWindow *window)
 {
     // Create toolbar items
     prefsToolbarItems = [[NSMutableDictionary alloc] init];
-    NSEnumerator *itemEnumerator = [panesOrder objectEnumerator];
-    NSString *name;
+    NSString *identifier;
     NSImage *itemImage;
     
-    while (name = [itemEnumerator nextObject]) {
-        if ([preferencePanes objectForKey:name] != nil) {
-            NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:name];
-            [item setPaletteLabel:name]; // item's label in the "Customize Toolbar" sheet (not relevant here, but we set it anyway)
-            [item setLabel:name]; // item's label in the toolbar
-            NSString *tempTip = [[preferencePanes objectForKey:name] paneToolTip];
+    for (identifier in panesOrder) {
+        if ([preferencePanes objectForKey:identifier] != nil) {
+			NSObject<SS_PreferencePaneProtocol> *pane = [preferencePanes objectForKey:identifier];
+			
+			NSString	 *paneName = [pane paneName];
+            NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:identifier];
+            [item setPaletteLabel:paneName]; // item's label in the "Customize Toolbar" sheet (not relevant here, but we set it anyway)
+            [item setLabel:paneName]; // item's label in the toolbar
+            NSString *tempTip = [pane paneToolTip];
             if (!tempTip || [tempTip isEqualToString:@""]) {
                 [item setToolTip:nil];
             } else {
                 [item setToolTip:tempTip];
             }
-            itemImage = [[preferencePanes objectForKey:name] paneIcon];
+            itemImage = [pane paneIcon];
             [item setImage:itemImage];
             
             [item setTarget:self];
             [item setAction:@selector(prefsToolbarItemClicked:)]; // action called when item is clicked
-            [prefsToolbarItems setObject:item forKey:name]; // add to items
+            [prefsToolbarItems setObject:item forKey:identifier]; // add to items
             [item release];
-        } else {
-            [self debugLog:[NSString stringWithFormat:@"Could not create toolbar item for preference pane \"%@\", because that pane does not exist.", name]];
+        } else if ([identifier isEqual:NSToolbarSeparatorItemIdentifier]) {
+			//Don't have to do anything
+		} else {
+            [self debugLog:[NSString stringWithFormat:@"Could not create toolbar item for preference pane \"%@\", because that pane does not exist.", identifier]];
         }
     }
     
@@ -429,6 +482,9 @@ float ToolbarHeightForWindow(NSWindow *window)
     } else if (!alwaysShowsToolbar && prefsToolbarItems && ([prefsToolbarItems count] == 1)) {
         [self debugLog:@"Not showing toolbar in Preferences window because there is only one preference pane loaded. You can override this behaviour using -[setAlwaysShowsToolbar:YES]."];
     }
+	
+	//Hide the toolbar button
+	[[prefsWindow standardWindowButton:NSWindowToolbarButton] setFrame:NSZeroRect];
 }
 
 
@@ -461,7 +517,7 @@ float ToolbarHeightForWindow(NSWindow *window)
 - (void)prefsToolbarItemClicked:(NSToolbarItem*)item
 {
     if (![[item itemIdentifier] isEqualToString:[prefsWindow title]]) {
-        [self loadPrefsPaneNamed:[item itemIdentifier] display:YES];
+        [self loadPrefsWithIdentifier:[item itemIdentifier] display:YES];
     }
 }
 
@@ -478,17 +534,25 @@ float ToolbarHeightForWindow(NSWindow *window)
 }
 
 
-- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
-{
-    return panesOrder;
-}
-
-
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
     return [prefsToolbarItems objectForKey:itemIdentifier];
 }
 
+- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
+{
+    return panesOrder;
+}
+
+/*!
+ * @brief Disable toolbar customization
+ *
+ * Used by AIInterfaceController to validate the customize toolbar menu item
+ */
+- (BOOL)canCustomizeToolbar
+{
+	return NO;
+}
 
 // ************************************************
 // Accessors
@@ -522,12 +586,12 @@ float ToolbarHeightForWindow(NSWindow *window)
 - (void)setPanesOrder:(NSArray *)newPanesOrder
 {
     [panesOrder removeAllObjects];
-
-    NSEnumerator *enumerator = [newPanesOrder objectEnumerator];
+	
     NSString *name;
     
-    while (name = [enumerator nextObject]) {
-        if ([preferencePanes objectForKey:name] != nil) {
+    for (name in newPanesOrder) {
+        if (([preferencePanes objectForKey:name] != nil) ||
+			([name isEqual:NSToolbarSeparatorItemIdentifier])) {
             [panesOrder addObject:name];
         } else {
             [self debugLog:[NSString stringWithFormat:@"Did not add preference pane \"%@\" to the toolbar ordering array, because that pane does not exist.", name]];
@@ -582,6 +646,5 @@ float ToolbarHeightForWindow(NSWindow *window)
 {
     alwaysOpensCentered = newAlwaysOpensCentered;
 }
-
 
 @end

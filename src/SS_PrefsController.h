@@ -1,19 +1,18 @@
 /* SS_PrefsController */
 
-#import <Cocoa/Cocoa.h>
 
 @interface SS_PrefsController : NSObject
 {
     NSWindow *prefsWindow;
     NSMutableDictionary *preferencePanes;
     NSMutableArray *panesOrder;
-
+	
     NSString *bundleExtension;
     NSString *searchPath;
     
     NSToolbar *prefsToolbar;
     NSMutableDictionary *prefsToolbarItems;
-
+	
     NSToolbarDisplayMode toolbarDisplayMode;
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
     NSToolbarSizeMode toolbarSizeMode;
@@ -23,12 +22,17 @@
     BOOL alwaysOpensCentered;
     
     BOOL debug;
+	
+	float minimumWidthForToolbar;
+	
+	id delegate;
 }
 
 // Convenience constructors
 + (id)preferencesWithPanesSearchPath:(NSString*)path bundleExtension:(NSString *)ext;
 + (id)preferencesWithBundleExtension:(NSString *)ext;
 + (id)preferencesWithPanesSearchPath:(NSString*)path;
++ (id)preferencesWithPanes:(NSArray *)inArray delegate:(id)inDelegate;
 + (id)preferences;
 
 // Designated initializer
@@ -41,7 +45,7 @@
 - (void)createPreferencesWindowAndDisplay:(BOOL)shouldDisplay;
 - (void)createPreferencesWindow;
 - (void)destroyPreferencesWindow;
-- (BOOL)loadPrefsPaneNamed:(NSString *)name display:(BOOL)disp;
+- (BOOL)loadPrefsWithIdentifier:(NSString *)name display:(BOOL)disp;
 - (BOOL)loadPreferencePaneNamed:(NSString *)name;
 - (void)activatePane:(NSString*)path;
 - (void)debugLog:(NSString*)msg;
@@ -73,4 +77,8 @@ float ToolbarHeightForWindow(NSWindow *window);
 - (void)setToolbarSizeMode:(NSToolbarSizeMode)sizeMode;
 #endif
 
+@end
+
+@interface NSObject (SS_PrefsControllerDelegate)
+- (void)prefsWindowWillClose:(SS_PrefsController *)sender;
 @end
