@@ -35,6 +35,10 @@
     return @"Sync";
 }
 
+- (NSString *)paneIdentifier {
+	return @"sync";
+}
+
 
 - (NSImage *)paneIcon {
     return nil;
