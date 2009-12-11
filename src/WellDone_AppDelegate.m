@@ -17,6 +17,7 @@
 #import "TDApi.h"
 #import "SyncManager.h"
 #import "TaskValueTransformer.h";
+#import "SyncPreferences.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -57,6 +58,14 @@
 	self.syncServices = [[NSMutableDictionary alloc] init];
 	[syncServices setObject:[TDApi class] forKey:[TDApi identifier]];
 	
+	
+	// Init preferences window
+	preferencesController = [[SS_PrefsController preferencesWithPanes:
+							  [NSArray arrayWithObject:[[[SyncPreferences alloc] init] autorelease]] delegate:self] retain];
+	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"sync", nil]];
+	[preferencesController setAlwaysShowsToolbar:YES];
+	
+	
 	/* Init the custum transformer (for token-tags) */
 	TaskValueTransformer *taskValueTransformer;
 	// create an autoreleased instance of our value transformer
@@ -69,7 +78,7 @@
 	
 	/////////////////////////////////////////////////
 	
-	// Für Überschreiben der lokalen fodler mit remote folder die 4 Zeilen 
+	// Für Überschreiben der lokalen folder mit remote folder die 4 Zeilen 
 	// unkommentieren und user und password in zeile 69 eintragen.
 	
 	// Init sync manager
@@ -442,6 +451,14 @@
 	[window makeFirstResponder:currentListView];
 }
 
+- (IBAction)showPreferencesWindow:(id)sender {
+	[preferencesController showPreferencesWindow];
+}
+
+- (void)prefsWindowWillClose:(SS_PrefsController *)sender {
+	DLog(@"Closing preferences window...");
+	[sender destroyPreferencesWindow];
+}
 
 
 @end

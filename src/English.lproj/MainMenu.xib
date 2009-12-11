@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="856"/>
 			<integer value="29"/>
+			<integer value="856"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2767,6 +2767,14 @@
 					</object>
 					<int key="connectionID">921</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showPreferencesWindow:</string>
+						<reference key="source" ref="909243075"/>
+						<reference key="destination" ref="124073989"/>
+					</object>
+					<int key="connectionID">922</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -4283,9 +4291,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{328, 66}, {861, 690}}</string>
+					<string>{{57, 66}, {861, 690}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{328, 66}, {861, 690}}</string>
+					<string>{{57, 66}, {861, 690}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
@@ -4303,7 +4311,7 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{297, 736}, {432, 20}}</string>
+					<string>{{274, 793}, {432, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4500,7 +4508,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">921</int>
+			<int key="maxID">922</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4518,6 +4526,26 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">prefsWindowWillClose:</string>
+						<string key="NS.object.0">SS_PrefsController</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="106644491">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">SS_PrefsController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SS_PrefsController</string>
+					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">delegate</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<reference key="sourceIdentifier" ref="106644491"/>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">WellDone_AppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -4529,11 +4557,13 @@
 							<string>saveAction:</string>
 							<string>showContextManagement:</string>
 							<string>showFolderManagement:</string>
+							<string>showPreferencesWindow:</string>
 							<string>showTagManagement:</string>
 							<string>showTestdatagenerator:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

@@ -60,7 +60,8 @@
 @property (nonatomic, retain, readonly) SimpleListController *simpleListController;
 
 - (IBAction)saveAction:sender;
-- (IBAction) changeViewController:(id)sender;
+- (IBAction)changeViewController:(id)sender;
+- (IBAction)showPreferencesWindow:(id)sender;
 - (void)showTestdatagenerator:(id)sender;
 - (void)showFolderManagement:(id)sender;
 - (void)showTagManagement:(id)sender;

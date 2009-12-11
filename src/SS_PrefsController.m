@@ -264,7 +264,7 @@
 	prefsWindow = nil;
 	
 	//Let the preference panes know we're closing	
-	[[preferencePanes allValues] makeObjectsPerformSelector:@selector(closeView)];
+	// [[preferencePanes allValues] makeObjectsPerformSelector:@selector(closeView)];
 	
 	//Tell the delegate
 	if ([delegate respondsToSelector:@selector(prefsWindowWillClose:)]) {
