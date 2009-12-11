@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="322"/>
+			<integer value="64"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -98,7 +98,7 @@
 			</object>
 			<object class="NSScrollView" id="858312636">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">268</int>
+				<int key="NSvFlags">4364</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSClipView" id="963355143">
@@ -269,7 +269,7 @@
 									</object>
 									<object class="NSTableColumn" id="929791503">
 										<string key="NSIdentifier">tags</string>
-										<double key="NSWidth">192</double>
+										<double key="NSWidth">197</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028234663852886e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -356,11 +356,10 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{1, 384}, {384, 15}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
-						<bool key="NSEnabled">YES</bool>
 						<int key="NSsFlags">1</int>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
-						<double key="NSPercent">0.96836982968369834</double>
+						<double key="NSPercent">0.49874686716791977</double>
 					</object>
 					<object class="NSClipView" id="538321996">
 						<reference key="NSNextResponder" ref="858312636"/>
@@ -381,7 +380,7 @@
 				<string key="NSFrameSize">{400, 400}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="963355143"/>
-				<int key="NSsFlags">690</int>
+				<int key="NSsFlags">562</int>
 				<reference key="NSVScroller" ref="783213421"/>
 				<reference key="NSHScroller" ref="961531674"/>
 				<reference key="NSContentView" ref="963355143"/>
