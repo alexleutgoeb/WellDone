@@ -3,16 +3,15 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">740</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="322"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -111,12 +110,14 @@
 								<int key="NSvFlags">272</int>
 								<string key="NSFrameSize">{398, 382}</string>
 								<reference key="NSSuperview" ref="963355143"/>
+								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTableHeaderView" key="NSHeaderView" id="279691375">
 									<reference key="NSNextResponder" ref="538321996"/>
 									<int key="NSvFlags">256</int>
 									<string key="NSFrameSize">{398, 17}</string>
 									<reference key="NSSuperview" ref="538321996"/>
+									<reference key="NSWindow"/>
 									<reference key="NSTableView" ref="848461419"/>
 								</object>
 								<object class="_NSCornerView" key="NSCornerView" id="953206512">
@@ -124,6 +125,7 @@
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{224, 0}, {16, 17}}</string>
 									<reference key="NSSuperview" ref="858312636"/>
+									<reference key="NSWindow"/>
 								</object>
 								<object class="NSMutableArray" key="NSTableColumns">
 									<bool key="EncodedWithXMLCoder">YES</bool>
@@ -254,25 +256,6 @@
 											<int key="NSCellFlags2">-2147481600</int>
 											<string key="NSContents">Text Cell</string>
 											<reference key="NSSupport" ref="413097696"/>
-											<object class="NSDateFormatter" key="NSFormatter" id="444993292">
-												<object class="NSMutableDictionary" key="NS.attributes">
-													<bool key="EncodedWithXMLCoder">YES</bool>
-													<object class="NSArray" key="dict.sortedKeys">
-														<bool key="EncodedWithXMLCoder">YES</bool>
-														<string>dateStyle</string>
-														<string>formatterBehavior</string>
-														<string>timeStyle</string>
-													</object>
-													<object class="NSMutableArray" key="dict.values">
-														<bool key="EncodedWithXMLCoder">YES</bool>
-														<integer value="2"/>
-														<integer value="1040"/>
-														<integer value="1"/>
-													</object>
-												</object>
-												<string key="NS.format">dd MMM yyyy HH:mm</string>
-												<bool key="NS.natural">NO</bool>
-											</object>
 											<string key="NSPlaceholderString">dd/MM/yyyy hh:ss</string>
 											<reference key="NSControlView" ref="848461419"/>
 											<reference key="NSBackgroundColor" ref="1036994668"/>
@@ -356,7 +339,7 @@
 						</object>
 						<string key="NSFrame">{{1, 17}, {398, 382}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
-						<reference key="NSNextKeyView" ref="848461419"/>
+						<reference key="NSWindow"/>
 						<reference key="NSDocView" ref="848461419"/>
 						<reference key="NSBGColor" ref="1036994668"/>
 						<int key="NScvFlags">4</int>
@@ -366,6 +349,7 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
+						<reference key="NSWindow"/>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSCurValue">37</double>
@@ -376,6 +360,7 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{1, 384}, {384, 15}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
+						<reference key="NSWindow"/>
 						<int key="NSsFlags">1</int>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
@@ -390,7 +375,7 @@
 						</object>
 						<string key="NSFrame">{{1, 0}, {398, 17}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
-						<reference key="NSNextKeyView" ref="279691375"/>
+						<reference key="NSWindow"/>
 						<reference key="NSDocView" ref="279691375"/>
 						<reference key="NSBGColor" ref="1036994668"/>
 						<int key="NScvFlags">4</int>
@@ -399,7 +384,7 @@
 				</object>
 				<string key="NSFrameSize">{400, 400}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="963355143"/>
+				<reference key="NSWindow"/>
 				<int key="NSsFlags">562</int>
 				<reference key="NSVScroller" ref="783213421"/>
 				<reference key="NSHScroller" ref="961531674"/>
@@ -654,7 +639,6 @@
 						<reference key="object" ref="1032802298"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="444993292"/>
 						</object>
 						<reference key="parent" ref="566750403"/>
 					</object>
@@ -682,23 +666,17 @@
 						<reference key="object" ref="1039256776"/>
 						<reference key="parent" ref="0"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">404</int>
-						<reference key="object" ref="444993292"/>
-						<reference key="parent" ref="1032802298"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="NSArray" key="dict.sortedKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>321.CustomClassName</string>
 					<string>323.CustomClassName</string>
 					<string>330.IBAttributePlaceholdersKey</string>
 					<string>330.IBPluginDependency</string>
 					<string>338.IBPluginDependency</string>
-					<string>404.IBDateFormatterBehaviorMetadataKey</string>
-					<string>404.IBPluginDependency</string>
 					<string>63.IBPluginDependency</string>
 					<string>64.IBEditorWindowLastContentRect</string>
 					<string>64.IBPluginDependency</string>
@@ -713,6 +691,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>DateCell</string>
 					<string>NSTokenFieldCell</string>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
@@ -724,10 +703,8 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{422, 100}, {400, 400}}</string>
+					<string>{{201, 98}, {400, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -755,11 +732,19 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">417</int>
+			<int key="maxID">419</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">DateCell</string>
+					<string key="superclassName">NSTextFieldCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">DateCell.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SimpleListController</string>
 					<string key="superclassName">NSViewController</string>
@@ -880,14 +865,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSDateFormatter</string>
-					<string key="superclassName">NSFormatter</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">Foundation.framework/Headers/NSDateFormatter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

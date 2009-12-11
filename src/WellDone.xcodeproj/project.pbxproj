@@ -40,6 +40,7 @@
 		D110F47110B8D92600304B4C /* TagManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F47010B8D92600304B4C /* TagManagementController.m */; };
 		D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D110F48410B8DA6800304B4C /* ContextManagement.xib */; };
 		D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F48B10B8DBDB00304B4C /* ContextManagementController.m */; };
+		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
@@ -159,6 +160,8 @@
 		D110F48410B8DA6800304B4C /* ContextManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContextManagement.xib; sourceTree = "<group>"; };
 		D110F48A10B8DBDB00304B4C /* ContextManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextManagementController.h; sourceTree = "<group>"; };
 		D110F48B10B8DBDB00304B4C /* ContextManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextManagementController.m; sourceTree = "<group>"; };
+		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
+		D164971B10D2E17B00DEB20A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		D1ED7EFE10B090020065D79B /* TaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskEditor.xib; sourceTree = "<group>"; };
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
@@ -213,6 +216,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D164971910D2E16F00DEB20A /* Custom Cells */,
 				77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */,
 				6F5D249210AC588D002E9514 /* View Classes */,
@@ -384,6 +388,15 @@
 				FA90D40310C4124D00309192 /* Context.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		D164971910D2E16F00DEB20A /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D164971A10D2E17B00DEB20A /* DateCell.h */,
+				D164971B10D2E17B00DEB20A /* DateCell.m */,
+			);
+			name = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		FABE3F9210C1A323000D72E9 /* Logic Classes */ = {
@@ -592,6 +605,7 @@
 				FA90D4A410C41E8400309192 /* RemoteObject.m in Sources */,
 				6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */,
 				4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */,
+				D164971C10D2E17B00DEB20A /* DateCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

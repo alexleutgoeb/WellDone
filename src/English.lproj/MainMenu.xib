@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="856"/>
 			<integer value="29"/>
-			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2759,6 +2759,14 @@
 					</object>
 					<int key="connectionID">908</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">quickAddTask</string>
+						<reference key="source" ref="612578685"/>
+						<reference key="destination" ref="734058192"/>
+					</object>
+					<int key="connectionID">921</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -4275,9 +4283,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{124, 114}, {861, 690}}</string>
+					<string>{{328, 66}, {861, 690}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{124, 114}, {861, 690}}</string>
+					<string>{{328, 66}, {861, 690}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
@@ -4295,7 +4303,7 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{297, 790}, {432, 20}}</string>
+					<string>{{297, 736}, {432, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4492,7 +4500,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">920</int>
+			<int key="maxID">921</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4540,6 +4548,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>foldermanagement</string>
+							<string>quickAddTask</string>
 							<string>sidebarFolderPlaceholderView</string>
 							<string>sidebarTaskPlaceholderView</string>
 							<string>simpleListPlaceholderView</string>
@@ -4549,6 +4558,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSPanel</string>
+							<string>NSTextField</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>

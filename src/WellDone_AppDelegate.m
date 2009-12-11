@@ -148,6 +148,7 @@
 	
 	
 	[splitView setDelegate:splitViewDelegate];
+	[window makeFirstResponder:quickAddTask];
 }
 
 

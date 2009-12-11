@@ -27,6 +27,8 @@
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
 	
+	IBOutlet NSTextField* quickAddTask;
+	
 	//is necessary for setting the first responder (focus) to the current view, e.g. after inserting new task:
 	NSView* currentListView;
 	
