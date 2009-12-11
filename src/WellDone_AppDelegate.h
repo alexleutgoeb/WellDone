@@ -7,15 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <SidebarTaskController.h>
-#import <SimpleListController.h>
-#import <GTDListController.h>
-#import <SidebarFolderController.h>
-#import <TestDataGeneratorController.h>
-#import <FolderManagementController.h>
-#import <TagManagementController.h>
-#import <ContextManagementController.h>
-#import <PrioritySplitViewDelegate.h>
+#import "SidebarTaskController.h"
+#import "SimpleListController.h"
+#import "GTDListController.h"
+#import "SidebarFolderController.h"
+#import "TestDataGeneratorController.h"
+#import "FolderManagementController.h"
+#import "TagManagementController.h"
+#import "ContextManagementController.h"
+#import "PrioritySplitViewDelegate.h"
+#import "SS_PrefsController.h"
 
 @class TDApi, SyncManager;
 
@@ -49,6 +50,8 @@
 @private
 	NSMutableDictionary *syncServices;
 	SyncManager *syncManager;
+	
+	SS_PrefsController *preferencesController;
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
