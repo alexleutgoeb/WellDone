@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ActivePerspectiveName</key>
-	<string>Project</string>
+	<string>Debug</string>
 	<key>AllowedModules</key>
 	<array>
 		<dict>
@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>42A7EC4B10D2880C0009273A</string>
+						<string>42A7ECC810D28EA80009273A</string>
 						<key>history</key>
 						<array>
 							<string>4226726F10D27DA100EC6AAE</string>
@@ -311,6 +311,7 @@
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>6F5D249110AC5873002E9514</string>
 								<string>FABE3F9210C1A323000D72E9</string>
+								<string>7756732906782D8800D1FEB8</string>
 								<string>FACCD7BF10A050B900A36C87</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
@@ -323,13 +324,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>5</integer>
-									<integer>3</integer>
+									<integer>58</integer>
+									<integer>56</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {350, 727}}</string>
+							<string>{{0, 595}, {350, 727}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -345,8 +346,6 @@
 							<string>MainColumn</string>
 							<real>350</real>
 						</array>
-						<key>RubberWindowFrame</key>
-						<string>0 92 1440 786 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -357,8 +356,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -376,7 +373,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>42A7EC4A10D2880C0009273A</string>
+										<string>42A7ECC710D28EA80009273A</string>
 										<key>history</key>
 										<array>
 											<string>4263A75410D118DC00C5FD7B</string>
@@ -397,7 +394,7 @@
 											<string>42B57F8B10D156A900EF6391</string>
 											<string>42B57FC310D1586300EF6391</string>
 											<string>42A7EC4810D2880C0009273A</string>
-											<string>42A7EC4910D2880C0009273A</string>
+											<string>42A7EC6610D2892D0009273A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -412,8 +409,6 @@
 							<dict>
 								<key>Frame</key>
 								<string>{{0, 0}, {1068, 447}}</string>
-								<key>RubberWindowFrame</key>
-								<string>0 92 1440 786 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -437,8 +432,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1068, 266}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 92 1440 786 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -565,6 +558,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
@@ -576,6 +571,8 @@
 					<dict>
 						<key>Frame</key>
 						<string>{{0, 0}, {1440, 718}}</string>
+						<key>RubberWindowFrame</key>
+						<string>0 92 1440 786 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugCLIModule</string>
@@ -650,7 +647,11 @@
 							</array>
 							<key>Frame</key>
 							<string>{{703, 0}, {737, 80}}</string>
+							<key>RubberWindowFrame</key>
+							<string>0 92 1440 786 0 0 1440 878 </string>
 						</dict>
+						<key>RubberWindowFrame</key>
+						<string>0 92 1440 786 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXDebugSessionModule</string>
@@ -714,7 +715,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>42A7EC4010D287D90009273A</string>
+		<string>42A7ECC910D28EA80009273A</string>
 		<string>42A7EC4110D287D90009273A</string>
 		<string>42A7EC4210D287D90009273A</string>
 		<string>422671E210D2763800EC6AAE</string>

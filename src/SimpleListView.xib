@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="64"/>
+			<integer value="320"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -251,9 +251,29 @@
 										</object>
 										<object class="NSTextFieldCell" key="NSDataCell" id="1032802298">
 											<int key="NSCellFlags">337772096</int>
-											<int key="NSCellFlags2">2048</int>
+											<int key="NSCellFlags2">-2147481600</int>
 											<string key="NSContents">Text Cell</string>
 											<reference key="NSSupport" ref="413097696"/>
+											<object class="NSDateFormatter" key="NSFormatter" id="444993292">
+												<object class="NSMutableDictionary" key="NS.attributes">
+													<bool key="EncodedWithXMLCoder">YES</bool>
+													<object class="NSArray" key="dict.sortedKeys">
+														<bool key="EncodedWithXMLCoder">YES</bool>
+														<string>dateStyle</string>
+														<string>formatterBehavior</string>
+														<string>timeStyle</string>
+													</object>
+													<object class="NSMutableArray" key="dict.values">
+														<bool key="EncodedWithXMLCoder">YES</bool>
+														<integer value="2"/>
+														<integer value="1040"/>
+														<integer value="1"/>
+													</object>
+												</object>
+												<string key="NS.format">dd.MM.yyyy HH:mm</string>
+												<bool key="NS.natural">NO</bool>
+											</object>
+											<string key="NSPlaceholderString">dd/MM/yyyy hh:ss</string>
 											<reference key="NSControlView" ref="848461419"/>
 											<reference key="NSBackgroundColor" ref="1036994668"/>
 											<reference key="NSTextColor" ref="225775940"/>
@@ -632,6 +652,10 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">321</int>
 						<reference key="object" ref="1032802298"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="444993292"/>
+						</object>
 						<reference key="parent" ref="566750403"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -658,6 +682,11 @@
 						<reference key="object" ref="1039256776"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">404</int>
+						<reference key="object" ref="444993292"/>
+						<reference key="parent" ref="1032802298"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -668,6 +697,8 @@
 					<string>330.IBAttributePlaceholdersKey</string>
 					<string>330.IBPluginDependency</string>
 					<string>338.IBPluginDependency</string>
+					<string>404.IBDateFormatterBehaviorMetadataKey</string>
+					<string>404.IBPluginDependency</string>
 					<string>63.IBPluginDependency</string>
 					<string>64.IBEditorWindowLastContentRect</string>
 					<string>64.IBPluginDependency</string>
@@ -692,6 +723,8 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{422, 100}, {400, 400}}</string>
@@ -722,7 +755,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">401</int>
+			<int key="maxID">404</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -847,6 +880,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSDateFormatter</string>
+					<string key="superclassName">NSFormatter</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">Foundation.framework/Headers/NSDateFormatter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

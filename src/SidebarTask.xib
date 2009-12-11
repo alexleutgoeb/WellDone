@@ -1945,27 +1945,29 @@
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="451358726">
 							<int key="NSCellFlags">341966336</int>
-							<int key="NSCellFlags2">-2147483648</int>
-							<string key="NSContents"/>
+							<int key="NSCellFlags2">0</int>
+							<object class="NSDate" key="NSContents">
+								<double key="NS.time">-978307200</double>
+							</object>
 							<reference key="NSSupport" ref="926334322"/>
-							<object class="NSDateFormatter" key="NSFormatter" id="148047346">
+							<object class="NSDateFormatter" key="NSFormatter" id="76115868">
 								<object class="NSMutableDictionary" key="NS.attributes">
 									<bool key="EncodedWithXMLCoder">YES</bool>
 									<object class="NSArray" key="dict.sortedKeys">
 										<bool key="EncodedWithXMLCoder">YES</bool>
-										<string>dateFormat_10_0</string>
+										<string>dateStyle</string>
 										<string>formatterBehavior</string>
-										<string>lenient</string>
+										<string>timeStyle</string>
 									</object>
 									<object class="NSMutableArray" key="dict.values">
 										<bool key="EncodedWithXMLCoder">YES</bool>
-										<string>%c</string>
-										<integer value="1000"/>
-										<boolean value="YES"/>
+										<integer value="2"/>
+										<integer value="1040"/>
+										<integer value="1"/>
 									</object>
 								</object>
-								<string key="NS.format">%c</string>
-								<bool key="NS.natural">YES</bool>
+								<string key="NS.format">dd.MM.yyyy HH:mm</string>
+								<bool key="NS.natural">NO</bool>
 							</object>
 							<reference key="NSControlView" ref="11488703"/>
 							<bool key="NSDrawsBackground">YES</bool>
@@ -4107,42 +4109,24 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
-			<object class="NSToolbarItem" id="473144501">
-				<string key="NSToolbarItemIdentifier">NSToolbarShowColorsItem</string>
-				<string key="NSToolbarItemLabel">Colors</string>
-				<string key="NSToolbarItemPaletteLabel">Colors</string>
-				<string key="NSToolbarItemToolTip">Show Color Panel</string>
-				<nil key="NSToolbarItemView"/>
-				<object class="NSCustomResource" key="NSToolbarItemImage">
-					<string key="NSClassName">NSImage</string>
-					<string key="NSResourceName">NSToolbarShowColorsItemImage</string>
+			<object class="NSDateFormatter" id="289266528">
+				<object class="NSMutableDictionary" key="NS.attributes">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="NSArray" key="dict.sortedKeys">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<string>dateStyle</string>
+						<string>formatterBehavior</string>
+						<string>timeStyle</string>
+					</object>
+					<object class="NSMutableArray" key="dict.values">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<integer value="2"/>
+						<integer value="1040"/>
+						<integer value="1"/>
+					</object>
 				</object>
-				<nil key="NSToolbarItemTarget"/>
-				<string key="NSToolbarItemAction">orderFrontColorPanel:</string>
-				<string key="NSToolbarItemMinSize">{0, 0}</string>
-				<string key="NSToolbarItemMaxSize">{0, 0}</string>
-				<bool key="NSToolbarItemEnabled">YES</bool>
-				<bool key="NSToolbarItemAutovalidates">YES</bool>
-				<int key="NSToolbarItemTag">-1</int>
-				<bool key="NSToolbarIsUserRemovable">YES</bool>
-				<int key="NSToolbarItemVisibilityPriority">0</int>
-			</object>
-			<object class="NSWindowTemplate" id="579174104">
-				<int key="NSWindowStyleMask">31</int>
-				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{162, 101}, {276, 378}}</string>
-				<int key="NSWTFlags">-1535639552</int>
-				<string key="NSWindowTitle">Window</string>
-				<string key="NSWindowClass">NSColorPanel</string>
-				<nil key="NSViewClass"/>
-				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
-				<object class="NSView" key="NSWindowView" id="829021924">
-					<nil key="NSNextResponder"/>
-					<int key="NSvFlags">256</int>
-					<string key="NSFrameSize">{276, 378}</string>
-				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
-				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NS.format">dd.MM.yyyy HH:mm</string>
+				<bool key="NS.natural">NO</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -4500,22 +4484,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.startDate</string>
-						<reference key="source" ref="11488703"/>
-						<reference key="destination" ref="784584499"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="11488703"/>
-							<reference key="NSDestination" ref="784584499"/>
-							<string key="NSLabel">value: selection.startDate</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.startDate</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">228</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.createDate</string>
 						<reference key="source" ref="1002412606"/>
 						<reference key="destination" ref="784584499"/>
@@ -4579,12 +4547,37 @@
 					<int key="connectionID">286</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">print:</string>
-						<reference key="source" ref="829021924"/>
-						<reference key="destination" ref="473144501"/>
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.startDate</string>
+						<reference key="source" ref="11488703"/>
+						<reference key="destination" ref="784584499"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="11488703"/>
+							<reference key="NSDestination" ref="784584499"/>
+							<string key="NSLabel">value: selection.startDate</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.startDate</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSMultipleValuesPlaceholder</string>
+									<string>NSNoSelectionPlaceholder</string>
+									<string>NSNotApplicablePlaceholder</string>
+									<string>NSNullPlaceholder</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>dd/MM/yyyy hh:ss</string>
+									<string>dd/MM/yyyy hh:ss</string>
+									<string>dd/MM/yyyy hh:ss</string>
+									<string>dd/MM/yyyy hh:ss</string>
+								</object>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
 					</object>
-					<int key="connectionID">296</int>
+					<int key="connectionID">320</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4864,14 +4857,9 @@
 						<reference key="object" ref="451358726"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="148047346"/>
+							<reference ref="76115868"/>
 						</object>
 						<reference key="parent" ref="11488703"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">128</int>
-						<reference key="object" ref="148047346"/>
-						<reference key="parent" ref="451358726"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">136</int>
@@ -5319,23 +5307,14 @@
 						<reference key="parent" ref="510750650"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">293</int>
-						<reference key="object" ref="473144501"/>
-						<reference key="parent" ref="0"/>
+						<int key="objectID">311</int>
+						<reference key="object" ref="76115868"/>
+						<reference key="parent" ref="451358726"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">294</int>
-						<reference key="object" ref="579174104"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="829021924"/>
-						</object>
+						<int key="objectID">312</int>
+						<reference key="object" ref="289266528"/>
 						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">295</int>
-						<reference key="object" ref="829021924"/>
-						<reference key="parent" ref="579174104"/>
 					</object>
 				</object>
 			</object>
@@ -5384,12 +5363,10 @@
 					<string>282.IBPluginDependency</string>
 					<string>283.IBPluginDependency</string>
 					<string>284.IBPluginDependency</string>
-					<string>293.IBPluginDependency</string>
-					<string>294.IBEditorWindowLastContentRect</string>
-					<string>294.IBPluginDependency</string>
-					<string>294.IBWindowTemplateEditedContentRect</string>
-					<string>294.NSWindowTemplate.visibleAtLaunch</string>
-					<string>295.IBPluginDependency</string>
+					<string>311.IBDateFormatterBehaviorMetadataKey</string>
+					<string>311.IBPluginDependency</string>
+					<string>312.IBDateFormatterBehaviorMetadataKey</string>
+					<string>312.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -5441,11 +5418,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{778, 282}, {276, 378}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{778, 282}, {276, 378}}</string>
-					<boolean value="YES"/>
+					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
@@ -5465,7 +5440,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">296</int>
+			<int key="maxID">320</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5593,11 +5568,6 @@
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSCell.h</string>
 					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSColorPanel</string>
-					<string key="superclassName">NSPanel</string>
-					<reference key="sourceIdentifier" ref="58303746"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSControl</string>
@@ -5770,7 +5740,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="976455962">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSToolbarItem.h</string>
 					</object>
@@ -5924,14 +5894,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NSPanel</string>
-					<string key="superclassName">NSWindow</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSPanel.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">NSPopUpButton</string>
 					<string key="superclassName">NSButton</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -5979,11 +5941,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NSToolbarItem</string>
-					<string key="superclassName">NSObject</string>
-					<reference key="sourceIdentifier" ref="976455962"/>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
@@ -6023,35 +5980,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSWindow</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSDrawer.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSWindow</string>
-					<string key="superclassName">NSResponder</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSWindow.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSWindow</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSWindowScripting.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSWindow</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">BWToolkitFramework.framework/Headers/NSWindow+BWAdditions.h</string>
 					</object>
 				</object>
 			</object>
