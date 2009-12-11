@@ -79,13 +79,17 @@
  */
 
 
-/*
 //TODO: methodenkopf, unit tests, soll sie threadsave sein?
 - (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
 		   shouldAddObjects:(NSArray *)tokens 
 					atIndex:(NSUInteger)index{
 	
 	NSLog(@"shouldAddObjects");
+	
+	//for (id token in tokens) {
+	//	NSLog(@"Token: %@",[token className]);
+	//}
+	
 	NSString *currentTagName = [[NSString alloc]init];
 	
 	NSArray *currentTags = [self getCurrentTags]; //from core data
@@ -113,9 +117,7 @@
 			
 		}		
 		// add tag to the result list and link it with the task (if not already done, double tagging not allowed)
-		[result addObject:currentTagName]; 
-		
-		
+		[result addObject:currentTagName];
 		
 		Tag *tag =[self getTagByName: currentTagName] ;//TODO
 		NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects ];
@@ -133,7 +135,7 @@
 	return result;
 	//return nil;
 	
-}*/
+}
 
 
 //TODO: methodenkopf, unit tests, copy&paste
@@ -164,6 +166,14 @@
 	// add the current typed string from the user (substring param) as the first item
 	[result insertObject:substring atIndex:0];
 	return result;
+}
+
+- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString: (NSString *)editingString {
+	NSLog(@"representedObjectForEditingString called...");
+    //iTunesTrack *track = [tracks objectWithName:editingString];
+//    if ([track exists])
+//        return track;
+    return nil;
 }
 
 //TODO: comments, tests

@@ -7,6 +7,7 @@
 //
 
 #import "TaskValueTransformer.h"
+#import "Tag.h"
 
 
 @implementation TaskValueTransformer
@@ -18,28 +19,40 @@
 
 + (BOOL) allowsReverseTransformation
 {
-	return NO;
+	return YES;
 }
 
 - (id) transformedValue:(id) value
 {
 	NSLog(@"transformedValue: FORWARD");
 	
-	NSMutableArray *returnArray=[[NSMutableArray alloc]init];
-	NSEnumerator *e = [value objectEnumerator];
-	id collectionMemberObject;
+	if (value == nil) return nil;
 	
-	while ( (collectionMemberObject = [e nextObject]) ) {
-		[returnArray addObject:(NSString *) [collectionMemberObject text]];
+	// check if value has the right class type
+	if ([[value className] compare: @"_NSFaultingMutableSet"]) {
+		[NSException raise: NSInternalInconsistencyException
+					format: @"Value (%@) has wrong type.",
+					[value className]];
 	}
 	
+	NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+	
+	for (id tag in value) {
+		//NSLog(@"Tag: %@",tag);
+		[returnArray addObject: [tag text]];
+	}
+	
+	if ([returnArray count] == 0) return nil;
 	return returnArray;
 }
 
 - (id) reverseTransformedValue:(id) value
 {
+	// should return Tag-OBJECTs?????
+	
 	NSLog(@"REVERSE");
-	return [NSSet setWithArray:value];
+	//return value;
+	return [NSMutableSet setWithArray:value];
 	//return nil;
 }
 
