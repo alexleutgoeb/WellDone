@@ -56,6 +56,9 @@
 		FA90D40D10C4124D00309192 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D40310C4124D00309192 /* Context.m */; };
 		FA90D4A410C41E8400309192 /* RemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D4A310C41E8400309192 /* RemoteObject.m */; };
 		FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
+		FACF444C10D2EB5700B0237A /* SS_PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACF444B10D2EB5700B0237A /* SS_PrefsController.m */; };
+		FACF445210D2EC9300B0237A /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACF445110D2EC9300B0237A /* SyncPreferences.xib */; };
+		FACF445610D2ED0900B0237A /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = FACF445510D2ED0900B0237A /* SyncPreferences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +192,12 @@
 		FABE3F9310C1A33E000D72E9 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		FABE3F9410C1A33E000D72E9 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 		FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ToodledoAPI.xcodeproj; path = "Extern/toodledo-objc/src/ToodledoAPI.xcodeproj"; sourceTree = "<group>"; };
+		FACF444910D2EB5700B0237A /* SS_PreferencePaneProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SS_PreferencePaneProtocol.h; sourceTree = "<group>"; };
+		FACF444A10D2EB5700B0237A /* SS_PrefsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SS_PrefsController.h; sourceTree = "<group>"; };
+		FACF444B10D2EB5700B0237A /* SS_PrefsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SS_PrefsController.m; sourceTree = "<group>"; };
+		FACF445110D2EC9300B0237A /* SyncPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncPreferences.xib; sourceTree = "<group>"; };
+		FACF445410D2ED0900B0237A /* SyncPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncPreferences.h; sourceTree = "<group>"; };
+		FACF445510D2ED0900B0237A /* SyncPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncPreferences.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +231,7 @@
 				6F5D249210AC588D002E9514 /* View Classes */,
 				6F5D249110AC5873002E9514 /* ViewController Classes */,
 				FABE3F9210C1A323000D72E9 /* Logic Classes */,
+				FACF441C10D2EAD700B0237A /* Preferences Classes */,
 				7756732906782D8800D1FEB8 /* Models */,
 			);
 			name = Classes;
@@ -298,6 +308,7 @@
 				D110F46910B8D72300304B4C /* TagManagement.xib */,
 				D110F48410B8DA6800304B4C /* ContextManagement.xib */,
 				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
+				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -428,6 +439,18 @@
 			name = TestClasses;
 			sourceTree = "<group>";
 		};
+		FACF441C10D2EAD700B0237A /* Preferences Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FACF444910D2EB5700B0237A /* SS_PreferencePaneProtocol.h */,
+				FACF444A10D2EB5700B0237A /* SS_PrefsController.h */,
+				FACF444B10D2EB5700B0237A /* SS_PrefsController.m */,
+				FACF445410D2ED0900B0237A /* SyncPreferences.h */,
+				FACF445510D2ED0900B0237A /* SyncPreferences.m */,
+			);
+			name = "Preferences Classes";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -541,6 +564,7 @@
 				D110F46A10B8D72300304B4C /* TagManagement.xib in Resources */,
 				D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */,
 				6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */,
+				FACF445210D2EC9300B0237A /* SyncPreferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +630,8 @@
 				6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */,
 				4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */,
 				D164971C10D2E17B00DEB20A /* DateCell.m in Sources */,
+				FACF444C10D2EB5700B0237A /* SS_PrefsController.m in Sources */,
+				FACF445610D2ED0900B0237A /* SyncPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
