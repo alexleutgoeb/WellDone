@@ -12,6 +12,12 @@
 #import "SyncService.h"
 
 
+@interface SyncPreferences ()
+
+- (NSMutableDictionary *)syncServices;
+
+@end
+
 @implementation SyncPreferences
 
 - (id)init {
@@ -80,9 +86,13 @@
 	return [[[[NSApp delegate] sharedSyncController] syncServices] count];
 }
 
+- (NSMutableDictionary *)syncServices {
+	return [[[NSApp delegate] sharedSyncController] syncServices];
+}
+
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 	
-	if (rowIndex < 0 || rowIndex >= [[[[NSApp delegate] sharedSyncController] syncServices] count]) {
+	if (rowIndex < 0 || rowIndex >= [[self syncServices] count]) {
 		return nil;
 	}
 	
@@ -103,6 +113,21 @@
 	}
 	else {
 		return nil;
+	}
+}
+
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+	
+	if (rowIndex >= 0 && rowIndex < [[self syncServices] count] && [[aTableColumn identifier] isEqualToString:@"enabled"]) {
+		SyncService *service = [[[self syncServices] allValues] objectAtIndex:rowIndex]; 
+		if (service.isEnabled == NO) {
+			NSError *error = nil;
+			// TODO: show user/pwd sheet
+			service.user = @"etc";
+			service.pwd = @"etc";
+			BOOL flag = [service activateService:&error];
+			DLog(@"Service active: %i, error: %@.", flag, [error localizedDescription]);
+		}
 	}
 }
 

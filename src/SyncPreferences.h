@@ -16,9 +16,7 @@
     IBOutlet NSScrollView *scrollView_accountList;
     IBOutlet NSTableView *tableView_accountList;
 	IBOutlet NSButton *button_editService;
-	IBOutlet NSTextField *textField_overview;
-	
-	NSArray *serviceArray;
+	IBOutlet NSTextField *textField_overview;	
 }
 
 // - (void)editService:(id<GtdApi> *)aService;
