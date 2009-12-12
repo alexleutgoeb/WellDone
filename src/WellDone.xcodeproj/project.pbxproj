@@ -44,6 +44,9 @@
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
+		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
+		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
+		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
 		FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
 		FA90D40410C4124D00309192 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F110C4124D00309192 /* Folder.m */; };
 		FA90D40510C4124D00309192 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F310C4124D00309192 /* Note.m */; };
@@ -169,6 +172,11 @@
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
+		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
+		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
+		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
+		FA48B62D10D3DEDC0032F1D8 /* SyncService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncService.m; sourceTree = "<group>"; };
+		FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "syncservice.toodledo-objc.png"; sourceTree = "<group>"; };
 		FA90D3F010C4124D00309192 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		FA90D3F110C4124D00309192 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		FA90D3F210C4124D00309192 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -294,6 +302,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FA48B85F10D4139E0032F1D8 /* ImageRes */,
 				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
 				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
 				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
@@ -397,6 +406,8 @@
 				FA90D40110C4124D00309192 /* RemoteFolder.m */,
 				FA90D40210C4124D00309192 /* Context.h */,
 				FA90D40310C4124D00309192 /* Context.m */,
+				FA48B62C10D3DEDB0032F1D8 /* SyncService.h */,
+				FA48B62D10D3DEDC0032F1D8 /* SyncService.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -410,11 +421,29 @@
 			name = "Custom Cells";
 			sourceTree = "<group>";
 		};
+		FA48B85F10D4139E0032F1D8 /* ImageRes */ = {
+			isa = PBXGroup;
+			children = (
+				FA48B86010D4139E0032F1D8 /* SyncIcons */,
+			);
+			path = ImageRes;
+			sourceTree = "<group>";
+		};
+		FA48B86010D4139E0032F1D8 /* SyncIcons */ = {
+			isa = PBXGroup;
+			children = (
+				FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */,
+			);
+			path = SyncIcons;
+			sourceTree = "<group>";
+		};
 		FABE3F9210C1A323000D72E9 /* Logic Classes */ = {
 			isa = PBXGroup;
 			children = (
 				FABE3F9310C1A33E000D72E9 /* SyncManager.h */,
 				FABE3F9410C1A33E000D72E9 /* SyncManager.m */,
+				FA48B62510D3DADF0032F1D8 /* SyncController.h */,
+				FA48B62610D3DADF0032F1D8 /* SyncController.m */,
 			);
 			name = "Logic Classes";
 			sourceTree = "<group>";
@@ -565,6 +594,7 @@
 				D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */,
 				6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */,
 				FACF445210D2EC9300B0237A /* SyncPreferences.xib in Resources */,
+				FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +662,8 @@
 				D164971C10D2E17B00DEB20A /* DateCell.m in Sources */,
 				FACF444C10D2EB5700B0237A /* SS_PrefsController.m in Sources */,
 				FACF445610D2ED0900B0237A /* SyncPreferences.m in Sources */,
+				FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */,
+				FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

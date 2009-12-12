@@ -18,7 +18,7 @@
 #import "PrioritySplitViewDelegate.h"
 #import "SS_PrefsController.h"
 
-@class TDApi, SyncManager;
+@class SyncController;
 
 @interface WellDone_AppDelegate : NSObject {
     IBOutlet NSWindow *window;
@@ -48,9 +48,7 @@
     NSManagedObjectContext *managedObjectContext;
 	
 @private
-	NSMutableDictionary *syncServices;
-	SyncManager *syncManager;
-	
+	SyncController *syncController;
 	SS_PrefsController *preferencesController;
 }
 
@@ -58,6 +56,8 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) SimpleListController *simpleListController;
+
+- (SyncController *)sharedSyncController;
 
 - (IBAction)saveAction:sender;
 - (IBAction)changeViewController:(id)sender;

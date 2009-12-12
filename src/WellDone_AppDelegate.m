@@ -14,8 +14,7 @@
 #import "FolderManagementController.h"
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
-#import "TDApi.h"
-#import "SyncManager.h"
+#import "SyncController.h"
 #import "TaskValueTransformer.h";
 #import "SyncPreferences.h"
 
@@ -34,8 +33,7 @@
 // Anonymous class category for private methods and properties
 @interface WellDone_AppDelegate ()
 
-@property (nonatomic, retain) NSMutableDictionary *syncServices;
-@property (nonatomic, retain) SyncManager *syncManager;
+@property (nonatomic, retain) SyncController *syncController;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
@@ -45,7 +43,7 @@
 @implementation WellDone_AppDelegate
 
 @synthesize simpleListController;
-@synthesize syncManager, syncServices;
+@synthesize syncController;
 
 
 #pragma mark -
@@ -53,17 +51,15 @@
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-	
-	// Init available sync services and add to list
-	self.syncServices = [[NSMutableDictionary alloc] init];
-	[syncServices setObject:[TDApi class] forKey:[TDApi identifier]];
-	
-	
+
 	// Init preferences window
 	preferencesController = [[SS_PrefsController preferencesWithPanes:
 							  [NSArray arrayWithObject:[[[SyncPreferences alloc] init] autorelease]] delegate:self] retain];
 	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"sync", nil]];
 	[preferencesController setAlwaysShowsToolbar:YES];
+	
+	// Init syncController
+	self.syncController = [[SyncController alloc] init];
 	
 	
 	/* Init the custum transformer (for token-tags) */
@@ -97,9 +93,7 @@
  Implementation of dealloc, to release the retained variables.
  */
 - (void)dealloc {
-	[syncServices removeAllObjects];
-	[syncServices release];
-	[syncManager release];
+	[syncController release];
 	
     [window release];
     [managedObjectContext release];
@@ -158,6 +152,10 @@
 	
 	[splitView setDelegate:splitViewDelegate];
 	[window makeFirstResponder:quickAddTask];
+}
+
+- (SyncController *)sharedSyncController {
+	return syncController;
 }
 
 
