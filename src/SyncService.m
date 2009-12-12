@@ -42,7 +42,7 @@
 }
 
 - (BOOL)isEnabled {
-	return api == nil ? YES : NO;
+	return api == nil ? NO : YES;
 }
 
 - (BOOL)activateService:(NSError **)error {
