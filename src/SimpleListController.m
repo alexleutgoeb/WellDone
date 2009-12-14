@@ -173,7 +173,12 @@
     //iTunesTrack *track = [tracks objectWithName:editingString];
 //    if ([track exists])
 //        return track;
-    return nil;
+	NSString *s = [[NSString alloc] initWithString:@"teststring"];
+    return s;
+}
+
+- (NSString *)tokenField:(NSTokenField *)tokenFieldArg displayStringForRepresentedObject:(id)representedObject { 
+    return [representedObject name];
 }
 
 //TODO: comments, tests

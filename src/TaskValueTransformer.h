@@ -13,4 +13,8 @@
 
 }
 
++ (Class) transformedValueClass;
++ (BOOL) allowsReverseTransformation;
+- (id) transformedValue:(id) value;
+- (id) reverseTransformedValue:(id) value;
 @end
