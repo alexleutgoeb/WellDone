@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="885"/>
 			<integer value="29"/>
-			<integer value="856"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -420,7 +420,7 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="BWCustomView" id="279165087">
 									<reference key="NSNextResponder" ref="107424906"/>
-									<int key="NSvFlags">274</int>
+									<int key="NSvFlags">272</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="BWSplitView" id="1817">
@@ -507,7 +507,7 @@
 								</object>
 								<object class="BWCustomView" id="343399795">
 									<reference key="NSNextResponder" ref="107424906"/>
-									<int key="NSvFlags">274</int>
+									<int key="NSvFlags">272</int>
 									<string key="NSFrame">{{575, 0}, {286, 630}}</string>
 									<reference key="NSSuperview" ref="107424906"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -4291,9 +4291,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{57, 66}, {861, 690}}</string>
+					<string>{{276, 128}, {861, 690}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{57, 66}, {861, 690}}</string>
+					<string>{{276, 128}, {861, 690}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
