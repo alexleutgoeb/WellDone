@@ -23,5 +23,4 @@
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
-- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString: (NSString *)editingString;
 @end

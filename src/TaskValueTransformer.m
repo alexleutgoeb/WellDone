@@ -38,8 +38,7 @@
 	NSMutableArray *returnArray = [[NSMutableArray alloc] init];
 	
 	for (id tag in value) {
-		//NSLog(@"Tag: %@",tag);
-		[returnArray addObject: [tag text]];
+		[returnArray addObject: tag];
 	}
 	
 	if ([returnArray count] == 0) return nil;

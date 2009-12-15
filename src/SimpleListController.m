@@ -79,13 +79,14 @@
  */
 
 
+/*
 //TODO: methodenkopf, unit tests, soll sie threadsave sein?
 - (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
 		   shouldAddObjects:(NSArray *)tokens 
 					atIndex:(NSUInteger)index{
 	
 	NSLog(@"shouldAddObjects");
-	
+
 	//for (id token in tokens) {
 	//	NSLog(@"Token: %@",[token className]);
 	//}
@@ -134,10 +135,13 @@
  // return An array of validated tokens (pasteboard)
 	return result;
 	//return nil;
-	
+// ------------
+	NSMutableArray *a = [[NSMutableArray alloc]init];
+	[a addObject: @"test"];
+	return a;
 }
-
-
+ */
+/*
 //TODO: methodenkopf, unit tests, copy&paste
 - (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
 	completionsForSubstring:(NSString *)substring 
@@ -167,20 +171,28 @@
 	[result insertObject:substring atIndex:0];
 	return result;
 }
-
-- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString: (NSString *)editingString {
+ */
+/*
+- (id)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell representedObjectForEditingString:(NSString *)editingString {
 	NSLog(@"representedObjectForEditingString called...");
-    //iTunesTrack *track = [tracks objectWithName:editingString];
-//    if ([track exists])
-//        return track;
-	NSString *s = [[NSString alloc] initWithString:@"teststring"];
-    return s;
+	
+	Tag *tag = [self getTagByName: editingString];
+	
+	if (tag == nil) {
+		// Create tag
+		NSLog(@"Create tag...");
+		tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+		[tag setValue:editingString forKey:@"text"];
+	}
+	
+	return tag;
 }
 
-- (NSString *)tokenField:(NSTokenField *)tokenFieldArg displayStringForRepresentedObject:(id)representedObject { 
-    return [representedObject name];
+- (NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject {
+	NSLog(@"displayStringForRe... called");
+	return [representedObject text];
 }
-
+*/
 //TODO: comments, tests
 - (NSArray *) getCurrentTags {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -200,8 +212,12 @@
 	[fetchRequest setPredicate:predicate];	
 	NSError *error;
 	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
-	//TODO: errorhandling (if !=1)
-	return  [result objectAtIndex:0];
+
+	if ([result count] == 0) return nil;
+	else {
+		NSLog(@"getTagByName returns: %@", [[result objectAtIndex:0] className]);
+		return  [result objectAtIndex:0];
+	}
 }
 
 @end
