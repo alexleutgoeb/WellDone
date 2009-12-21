@@ -24,7 +24,7 @@
 
 - (id) transformedValue:(id) value
 {
-	NSLog(@"transformedValue: FORWARD");
+	//NSLog(@"transformedValue: FORWARD");
 	
 	if (value == nil) return nil;
 	
@@ -38,14 +38,14 @@
 	NSMutableArray *returnArray = [[NSMutableArray alloc] init];
 	
 	for (id tag in value) {
-		[returnArray addObject: tag];
+		[returnArray addObject: [tag text]];
 	}
 	
 	if ([returnArray count] == 0) return nil;
 	return returnArray;
 }
 
-- (id) reverseTransformedValue:(id) value
+- (id) reverseTranswformedValue:(id) value
 {
 	// should return Tag-OBJECTs?????
 	

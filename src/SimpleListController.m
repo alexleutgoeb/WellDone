@@ -215,9 +215,93 @@
 
 	if ([result count] == 0) return nil;
 	else {
-		NSLog(@"getTagByName returns: %@", [[result objectAtIndex:0] className]);
+		//NSLog(@"getTagByName returns: %@", [[result objectAtIndex:0] className]);
 		return  [result objectAtIndex:0];
 	}
+}
+
+- (void)updateTagsInTask:(NSString*)title Tags:(NSSet*)tags
+{
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(title == %@)", title];
+	[fetchRequest setEntity:entity];	
+	[fetchRequest setPredicate:predicate];	
+	NSError *error;
+	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
+	
+	if ([result count] == 0) {
+		//NSLog(@"Task nicht gefunden!");
+		return;
+	}
+	else {
+		//NSLog(@"getTagByName returns: %@", [[result objectAtIndex:0] className]);
+		//NSLog(@"Task gefunden!");
+		NSManagedObject *task = [result objectAtIndex:0];
+		[task setValue:tags forKey:@"tags"];
+	}
+}
+
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification
+{
+    //NSLog(@"controlTextDidEndEditing");
+	
+	NSTokenFieldCell *o = [aNotification object];
+	
+	NSArray *tokens = [o objectValue];
+	NSMutableArray *newTags = [[NSMutableArray alloc] init];
+	
+	//for (id token in tokens) {
+	//	NSLog(@"Token: %@",token);
+	//}
+	
+	NSString *currentTagName = [[NSString alloc]init];
+	
+	NSMutableArray *currentTags = [NSMutableArray arrayWithArray:[self getCurrentTags]]; //from core data
+	NSMutableArray *currentTagNames = [[NSMutableArray alloc]init]; //tag 'text' from currentTags is copied in there
+	
+	//copy all the current TagNames into the currentTagNames array
+	for (int i = 0; i < [currentTags count]; i++){
+		if ([[currentTags objectAtIndex:i] text]!=nil ){ 
+			[currentTagNames addObject: ((NSString *) [[currentTags objectAtIndex:i] text])];
+		}
+	}
+	
+	NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects];
+	Task *selectedTask = [selectedTasks objectAtIndex:0];
+	
+	// go through all tokens (it might come more than one because of copy&paste) which the user entered (tokens)
+	for (int i = 0; i < [tokens count]; i++) {
+		
+		//check if tag already exisits (a task can't be tagged twice with the same tag name, this could be possible with copy&paste)
+		currentTagName = (NSString *) [tokens objectAtIndex:i];
+		if (![currentTagNames containsObject:currentTagName]){
+			
+			//add tag to core data
+			NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+			[tag setValue:currentTagName forKey:@"text"]; 		
+			
+			//add tag to currentTags and currentTagNames
+			[currentTags addObject:tag];
+			[currentTagNames addObject:[tag text]];
+			[newTags addObject:tag];
+		} else {
+			[newTags addObject:[self getTagByName:currentTagName]];
+		}
+
+		
+		//Tag *tag =[self getTagByName: currentTagName] ;//TODO
+		
+		//[tag addTasks:selectedTask];
+	}
+	
+	//for (id token in newTags) {
+	//	NSLog(@"New Token: %@",[token text]);
+	//}
+	
+	// Tags im Task aktualisieren
+	[self updateTagsInTask:[selectedTask title] Tags:[NSSet setWithArray:newTags]];
+	
 }
 
 @end
