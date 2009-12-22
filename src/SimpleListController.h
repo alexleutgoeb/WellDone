@@ -10,10 +10,34 @@
 #import <Task.h>
 
 
+
+/*
+ *Basically objects returned in the dataSource methods will return _NSArrayControllerTreeNode objects, a private controller class. 
+ *it would not be necessary to declare this interface, it would be possible to just call the observedObject method on an (id) reference 
+ * to get the relevant managed object. However, "the treat warnings as errors flag" are turned on this is the best way. 
+ * more info: http://allusions.sourceforge.net/articles/treeDragPart1.php
+ */
+@interface _NSArrayControllerTreeNode : NSObject
+{
+
+}
+- (unsigned int)count;
+- (id)observedObject;
+- (id)parentNode;
+- (id)nodeAtIndexPath:(id)fp8;
+- (id)subnodeAtIndex:(unsigned int)fp8;
+- (BOOL)isLeaf;
+- (id)indexPath;
+- (id)objectAtIndexPath:(id)fp8;
+@end
+
+
 @interface SimpleListController : NSViewController {
 	IBOutlet NSTreeController* treeController;
 	IBOutlet NSOutlineView* myview;
 	NSManagedObjectContext *moc;
+	NSArray* dragType;
+	_NSArrayControllerTreeNode* draggedNode;
 }
 
 @property (nonatomic, retain, readonly) NSTreeController *treeController;

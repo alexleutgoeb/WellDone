@@ -304,4 +304,114 @@
 	
 }
 
+
+
+//------------------------------------
+#pragma mark NSOutlineView datasource methods for drag&drop-- see NSOutlineViewDataSource
+//---------------------------------------------------------------------------
+
+
+
+- (void)awakeFromNib {	
+	NSLog(@"Drag&Drop: awakeFromNib called");
+	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];
+	
+	[ dragType retain ]; 
+	
+	[ myview registerForDraggedTypes:dragType ];
+	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
+	[ sortDesc release ];
+}	
+
+- (BOOL) outlineView : (NSOutlineView *) outlineView  
+		  writeItems : (NSArray*) items 
+		toPasteboard : (NSPasteboard*) pboard  {
+	NSLog(@"Drag&Drop: awakeFromNib called");
+	[ pboard declareTypes:dragType owner:self ];		
+	// items is an array of _NSArrayControllerTreeNode   see http://theocacao.com/document.page/130 for more info
+	draggedNode = [ items objectAtIndex:0 ];
+	return YES;	
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)index {
+	NSLog(@"Drag&Drop: acceptDrop called");
+	_NSArrayControllerTreeNode* parentNode = item;
+	NSManagedObject* draggedTreeNode = [ draggedNode observedObject ];	
+	[ draggedTreeNode setValue:[parentNode observedObject ] forKey:@"parentTask" ];		
+	return YES;		
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index {
+	NSLog(@"Drag&Drop: validateDrop called");
+	_NSArrayControllerTreeNode* newParent = item;
+	
+	// drags to the root are always acceptable
+	if ( newParent == NULL ) {	
+		return  NSDragOperationGeneric;	
+	}
+	
+	// Verify that we are not dragging a parent to one of it's ancestors
+	// causes a parent loop where a group of nodes point to each other and disappear
+	// from the control	
+	NSManagedObject* dragged = [ draggedNode observedObject ];	 	 
+	NSManagedObject* newP = [ newParent observedObject ];
+	
+	if ( [ self category:dragged isSubCategoryOf:newP ] ) {
+		return NO;
+	}		
+	
+	return NSDragOperationGeneric;
+}
+
+- (BOOL) category:(NSManagedObject* )cat isSubCategoryOf:(NSManagedObject* ) possibleSub {
+	NSLog(@"Drag&Drop: isSubCategoryOf called");
+	// Depends on your interpretation of subCategory ....
+	if ( cat == possibleSub ) {	return YES; }
+	
+	NSManagedObject* possSubParent = [possibleSub valueForKey:@"parentTask"];	
+	
+	if ( possSubParent == NULL ) {	return NO; }
+	
+	while ( possSubParent != NULL ) {		
+		if ( possSubParent == cat ) { return YES;	}
+		
+		// move up the tree
+		possSubParent = [possSubParent valueForKey:@"parentTask"];			
+	}	
+	
+	return NO;
+}
+
+
+// This method gets called by the framework but the values from bindings are used instead
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {	
+	NSLog(@"Drag&Drop: objectValueForTableColumn called");
+	return NULL;
+}
+
+/* 
+ The following are implemented as stubs because they are required when 
+ implementing an NSOutlineViewDataSource. Because we use bindings on the
+ table column these methods are never called. The NSLog statements have been
+ included to prove that these methods are not called.
+ */
+- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+	NSLog(@"Drag&Drop: numberOfChildrenOfItem called");
+	return 1;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+	NSLog(@"Drag&Drop: isItemExpandable called");
+	return NO;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item {
+	NSLog(@"Drag&Drop: child called");	
+	return NULL;
+}
+
+
+
+
 @end
