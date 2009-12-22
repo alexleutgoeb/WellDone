@@ -202,7 +202,7 @@ static CGFloat gDetailNaturalWidths[DateCellDetailNumberOfTodayAndYesterdays];
 	
     // Check to see if we can use the yesterday/today option
     iTodayAndYesterdayLevel = DateCellDetailNumberOfTodayAndYesterdays;
-	NSLog(@"bla %d ", iTodayAndYesterdayLevel);
+	//NSLog(@"bla %d ", iTodayAndYesterdayLevel);
     for (DateCellDetailTodayAndYesterdays i = 0; i < DateCellDetailNumberOfTodayAndYesterdays; i++) {
         // If we have one greater than it, then we can't use it
         if (gDetailNaturalWidths[i] > iLastWidth) {

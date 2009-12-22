@@ -312,12 +312,11 @@
 
 
 
+// create a sortDescriptor based on the name attribute. This will give us an ordered tree.
 - (void)awakeFromNib {	
 	NSLog(@"Drag&Drop: awakeFromNib called");
-	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];
-	
+	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];	
 	[ dragType retain ]; 
-	
 	[ myview registerForDraggedTypes:dragType ];
 	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
 	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
@@ -329,7 +328,7 @@
 		toPasteboard : (NSPasteboard*) pboard  {
 	NSLog(@"Drag&Drop: awakeFromNib called");
 	[ pboard declareTypes:dragType owner:self ];		
-	// items is an array of _NSArrayControllerTreeNode   see http://theocacao.com/document.page/130 for more info
+	// items is an array of _NSArrayControllerTreeNode  
 	draggedNode = [ items objectAtIndex:0 ];
 	return YES;	
 }
