@@ -75,12 +75,9 @@
 	// call syncmanager in background thread
 	
 	
-	// after completion saveand inform delegate
-	
-}
+	// after completion save and inform delegate
 
-- (void)syncFinished {
-	// merge moc with deactived undo manager
+	// merge moc with deactivated undo manager
 	NSError *error = nil;
 	[mainContext setMergePolicy:NSRollbackMergePolicy];
 	[context save:&error];
