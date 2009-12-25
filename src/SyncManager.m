@@ -78,7 +78,7 @@
 	}
 }
 
-- (NSManagedObjectContext *)syncDataFromManagedObjectContext:(NSManagedObjectContext *)aManagedObjectContext {
+- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext {
 	// TODO: implement
 	
 	if ([syncServices count] > 0) {
@@ -118,7 +118,7 @@
 	}
 }
 
-- (NSManagedObjectContext *)replaceLocalDataWithRemoteData:(NSManagedObjectContext *)aManagedObjectContext {
+- (NSManagedObjectContext *)replaceLocalData:(NSManagedObjectContext *)aManagedObjectContext {
 
 	DLog(@"Replacing local data with remote...");
 	

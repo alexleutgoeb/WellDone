@@ -64,14 +64,14 @@
  This method is the main method for syncing a managed object context with remote 
  data, fetched from the different sync services.
  */
-- (NSManagedObjectContext *)syncDataFromManagedObjectContext:(NSManagedObjectContext *)aManagedObjectContext;
+- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext;
 
 /**
  Overrides local data with remote
  The method replaces the local data with remote entries. Warning: All local 
  data will be deleted.
  */
-- (NSManagedObjectContext *)replaceLocalDataWithRemoteData:(NSManagedObjectContext *)aManagedObjectContext;
+- (NSManagedObjectContext *)replaceLocalData:(NSManagedObjectContext *)aManagedObjectContext;
 
 
 @end
