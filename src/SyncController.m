@@ -19,6 +19,9 @@
 	if (self = [super init]) {
 		syncServices = [[NSMutableDictionary alloc] init];
 		syncManager = [[SyncManager alloc] initWithDelegate:self];
+		syncQueue = [[NSOperationQueue alloc] init];
+		// Set operation count to 1, so that max 1 sync is active
+		[syncQueue setMaxConcurrentOperationCount:1];
 		
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
@@ -27,6 +30,8 @@
 }
 
 - (void) dealloc {
+	[syncQueue cancelAllOperations];
+	[syncQueue release];
 	[syncManager release];
 	[syncServices removeAllObjects];
 	[syncServices release];
@@ -57,6 +62,17 @@
 	BOOL returnValue = NO;
 	
 	return returnValue;
+}
+
+- (void)sync {
+	// TODO: check for internet connection to services
+	
+	// Get objectcontext from delegate
+	[[NSApp delegate] managedObjectContext];
+	
+	// call syncmanager in background thread
+	
+	// merge moc with deactived undo manager
 }
 
 @end

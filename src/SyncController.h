@@ -16,11 +16,16 @@
 	NSMutableDictionary *syncServices;
 	// Instance of the syncmanager
 	SyncManager *syncManager;
+	
+	// queue for sync operations
+	NSOperationQueue *syncQueue;
 }
 
 @property(nonatomic, readonly) NSMutableDictionary *syncServices;
 
 - (BOOL)enableSyncService:(NSString *)anIdentifier WithUser:(NSString *)aUser andPwd:(NSString *)aPwd;
 - (BOOL)disableSyncService:(NSString *)anIdentifier;
+
+- (void)sync;
 
 @end
