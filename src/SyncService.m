@@ -11,7 +11,7 @@
 
 @implementation SyncService
 
-@synthesize user, pwd;
+@synthesize user, pwd, api;
 
 - (id)initWithApiClass:(Class)anApiClass {
 	if (self = [self init]) {

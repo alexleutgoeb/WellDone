@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString *pwd;
 @property (nonatomic, readonly) NSString *identifier;
 @property (nonatomic, readonly) BOOL isEnabled;
+@property (nonatomic, readonly) id<GtdApi> api;
 
 - (id)initWithApiClass:(Class)anApiClass;
 - (BOOL)activateService:(NSError **)error;
