@@ -67,12 +67,30 @@
 - (void)sync {
 	// TODO: check for internet connection to services
 	
-	// Get objectcontext from delegate
-	[[NSApp delegate] managedObjectContext];
+	// Get new objectcontext from delegate
+	NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
+	NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+	[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
 	
 	// call syncmanager in background thread
 	
+	
+	// after completion saveand inform delegate
+	
+}
+
+- (void)syncFinished {
 	// merge moc with deactived undo manager
+	NSError *error = nil;
+	[mainContext setMergePolicy:NSRollbackMergePolicy];
+	[context save:&error];
+	
+	if (error != nil) {
+		// save error
+	}
+	else {
+		
+	}
 }
 
 @end

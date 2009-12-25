@@ -8,7 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class SyncManager;
+@class SyncController, SyncManager;
+
+
+// Protocol for the parser to communicate with its delegate.
+@protocol SyncControllerDelegate <NSObject>
+
+@optional
+- (void)syncControllerDidSyncWithSuccess:(SyncController *)sc;
+- (void)syncControllerDidSyncWithConflicts:(SyncController *)sc;
+- (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error;
+
+@end
+
 
 @interface SyncController : NSObject {
 @private
