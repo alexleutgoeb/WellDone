@@ -43,12 +43,16 @@
 		service.user = aUser;
 		service.pwd = aPwd;
 		returnValue = [service activateService:&error];
+		if (returnValue != NO) {
+			[syncManager registerSyncService:service.api];
+		}
 	}
 	
 	DLog(@"Service activated: %i, error: %@", returnValue, [error localizedDescription]);
 	
 	return returnValue;
 }
+
 - (BOOL)disableSyncService:(NSString *)anIdentifier {
 	BOOL returnValue = NO;
 	
