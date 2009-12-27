@@ -10,6 +10,7 @@
 #import "WellDone_AppDelegate.h"
 #import "SyncController.h"
 #import "SyncService.h"
+#import "ServicePreferencesSheetController.h"
 
 
 @interface SyncPreferences ()
@@ -78,6 +79,10 @@
     return NO;
 }
 
+- (void)editServiceSheetDidEndForService:(NSString *)serviceId withSuccess:(BOOL)success {
+	
+}
+
 
 #pragma mark -
 #pragma mark NSTableView delegate methods
@@ -121,12 +126,15 @@
 	if (rowIndex >= 0 && rowIndex < [[self syncServices] count] && [[aTableColumn identifier] isEqualToString:@"enabled"]) {
 		SyncService *service = [[[self syncServices] allValues] objectAtIndex:rowIndex]; 
 		if (service.isEnabled == NO) {
-			NSError *error = nil;
+			// NSError *error = nil;
 			// TODO: show user/pwd sheet
-			service.user = @"etc";
-			service.pwd = @"etc";
-			BOOL flag = [service activateService:&error];
-			DLog(@"Service active: %i, error: %@.", flag, [error localizedDescription]);
+			
+			[ServicePreferencesSheetController editService:service.identifier onWindow:[[self view] window] notifyingTarget:self];
+			
+			// service.user = @"etc";
+			// service.pwd = @"etc";
+			// BOOL flag = [service activateService:&error];
+			// DLog(@"Service active: %i, error: %@.", flag, [error localizedDescription]);
 		}
 	}
 }
