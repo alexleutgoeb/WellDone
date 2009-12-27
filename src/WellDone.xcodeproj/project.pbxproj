@@ -69,7 +69,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = CF04581710E2F5C400DED3CF /* liblibToodledoAPIiPhone.a */;
+			remoteGlobalIDString = CF04581710E2F5C400DED3CF;
 			remoteInfo = libToodledoAPIiPhone;
 		};
 		FA649BF410C30D790051F758 /* PBXContainerItemProxy */ = {
