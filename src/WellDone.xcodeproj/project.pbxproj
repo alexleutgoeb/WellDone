@@ -47,6 +47,8 @@
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
+		FA56E4ED10E7E0C400228C43 /* ServicePreferencesSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */; };
+		FA56E4F210E7E2B100228C43 /* ServicePreferencesSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */; };
 		FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
 		FA90D40410C4124D00309192 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F110C4124D00309192 /* Folder.m */; };
 		FA90D40510C4124D00309192 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F310C4124D00309192 /* Note.m */; };
@@ -184,6 +186,9 @@
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
 		FA48B62D10D3DEDC0032F1D8 /* SyncService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncService.m; sourceTree = "<group>"; };
 		FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "syncservice.toodledo-objc.png"; sourceTree = "<group>"; };
+		FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicePreferencesSheet.xib; sourceTree = "<group>"; };
+		FA56E4F010E7E2B100228C43 /* ServicePreferencesSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePreferencesSheetController.h; sourceTree = "<group>"; };
+		FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePreferencesSheetController.m; sourceTree = "<group>"; };
 		FA90D3F010C4124D00309192 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		FA90D3F110C4124D00309192 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		FA90D3F210C4124D00309192 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -325,6 +330,7 @@
 				D110F48410B8DA6800304B4C /* ContextManagement.xib */,
 				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
 				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
+				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -366,6 +372,8 @@
 				D110F48B10B8DBDB00304B4C /* ContextManagementController.m */,
 				6F22C1E410CC044100ABFE19 /* SidebarFolderController.h */,
 				6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */,
+				FA56E4F010E7E2B100228C43 /* ServicePreferencesSheetController.h */,
+				FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -610,6 +618,7 @@
 				6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */,
 				FACF445210D2EC9300B0237A /* SyncPreferences.xib in Resources */,
 				FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */,
+				FA56E4ED10E7E0C400228C43 /* ServicePreferencesSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +688,7 @@
 				FACF445610D2ED0900B0237A /* SyncPreferences.m in Sources */,
 				FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */,
 				FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */,
+				FA56E4F210E7E2B100228C43 /* ServicePreferencesSheetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
