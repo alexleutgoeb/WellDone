@@ -9,6 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 
+/**
+ ServicePreferencesSheetController class
+ Controller class handles actions on the ServicePreferencesSheet view.
+*/
 @interface ServicePreferencesSheetController : NSWindowController {
 @private
 	// window outlets
@@ -24,8 +28,23 @@
 	NSString *serviceId;
 }
 
+/**
+ Static method adding a modal window for entering credentials for a service to the
+ given parentWindow.
+ @param serviceIdentifier identifier of the service which should be edited
+ @param parentWindow window to which the modal view should be added
+ @param inTarget target to notify about changes in modal view
+*/
 + (void)editService:(NSString *)serviceIdentifier onWindow:(id)parentWindow notifyingTarget:(id)inTarget;
+
+/**
+ Called if the cancel button of the view get pressed.
+*/
 - (IBAction)cancel:(id)sender;
+
+/**
+ Called if the ok button of the view get pressed.
+*/
 - (IBAction)okay:(id)sender;
 
 @end
