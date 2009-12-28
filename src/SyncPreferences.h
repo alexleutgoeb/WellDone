@@ -25,4 +25,6 @@
 // - (void)updateControlAvailability;
 // - (NSString *)statusMessageForService:(id<GtdApi> *)aService;
 
+- (void)editServiceSheetDidEndForService:(NSString *)serviceId withSuccess:(BOOL)success;
+
 @end
