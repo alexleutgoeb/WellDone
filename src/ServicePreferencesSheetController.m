@@ -66,6 +66,8 @@
 
 - (IBAction)okay:(id)sender {
 	[okButton setEnabled:NO];
+	[usernameTextField setEnabled:NO];
+	[passwordTextField setEnabled:NO];
 	[workingIndicator startAnimation:self];
 	[workingLabel setHidden:NO];
 }
