@@ -7,6 +7,9 @@
 //
 
 #import "ServicePreferencesSheetController.h"
+#import "WellDone_AppDelegate.h"
+#import "SyncController.h"
+#import "SyncPreferences.h"
 
 
 @interface ServicePreferencesSheetController ()
@@ -70,6 +73,18 @@
 	[passwordTextField setEnabled:NO];
 	[workingIndicator startAnimation:self];
 	[workingLabel setHidden:NO];
+	
+	SyncController *sc = [[NSApp delegate] sharedSyncController];
+	BOOL success = [sc enableSyncService:serviceId withUser:[usernameTextField stringValue] andPwd:[passwordTextField stringValue]];
+	
+	if (success == NO) {
+		// TODO: show error
+	}
+	else {
+		if (notifyTarget)
+			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:YES];
+		[NSApp endSheet:[self window]];
+	}
 }
 
 - (void)windowWillClose:(id)sender
