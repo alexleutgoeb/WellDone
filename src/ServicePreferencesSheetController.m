@@ -71,14 +71,22 @@
 	[okButton setEnabled:NO];
 	[usernameTextField setEnabled:NO];
 	[passwordTextField setEnabled:NO];
-	[workingIndicator startAnimation:self];
 	[workingLabel setHidden:NO];
+	[workingIndicator startAnimation:self];
 	
+	// TODO: option to cancel thread
+	[NSThread detachNewThreadSelector:@selector(connectToService) toTarget:self withObject:nil];
+}
+
+- (void)connectToService {
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
 	BOOL success = [sc enableSyncService:serviceId withUser:[usernameTextField stringValue] andPwd:[passwordTextField stringValue]];
 	
 	if (success == NO) {
-		// TODO: show error
+		// TODO: show error, save credentials
+		if (notifyTarget)
+			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
+		[NSApp endSheet:[self window]];
 	}
 	else {
 		if (notifyTarget)
