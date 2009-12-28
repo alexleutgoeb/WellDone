@@ -79,16 +79,26 @@
 }
 
 - (void)connectToService {
+	
+	// TODO: check internet connection before
+	
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
 	BOOL success = [sc enableSyncService:serviceId withUser:[usernameTextField stringValue] andPwd:[passwordTextField stringValue]];
 	
 	if (success == NO) {
-		// TODO: show error, save credentials
+		// TODO: show error
+		
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 		[NSApp endSheet:[self window]];
+		
+		NSAlert *alert = [NSAlert alertWithMessageText:@"Credentials wrong." defaultButton:@"OK" 
+										alternateButton:nil otherButton:nil 
+										informativeTextWithFormat:@"Please check your credentials."];
+		[alert runModal];
 	}
 	else {
+		// TODO: save credentials
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:YES];
 		[NSApp endSheet:[self window]];
