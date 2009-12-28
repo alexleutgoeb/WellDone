@@ -16,6 +16,8 @@
 	IBOutlet NSSecureTextField *passwordTextField;
 	IBOutlet NSButton *cancelButton;
 	IBOutlet NSButton *okButton;
+	IBOutlet NSProgressIndicator *workingIndicator;
+	IBOutlet NSTextField *workingLabel;
 	
 	// current config
 	id notifyTarget;

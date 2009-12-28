@@ -37,6 +37,10 @@
 	}
 }
 
+- (void)windowDidLoad {
+	[workingIndicator stopAnimation:self];
+}
+
 - (id)initWithWindowNibName:(NSString *)windowNibName service:(NSString *)serviceIdentifier notifyingTarget:(id)inTarget {
 	if ((self = [super initWithWindowNibName:windowNibName])) {
 		serviceId = [serviceIdentifier copy];
@@ -61,7 +65,9 @@
 }
 
 - (IBAction)okay:(id)sender {
-	
+	[okButton setEnabled:NO];
+	[workingIndicator startAnimation:self];
+	[workingLabel setHidden:NO];
 }
 
 - (void)windowWillClose:(id)sender
