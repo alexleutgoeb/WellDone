@@ -35,7 +35,7 @@
 
 @property(nonatomic, readonly) NSMutableDictionary *syncServices;
 
-- (BOOL)enableSyncService:(NSString *)anIdentifier WithUser:(NSString *)aUser andPwd:(NSString *)aPwd;
+- (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser andPwd:(NSString *)aPwd;
 - (BOOL)disableSyncService:(NSString *)anIdentifier;
 
 - (void)sync;

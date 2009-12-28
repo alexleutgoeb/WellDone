@@ -38,7 +38,7 @@
 	[super dealloc];
 }
 
-- (BOOL)enableSyncService:(NSString *)anIdentifier WithUser:(NSString *)aUser andPwd:(NSString *)aPwd {
+- (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser andPwd:(NSString *)aPwd {
 	BOOL returnValue = NO;
 	NSError *error = nil;
 	
