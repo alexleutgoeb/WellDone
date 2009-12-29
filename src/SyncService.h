@@ -29,6 +29,7 @@
 @property (nonatomic, readonly) id<GtdApi> api;
 
 - (id)initWithApiClass:(Class)anApiClass;
-- (BOOL)activateService:(NSError **)error;
+- (BOOL)activate:(NSError **)error;
+- (void)deactivate;
 
 @end

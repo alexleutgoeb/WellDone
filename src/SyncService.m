@@ -45,7 +45,7 @@
 	return api == nil ? NO : YES;
 }
 
-- (BOOL)activateService:(NSError **)error {
+- (BOOL)activate:(NSError **)error {
 	DLog(@"Trying to activate sync service...");
 	
 	if (self.user != nil && self.pwd != nil) {
@@ -64,6 +64,11 @@
 		DLog(@"User/pwd not set.");
 		return NO;
 	}
+}
+
+- (void)deactivate {
+	[api release];
+	api = nil;
 }
 
 @end
