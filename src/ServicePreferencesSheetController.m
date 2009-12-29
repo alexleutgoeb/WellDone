@@ -81,12 +81,14 @@
 - (void)connectToService {
 	
 	// TODO: check internet connection before
+	NSString *username = [usernameTextField stringValue];
+	NSString *password = [passwordTextField stringValue];
 	
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
-	BOOL success = [sc enableSyncService:serviceId withUser:[usernameTextField stringValue] andPwd:[passwordTextField stringValue]];
+	BOOL success = [sc enableSyncService:serviceId withUser:username andPwd:password];
 	
 	if (success == NO) {
-		// TODO: show error
+		// TODO: show detailed error
 		
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
@@ -98,11 +100,33 @@
 		[alert runModal];
 	}
 	else {
-		// TODO: save credentials
+		// TODO: save password in keychain
+		DLog(@"Connected to service, save credentials in defaults.");
+		NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
+
+		NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
+		
+		if (defaultServices == nil)
+			defaultServices = [NSMutableDictionary dictionary];
+		
+		NSMutableDictionary *serviceDic = [NSMutableDictionary dictionary];
+		[serviceDic setObject:username forKey:@"username"];
+		[serviceDic setObject:password forKey:@"password"];
+		[serviceDic setObject:@"1" forKey:@"enabled"];
+		
+		// TODO: check if current serviceDic already exists; remove remote objects if other user
+		[defaultServices setObject:serviceDic forKey:serviceId];
+		
+		[userPreferences setObject:defaultServices forKey:@"syncServices"];
+		[userPreferences synchronize];
+		
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:YES];
 		[NSApp endSheet:[self window]];
 	}
+	
+	username = nil;
+	password = nil;
 }
 
 - (void)windowWillClose:(id)sender {
