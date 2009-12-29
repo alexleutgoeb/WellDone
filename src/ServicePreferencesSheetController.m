@@ -84,9 +84,10 @@
 	// TODO: check internet connection before connecting
 	NSString *username = [usernameTextField stringValue];
 	NSString *password = [passwordTextField stringValue];
+	NSError *error = nil;
 	
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
-	BOOL success = [sc enableSyncService:serviceId withUser:username andPwd:password];
+	BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
 	
 	if (success == NO) {
 		// TODO: show detailed error

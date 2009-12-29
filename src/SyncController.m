@@ -38,7 +38,7 @@
 				if ([[service objectForKey:@"enabled"] boolValue] != NO) {
 					// activate service
 					if ([service objectForKey:@"username"] != nil && [service objectForKey:@"password"] != nil) {
-						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] andPwd:[service objectForKey:@"password"]];
+						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:[service objectForKey:@"password"] error:nil];
 						DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
 						// TODO: if not successful try later with timer or deactivate service automatically ?
 					}
@@ -59,22 +59,21 @@
 	[super dealloc];
 }
 
-- (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser andPwd:(NSString *)aPwd {
+- (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser pwd:(NSString *)aPwd error:(NSError **)anError {
 	BOOL returnValue = NO;
-	NSError *error = nil;
 	
 	SyncService *service = [syncServices objectForKey:anIdentifier];
 	
 	if (service != nil) {
 		service.user = aUser;
 		service.pwd = aPwd;
-		returnValue = [service activate:&error];
+		returnValue = [service activate:*&anError];
 		if (returnValue != NO) {
 			[syncManager registerSyncService:service.api];
 		}
 	}
 	
-	DLog(@"Service activated: %i, error: %@", returnValue, [error localizedDescription]);
+	DLog(@"Service activated: %i, error: %@", returnValue, [*anError localizedDescription]);
 	
 	return returnValue;
 }

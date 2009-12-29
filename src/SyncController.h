@@ -66,8 +66,9 @@
  @param anIdentifier specific syncService identifer to enable
  @param aUser username for login
  @param aPwd password for login
+ @param anError error object if enabling the service failed
  */
-- (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser andPwd:(NSString *)aPwd;
+- (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser pwd:(NSString *)aPwd error:(NSError **)anError;
 
 /**
  Disables a specific syncService in the sync controller.
