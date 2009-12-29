@@ -48,12 +48,32 @@
 - (BOOL)activate:(NSError **)error {
 	DLog(@"Trying to activate sync service...");
 	
+	NSError *initError = nil;
+	
 	if (self.user != nil && self.pwd != nil) {
 
-		api = [[ApiClass alloc] initWithUsername:user password:pwd error:&*error];
+		api = [[ApiClass alloc] initWithUsername:user password:pwd error:&initError];
 		
-		if (api == nil || *error != nil) {
+		if (api == nil || initError != nil) {
 			DLog(@"Error while activating sync service: %@", *error);
+			
+			// Check error and create custom error object
+			if ([initError code] == GtdApiMissingCredentialsError) {
+				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+				[errorDetail setValue:@"ich NSLocalizedDescriptionKey" forKey:NSLocalizedDescriptionKey];
+				[errorDetail setValue:@"ich NSLocalizedFailureReasonErrorKey" forKey:NSLocalizedFailureReasonErrorKey];
+				[errorDetail setValue:@"ich NSLocalizedRecoverySuggestionErrorKey" forKey:NSLocalizedRecoverySuggestionErrorKey];
+				*error = [NSError errorWithDomain:[initError domain] code:[initError code] userInfo:errorDetail];
+			}
+			else if ([initError code] == GtdApiWrongCredentialsError) {
+				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+				[errorDetail setValue:@"Failed to do something wicked" forKey:NSLocalizedDescriptionKey];
+				*error = [NSError errorWithDomain:@"myDomain" code:100 userInfo:errorDetail];
+			}
+			else {
+				
+			}
+			
 			return NO;
 		}
 		else {
