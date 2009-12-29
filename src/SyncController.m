@@ -63,8 +63,10 @@
 	BOOL returnValue = NO;
 	
 	SyncService *service = [syncServices objectForKey:anIdentifier];
-	
+		
 	if (service != nil) {
+		DLog(@"Trying to enable sync service with user: %@.", aUser);
+
 		service.user = aUser;
 		service.pwd = aPwd;
 		returnValue = [service activate:*&anError];
