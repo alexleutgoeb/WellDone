@@ -60,18 +60,21 @@
 			// Check error and create custom error object
 			if ([initError code] == GtdApiMissingCredentialsError) {
 				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-				[errorDetail setValue:@"ich NSLocalizedDescriptionKey" forKey:NSLocalizedDescriptionKey];
-				[errorDetail setValue:@"ich NSLocalizedFailureReasonErrorKey" forKey:NSLocalizedFailureReasonErrorKey];
-				[errorDetail setValue:@"ich NSLocalizedRecoverySuggestionErrorKey" forKey:NSLocalizedRecoverySuggestionErrorKey];
+				[errorDetail setValue:@"Missing credentials" forKey:NSLocalizedDescriptionKey];
+				[errorDetail setValue:@"Please provide your credentials for the sync service." forKey:NSLocalizedRecoverySuggestionErrorKey];
 				*error = [NSError errorWithDomain:[initError domain] code:[initError code] userInfo:errorDetail];
 			}
 			else if ([initError code] == GtdApiWrongCredentialsError) {
 				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-				[errorDetail setValue:@"Failed to do something wicked" forKey:NSLocalizedDescriptionKey];
-				*error = [NSError errorWithDomain:@"myDomain" code:100 userInfo:errorDetail];
+				[errorDetail setValue:@"Wrong credentials" forKey:NSLocalizedDescriptionKey];
+				[errorDetail setValue:@"Your credentials were declined by the service. Please provide valid credentials." forKey:NSLocalizedRecoverySuggestionErrorKey];
+				*error = [NSError errorWithDomain:[initError domain] code:[initError code] userInfo:errorDetail];
 			}
 			else {
-				
+				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+				[errorDetail setValue:@"Unkown Error" forKey:NSLocalizedDescriptionKey];
+				[errorDetail setValue:@"An unknown error happened, shit." forKey:NSLocalizedRecoverySuggestionErrorKey];
+				*error = [NSError errorWithDomain:[initError domain] code:[initError code] userInfo:errorDetail];
 			}
 			
 			return NO;
