@@ -26,8 +26,26 @@
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
 		
-		// TODO: check for activated services in user defaults, if existing, register.
-		// If failed set timer to try later.
+		// TODO: start in background thread ?
+		// Activated services from user defaults
+		NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
+		NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
+		
+		if (defaultServices != nil) {
+			for (NSString *serviceKey in [defaultServices allKeys]) {
+				NSDictionary *service = [defaultServices objectForKey:serviceKey];
+				
+				if ([[service objectForKey:@"enabled"] boolValue] != NO) {
+					// activate service
+					if ([service objectForKey:@"username"] != nil && [service objectForKey:@"password"] != nil) {
+						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] andPwd:[service objectForKey:@"password"]];
+						DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
+						// TODO: if not successful try later with timer or deactivate service automatically ?
+					}
+				}
+			}
+		}
+		
 	}
 	return self;
 }
