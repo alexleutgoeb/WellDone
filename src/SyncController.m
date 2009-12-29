@@ -25,6 +25,9 @@
 		
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
+		
+		// TODO: check for activated services in user defaults, if existing, register.
+		// If failed set timer to try later.
 	}
 	return self;
 }
