@@ -36,7 +36,7 @@
 
 /**
  Adds a sync service to the manager
- The method adds a sync servce, which must confrom to the GtdApi-protocol, to 
+ The method adds a sync servce, which must conform to the GtdApi-protocol, to 
  the sync manager. The new service will be used for the next triggered syncing.
  @param aSyncService	the sync service which should be added
  */
