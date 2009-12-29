@@ -47,7 +47,7 @@
 	if (service != nil) {
 		service.user = aUser;
 		service.pwd = aPwd;
-		returnValue = [service activateService:&error];
+		returnValue = [service activate:&error];
 		if (returnValue != NO) {
 			[syncManager registerSyncService:service.api];
 		}
@@ -60,6 +60,18 @@
 
 - (BOOL)disableSyncService:(NSString *)anIdentifier {
 	BOOL returnValue = NO;
+	
+	SyncService *service = [syncServices objectForKey:anIdentifier];
+	
+	if (service != nil) {
+		[service deactivate];
+		[syncManager unregisterSyncService:service.api];
+		returnValue = YES;
+		DLog(@"Service deactivated.");
+	}
+	else {
+		DLog(@"Service not found, nothing to do, returning NO.");
+	}
 	
 	return returnValue;
 }
