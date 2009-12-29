@@ -261,8 +261,6 @@
 			newRemoteFolder.localFolder = localFolder;
 			NSMutableSet *mutableRemoteFolders = [remoteFolder mutableSetValueForKey:@"remoteFolders"];
 			[mutableRemoteFolders addObject:newRemoteFolder];
-			//localFolder.remoteFolders.
-			//create Remotefolder
 		}
 	}
 	//now we can safely assume, that each local folder has a remoteFolder
