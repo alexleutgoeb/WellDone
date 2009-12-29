@@ -96,9 +96,12 @@
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 		[NSApp endSheet:[self window]];
 		
-		NSAlert *alert = [NSAlert alertWithMessageText:@"Credentials wrong." defaultButton:@"OK" 
-										alternateButton:nil otherButton:nil 
-										informativeTextWithFormat:@"Please check your credentials."];
+		//NSAlert *alert = [NSAlert alertWithMessageText:@"Credentials wrong." defaultButton:@"OK" 
+		//								alternateButton:nil otherButton:nil 
+		//								informativeTextWithFormat:@"Please check your credentials."];
+		
+		NSAlert *alert = [NSAlert alertWithError:error];
+		
 		[alert runModal];
 	}
 	else {
