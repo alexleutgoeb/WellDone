@@ -52,8 +52,8 @@
 
 		api = [[ApiClass alloc] initWithUsername:user password:pwd error:&*error];
 		
-		if (api == nil || error != nil) {
-			DLog(@"Error while activating sync service: %@", [*error localizedDescription]);
+		if (api == nil || *error != nil) {
+			DLog(@"Error while activating sync service: %@", *error);
 			return NO;
 		}
 		else {
