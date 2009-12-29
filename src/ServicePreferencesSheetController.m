@@ -106,7 +106,7 @@
 }
 
 - (void)windowWillClose:(id)sender {
-	[super windowWillClose:sender];
+	// [super windowWillClose:sender];
 	[self autorelease];
 }
 
