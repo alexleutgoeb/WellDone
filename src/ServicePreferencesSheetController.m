@@ -15,6 +15,7 @@
 @interface ServicePreferencesSheetController ()
 
 - (id)initWithWindowNibName:(NSString *)windowNibName service:(NSString *)serviceIdentifier notifyingTarget:(id)inTarget;
+- (void)connectToService;
 
 @end
 
