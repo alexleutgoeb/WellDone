@@ -80,7 +80,9 @@
 }
 
 - (void)editServiceSheetDidEndForService:(NSString *)serviceId withSuccess:(BOOL)success {
-	
+	if (success != NO) {
+		// TODO: check for remote objects to delete
+	}
 }
 
 
@@ -105,7 +107,7 @@
 	NSString *columnId = [aTableColumn identifier];
 	
 	if ([columnId isEqualToString:@"enabled"]) {
-		return nil;
+		return (service.isEnabled ? [NSNumber numberWithInteger:NSOnState] : [NSNumber numberWithInteger:NSOffState]);
 	}
 	else if ([columnId isEqualToString:@"icon"]) {
 		return [NSImage imageNamed:[NSString stringWithFormat:@"%@.png", service.identifier]];
@@ -126,15 +128,38 @@
 	if (rowIndex >= 0 && rowIndex < [[self syncServices] count] && [[aTableColumn identifier] isEqualToString:@"enabled"]) {
 		SyncService *service = [[[self syncServices] allValues] objectAtIndex:rowIndex]; 
 		if (service.isEnabled == NO) {
-			// NSError *error = nil;
-			// TODO: show user/pwd sheet
-			
 			[ServicePreferencesSheetController editService:service.identifier onWindow:[[self view] window] notifyingTarget:self];
+		}
+		else {
+			DLog(@"Service active, deactivate...");
+			// Deactivate service
+			SyncController *sc = [[NSApp delegate] sharedSyncController];
+			BOOL success = [sc disableSyncService:service.identifier];
 			
-			// service.user = @"etc";
-			// service.pwd = @"etc";
-			// BOOL flag = [service activateService:&error];
-			// DLog(@"Service active: %i, error: %@.", flag, [error localizedDescription]);
+			if (success != NO) {
+				DLog(@"Deactivation successful.");
+				// flag service in userdefaults as inactive
+				NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
+				
+				NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
+				
+				if (defaultServices != nil && [defaultServices objectForKey:service.identifier] != nil) {
+					NSMutableDictionary *serviceDic = [NSMutableDictionary dictionaryWithDictionary:[defaultServices objectForKey:service.identifier]];
+					
+					// TODO: Remove line if password is saved in keychains
+					// Removes password from defaults, keep username
+					[serviceDic removeObjectForKey:@"password"];
+					[serviceDic setObject:@"0" forKey:@"enabled"];
+					
+					[defaultServices setObject:serviceDic forKey:service.identifier];
+					[userPreferences setObject:defaultServices forKey:@"syncServices"];
+					[userPreferences synchronize];
+					DLog(@"Changed defaults.");
+				}
+			}
+			else {
+				DLog(@"Could not deactivate service!");
+			}
 		}
 	}
 }
