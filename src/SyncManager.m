@@ -259,6 +259,8 @@
 			newRemoteFolder.remoteUid = nil;
 			newRemoteFolder.lastsyncDate = nil;
 			newRemoteFolder.localFolder = localFolder;
+			NSMutableSet *mutableRemoteFolders = [remoteFolder mutableSetValueForKey:@"remoteFolders"];
+			[mutableRemoteFolders addObject:newRemoteFolder];
 			//localFolder.remoteFolders.
 			//create Remotefolder
 		}
