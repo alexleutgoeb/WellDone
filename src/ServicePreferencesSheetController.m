@@ -80,7 +80,7 @@
 
 - (void)connectToService {
 	
-	// TODO: check internet connection before
+	// TODO: check internet connection before connecting
 	NSString *username = [usernameTextField stringValue];
 	NSString *password = [passwordTextField stringValue];
 	
@@ -114,7 +114,12 @@
 		[serviceDic setObject:password forKey:@"password"];
 		[serviceDic setObject:@"1" forKey:@"enabled"];
 		
-		// TODO: check if current serviceDic already exists; remove remote objects if other user
+		if ([defaultServices objectForKey:serviceId] != nil) {
+			if (![username isEqualToString:[[defaultServices objectForKey:serviceId] objectForKey:@"username"]]) {
+				// TODO: remove remote objects with same serviceId
+			}
+		}
+		
 		[defaultServices setObject:serviceDic forKey:serviceId];
 		
 		[userPreferences setObject:defaultServices forKey:@"syncServices"];
