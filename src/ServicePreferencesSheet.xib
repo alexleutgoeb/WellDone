@@ -157,7 +157,7 @@
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSecureTextFieldCell" key="NSCell" id="622085455">
 										<int key="NSCellFlags">343014976</int>
-										<int key="NSCellFlags2">272630848</int>
+										<int key="NSCellFlags2">272630784</int>
 										<string key="NSContents"/>
 										<reference key="NSSupport" ref="949906627"/>
 										<reference key="NSControlView" ref="391135237"/>
