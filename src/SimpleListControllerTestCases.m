@@ -71,7 +71,7 @@
 
 }
 
-- void (getTagByName){
+- (void) getTagByName{
 /*
  - (Tag *) getTagByName: (NSString *)tagName {
 

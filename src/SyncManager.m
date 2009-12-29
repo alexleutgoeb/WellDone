@@ -187,4 +187,133 @@
 	
 }
 
+/**
+ generische variante zum erstellen von remoteObjects
+ 
+ @author: Michael
+ 
+*/
+/*- (void) checkAndCreateRemoteObjects:(NSArray *) remoteObjects withObjectName: (NSString) objectName fromObjectContext: (NSManagedObjectContext *) aManagedObjectContext {
+	
+	NSError *error = nil;
+	
+	//zuerst alle remoteFolders erstellen falls sie noch nicht existieren
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:objectName inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	NSArray *localObjects = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+	[fetchRequest release];
+	
+	BOOL foundRemoteObject;
+	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
+	for (NSManagedObject *localObject in localObjects) {
+		
+		foundRemoteObject = NO;
+		NSEnumerator *enumerator = [localObject.remoteObjects objectEnumerator];
+		
+		RemoteObject *remoteObject = nil;
+		
+		while ((remoteObject = [enumerator nextObject])) {
+			//wenn remoteobject existiert
+			if(remoteObject.serviceIdentifier == syncService.identifier) foundRemoteObject = YES;
+		}
+		
+		if(foundRemoteObject == NO) {
+			//create Remotefolder
+			RemoteObject ro = createRemoteObject(objectName, localObject);
+		}
+	}
+}*/
+
+/**
+ Folder sync
+ @author Michael
+ */
+- (void) syncFolders:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
+	
+	NSError *error = nil;
+	
+	//zuerst alle remoteFolders erstellen falls sie noch nicht existieren
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	NSArray *localFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+	
+	BOOL foundRemoteFolder;
+	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
+	for (Folder *localFolder in localFolders) {
+		
+		foundRemoteFolder = NO;
+		NSEnumerator *enumerator = [localFolder.remoteFolders objectEnumerator];
+		
+		RemoteFolder *remoteFolder;
+			
+		while ((remoteFolder = [enumerator nextObject])) {
+			//wenn remoteobject existiert
+			if(remoteFolder.serviceIdentifier == syncService.identifier) foundRemoteFolder = YES;
+		}
+		
+		if(foundRemoteFolder == NO) {
+			RemoteFolder *newRemoteFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+			newRemoteFolder.serviceIdentifier = syncService.identifier;
+			newRemoteFolder.remoteUid = nil;
+			newRemoteFolder.lastsyncDate = nil;
+			newRemoteFolder.localFolder = localFolder;
+			//localFolder.remoteFolders.
+			//create Remotefolder
+		}
+	}
+	//now we can safely assume, that each local folder has a remoteFolder
+	//get all remote folders
+	/*
+	entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	NSArray *rFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+	[fetchRequest release];
+	
+	//fetch the remote remoteFolders
+	NSArray *gtdFolders = [syncService getFolders:&error];
+	
+	//TODO implement handling of deleted and newly created folders:
+	//zuerst innerhalb einer passenden datenstruktur jedem element aus rFolder das entsprechende element aus gtdFolder zuordnen
+		//falls es zu einem rFolder element keinen gtdFolder gibt:
+			//wenn rFolder.localFolder.deleted != true -> [syncService addFolder]
+		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
+	
+	//foreach remoteFolder
+	for (NSManagedObject *rFolder in rFolders) {
+		if(rFolder.localFolder.modifiedDate > rFolder.lastsyncDate) {
+			//overwrite the remote remoteFolder with the local folder
+			//[syncService editFolder:]
+		}
+		else {
+			//find the corresponding folder in remoteRemoteFolders
+			//overwrite the local Folder with the remote remote folder
+		}
+	}*/
+}
+/*
+ 
+ syncpseudocode:
+ 
+1. via syncService die gtdFolders holen.
+
+2. aus dem managedObjectContext die remoteFolders holen.
+
+3. jetzt iteriere ich die remoteFolders durch und schau bei jedem ob es einen entsprechenden gtdFolder gibt.
+
+3a Wenn ich einen passenden gtdFolder finde dann als nächstes remoteFolder.localFolder.deleted prüfen:
+wenn deleted = true: lösche gtdFolder
+sonst als nächstes das remoteFolder.localFolder lastmodified prüfen:
+wenn lastmodified > lastsync: gtdFolder mit daten aus remoteFolder.localFolder überschreiben
+wenn lastmodified <= lastsync: localFolder mit gtdFolder überschreiben
+
+3b wenn ich keinen passenden gtdFolder finde und remoteFolder.localFolder.deleted != true: neuen gtdFolder anlegen
+sonst wenn lastmodified <= lastsync dann bedeuted das, dass der folder in toodledo gelöscht wurde daher: remoteFolder deleten.
+
+4 jetzt die übriggebliebenen gtdFolders hernehmen und für jeden einen remoteFolder + remoteFolder.localFolder anlegen
+
+bei den anderen wird es fast ident sein. nur bei tasks und notes kommt der fall dazu, dass zb gtdTask.lastEdit auch > lastSync ist und dann der user gepromptet werden muss.
+*/
+
 @end
