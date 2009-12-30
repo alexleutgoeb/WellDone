@@ -52,6 +52,7 @@
 		FA56E4F210E7E2B100228C43 /* ServicePreferencesSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */; };
 		FA56EB6410EBB95300228C43 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56EB6310EBB95300228C43 /* Security.framework */; };
 		FA56EB9210EBBFC200228C43 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */; };
+		FA56EC0810EBCA9900228C43 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FA56EC0710EBCA9900228C43 /* icon.icns */; };
 		FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
 		FA90D40410C4124D00309192 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F110C4124D00309192 /* Folder.m */; };
 		FA90D40510C4124D00309192 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F310C4124D00309192 /* Note.m */; };
@@ -197,6 +198,7 @@
 		FA56EB6310EBB95300228C43 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FA56EB9010EBBFC200228C43 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		FA56EC0710EBCA9900228C43 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		FA90D3F010C4124D00309192 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		FA90D3F110C4124D00309192 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		FA90D3F210C4124D00309192 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				FA48B85F10D4139E0032F1D8 /* ImageRes */,
+				FA56EC0710EBCA9900228C43 /* icon.icns */,
 				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
 				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
 				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
@@ -641,6 +644,7 @@
 				FACF445210D2EC9300B0237A /* SyncPreferences.xib in Resources */,
 				FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */,
 				FA56E4ED10E7E0C400228C43 /* ServicePreferencesSheet.xib in Resources */,
+				FA56EC0810EBCA9900228C43 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
