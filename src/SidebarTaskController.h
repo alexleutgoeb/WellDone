@@ -14,6 +14,8 @@
 	IBOutlet NSTextField* datedue;
 }
 
+- (IBAction)setRepeat:(id)sender;
+
 @property (nonatomic, retain) NSTextField* datedue;
 
 @end

@@ -24,6 +24,19 @@
 	}
 	return self;
 }
+
+typedef enum _repeatValue
+{
+	never = 0, daily, weekly, monthly
+} repeatValue;
+
+- (void) setRepeat:(id)sender {
+	//NSLog(@"Tag: %d",[[sender selectedItem] tag]);
+	//	NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects];
+	//	Task *selectedTask = [selectedTasks objectAtIndex:0];
+	//	[selectedTask setRepeat:1];
+}
+
 /*
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
 {

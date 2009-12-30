@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
+		<string key="IBDocument.InterfaceBuilderVersion">732</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">740</string>
+			<string key="NS.object.0">732</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1397,7 +1397,7 @@
 										<integer value="1"/>
 									</object>
 								</object>
-								<string key="NS.format">dd.MM.yyyy HH:mm</string>
+								<string key="NS.format">dd MMM yyyy HH:mm</string>
 								<bool key="NS.natural">NO</bool>
 							</object>
 							<reference key="NSControlView" ref="11488703"/>
@@ -3508,7 +3508,7 @@
 						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">dd.MM.yyyy HH:mm</string>
+				<string key="NS.format">dd MMM yyyy HH:mm</string>
 				<bool key="NS.natural">NO</bool>
 			</object>
 		</object>
@@ -3808,6 +3808,14 @@
 					</object>
 					<int key="connectionID">320</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setRepeat:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="87569431"/>
+					</object>
+					<int key="connectionID">321</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3854,7 +3862,6 @@
 							<reference ref="586710871"/>
 							<reference ref="404665166"/>
 							<reference ref="1026346897"/>
-							<reference ref="87569431"/>
 							<reference ref="295288972"/>
 							<reference ref="814236383"/>
 							<reference ref="958756497"/>
@@ -3862,6 +3869,7 @@
 							<reference ref="856100978"/>
 							<reference ref="636525185"/>
 							<reference ref="525898359"/>
+							<reference ref="87569431"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4450,7 +4458,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">320</int>
+			<int key="maxID">321</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4478,6 +4486,10 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SidebarTaskController</string>
 					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">setRepeat:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
