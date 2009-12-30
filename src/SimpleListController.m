@@ -239,7 +239,7 @@
 
 // This method gets called by the framework but the values from bindings are used instead
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {	
-	NSLog(@"Drag&Drop: objectValueForTableColumn called");
+	// NSLog(@"Drag&Drop: objectValueForTableColumn called");
 	return NULL;
 }
 
