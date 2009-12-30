@@ -11,6 +11,7 @@
 #import "SyncController.h"
 #import "SyncService.h"
 #import "ServicePreferencesSheetController.h"
+#import "SFHFKeychainUtils.h"
 
 
 @interface SyncPreferences ()
@@ -146,9 +147,16 @@
 				if (defaultServices != nil && [defaultServices objectForKey:service.identifier] != nil) {
 					NSMutableDictionary *serviceDic = [NSMutableDictionary dictionaryWithDictionary:[defaultServices objectForKey:service.identifier]];
 					
-					// TODO: Remove line if password is saved in keychains
-					// Removes password from defaults, keep username
-					[serviceDic removeObjectForKey:@"password"];
+					// Remove password from keychain
+					// save password to keychain
+					NSError *error = nil;
+					NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], service.identifier];
+					[SFHFKeychainUtils deleteItemForUsername:service.user andServiceName:serviceName error:&error];
+					if (error != nil) {
+						DLog(@"Error while deleting password from keychain: %@.", error);
+					}
+					
+					// Set enabled to NO in defaults
 					[serviceDic setObject:@"0" forKey:@"enabled"];
 					
 					[defaultServices setObject:serviceDic forKey:service.identifier];

@@ -10,6 +10,7 @@
 #import "WellDone_AppDelegate.h"
 #import "SyncController.h"
 #import "SyncPreferences.h"
+#import "SFHFKeychainUtils.h"
 
 
 @interface ServicePreferencesSheetController ()
@@ -105,7 +106,6 @@
 		[alert runModal];
 	}
 	else {
-		// TODO: save password in keychain
 		DLog(@"Connected to service, save credentials in defaults.");
 		NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 
@@ -116,7 +116,6 @@
 		
 		NSMutableDictionary *serviceDic = [NSMutableDictionary dictionary];
 		[serviceDic setObject:username forKey:@"username"];
-		[serviceDic setObject:password forKey:@"password"];
 		[serviceDic setObject:@"1" forKey:@"enabled"];
 		
 		if ([defaultServices objectForKey:serviceId] != nil) {
@@ -129,6 +128,14 @@
 		
 		[userPreferences setObject:defaultServices forKey:@"syncServices"];
 		[userPreferences synchronize];
+		
+		// save password to keychain
+		NSError *error = nil;
+		NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceId];
+		[SFHFKeychainUtils storeUsername:username andPassword:password forServiceName:serviceName updateExisting:NO error:&error];
+		if (error != nil) {
+			DLog(@"Error while saving to keychain: %@.", error);
+		}
 		
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:YES];

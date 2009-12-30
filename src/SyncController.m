@@ -10,6 +10,7 @@
 #import "SyncManager.h"
 #import "SyncService.h"
 #import "TDApi.h"
+#import "SFHFKeychainUtils.h"
 
 @implementation SyncController
 
@@ -26,7 +27,8 @@
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
 		
-		// TODO: start in background thread ?
+		// TODO: start in background thread !!!!!
+		
 		// Activated services from user defaults
 		NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 		NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
@@ -37,8 +39,17 @@
 				
 				if ([[service objectForKey:@"enabled"] boolValue] != NO) {
 					// activate service
-					if ([service objectForKey:@"username"] != nil && [service objectForKey:@"password"] != nil) {
-						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:[service objectForKey:@"password"] error:nil];
+					
+					// Get password for service
+					NSError *error = nil;
+					NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceKey];
+					NSString *password = [SFHFKeychainUtils getPasswordForUsername:[service objectForKey:@"username"] andServiceName:serviceName error:&error];
+					if (error != nil) {
+						DLog(@"Error while saving to keychain: %@.", error);
+					}
+					
+					if ([service objectForKey:@"username"] != nil && error == nil) {
+						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
 						DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
 						// TODO: if not successful try later with timer or deactivate service automatically ?
 					}
@@ -75,7 +86,15 @@
 		}
 	}
 	
-	DLog(@"Service activated: %i, error: %@", returnValue, [*anError localizedDescription]);
+	if (returnValue == NO) {
+		DLog(@"Service not enabled: %@.", *anError);
+	}
+	else {
+		DLog(@"Service enabled.");
+	}
+	
+	// Remove password from memory
+	service.pwd = nil;
 	
 	return returnValue;
 }
