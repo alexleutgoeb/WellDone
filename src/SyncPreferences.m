@@ -122,7 +122,13 @@
 		return NSLocalizedString(service.identifier, @"The service identifier string.");
 	}
 	else if ([columnId isEqualToString:@"status"]) {
-		return @"";
+		if (service.isEnabled != NO) {
+			return @"Last sync: Never";
+		}
+		else {
+			return @"";
+		}
+
 	}
 	else {
 		return nil;
@@ -147,7 +153,8 @@
 				
 				SyncController *sc = [[NSApp delegate] sharedSyncController];
 				[textField_overview setStringValue:[NSString stringWithFormat:@"%i service(s), %i active", sc.servicesCount, sc.activeServicesCount]];
-
+				[aTableView reloadData];
+				
 				// flag service in userdefaults as inactive
 				NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 				
