@@ -114,7 +114,7 @@
 		return [NSImage imageNamed:[NSString stringWithFormat:@"%@.png", service.identifier]];
 	}
 	else if ([columnId isEqualToString:@"name"]) {
-		return service.identifier;
+		return NSLocalizedString(service.identifier, @"The service identifier string.");
 	}
 	else if ([columnId isEqualToString:@"status"]) {
 		return @"";
