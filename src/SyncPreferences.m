@@ -37,7 +37,7 @@
 	[cell release];
 	
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
-	[textField_overview setStringValue:[NSString stringWithFormat:@"%i accounts, %i active", sc.servicesCount, sc.activeServicesCount]];
+	[textField_overview setStringValue:[NSString stringWithFormat:@"%i service(s), %i active", sc.servicesCount, sc.activeServicesCount]];
 	
 	[tableView_accountList sizeToFit];
 }
@@ -146,7 +146,7 @@
 				DLog(@"Deactivation successful.");
 				
 				SyncController *sc = [[NSApp delegate] sharedSyncController];
-				[textField_overview setStringValue:[NSString stringWithFormat:@"%i accounts, %i active", sc.servicesCount, sc.activeServicesCount]];
+				[textField_overview setStringValue:[NSString stringWithFormat:@"%i service(s), %i active", sc.servicesCount, sc.activeServicesCount]];
 
 				// flag service in userdefaults as inactive
 				NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
