@@ -36,6 +36,9 @@
 	[[tableView_accountList tableColumnWithIdentifier:@"name"] setDataCell:cell];
 	[cell release];
 	
+	SyncController *sc = [[NSApp delegate] sharedSyncController];
+	[textField_overview setStringValue:[NSString stringWithFormat:@"%i accounts, %i active", sc.servicesCount, sc.activeServicesCount]];
+	
 	[tableView_accountList sizeToFit];
 }
 
@@ -83,6 +86,8 @@
 - (void)editServiceSheetDidEndForService:(NSString *)serviceId withSuccess:(BOOL)success {
 	if (success != NO) {
 		// TODO: check for remote objects to delete
+		SyncController *sc = [[NSApp delegate] sharedSyncController];
+		[textField_overview setStringValue:[NSString stringWithFormat:@"%i service(s), %i active", sc.servicesCount, sc.activeServicesCount]];
 	}
 }
 
@@ -139,6 +144,10 @@
 			
 			if (success != NO) {
 				DLog(@"Deactivation successful.");
+				
+				SyncController *sc = [[NSApp delegate] sharedSyncController];
+				[textField_overview setStringValue:[NSString stringWithFormat:@"%i accounts, %i active", sc.servicesCount, sc.activeServicesCount]];
+
 				// flag service in userdefaults as inactive
 				NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 				
