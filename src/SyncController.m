@@ -14,7 +14,7 @@
 
 @implementation SyncController
 
-@synthesize syncServices;
+@synthesize syncServices, activeServicesCount;
 
 - (id)init {
 	if (self = [super init]) {
@@ -23,6 +23,7 @@
 		syncQueue = [[NSOperationQueue alloc] init];
 		// Set operation count to 1, so that max 1 sync is active
 		[syncQueue setMaxConcurrentOperationCount:1];
+		activeServicesCount = 0;
 		
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
@@ -70,6 +71,10 @@
 	[super dealloc];
 }
 
+- (NSInteger)servicesCount {
+	return [syncServices count];
+}
+
 - (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser pwd:(NSString *)aPwd error:(NSError **)anError {
 	BOOL returnValue = NO;
 	
@@ -91,6 +96,7 @@
 	}
 	else {
 		DLog(@"Service enabled.");
+		activeServicesCount++;
 	}
 	
 	// Remove password from memory
@@ -109,6 +115,7 @@
 		[syncManager unregisterSyncService:service.api];
 		returnValue = YES;
 		DLog(@"Service deactivated.");
+		activeServicesCount--;
 	}
 	else {
 		DLog(@"Service not found, nothing to do, returning NO.");

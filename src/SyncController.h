@@ -54,12 +54,25 @@
 	
 	// queue for sync operations
 	NSOperationQueue *syncQueue;
+	
+	// counter for active services
+	NSInteger activeServicesCount;
 }
 
 /**
- Getter for a list of all available syncServices.
+ Getter for a list of all available sync services.
  */
 @property(nonatomic, readonly) NSMutableDictionary *syncServices;
+
+/**
+ Returns the number of available sync services.
+ */
+@property(nonatomic, readonly) NSInteger servicesCount;
+
+/**
+ Returns the number of active sync services.
+ */
+@property(nonatomic, readonly) NSInteger activeServicesCount;
 
 /**
  Enables a syncService in the sync controller.
