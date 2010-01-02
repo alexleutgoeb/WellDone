@@ -12,6 +12,13 @@
 #import "TDApi.h"
 #import "SFHFKeychainUtils.h"
 
+@interface SyncController ()
+
+- (void)enableAllServices;
+
+@end
+
+
 @implementation SyncController
 
 @synthesize syncServices, activeServicesCount;
@@ -29,35 +36,8 @@
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
 		
 		// TODO: start in background thread !!!!!
-		
-		// Activated services from user defaults
-		NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
-		NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
-		
-		if (defaultServices != nil) {
-			for (NSString *serviceKey in [defaultServices allKeys]) {
-				NSDictionary *service = [defaultServices objectForKey:serviceKey];
-				
-				if ([[service objectForKey:@"enabled"] boolValue] != NO) {
-					// activate service
-					
-					// Get password for service
-					NSError *error = nil;
-					NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceKey];
-					NSString *password = [SFHFKeychainUtils getPasswordForUsername:[service objectForKey:@"username"] andServiceName:serviceName error:&error];
-					if (error != nil) {
-						DLog(@"Error while saving to keychain: %@.", error);
-					}
-					
-					if ([service objectForKey:@"username"] != nil && error == nil) {
-						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
-						DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
-						// TODO: if not successful try later with timer or deactivate service automatically ?
-					}
-				}
-			}
-		}
-		
+		NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(enableAllServices) object:nil];
+		[syncQueue addOperation:op];
 	}
 	return self;
 }
@@ -69,6 +49,36 @@
 	[syncServices removeAllObjects];
 	[syncServices release];
 	[super dealloc];
+}
+
+- (void)enableAllServices {
+	// Activated services from user defaults
+	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
+	
+	if (defaultServices != nil) {
+		for (NSString *serviceKey in [defaultServices allKeys]) {
+			NSDictionary *service = [defaultServices objectForKey:serviceKey];
+			
+			if ([[service objectForKey:@"enabled"] boolValue] != NO) {
+				// activate service
+				
+				// Get password for service
+				NSError *error = nil;
+				NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceKey];
+				NSString *password = [SFHFKeychainUtils getPasswordForUsername:[service objectForKey:@"username"] andServiceName:serviceName error:&error];
+				if (error != nil) {
+					DLog(@"Error while saving to keychain: %@.", error);
+				}
+				
+				if ([service objectForKey:@"username"] != nil && error == nil) {
+					BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
+					DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
+					// TODO: if not successful try later with timer or deactivate service automatically ?
+				}
+			}
+		}
+	}
 }
 
 - (NSInteger)servicesCount {
