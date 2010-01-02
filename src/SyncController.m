@@ -143,7 +143,9 @@
 	[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
 	
 	// call syncmanager in background thread
-	
+	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startSync:) object:context];
+	[syncQueue addOperation:op];
+	[context release];
 	
 	// after completion save and inform delegate
 
@@ -158,6 +160,10 @@
 	else {
 		
 	}
+}
+
+- (void)startSync:(NSManagedObjectContext *)moc {
+	// TODOD: start syncmanager
 }
 
 @end
