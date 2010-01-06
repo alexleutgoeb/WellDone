@@ -20,6 +20,15 @@
 	NSMutableArray *_roots;
 }
 
+- (void) initializeRootNodes;
+- (void) initFolderListFromStore;
+- (void) saveChangesToStore;
+- (void) reactToMOCSave:(NSNotification *)notification;
+- (void) addFolder:(Folder *)folder toSection:(NSString *)section;
+- (void) addMultipleNewFolderEntities: (NSArray *) folders toSection:(NSString *)section;
+- (void) removeFolderFromView:(Folder *) folder;
+- (void) saveOrderingToStore;
+
 // Set Default Item Clicked Handler
 - (void)setDefaultAction:(SEL)action target:(id)target;
 
@@ -112,9 +121,6 @@
 - (void)setBadge:(id)key count:(NSInteger)badgeValue;
 - (void)unsetBadge:(id)key;
 
-- (void) initializeRootNodes;
-- (void) reactToMOCUpdate:(NSNotification *)notification;
-- (void) addNewFolderEntity:(Folder *)folder toSection:(NSString *)section;
-- (void) removeFolderEntity:(Folder *) folder;
+
 @end
 

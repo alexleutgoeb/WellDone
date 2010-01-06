@@ -59,4 +59,6 @@
 
 - (BOOL)isDraggable;
 
+- (NSEnumerator *)childrenEnumeration;
+
 @end

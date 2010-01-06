@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="885"/>
 			<integer value="29"/>
+			<integer value="21"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -62,7 +62,7 @@
 					<characters key="NS.bytes">View</characters>
 				</object>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
-				<string key="NSWindowContentMinSize">{600, 300}</string>
+				<string key="NSWindowContentMinSize">{700, 400}</string>
 				<object class="NSView" key="NSWindowView" id="823886803">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">4370</int>
@@ -611,7 +611,7 @@
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
-				<string key="NSMinSize">{600, 322}</string>
+				<string key="NSMinSize">{700, 422}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<double key="NSContentBorderThicknessMaxY">100</double>
 			</object>
@@ -4297,7 +4297,7 @@
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{600, 300}</string>
+					<string>{700, 400}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{610, 1023}, {194, 73}}</string>

@@ -33,6 +33,11 @@
 	[child1 setValue:parent1 forKey:@"parentTask"];
 	[child2 setValue:parent2 forKey:@"parentTask"];
 	[child3 setValue:parent3 forKey:@"parentTask"];
+	
+	NSError *error;
+	if (![moc save:&error]) {
+        NSLog(@"Error while generating tasks:%@",error);
+    }
 }
 
 - (void) generateTags:(id)sender {
@@ -42,6 +47,11 @@
 	[self createFolder:@"Test Folder 1"];
 	[self createFolder:@"Test Folder 2"];
 	[self createFolder:@"Test Folder 3"];
+	
+	NSError *error;
+	if (![moc save:&error]) {
+        NSLog(@"Error while generating folders:%@",error);
+    }
 }
 
 - (void) deleteAll:(id)sender {

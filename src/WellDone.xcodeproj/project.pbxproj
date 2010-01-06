@@ -72,7 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FA56E42210E51BC500228C43 /* PBXContainerItemProxy */ = {
+		6FC984D510F34D7000CF16A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 2;
@@ -495,7 +495,7 @@
 				FABE3FEA10C1A869000D72E9 /* libToodledoAPI.a */,
 				FA649BF510C30D790051F758 /* libToodledoAPIMac.a */,
 				FABE3FEC10C1A869000D72E9 /* UnitTests.octest */,
-				FA56E42310E51BC500228C43 /* liblibToodledoAPIiPhone.a */,
+				6FC984D610F34D7000CF16A3 /* liblibToodledoAPIiPhone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -590,11 +590,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		FA56E42310E51BC500228C43 /* liblibToodledoAPIiPhone.a */ = {
+		6FC984D610F34D7000CF16A3 /* liblibToodledoAPIiPhone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = liblibToodledoAPIiPhone.a;
-			remoteRef = FA56E42210E51BC500228C43 /* PBXContainerItemProxy */;
+			remoteRef = 6FC984D510F34D7000CF16A3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		FA649BF510C30D790051F758 /* libToodledoAPIMac.a */ = {

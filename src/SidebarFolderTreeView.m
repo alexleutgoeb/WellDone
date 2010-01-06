@@ -17,14 +17,19 @@
 @implementation SidebarFolderTreeView
 
 /* ============================================================================
- *  PUBLIC Constructors/Distructors
+ *  Constructors/Distructors
  */
+
 - (void)dealloc {
 	[_contents release];
 	[_roots release];
 	
 	[super dealloc];
 }
+
+/* ============================================================================
+ *  Initializing Code, should be run when view is instantiated
+ */
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	self = [super initWithCoder:decoder];
@@ -51,57 +56,85 @@
 	// Insert initial root nodes
 	[self initializeRootNodes];
 	
+	// Insert nodes from persistent store
+	[self initFolderListFromStore];
+	
 	// Initialize listening to notifications by managedObjectContext
 	NSNotificationCenter *nc;
 	nc = [NSNotificationCenter defaultCenter];
 	
 	[nc addObserver:self
-		   selector:@selector(reactToMOCUpdate:)
-			   name:NSManagedObjectContextObjectsDidChangeNotification
+		   selector:@selector(reactToMOCSave:)
+			   name:NSManagedObjectContextDidSaveNotification
 			 object:nil];
 	
 	return self;
 }
 
 /*
- * Initialize all root nodes which group items in the source list view.
-*/
-- (void) initializeRootNodes {
-	[self addSection:rootNodeTaskFolders caption:@"FOLDERS"];
-	
-	/*
-	NSManagedObjectContext * moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
-
-	
+ * Initialize the folder list from the store.
+ */
+- (void)initFolderListFromStore {
+	NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 	NSEntityDescription *entityDescription = [NSEntityDescription
 											  entityForName:@"Folder" inManagedObjectContext:moc];
+	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+	[request setEntity:entityDescription];
 	
-		
-	Folder *folder = [[Folder alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-	folder.name =@"TestFolder";
-	[self addNewFolderEntity:folder toSection:rootNodeTaskFolders];
-	*/
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+										initWithKey:@"order" ascending:YES];
+	[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 	
-	[self reloadData];
-	[self expandItem:rootNodeTaskFolders];
+	NSError *error;
+	NSArray *folders = [moc executeFetchRequest:request error:&error];
+	if (folders == nil)
+	{
+		// TODO: Deal with error...
+	}
+	[self addMultipleNewFolderEntities:folders toSection:rootNodeTaskFolders];
 	
-	//TODO: Insert more sections
 }
 
 /*
- * This method will be called when any update is done to the managedObjectContext.
+ * Initialize all root nodes which group items in the source list view.
+ */
+- (void) initializeRootNodes {
+	[self addSection:rootNodeTaskFolders caption:@"FOLDERS"];
+	[self reloadData];
+	
+	// Expand all sections' nodes
+	[self expandItem:rootNodeTaskFolders];
+	
+	//TODO: Insert missing sections (intelligent search queries,...)
+}
+
+/* ============================================================================
+ *  General Controller methods 
+ */
+
+/*
+ * Save all changes done to managed objects into the persistent store.
+ */
+- (void) saveChangesToStore {
+	NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+	NSError *error;
+	if (![moc save:&error]) {
+		NSLog(@"Error saving changes - error:%@",error);
+	}
+}
+
+/*
+ * This method will be called when a save-operatoin is done to the main managedObjectContext (central application delegate's moc).
  * It reacts to some of these changes with updates to the folder tree view.
 */
-- (void) reactToMOCUpdate:(NSNotification *)notification {
-	//NSEnumerator *enumerator = [[notification object]
-	//							objectEnumerator];
+- (void) reactToMOCSave:(NSNotification *)notification {
 	id object;
 	NSDictionary *userInfo = [notification userInfo];
 	
 	NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
 	while (object = [updatedObjects nextObject]) {
 		if ([object isKindOfClass: [Folder class]]) {
-			NSLog(@"Updated Folder with name: %@", [object name]);
+			NSLog(@"NYI: Will update Folder with name: %@", [object name]);
 			// TODO: handle updated objects
 			// TODO: handle deleted objects (flag: delete), they are not really deleted until synchronisation
 		}
@@ -110,8 +143,8 @@
 	NSEnumerator *insertedObjects = [[userInfo objectForKey:NSInsertedObjectsKey] objectEnumerator];
 	while (object = [insertedObjects nextObject]) {
 		if ([object isKindOfClass: [Folder class]]) {
-			NSLog(@"Inserted Folder with name: %@", [object name]);
-			[self addNewFolderEntity:object toSection:rootNodeTaskFolders];
+			NSLog(@"Will insert Folder with name: %@", [object name]);
+			[self addFolder:object toSection:rootNodeTaskFolders];
 			[self reloadData];			
 		}
 	}
@@ -119,27 +152,118 @@
 	NSEnumerator *deletedObjects = [[userInfo objectForKey:NSDeletedObjectsKey] objectEnumerator];
 	while (object = [deletedObjects nextObject]) {
 		if ([object isKindOfClass: [Folder class]]) {
-			NSLog(@"Deleted Folder with name: %@", [object name]);
-			[self removeFolderEntity: object];
+			NSLog(@"Will delete Folder with name: %@", [object name]);
+			[self removeFolderFromView: object];
+			[self reloadData];	
 		}
 	}
 }
 
-- (void) addNewFolderEntity:(Folder *) folder toSection:(NSString *)section {
+/*
+ * Save all folders' orderings which are children of rootNodeTaskFolders (see header) to the store
+ */
+- (void) saveOrderingToStore {
+	SidebarFolderNode *parentNode = [_contents objectForKey:rootNodeTaskFolders];
+	NSEnumerator *childrenEnum = [parentNode childrenEnumeration];
+	id child;
+	int counter = 0;
+	while (child = [childrenEnum nextObject]) {
+		counter++;
+		if ([child isKindOfClass: [SidebarFolderNode class]]) {
+			SidebarFolderNode *node = child;
+			NSLog(@"Will save order for folder node: %@", [node caption]);
+			Folder *currentListFolder = [node data];
+			[currentListFolder setOrder: [[NSNumber alloc] initWithInt: counter]];
+		}
+	}
+	[self saveChangesToStore];
+	
+}
+
+/*
+ * CURRENTLY NOT IN USE!
+ * Takes a given folder. If it has an ordering value of 0, it is seen as unordered, and it is assigned a new ordering value,
+ * which is maximum(all order numbers)+1
+ */
+- (void) fixOrderingForFolder:(Folder *)folder doSave:(BOOL)performSave {
+	if ([folder order] != nil) {
+		NSNumber *orderNumber = [folder order];
+		if ([orderNumber intValue] == 0) {
+			NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+			NSEntityDescription *entityDescription = [NSEntityDescription
+													  entityForName:@"Folder" inManagedObjectContext:moc];
+			NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+			[request setEntity:entityDescription];
+			
+			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+												initWithKey:@"order" ascending:NO];
+			[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+			[request setFetchLimit:1];
+			NSError *error;
+			NSArray *folders = [moc executeFetchRequest:request error:&error];
+			if (folders == nil)
+			{
+				// TODO: Deal with error...
+			}
+			//Get folder with the highest order count
+			Folder *lastFolder = [folders lastObject];
+			int newOrder;
+			if (lastFolder == nil) {
+				newOrder = 1;
+			}
+			else {
+				newOrder = [[lastFolder order] intValue]+1;
+			}
+			
+			NSNumber *newOrderNumber = [[NSNumber alloc] initWithInt:newOrder];
+			[folder setOrder:newOrderNumber];
+			
+			if(performSave) {
+				[self saveChangesToStore];
+			}
+		}
+	}
+}
+
+/*
+ * Adds a new folder to the given section. The folder entity has to provide a persistent id, or else
+ * it will not be added (entity has to have been saved at least once in the moc).
+ */
+- (void) addFolder:(Folder *) folder toSection:(NSString *)section {
 	if([[folder objectID] isTemporaryID] == YES) {
 		NSLog(@"New Folder has temporary objectid!");
+		return;
 	}
 	
 	[self addChild:section 
-			 key:[folder name]  // TODO: change to real unique key!
+			 key:[folder objectID]
 			 caption:[folder name]
-			 icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]
+			 icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]	
+			 data: folder
 			 action:@selector(buttonPres:) 
 			 target:self];
 }
 
-- (void) removeFolderEntity:(Folder *) folder {
-	[self removeItem: [folder name]];  // TODO: change to real unique key!
+/*
+ * Adds multiple folders to the given section. At the end, a reload command is sent so the list reloads all nodes.
+ */
+- (void) addMultipleNewFolderEntities: (NSArray *) folders toSection:(NSString *)section {
+	id folder;
+	NSEnumerator *folderEnumerator = [folders objectEnumerator];
+	while (folder = [folderEnumerator nextObject]) {
+		if ([folder isKindOfClass: [Folder class]]) {
+			NSLog(@"Will insert Folder with name: %@", [folder name]);
+			[self addFolder:folder toSection:section];			
+		}
+	}
+	[self reloadData];
+}
+
+/*
+ * Removes the given folder from the view.
+ */
+- (void) removeFolderFromView:(Folder *) folder {
+	[self removeItem: [folder objectID]];
 }
 
 - (void)setDefaultAction:(SEL)action target:(id)target {
@@ -148,7 +272,11 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Add Root Folder)
+ *  Add Root Folder to View
+ */
+
+/*
+ * Adds a new root folder (node) to the view.
  */
 - (void)addSection:(id)key
 		   caption:(NSString *)folderCaption
@@ -169,8 +297,9 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Add Child)
+ *  Add Child(ren) Folder to View
  */
+
 - (void)addChild:(id)parentKey
 			 key:(id)key
 			 url:(NSString *)url
@@ -255,9 +384,9 @@
 	[node setNodeKey:key];
 	
 	// Add Node as Child of Root Node
-	SidebarFolderNode *rootNode = [_contents objectForKey:parentKey];
-	if (rootNode != nil)
-		[rootNode addChild:node];
+	SidebarFolderNode *parentNode = [_contents objectForKey:parentKey];
+	if (parentNode != nil)
+		[parentNode addChild:node];
 	else
 		[_roots addObject:node];
 	
@@ -270,7 +399,7 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Insert Child)
+ *  Insert Child Folder to View
  */
 - (void)insertChild:(id)parentKey
 				key:(id)key
@@ -327,9 +456,9 @@
 	[node setNodeKey:key];
 	
 	// Add Node as Child of Root Node
-	SidebarFolderNode *rootNode = [_contents objectForKey:parentKey];
-	if (rootNode != nil)
-		[rootNode insertChild:node atIndex:index];
+	SidebarFolderNode *parentNode = [_contents objectForKey:parentKey];
+	if (parentNode != nil)
+		[parentNode insertChild:node atIndex:index];
 	else
 		[_roots addObject:node];
 	
@@ -339,8 +468,9 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Remove Items)
+ *  Remove Items from View
  */
+
 - (void)removeItem:(id)key {
 	SidebarFolderNode *node = [_contents objectForKey:key];
 	if (node == nil) return;
@@ -369,8 +499,9 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Selection)
+ *  Selection of Items
  */
+
 - (SidebarFolderNode *)selectedNode {
 	return([self itemAtRow:[self selectedRow]]);
 }
@@ -387,8 +518,9 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Expand/Collapse)
+ *  Expand/Collapse of Items
  */
+
 - (void)expandAll {
 	[super expandItem:nil expandChildren:YES];
 }
@@ -438,7 +570,7 @@
 }
 
 /* ============================================================================
- *  PUBLIC Methods (Badges)
+ *  Badges
  */
 - (void)setBadge:(id)key count:(NSInteger)badgeValue {
 	SidebarFolderNode *node = [_contents objectForKey:key];
@@ -451,11 +583,13 @@
 }
 
 /* ============================================================================
- *  PRIVATE Data Source Delegates
+ *  Delegate: Data Source
  */
 
-// The child item at index of a item. 
-// If item is nil, returns the appropriate child item of the root object.
+/*
+ * The child item at index of a item. 
+ * If item is nil, returns the appropriate child item of the root object.
+ */ 
 - (id)outlineView:(NSOutlineView *)outlineView 
 			child:(NSInteger)index
 		   ofItem:(id)item
@@ -465,22 +599,28 @@
 	return [item childAtIndex:index];
 }
 
-// Returns a Boolean value that indicates whether in a given item is expandable.
+/*
+ * Returns a Boolean value that indicates whether in a given item is expandable.
+ */
 - (BOOL)outlineView:(NSOutlineView *)outlineView
    isItemExpandable:(id)item
 {
 	return((item == nil) ? NO : [item nodeType] != kSidebarNodeTypeItem);
 }
 
-// Returns the number of child items encompassed by a given item.
+/*
+ * Returns the number of child items encompassed by a given item.
+ */
 - (NSInteger)outlineView:(NSOutlineView *)outlineView
   numberOfChildrenOfItem:(id)item
 {
 	return((item == nil) ? [_roots count] : [item numberOfChildren]);
 }
 
-// Invoked by outlineView to return the data object 
-// associated with the specified item.
+/*
+ * Invoked by outlineView to return the data object 
+ * associated with the specified item.
+ */
 - (id)outlineView:(NSOutlineView *)outlineView
 objectValueForTableColumn:(NSTableColumn *)tableColumn
 		   byItem:(id)item
@@ -489,8 +629,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 }
 
 /* ============================================================================
- *  PRIVATE Delegates
+ * Delegate: NSOutlineView 
  */
+
 - (BOOL)outlineView:(NSOutlineView *)outlineView
    shouldSelectItem:(id)item
 {
@@ -508,7 +649,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 shouldEditTableColumn:(NSTableColumn *)tableColumn
 			   item:(id)item
 {
-	return NO;
+	return YES;
 }
 
 -(BOOL)outlineView:(NSOutlineView*)outlineView
@@ -554,9 +695,35 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	return([[fieldEditor string] length] > 0);
 }
 
+- (void)outlineView:(NSOutlineView *)outlineView 
+	 setObjectValue:(id)object 
+	 forTableColumn:(NSTableColumn *)tableColumn 
+			 byItem:(id)item {
+	
+	if ([item isKindOfClass: [SidebarFolderNode class]]) {
+		NSLog(@"Will save new name for folder: %@", [item caption]);
+		
+		if ([item data] != nil && [[item data] isKindOfClass: [Folder class]]) {
+			SidebarFolderNode *node = item;
+			Folder *folderToChange = [node data];
+			[folderToChange setName:object];
+			[self saveChangesToStore];
+			
+			// Set caption on folder node in view
+			[node setCaption:object];
+		}
+		
+
+	}
+	
+
+
+}
+
 /* ============================================================================
- *  PRIVATE Delegates (Drag & Drop)
+ *  Delegate: Drag & Drop
  */
+
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
 	return NSDragOperationMove;
 }
@@ -573,25 +740,36 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	return YES;
 }
 
+/*
+ * Checks, wether the proposed drag destination is ok for a dragged item.
+ * Currently, only drags to the root node are disabled.
+ */
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView
                   validateDrop:(id<NSDraggingInfo>)info
                   proposedItem:(id)item
             proposedChildIndex:(NSInteger)index
 {
-	if (item == nil)
-		return NSDragOperationGeneric;
-	
-	if (![item isDraggable] && index >= 0)
+
+	if (item == nil) {
+		//NSLog(@"Tried to drag item to root note - won't let that happen...");
+		return NSDragOperationNone;
+	}
+	//NSLog(@"proposedItem: %@", [item caption]);
+	if (![item isDraggable] && index >= 0) {
 		return NSDragOperationMove;
-	
+	}
+		
 	return NSDragOperationNone;
 }
 
+/*
+ * This is called when a drag&drop operation is ended (user releases mouse). Currently, only drags within the outline view
+ * are handled.
+ */
 - (BOOL)outlineView:(NSOutlineView*)outlineView
 		 acceptDrop:(id<NSDraggingInfo>)info
 			   item:(id)targetItem
-		 childIndex:(NSInteger)index
-{
+		 childIndex:(NSInteger)index {
 	NSPasteboard *pboard = [info draggingPasteboard];	// get the pasteboard
 	
 	// user is doing an intra-app drag within the outline view
@@ -623,6 +801,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 			} else {
 				[_roots insertObject:node atIndex:index];
 			}
+			[self saveOrderingToStore];
 		}
 		
 		[self reloadData];
@@ -634,8 +813,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 
 - (NSUInteger)hitTestForEvent:(NSEvent *)event
 					   inRect:(NSRect)cellFrame
-					   ofView:(NSView *)controlView
-{
+					   ofView:(NSView *)controlView {
 	if ([controlView isKindOfClass:[SidebarFolderTreeView class]]) {
 		SidebarFolderTreeView *sidebar = (SidebarFolderTreeView *) controlView;
 		SidebarFolderNode *node = [sidebar selectedNode];
@@ -646,7 +824,14 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	return NSCellHitContentArea;
 }
 
-- (void)drawRect:(NSRect)rect{
+/* ============================================================================
+ *  Custom Drawing
+ */
+
+/*
+ * Set better apple-matching colors.
+ */
+- (void)drawRect:(NSRect)rect {
 	BOOL isWindowFront = [[NSApp mainWindow] isVisible];
 	if(isWindowFront){
 		[self setBackgroundColor:[NSColor colorWithCalibratedRed:214.0/255.0 green:221.0/255.0 blue:229.0/255.0 alpha:1.0]];

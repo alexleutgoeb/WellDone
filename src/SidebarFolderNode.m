@@ -88,4 +88,8 @@
 	return(nodeType != kSidebarNodeTypeSection);
 }
 
+- (NSEnumerator *)childrenEnumeration {
+	return [children objectEnumerator];
+}
+
 @end
