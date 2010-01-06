@@ -20,14 +20,14 @@
 	NSMutableArray *_roots;
 }
 
-- (void) initializeRootNodes;
+- (void) initRootNodes;
 - (void) initFolderListFromStore;
 - (void) saveChangesToStore;
 - (void) reactToMOCSave:(NSNotification *)notification;
 - (void) addFolder:(Folder *)folder toSection:(NSString *)section;
-- (void) addMultipleNewFolderEntities: (NSArray *) folders toSection:(NSString *)section;
-- (void) removeFolderFromView:(Folder *) folder;
-- (void) saveOrderingToStore;
+- (void) addFolders: (NSArray *) folders toSection:(NSString *)section;
+- (void) removeFolder:(Folder *) folder;
+- (void) saveFolderOrderingToStore;
 
 // Set Default Item Clicked Handler
 - (void)setDefaultAction:(SEL)action target:(id)target;

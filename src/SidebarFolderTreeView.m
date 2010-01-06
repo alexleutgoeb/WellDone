@@ -54,7 +54,7 @@
 	[self setDelegate:self];
 	
 	// Insert initial root nodes
-	[self initializeRootNodes];
+	[self initRootNodes];
 	
 	// Insert nodes from persistent store
 	[self initFolderListFromStore];
@@ -91,14 +91,14 @@
 	{
 		// TODO: Deal with error...
 	}
-	[self addMultipleNewFolderEntities:folders toSection:rootNodeTaskFolders];
+	[self addFolders:folders toSection:rootNodeTaskFolders];
 	
 }
 
 /*
  * Initialize all root nodes which group items in the source list view.
  */
-- (void) initializeRootNodes {
+- (void) initRootNodes {
 	[self addSection:rootNodeTaskFolders caption:@"FOLDERS"];
 	[self reloadData];
 	
@@ -153,7 +153,7 @@
 	while (object = [deletedObjects nextObject]) {
 		if ([object isKindOfClass: [Folder class]]) {
 			NSLog(@"Will delete Folder with name: %@", [object name]);
-			[self removeFolderFromView: object];
+			[self removeFolder: object];
 			[self reloadData];	
 		}
 	}
@@ -162,7 +162,7 @@
 /*
  * Save all folders' orderings which are children of rootNodeTaskFolders (see header) to the store
  */
-- (void) saveOrderingToStore {
+- (void) saveFolderOrderingToStore {
 	SidebarFolderNode *parentNode = [_contents objectForKey:rootNodeTaskFolders];
 	NSEnumerator *childrenEnum = [parentNode childrenEnumeration];
 	id child;
@@ -247,7 +247,7 @@
 /*
  * Adds multiple folders to the given section. At the end, a reload command is sent so the list reloads all nodes.
  */
-- (void) addMultipleNewFolderEntities: (NSArray *) folders toSection:(NSString *)section {
+- (void) addFolders: (NSArray *) folders toSection:(NSString *)section {
 	id folder;
 	NSEnumerator *folderEnumerator = [folders objectEnumerator];
 	while (folder = [folderEnumerator nextObject]) {
@@ -262,7 +262,7 @@
 /*
  * Removes the given folder from the view.
  */
-- (void) removeFolderFromView:(Folder *) folder {
+- (void) removeFolder:(Folder *) folder {
 	[self removeItem: [folder objectID]];
 }
 
@@ -801,7 +801,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 			} else {
 				[_roots insertObject:node atIndex:index];
 			}
-			[self saveOrderingToStore];
+			[self saveFolderOrderingToStore];
 		}
 		
 		[self reloadData];
