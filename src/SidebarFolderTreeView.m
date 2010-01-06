@@ -16,16 +16,6 @@
 
 @implementation SidebarFolderTreeView
 
-/* ============================================================================
- *  Constructors/Distructors
- */
-
-- (void)dealloc {
-	[_contents release];
-	[_roots release];
-	
-	[super dealloc];
-}
 
 /* ============================================================================
  *  Initializing Code, should be run when view is instantiated
@@ -78,7 +68,7 @@
 	NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 	NSEntityDescription *entityDescription = [NSEntityDescription
 											  entityForName:@"Folder" inManagedObjectContext:moc];
-	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:entityDescription];
 	
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
@@ -192,7 +182,7 @@
 			NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 			NSEntityDescription *entityDescription = [NSEntityDescription
 													  entityForName:@"Folder" inManagedObjectContext:moc];
-			NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+			NSFetchRequest *request = [[NSFetchRequest alloc] init];
 			[request setEntity:entityDescription];
 			
 			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
@@ -293,7 +283,7 @@
 	// Add Object to List
 	[_contents setObject:node forKey:key];
 	[_roots addObject:node];
-	[node release];
+	//[node release];
 }
 
 /* ============================================================================
@@ -395,7 +385,7 @@
 	// Add Object to List
 	[_contents setObject:node forKey:key];
 
-	[node release];
+	//[node release];
 }
 
 /* ============================================================================
@@ -464,7 +454,7 @@
 	
 	// Add Object to List
 	[_contents setObject:node forKey:key];
-	[node release];
+	//[node release];
 }
 
 /* ============================================================================
