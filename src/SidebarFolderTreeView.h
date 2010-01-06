@@ -101,7 +101,6 @@
 // Remove Methods
 - (void)removeItem:(id)key;
 - (void)removeChild:(id)key;
-- (void)removeFolder:(id)key;
 - (void)removeSection:(id)key;
 
 // Selection Methods

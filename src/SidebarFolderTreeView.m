@@ -490,10 +490,6 @@
 	[self removeItem:key];
 }
 
-- (void)removeFolder:(id)key {
-	[self removeItem:key];
-}
-
 - (void)removeSection:(id)key {
 	[self removeItem:key];
 }
