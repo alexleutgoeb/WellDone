@@ -37,6 +37,7 @@
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 - (NSMenu *)createStatusBarMenu;
+- (void)quitApp:(id)sender;
 
 @end
 
@@ -487,7 +488,7 @@
 	[menuItem setToolTip:@"Click to open WellDone window"];
 	[menuItem setTarget:self];
 	
-	menuItem = [menu addItemWithTitle:@"New task" action:nil keyEquivalent:@""];
+	menuItem = [menu addItemWithTitle:@"New task" action:@selector(addNewTask:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to add a new task"];
 	[menuItem setTarget:self];
 	
@@ -499,11 +500,15 @@
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	menuItem = [menu addItemWithTitle:@"Quit" action:nil keyEquivalent:@""];
+	menuItem = [menu addItemWithTitle:@"Quit WellDone" action:@selector(quitApp:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to quit WellDone"];
 	[menuItem setTarget:self];
 	
 	return menu;
+}
+
+- (void)quitApp:(id)sender {
+	[[NSApplication sharedApplication] terminate:sender];
 }
 
 
