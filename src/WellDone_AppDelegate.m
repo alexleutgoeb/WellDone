@@ -14,6 +14,7 @@
 #import "FolderManagementController.h"
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
+#import "ContextViewController.h"
 #import "SyncController.h"
 #import "TaskValueTransformer.h"
 #import "SyncPreferences.h"
@@ -130,6 +131,7 @@
 	NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
 	NSAssert(simpleListPlaceholderView != nil, @"Forgot to link the gtdList placeholder view!");
 	NSAssert(sidebarFolderPlaceholderView != nil, @"Forgot to link the sidebarFolder placeholder view!");
+	NSAssert(contextPlaceholderView != nil, @"Forgot to link the context placeholder view!");
 	
 	// When the main window is loaded from nib, we create our children views. This
 	// loads the views from their nibs so we can access their data. Note that in apps
@@ -142,11 +144,13 @@
 	gtdListController = [[GTDListController alloc] init];
 	sidebarTaskController = [[SidebarTaskController alloc] init];
 	sidebarFolderController = [[SidebarFolderController alloc] init];
+	contextViewController = [[ContextViewController alloc] init];
 	
 	// Replace the placeholder views with the actual views from the controllers.
  	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
+	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
 	
 	splitViewDelegate =

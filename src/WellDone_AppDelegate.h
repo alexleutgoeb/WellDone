@@ -16,6 +16,7 @@
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
 #import "PrioritySplitViewDelegate.h"
+#import "ContextViewController.h"
 #import "SS_PrefsController.h"
 
 @class SyncController;
@@ -27,6 +28,7 @@
  	IBOutlet NSView* sidebarTaskPlaceholderView;
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
+	IBOutlet NSView* contextPlaceholderView;
 	
 	IBOutlet NSTextField* quickAddTask;
 	
@@ -42,6 +44,7 @@
 	FolderManagementController* foldermanagementController;
 	TagManagementController* tagmanagementController;
 	ContextManagementController* contextmanagementController;
+	ContextViewController* contextViewController;
 	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;

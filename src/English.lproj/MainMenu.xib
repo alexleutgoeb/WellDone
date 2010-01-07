@@ -22,7 +22,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="948"/>
-			<integer value="21"/>
+			<integer value="892"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2815,6 +2815,14 @@
 					</object>
 					<int key="connectionID">973</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">contextPlaceholderView</string>
+						<reference key="source" ref="612578685"/>
+						<reference key="destination" ref="912414122"/>
+					</object>
+					<int key="connectionID">974</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -4560,7 +4568,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">973</int>
+			<int key="maxID">974</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4631,6 +4639,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>contextPlaceholderView</string>
 							<string>foldermanagement</string>
 							<string>quickAddTask</string>
 							<string>sidebarFolderPlaceholderView</string>
@@ -4641,6 +4650,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSView</string>
 							<string>NSPanel</string>
 							<string>NSTextField</string>
 							<string>NSView</string>

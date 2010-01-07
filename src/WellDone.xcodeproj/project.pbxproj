@@ -44,6 +44,8 @@
 		D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D110F48410B8DA6800304B4C /* ContextManagement.xib */; };
 		D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F48B10B8DBDB00304B4C /* ContextManagementController.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
+		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
+		D1B51A7810F690360053C847 /* ContextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B51A7710F690360053C847 /* ContextView.xib */; };
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
@@ -190,6 +192,9 @@
 		D110F48B10B8DBDB00304B4C /* ContextManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextManagementController.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		D164971B10D2E17B00DEB20A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
+		D1B51A7410F68FFE0053C847 /* ContextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextViewController.h; sourceTree = "<group>"; };
+		D1B51A7510F68FFE0053C847 /* ContextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextViewController.m; sourceTree = "<group>"; };
+		D1B51A7710F690360053C847 /* ContextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContextView.xib; sourceTree = "<group>"; };
 		D1ED7EFE10B090020065D79B /* TaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskEditor.xib; sourceTree = "<group>"; };
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
@@ -355,6 +360,7 @@
 				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
 				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
 				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
+				D1B51A7710F690360053C847 /* ContextView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -407,6 +413,8 @@
 				6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */,
 				FA56E4F010E7E2B100228C43 /* ServicePreferencesSheetController.h */,
 				FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */,
+				D1B51A7410F68FFE0053C847 /* ContextViewController.h */,
+				D1B51A7510F68FFE0053C847 /* ContextViewController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -667,6 +675,7 @@
 				FA56E4ED10E7E0C400228C43 /* ServicePreferencesSheet.xib in Resources */,
 				FA56EC0810EBCA9900228C43 /* icon.icns in Resources */,
 				FA56EC6B10EE9CE300228C43 /* Localizable.strings in Resources */,
+				D1B51A7810F690360053C847 /* ContextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +750,7 @@
 				FA56E4F210E7E2B100228C43 /* ServicePreferencesSheetController.m in Sources */,
 				FA56EB9210EBBFC200228C43 /* SFHFKeychainUtils.m in Sources */,
 				42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */,
+				D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
