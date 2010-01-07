@@ -498,6 +498,10 @@
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
+	menuItem = [menu addItemWithTitle:@"Last Sync: Never" action:nil keyEquivalent:@""];
+	[menuItem setToolTip:@"Last successful sync on: Never"];
+	[menuItem setTarget:self];
+	
 	menuItem = [menu addItemWithTitle:@"Sync now" action:nil keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to start the sync"];
 	[menuItem setTarget:self];
