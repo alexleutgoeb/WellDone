@@ -237,54 +237,121 @@
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:aManagedObjectContext];
 	[fetchRequest setEntity:entity];
+	
 	NSArray *localFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
 	
-	BOOL foundRemoteFolder;
+	/*entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	NSArray *remoteFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];*/
+	[fetchRequest release];
+	
+	//now find a corresponding GTDfolder
+	NSMutableArray *gtdFolders = (NSMutableArray *) [syncService getFolders:&error];
+	NSMutableArray *foundGtdFolders = [[NSMutableArray alloc] init];
+	GtdFolder *foundGtdFolder;
+	RemoteFolder *remoteFolder;
+	
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Folder *localFolder in localFolders) {
 		
-		foundRemoteFolder = NO;
 		NSEnumerator *enumerator = [localFolder.remoteFolders objectEnumerator];
 		
-		RemoteFolder *remoteFolder;
+		remoteFolder = nil;
 			
 		while ((remoteFolder = [enumerator nextObject])) {
 			//wenn remoteobject existiert
-			if(remoteFolder.serviceIdentifier == syncService.identifier) foundRemoteFolder = YES;
+			if(remoteFolder.serviceIdentifier == syncService.identifier) break;
+			else remoteFolder = nil;
+		}
+		//now we can safely assume, that each local folder has a remoteFolder
+		//no remoteFolder was found, create one
+		if(remoteFolder == nil) {
+			remoteFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+			remoteFolder.serviceIdentifier = syncService.identifier;
+			remoteFolder.remoteUid = nil;
+			remoteFolder.lastsyncDate = nil;
+			remoteFolder.localFolder = localFolder;
+			NSMutableSet *mutableRemoteFolders = [localFolder mutableSetValueForKey:@"remoteFolders"];
+			[mutableRemoteFolders addObject:remoteFolder];
 		}
 		
-		if(foundRemoteFolder == NO) {
-			RemoteFolder *newRemoteFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
-			newRemoteFolder.serviceIdentifier = syncService.identifier;
-			newRemoteFolder.remoteUid = nil;
-			newRemoteFolder.lastsyncDate = nil;
-			newRemoteFolder.localFolder = localFolder;
-			NSMutableSet *mutableRemoteFolders = [remoteFolder mutableSetValueForKey:@"remoteFolders"];
-			[mutableRemoteFolders addObject:newRemoteFolder];
+		//find gtdfolder
+		foundGtdFolder = nil;
+		for(GtdFolder *gtdFolder in gtdFolders) {
+			if(gtdFolder.uid == [remoteFolder.remoteUid integerValue]) {
+				[foundGtdFolders addObject:gtdFolder];
+				foundGtdFolder = gtdFolder;
+				break;
+			}
+		}
+		
+		if(
+		   (foundGtdFolder == nil && [localFolder.deleted integerValue] != 1) ||
+		   remoteFolder.lastsyncDate == nil ||
+		   remoteFolder.localFolder.modifiedDate > remoteFolder.lastsyncDate
+		   ) {
+			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
+			newGtdFolder.uid = [remoteFolder.remoteUid integerValue];
+			newGtdFolder.title = localFolder.name;
+			if([localFolder.private intValue] == 1)
+				newGtdFolder.private = YES;
+			else newGtdFolder.private = NO;
+			//newGtdFolder.archived = localFolder.archived;
+			newGtdFolder.order = [localFolder.order integerValue];
+			
+			//add new folder if firstsync
+			if(remoteFolder.remoteUid == nil) remoteFolder.remoteUid = [NSNumber numberWithInt:[syncService addFolder:newGtdFolder error:&error]];
+			//overwrite the remote remoteFolder with the local folder
+			else [syncService editFolder:newGtdFolder error:&error];
+		}
+		else if(foundGtdFolder != nil) {
+			localFolder.name = foundGtdFolder.title;
+			if(foundGtdFolder.private == YES) localFolder.private = [NSNumber numberWithInt:1];
+			else localFolder.private = [NSNumber numberWithInt:0];
+			localFolder.order = [NSNumber numberWithInt:foundGtdFolder.order];
 		}
 	}
-	//now we can safely assume, that each local folder has a remoteFolder
-	//get all remote folders
-	/*
-	entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
-	[fetchRequest setEntity:entity];
-	NSArray *rFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	
-	//fetch the remote remoteFolders
-	NSArray *gtdFolders = [syncService getFolders:&error];
-	
-	//TODO implement handling of deleted and newly created folders:
+	//NSMutableArray thxObjC = new NSMutableArray(gtdFolders);
+	//finally durchlaufe die gtdFolder die nicht zuordenbar waren und erzeuge sie lokal
+	[gtdFolders removeObjectsInArray:foundGtdFolders];
+	for(GtdFolder *gtdFolder in gtdFolders) {
+		// Add new entities
+		RemoteFolder *rFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+		Folder *lFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:aManagedObjectContext];
+		
+		// Set entity attributes
+		rFolder.serviceIdentifier = syncService.identifier;
+		rFolder.remoteUid = [NSNumber numberWithInteger:gtdFolder.uid];
+		rFolder.lastsyncDate = [NSDate date];
+		rFolder.localFolder = lFolder;
+		lFolder.name = gtdFolder.title;
+		lFolder.private = [NSNumber numberWithBool:gtdFolder.private];
+		lFolder.order = [NSNumber numberWithInteger:gtdFolder.order];
+	}
+		
 	//zuerst innerhalb einer passenden datenstruktur jedem element aus rFolder das entsprechende element aus gtdFolder zuordnen
 		//falls es zu einem rFolder element keinen gtdFolder gibt:
 			//wenn rFolder.localFolder.deleted != true -> [syncService addFolder]
 		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
 	
 	//foreach remoteFolder
-	for (NSManagedObject *rFolder in rFolders) {
-		if(rFolder.localFolder.modifiedDate > rFolder.lastsyncDate) {
+	/*for (RemoteFolder *rFolder in remoteFolders) {
+		if(rFolder.lastsyncDate == nil || rFolder.localFolder.modifiedDate > rFolder.lastsyncDate) {
+			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
+			newGtdFolder.uid = [rFolder.remoteUid integerValue];
+			newGtdFolder.title = rFolder.localFolder.name;
+			if([rFolder.localFolder.private intValue] == 1)
+				newGtdFolder.private = YES;
+			else newGtdFolder.private = NO;
+			//newGtdFolder.archived = rFolder.localFolder.archived;
+			newGtdFolder.order = [rFolder.localFolder.order integerValue];
+			
+			//add new folder if firstsync
+			if(rFolder.remoteUid == nil) [syncService addFolder:newGtdFolder error:&error];
 			//overwrite the remote remoteFolder with the local folder
-			//[syncService editFolder:]
+			else [syncService editFolder:newGtdFolder error:&error];
 		}
 		else {
 			//find the corresponding folder in remoteRemoteFolders
