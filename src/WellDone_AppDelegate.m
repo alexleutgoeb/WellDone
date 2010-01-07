@@ -470,7 +470,8 @@
 		NSString *title = [sender stringValue];
 		[task setValue:title forKey:@"title"]; 
 		[sender setStringValue:@""];
-	} 
+	}
+	[self showApp:self];
 	[window makeFirstResponder:currentListView];	
 }
 
