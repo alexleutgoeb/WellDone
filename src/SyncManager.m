@@ -335,29 +335,6 @@
 		//falls es zu einem rFolder element keinen gtdFolder gibt:
 			//wenn rFolder.localFolder.deleted != true -> [syncService addFolder]
 		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
-	
-	//foreach remoteFolder
-	/*for (RemoteFolder *rFolder in remoteFolders) {
-		if(rFolder.lastsyncDate == nil || rFolder.localFolder.modifiedDate > rFolder.lastsyncDate) {
-			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
-			newGtdFolder.uid = [rFolder.remoteUid integerValue];
-			newGtdFolder.title = rFolder.localFolder.name;
-			if([rFolder.localFolder.private intValue] == 1)
-				newGtdFolder.private = YES;
-			else newGtdFolder.private = NO;
-			//newGtdFolder.archived = rFolder.localFolder.archived;
-			newGtdFolder.order = [rFolder.localFolder.order integerValue];
-			
-			//add new folder if firstsync
-			if(rFolder.remoteUid == nil) [syncService addFolder:newGtdFolder error:&error];
-			//overwrite the remote remoteFolder with the local folder
-			else [syncService editFolder:newGtdFolder error:&error];
-		}
-		else {
-			//find the corresponding folder in remoteRemoteFolders
-			//overwrite the local Folder with the remote remote folder
-		}
-	}*/
 }
 /*
  

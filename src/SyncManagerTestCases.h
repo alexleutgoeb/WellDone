@@ -16,208 +16,180 @@
 //Folder tests
 
 /**
- Test:
- Wenn modifiedDate des lokalen Folders größer ist als LastSync
- dann sollten die daten des lokalen Folders nach dem sync remote übernommen worden sein
+ if modifiedDate of localFolder greater than lastsyncDate of remoteFolder
+ then overwrite GtdFolder Data with localFolder data
  */
 -(void)FolderSyncWithLocalModifiedDateGreaterLastSync;
 
 /**
- Test:
- Wenn modifiedDate des lokalen Folders kleiner oder gleich LastSync
- dann sollten die Daten des remote Folders nach dem sync lokal übernommen worden sein
+ if modifiedDate of localFolder less or equal lastsyncDate of remoteFolder
+ then overwrite localFolder Data with GtdFolder data
  */
 -(void)FolderSyncWithLocalModifiedDateLessOrEqualLastSync;
 
 /**
- Test:
- Wenn neuer Folder lokal angelegt wurde
- dann sollte dieser nach dem sync auch remote vorhanden sein
+ if a new folder got created locally
+ then create it remotely
  */
 -(void)FolderCreatedLocal;
 
 /**
- Test:
- Wenn neuer Folder remote angelegt wurde
- dann sollte dieser nach dem sync auch lokal vorhanden sein
+ if a new folder got created remotely
+ then create it locally
  */
 -(void)FolderCreatedRemote;
 
 /**
- Test:
- Wenn Folder lokal gelöscht wurde
- dann sollte dieser nach dem sync auch remote gelöscht sein
+ if a folder got deleted locally
+ then delete it remotely
  */
--(void)FolderDeleteLocal;
+-(void)FolderDeletedLocal;
 
 /**
- Test:
- Wenn Folder remote gelöscht wurde
- dann sollte dieser nach dem sync auch lokal gelöscht sein
+ if a folder got deleted remotely
+ then delete it locally
  */
--(void)FolderDeleteRemote;
+-(void)FolderDeletedRemote;
 
 
 //Context tests
 
 /**
- Test:
- Wenn modifiedDate des lokalen Context größer ist als LastSync
- dann sollten die Daten des lokalen Context nach dem sync remote übernommen sein
+ if modifiedDate of localContext greater than lastsyncDate of remoteContext
+ then overwrite GtdContext Data with localContext data
  */
 -(void)ContextSyncWithLocalModifiedDateGreaterLastSync;
 
 /**
- Test:
- Wenn modifiedDate des lokalen Context kleiner oder gleich LastSync
- dann sollten die Daten des remote Context nach dem sync lokal übernommen sein
+ if modifiedDate of localContext less or equal lastsyncDate of remoteContext
+ then overwrite localContext Data with GtdContext data
  */
 -(void)ContextSyncWithLocalModifiedDateLessOrEqualLastSync;
 
 /**
- Test:
- Wenn neuer Context lokal angelegt wurde
- dann sollte dieser nach dem sync remote angelegt sein
+ if new context got created locally
+ then create it remotely
  */
 -(void)ContextCreatedLocal;
 
 /**
- Test:
- Wenn neuer Context remote angelegt wurde
- dann sollte dieser nach dem sync lokal angelegt sein
+ if new context got created remotely
+ then create it locally
  */
 -(void)ContextCreatedRemote;
 
 /**
- Test:
- Wenn Context lokal gelöscht wurde
- dann sollte dieser nach dem sync auch remote gelöscht sein
+ if context got deleted locally
+ then delete it remotely
  */
--(void)ContextDeleteLocal;
+-(void)ContextDeletedLocal;
 
 /**
- Test:
- Wenn Context remote gelöscht wurde
- dann sollte dieser nach dem sync auch lokal gelöscht sein
+ if context got deleted remotely
+ then delete it locally
  */
--(void)ContextDeleteRemote;
+-(void)ContextDeletedRemote;
 
 
 //Note tests
 
 /**
- Test:
- Wenn (modifiedDate der lokalen Note) > lastSync >= (date_modified der remote Note)
- dann sollten die Daten der lokalen Note nach dem Sync remote übernommen sein
+ if (modifiedDate of localNote) > lastsyncDate of remoteNote >= (date_modified of gtdNote)
+ then overwrite GtdNote data with localNote data
  */
 -(void)NoteSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified;
 
 /**
- Test:
- Wenn (modifiedDate der lokalen Note) <= lastSync >= (date_modified der remote Note)
- dann sollen die Daten sowohl remote als auch lokal unverändert bleiben
+ if (modifiedDate of localNote) <= lastsyncDate of remoteNote >= (date_modified of gtdNote)
+ then do not change localNote data or gtdNote data
  */
 -(void)NoteSyncWithLocalAndRemoteDatesLessOrEqualLastSync;
 
 /**
- Test:
- Wenn (modifiedDate der lokalen Note) <= lastSync < (date_modified der remote Note)
- dann sollen die Daten der remote Note nach dem Sync lokal übernommen sein
+ if (modifiedDate of localNote) <= lastsyncDate of remoteNote < (date_modified of gtdNote)
+ then overwrite localNote data with gtdNote data
  */
 -(void)NoteSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified;
 
 /**
- Test:
- Wenn (modifiedDate der lokalen Note) > lastSync < (date_modified der remote Note)
- dann soll der User entscheiden was übernommen wird
+ if (modifiedDate of localNote) > lastsyncDate of remoteNote < (date_modified of gtdNote)
+ then let the user decide
  */
 -(void)NoteSyncWithLocalAndRemoteGreaterLastSync;
 
 /**
- Test:
- Wenn neue Note lokal angelegt wurde
- dann sollte diese nach dem sync remote angelegt sein
+ if a new note got created locally
+ then create it remotely
  */
 -(void)NoteCreatedLocal;
 
 /**
- Test:
- Wenn neue Note remote angelegt wurde
- dann sollte diese nach dem sync lokal angelegt sein
+ if a new note got created remotely
+ then create it locally
  */
 -(void)NoteCreatedRemote;
 
 /**
- Test:
- Wenn Note lokal gelöscht wurde
- dann sollte diese nach dem sync auch remote gelöscht sein
+ if a note got deleted locally
+ then delete it remotely
  */
--(void)NoteDeleteLocal;
+-(void)NoteDeletedLocal;
 
 /**
- Test:
- Wenn Note remote gelöscht wurde
- dann sollte diese nach dem sync auch lokal gelöscht sein
+ if a note got deleted remotely
+ then delete it locally
  */
--(void)NoteDeleteRemote;
+-(void)NoteDeletedRemote;
 
 
 //Task tests
 
 /**
- Test:
- Wenn (modifiedDate des lokalen Task) > lastSync >= (date_modified des remote Task)
- dann sollten die Daten der lokalen Note nach dem Sync remote übernommen sein
+ if (modifiedDate of localTask) > lastsyncDate of remoteTask >= (date_modified of gtdTask)
+ then overwrite gtdTask data with localTask data
  */
 -(void)TaskSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified;
 
 /**
- Test:
- Wenn (modifiedDate des lokalen Task) <= lastSync >= (date_modified des remote Task)
- dann sollen die Daten sowohl remote als auch lokal unverändert bleiben
+ if (modifiedDate of localTask) <= lastsyncDate of remoteTask >= (date_modified of gtdTask)
+ then do not change localTask data or gtdTask data
  */
 -(void)TaskSyncWithLocalAndRemoteDatesLessOrEqualLastSync;
 
 /**
- Test:
- Wenn (modifiedDate des lokalen Task) <= lastSync < (date_modified des remote Task)
- dann sollen die Daten der remote Task nach dem Sync lokal übernommen sein
+ if (modifiedDate of localTask) <= lastsyncDate of remoteTask < (date_modified of gtdTask)
+ then overwrite localNote data with gtdNote data
  */
 -(void)TaskSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified;
 
 /**
- Test:
- Wenn (modifiedDate des lokalen Task) > lastSync < (date_modified des remote Task)
- dann soll der User entscheiden was übernommen wird
+ if (modifiedDate of localTask) > lastsyncDate of remoteTask < (date_modified of gtdTask)
+ then let the user decide
  */
 -(void)TaskSyncWithLocalAndRemoteGreaterLastSync;
 
 /**
- Test:
- Wenn neuer Task lokal angelegt wurde
- dann sollte dieser nach dem sync remote angelegt sein
+ if a new task got created locally
+ then create it remotely
  */
 -(void)TaskCreatedLocal;
 
 /**
- Test:
- Wenn neuer Task remote angelegt wurde
- dann sollte dieser nach dem sync lokal angelegt sein
+ if a new task got created remotely
+ then create it locally
  */
 -(void)TaskCreatedRemote;
 
 /**
- Test:
- Wenn Task lokal gelöscht wurde
- dann sollte dieser nach dem sync auch remote gelöscht sein
+ if a task got deleted locally
+ then delete it remotely
  */
--(void)TaskDeleteLocal;
+-(void)TaskDeletedLocal;
 
 /**
- Test:
- Wenn Task remote gelöscht wurde
- dann sollte dieser nach dem sync auch lokal gelöscht sein
+ if a task got deleted remotely
+ then delete it locally
  */
--(void)TaskDeleteRemote;
+-(void)TaskDeletedRemote;
 
 @end
