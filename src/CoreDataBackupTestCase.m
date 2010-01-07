@@ -12,7 +12,7 @@
 @implementation CoreDataBackupTestCase
 
 
--(void)testOne {	
+-(void)testOne {
 	int value1 = 1;
 	int value2 = 1; //change this value to see what happens when the 
 	STAssertTrue(value1 == 
@@ -24,15 +24,19 @@
 
 - (void)testBackupDatabaseFile1{
 
+	
+			
+	//DLog(@"aaaaaaaaaaaaaaaaaa");	
+	NSLog(@"isNerverInTheConsole");
 	NSString *location = @"/Users/hatti/juhu";
 	
-	CoreDataBackup *backupEngine = [[CoreDataBackup alloc] init];
+	CoreDataBackup *backupEngine = [[CoreDataBackup alloc] init]; //this breakpoint is yellow, why?
 
 	
-	[backupEngine backupDatabaseFile:location];
+	BOOL status = [backupEngine backupDatabaseFile:location];
 	
 
-	
+	//this just to see if the testcase runs
 	int value1 = 1;
 	int value2 = 1; //change this value to see what happens when the 
 	STAssertTrue(value1 == 
