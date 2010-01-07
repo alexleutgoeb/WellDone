@@ -50,13 +50,15 @@
 @private
 	SyncController *syncController;
 	SS_PrefsController *preferencesController;
+	
+	NSStatusItem *menuBarItem;
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) SimpleListController *simpleListController;
-@property (nonatomic, retain, readonly) NSString *coreDataDBLocaionURL;
+@property (nonatomic, retain, readonly) NSURL *coreDataDBLocaionURL;
 
 - (SyncController *)sharedSyncController;
 

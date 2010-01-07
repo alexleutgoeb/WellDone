@@ -36,6 +36,7 @@
 @property (nonatomic, retain) SyncController *syncController;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
+- (NSMenu *)createStatusBarMenu;
 
 @end
 
@@ -86,7 +87,26 @@
 	
 	/////////////////////////////////////////////////
 	
+	// Load 16x16 icon from icns file
+	NSImage *iconFile = [NSImage imageNamed:@"icon"];
+	NSArray *iconFileReps = [iconFile representations];
+	NSImage *menuBarIcon = nil;
 	
+	for(NSImageRep *imageRep in iconFileReps) {
+		if(imageRep.size.width == 16) {
+			menuBarIcon = [[[NSImage alloc] init] autorelease];
+			[menuBarIcon addRepresentation:imageRep];
+		}
+	}	
+	
+	// Init menubar menu
+	NSMenu *menu = [self createStatusBarMenu];
+	menuBarItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
+	[menuBarItem setMenu:menu];
+	[menuBarItem setHighlightMode:YES];
+	[menuBarItem setToolTip:@"WellDone"];
+	[menuBarItem setImage:menuBarIcon];
+	[menu release];
 }
 
 /**
@@ -456,6 +476,34 @@
 - (void)prefsWindowWillClose:(SS_PrefsController *)sender {
 	DLog(@"Closing preferences window...");
 	[sender destroyPreferencesWindow];
+}
+
+- (NSMenu *)createStatusBarMenu {
+	NSZone *menuZone = [NSMenu menuZone];
+	NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
+	NSMenuItem *menuItem;
+	
+	menuItem = [menu addItemWithTitle:@"Open WellDone" action:nil keyEquivalent:@""];
+	[menuItem setToolTip:@"Click to open WellDone window"];
+	[menuItem setTarget:self];
+	
+	menuItem = [menu addItemWithTitle:@"New task" action:nil keyEquivalent:@""];
+	[menuItem setToolTip:@"Click to add a new task"];
+	[menuItem setTarget:self];
+	
+	[menu addItem:[NSMenuItem separatorItem]];
+	
+	menuItem = [menu addItemWithTitle:@"Sync now" action:nil keyEquivalent:@""];
+	[menuItem setToolTip:@"Click to start the sync"];
+	[menuItem setTarget:self];
+	
+	[menu addItem:[NSMenuItem separatorItem]];
+	
+	menuItem = [menu addItemWithTitle:@"Quit" action:nil keyEquivalent:@""];
+	[menuItem setToolTip:@"Click to quit WellDone"];
+	[menuItem setTarget:self];
+	
+	return menu;
 }
 
 
