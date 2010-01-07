@@ -7,7 +7,7 @@
 //
 
 #import "templateTestCases.h"
-
+#import "CoreDataBackup.h"
 
 @implementation templateTestCases
 
@@ -24,7 +24,6 @@
 	int value2 = 1; //change this value to see what happens when the 
 	STAssertTrue(value1 == 
 				 value2, @"Value1 != Value2. Expected %i, got %i", value1, value2);
-	
 	
 /*	These macros are defined in the SenTestCase.h header file of the framework. Some of the more commonly used macros are listed below: 
  STAssertNotNil(a1, description, ...) 

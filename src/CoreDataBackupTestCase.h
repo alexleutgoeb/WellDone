@@ -8,14 +8,17 @@
 
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "CoreDataBackup.h"
+
 
 @interface CoreDataBackupTestCase : SenTestCase {
+	
+	
+	
 }
 
 
 -(void)testOne;
 
-//-(BOOL)testBackupDatabaseFile1;
+-(BOOL)testBackupDatabaseFile1;
 
 @end
