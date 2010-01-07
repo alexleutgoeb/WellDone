@@ -37,6 +37,7 @@
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 - (NSMenu *)createStatusBarMenu;
+- (void)showApp:(id)sender;
 - (void)quitApp:(id)sender;
 
 @end
@@ -489,7 +490,7 @@
 	NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
 	NSMenuItem *menuItem;
 	
-	menuItem = [menu addItemWithTitle:@"Open WellDone" action:nil keyEquivalent:@""];
+	menuItem = [menu addItemWithTitle:@"Open WellDone" action:@selector(showApp:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to open WellDone window"];
 	[menuItem setTarget:self];
 	
@@ -512,6 +513,9 @@
 	return menu;
 }
 
+- (void)showApp:(id)sender {
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
 - (void)quitApp:(id)sender {
 	[[NSApplication sharedApplication] terminate:sender];
 }
