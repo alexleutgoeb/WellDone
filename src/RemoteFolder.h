@@ -15,7 +15,7 @@
 {
 }
 
-@property (nonatomic, retain) Folder * localFolder;
+@property (nonatomic, retain) Folder *localFolder;
 
 @end
 
