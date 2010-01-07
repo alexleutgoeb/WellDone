@@ -110,6 +110,11 @@
 	[menu release];
 }
 
+- (BOOL)windowShouldClose:(id)window {
+	[[NSApplication sharedApplication] hide:self];
+	return NO;
+}
+
 /**
  Implementation of dealloc, to release the retained variables.
  */
