@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <SidebarFolderTreeView.h>
+#import "SidebarFolderTreeView.h"
 
 
 @interface SidebarFolderController : NSViewController {

@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Task.h>
+#import "Task.h"
 
 @interface GTDListController : NSViewController {
 	NSMutableArray *subViewControllers;

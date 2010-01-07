@@ -1,5 +1,5 @@
 //
-//  WellDone_AppDelegate.m
+//  ^.m
 //  WellDone
 //
 //  Created by Alex Leutgöb on 27.10.09.
@@ -44,7 +44,7 @@
 
 @synthesize simpleListController;
 @synthesize syncController;
-
+@synthesize coreDataDBLocaionURL;
 
 #pragma mark -
 #pragma mark Initialization & disposal
@@ -260,11 +260,11 @@
 		}
     }
     
-	NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"WellDone.welldonedoc"]];
+	coreDataDBLocaionURL = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"WellDone.welldonedoc"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
 												  configuration:nil 
-															URL:url 
+															URL:coreDataDBLocaionURL 
 														options:nil 
 														  error:&error]){//change between XML and DB saved local (NSSQLiteStoreType vs. NSXMLStoreType)
         [[NSApplication sharedApplication] presentError:error];

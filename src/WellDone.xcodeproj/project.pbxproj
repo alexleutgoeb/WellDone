@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
 		42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42112E5910B6E5F100B19CC0 /* FolderView.xib */; };
+		42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = 42375F4910F5F9BC00A48318 /* CoreDataBackup.m */; };
+		4237604C10F6025A00A48318 /* CoreDataBackupTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4237604A10F6022200A48318 /* CoreDataBackupTestCase.m */; };
 		424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
-		4263A72410D1179D00C5FD7B /* SimpleListControllerTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */; };
 		4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */; };
 		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
 		6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */; };
@@ -134,6 +135,10 @@
 		42262EB5109C8049005E4997 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
+		42375F4810F5F9BC00A48318 /* CoreDataBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataBackup.h; sourceTree = "<group>"; };
+		42375F4910F5F9BC00A48318 /* CoreDataBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataBackup.m; sourceTree = "<group>"; };
+		4237604910F6022200A48318 /* CoreDataBackupTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataBackupTestCase.h; sourceTree = "<group>"; };
+		4237604A10F6022200A48318 /* CoreDataBackupTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataBackupTestCase.m; sourceTree = "<group>"; };
 		4242098910CFB7A000DB9F3F /* UnitTestCases.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestCases.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTestCases-Info.plist"; sourceTree = "<group>"; };
 		424209B610CFB96D00DB9F3F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -258,6 +263,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				42375F3610F5F26A00A48318 /* Backup */,
 				D164971910D2E16F00DEB20A /* Custom Cells */,
 				77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */,
@@ -359,6 +365,15 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42375F3610F5F26A00A48318 /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				42375F4810F5F9BC00A48318 /* CoreDataBackup.h */,
+				42375F4910F5F9BC00A48318 /* CoreDataBackup.m */,
+			);
+			name = Backup;
 			sourceTree = "<group>";
 		};
 		42B57FBB10D157A400EF6391 /* ValueTransformer */ = {
@@ -505,6 +520,8 @@
 			children = (
 				42262EC8109C818B005E4997 /* templateTestCases.h */,
 				42262EC9109C818B005E4997 /* templateTestCases.m */,
+				4237604910F6022200A48318 /* CoreDataBackupTestCase.h */,
+				4237604A10F6022200A48318 /* CoreDataBackupTestCase.m */,
 				4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */,
 				BFCC7FEA10E95932000757D8 /* SyncManagerTestCases.h */,
 				BFCC7FEB10E95932000757D8 /* SyncManagerTestCases.m */,
@@ -676,8 +693,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */,
-				4263A72410D1179D00C5FD7B /* SimpleListControllerTestCases.m in Sources */,
 				BFCC7FEC10E95932000757D8 /* SyncManagerTestCases.m in Sources */,
+				4237604C10F6025A00A48318 /* CoreDataBackupTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +738,7 @@
 				FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */,
 				FA56E4F210E7E2B100228C43 /* ServicePreferencesSheetController.m in Sources */,
 				FA56EB9210EBBFC200228C43 /* SFHFKeychainUtils.m in Sources */,
+				42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

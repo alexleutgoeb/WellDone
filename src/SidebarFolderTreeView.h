@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Folder.h>
+#import "Folder.h"
 
 @interface SidebarFolderTreeView : NSOutlineView {
 @private
