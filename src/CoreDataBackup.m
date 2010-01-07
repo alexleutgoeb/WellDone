@@ -13,7 +13,7 @@
 
 
 // make a copy of the core data file
-- (BOOL)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
+- (BOOL)backupDatabaseFile:(NSString *)backupPath {
     NSFileManager *fm = [NSFileManager defaultManager];
     
 
@@ -21,8 +21,14 @@
     // insist that the file which should be backuped does exist
 	NSAssert1([fm fileExistsAtPath:	[[NSApp delegate] coreDataDBLocaionURL]], @"no db file at %@", [[NSApp delegate] coreDataDBLocaionURL]);
 
+	// create the new file (if the folder does not exist, the method creates it)
 	
-	//    NSAssert1([fm fileExistsAtPath:backupPath], @"no backup db file at %@", backupPath);
+	
+	BOOL success = [fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:nil];
+	
+					
+	
+
 	
     // remove the original to make way for the backup
 //    NSLog(@"removing the file at the primary database path...");

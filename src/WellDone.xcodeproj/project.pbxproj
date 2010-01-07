@@ -10,6 +10,7 @@
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
 		42112E5A10B6E5F100B19CC0 /* FolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42112E5910B6E5F100B19CC0 /* FolderView.xib */; };
 		421726C610F60D9C001490F5 /* CoreDataBackupTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4237604A10F6022200A48318 /* CoreDataBackupTestCase.m */; };
+		4217271410F61182001490F5 /* CoreDataBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = 42375F4910F5F9BC00A48318 /* CoreDataBackup.m */; };
 		42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = 42375F4910F5F9BC00A48318 /* CoreDataBackup.m */; };
 		424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
@@ -692,6 +693,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4217271410F61182001490F5 /* CoreDataBackup.m in Sources */,
 				424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */,
 				BFCC7FEC10E95932000757D8 /* SyncManagerTestCases.m in Sources */,
 				421726C610F60D9C001490F5 /* CoreDataBackupTestCase.m in Sources */,

@@ -15,7 +15,7 @@
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
 #import "SyncController.h"
-#import "TaskValueTransformer.h";
+#import "TaskValueTransformer.h"
 #import "SyncPreferences.h"
 
 

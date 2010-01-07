@@ -19,6 +19,6 @@
 
 -(void)testOne;
 
--(BOOL)testBackupDatabaseFile1;
+-(void)testBackupDatabaseFile1;
 
 @end

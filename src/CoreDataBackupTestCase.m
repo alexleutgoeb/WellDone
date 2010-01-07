@@ -22,13 +22,16 @@
 	
 }
 
-- (BOOL)testBackupDatabaseFile1{
+- (void)testBackupDatabaseFile1{
 
-	// - (BOOL)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
+	NSString *location = @"/Users/hatti/juhu";
 	
-	NSString *location = @"/Users/hatti";
-//	CoreDataBackup *backupEngine = [[CoreDataBackup alloc] init];
-//	CoreDataBackup *backupEngine = [[CoreDataBackup alloc] init];
+	CoreDataBackup *backupEngine = [[CoreDataBackup alloc] init];
+
+	
+	[backupEngine backupDatabaseFile:location];
+	
+
 	
 	int value1 = 1;
 	int value2 = 1; //change this value to see what happens when the 
