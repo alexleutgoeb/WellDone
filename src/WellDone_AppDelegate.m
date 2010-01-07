@@ -477,7 +477,7 @@
 	[menuItem setToolTip:@"Click to open WellDone window"];
 	[menuItem setTarget:self];
 	
-	menuItem = [menu addItemWithTitle:@"New task" action:@selector(addNewTask:) keyEquivalent:@""];
+	menuItem = [menu addItemWithTitle:@"New Task" action:@selector(addNewTask:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to add a new task"];
 	[menuItem setTarget:self];
 	
