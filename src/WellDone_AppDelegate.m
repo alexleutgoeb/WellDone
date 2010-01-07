@@ -325,39 +325,9 @@
     Returns the NSUndoManager for the application.  In this case, the manager
     returned is that of the managed object context for the application.
  */
- 
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[self managedObjectContext] undoManager];
 }
-
-
-/**
-    Performs the save action for the application, which is to send the save:
-    message to the application's managed object context.  Any encountered errors
-    are presented to the user.
- */
- 
-- (IBAction) saveAction:(id)sender {
-
-    NSError *error = nil;
-    
-    if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%s unable to commit editing before saving", [self class], _cmd);
-    }
-
-    if (![[self managedObjectContext] save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-}
-
-/*
-// Called after start
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	DLog(@"Debug log message.");
-	mainWindowController = [[MainWindowController alloc] init];
-	[mainWindowController showWindow: nil];
-}
- */
 
 
 /**
@@ -365,7 +335,6 @@
     handle the saving of changes in the application managed object context
     before the application terminates.
  */
- 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 
     if (!managedObjectContext) return NSTerminateNow;
@@ -461,6 +430,21 @@
 		}
 	}
 
+}
+
+- (IBAction)newTaskAction:(id)sender {
+	[self addNewTask:sender];
+}
+
+- (IBAction)newFolderAction:(id)sender {
+	NSManagedObject *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:managedObjectContext]; 
+	[folder setValue:@"New Folder" forKey:@"name"];
+	
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+        NSLog(@"Error while generating folders:%@",error);
+    }
+	// TODO: set cursor in folder
 }
 
 - (void)addNewTask:(id)sender {

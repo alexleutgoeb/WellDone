@@ -62,7 +62,8 @@
 
 - (SyncController *)sharedSyncController;
 
-- (IBAction)saveAction:sender;
+- (IBAction)newTaskAction:(id)sender;
+- (IBAction)newFolderAction:(id)sender;
 - (IBAction)changeViewController:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
 - (void)showTestdatagenerator:(id)sender;
