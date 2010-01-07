@@ -470,10 +470,13 @@
 
 - (void)addNewTask:(id)sender {
 	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext]; 
-	NSString *title = [sender stringValue];
-	[task setValue:title forKey:@"title"]; 
-	[sender setStringValue:@""];
-	[window makeFirstResponder:currentListView];
+	
+	if ([sender isKindOfClass:[NSTextField class]]) {
+		NSString *title = [sender stringValue];
+		[task setValue:title forKey:@"title"]; 
+		[sender setStringValue:@""];
+	} 
+	[window makeFirstResponder:currentListView];	
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
