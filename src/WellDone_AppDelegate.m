@@ -36,8 +36,20 @@
 @property (nonatomic, retain) SyncController *syncController;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
+
+/**
+ Method for creating the status bar menu items.
+ */
 - (NSMenu *)createStatusBarMenu;
+
+/**
+ Shows the probably hidden application window.
+ */
 - (void)showApp:(id)sender;
+
+/**
+ Terminates the app.
+ */
 - (void)quitApp:(id)sender;
 
 @end
@@ -70,24 +82,7 @@
 	// create an autoreleased instance of our value transformer
 	taskValueTransformer = [[[TaskValueTransformer alloc] init]  autorelease];
 	// register it with the name that we refer to it with
-	[NSValueTransformer setValueTransformer:taskValueTransformer
-	 
-									forName:@"TaskValueTransformer"];
-	
-	
-	/////////////////////////////////////////////////
-	
-	// Für Überschreiben der lokalen folder mit remote folder die 4 Zeilen 
-	// unkommentieren und user und password in zeile 69 eintragen.
-	
-	// Init sync manager
-	
-	// self.syncManager = [[SyncManager alloc] init];
-	// NSError *error = nil;
-	// [syncManager registerSyncService:[[TDApi alloc] initWithUsername:@"" password:@"" error:&error]];
-	// NSManagedObjectContext *c = [syncManager replaceLocalDataWithRemoteData:self.managedObjectContext];
-	
-	/////////////////////////////////////////////////
+	[NSValueTransformer setValueTransformer:taskValueTransformer forName:@"TaskValueTransformer"];
 	
 	// Load 16x16 icon from icns file
 	NSImage *iconFile = [NSImage imageNamed:@"icon"];
