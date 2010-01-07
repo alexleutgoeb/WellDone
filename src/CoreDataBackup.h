@@ -13,6 +13,6 @@
 
 }
 
-- (BOOL)backupDatabaseFile:(NSString *)backupPath error:(NSError **) error;
+- (BOOL)backupDatabaseFile:(NSString *)backupPath;
 
 @end
