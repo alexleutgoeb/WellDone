@@ -46,6 +46,7 @@
 	ContextManagementController* contextmanagementController;
 	ContextViewController* contextViewController;
 	
+	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;

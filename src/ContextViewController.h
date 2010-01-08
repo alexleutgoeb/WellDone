@@ -8,12 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Context.h"
+#import "SimpleListController.h"
 
 @interface ContextViewController : NSViewController {
-	
+	IBOutlet NSTableView* myview;
 	IBOutlet NSArrayController* arrayController;
 	
+	SimpleListController *simpController;
 }
 
+- (void)contextsSelectionChanged:(id)sender;
+
+@property (nonatomic, retain) SimpleListController *simpController;
 
 @end
