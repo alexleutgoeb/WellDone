@@ -47,4 +47,5 @@
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
+- (void) filterByTaskTitle: (NSString *)title;
 @end

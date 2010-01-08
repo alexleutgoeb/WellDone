@@ -243,6 +243,11 @@
 	return NULL;
 }
 
+- (void) filterByTaskTitle: (NSString *)title {
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parentTask == nil AND title contains[cd] %@", title];
+	[treeController setFetchPredicate:predicate];
+}
+
 /* 
  The following are implemented as stubs because they are required when 
  implementing an NSOutlineViewDataSource. Because we use bindings on the
