@@ -38,6 +38,9 @@
 	NSManagedObjectContext *moc;
 	NSArray* dragType;
 	_NSArrayControllerTreeNode* draggedNode;
+	
+	// Holds all filter predicates (string or array representation) for the task view which are currently active
+	NSMutableDictionary* taskListFilterPredicate;
 }
 
 @property (nonatomic, retain, readonly) NSTreeController *treeController;
@@ -47,5 +50,8 @@
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
-- (void) filterByTaskTitle: (NSString *)title;
+- (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor;
+- (void) setTaskListSearchFilter:(NSString*) searchText;
+- (NSPredicate *) generateTaskListSearchPredicate;
+- (void) reloadTaskListWithFilters;
 @end

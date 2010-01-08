@@ -10,6 +10,10 @@
 #import <AppKit/NSTokenField.h>
 #import <AppKit/NSTokenFieldCell.h>
 #import <Tag.h>
+#import <Context.h>
+
+#define kFilterPredicateSearch	@"FilterPredicateSearch"
+#define kFilterPredicateContext	@"FilterPredicateContext"
 
 @implementation SimpleListController
 
@@ -21,6 +25,7 @@
 	{		
 		[myview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
 		moc = [[NSApp delegate] managedObjectContext];
+		taskListFilterPredicate = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	return self;
 }
@@ -244,16 +249,10 @@
 }
 
 - (void) filterByTaskTitle: (NSString *)title {
-	if (![title isEqualToString:@""]) {
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parentTask == nil AND title contains[cd] %@", title];
-		[treeController setFetchPredicate:predicate];
-	}
-	else {
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parentTask == nil", title];
-		[treeController setFetchPredicate:predicate];
-	}
+
 
 }
+
 
 /* 
  The following are implemented as stubs because they are required when 
@@ -276,7 +275,40 @@
 	return NULL;
 }
 
+- (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor {
+	[taskListFilterPredicate setValue:contextsToFilterFor forKey:kFilterPredicateContext];
+	[self reloadTaskListWithFilters];
+}
+- (void) setTaskListSearchFilter:(NSString*) searchText {
+	[taskListFilterPredicate setValue:searchText forKey:kFilterPredicateSearch];
+	[self reloadTaskListWithFilters];
+}
 
+- (void) reloadTaskListWithFilters {
+	NSPredicate *predicate = [self generateTaskListSearchPredicate];
+	[treeController setFetchPredicate:predicate];
+}
 
+- (NSPredicate *) generateTaskListSearchPredicate {
+	NSString *generatedPredicateString = @"parentTask == nil";
+	NSString *searchText = [taskListFilterPredicate objectForKey: kFilterPredicateSearch];
+	NSArray *contexts = [taskListFilterPredicate objectForKey: kFilterPredicateContext];
+	NSMutableArray *predicateArguments = [NSMutableArray arrayWithCapacity:10];
+	
+	if (searchText != nil && ![searchText isEqualToString:@""]) {
+		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND title contains[cd] %@"];
+		generatedPredicateString = extension;
+		[predicateArguments addObject:searchText];
+	}
+	
+	if (contexts != nil && [[contexts count] intValue] > 0) {
+		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND context IN %@"];
+		generatedPredicateString = extension;
+		[predicateArguments addObject:contexts];
+	}
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat: generatedPredicateString argumentArray:predicateArguments];
+	return predicate;
+}
 
 @end

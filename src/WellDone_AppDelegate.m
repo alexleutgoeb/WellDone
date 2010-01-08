@@ -465,7 +465,7 @@
 
 - (IBAction)filterTaskListByTitle:(id)sender {
 	NSSearchField *field = sender;
-	[simpleListController filterByTaskTitle:[field stringValue]];
+	[simpleListController setTaskListSearchFilter:[field stringValue]];
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
