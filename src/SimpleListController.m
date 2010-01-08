@@ -244,8 +244,15 @@
 }
 
 - (void) filterByTaskTitle: (NSString *)title {
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parentTask == nil AND title contains[cd] %@", title];
-	[treeController setFetchPredicate:predicate];
+	if (![title isEqualToString:@""]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parentTask == nil AND title contains[cd] %@", title];
+		[treeController setFetchPredicate:predicate];
+	}
+	else {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parentTask == nil", title];
+		[treeController setFetchPredicate:predicate];
+	}
+
 }
 
 /* 
