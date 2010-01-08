@@ -33,6 +33,8 @@
 	[[[self enclosingScrollView] contentView] scrollToPoint:NSMakePoint(0, 0)];
 	[self setBackgroundColor:[NSColor colorWithCalibratedRed:0.72 green:0.74 blue:0.79 alpha:1.0]];
 	
+	[self setFocusRingType:NSFocusRingTypeNone];
+	
 	// Make outline view appear with gradient selection, and behave like the Finder, iTunes, etc.
 	[self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
 	

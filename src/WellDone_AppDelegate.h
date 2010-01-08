@@ -51,6 +51,8 @@
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
 	
+	BOOL showGTDView; 
+	
 @private
 	SyncController *syncController;
 	SS_PrefsController *preferencesController;

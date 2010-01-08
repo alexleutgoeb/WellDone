@@ -11,13 +11,15 @@
 #import "SimpleListController.h"
 
 @interface ContextViewController : NSViewController {
-	IBOutlet NSTableView* myview;
+	IBOutlet NSTableView* myTableView;
 	IBOutlet NSArrayController* arrayController;
+	IBOutlet NSButton* checkBoxFilter;
 	
 	SimpleListController *simpController;
 }
 
-- (void)contextsSelectionChanged:(id)sender;
+- (void)contextsSelectionChanged;
+- (IBAction)toggleFilteringByContext:(id)sender;
 
 @property (nonatomic, retain) SimpleListController *simpController;
 

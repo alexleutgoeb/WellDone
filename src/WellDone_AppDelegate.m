@@ -154,6 +154,7 @@
 	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
+	showGTDView = NO;
 	
 	splitViewDelegate =
 	[[PrioritySplitViewDelegate alloc] init];
@@ -423,19 +424,19 @@
 }
 
 - (IBAction) changeViewController:(id) sender {
-	static int selectedSegment = -1;
-	if ([sender isKindOfClass:[NSSegmentedControl class]]) {
-		selectedSegment = [sender selectedSegment];
-		
-		if (selectedSegment == 0) {
-			NSLog(@"Debug: replace gtdlistview with simplelistview");
-			[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
-		} else if (selectedSegment == 1) {
-			NSLog(@"Debug: replace simplelistview with gtdlistview");
-			[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:gtdListController];
-		}
+	if (showGTDView) {
+		NSLog(@"Debug: replace gtdlistview with simplelistview");
+		[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
+		showGTDView = NO;
+		[sender setFont:[NSFont systemFontOfSize:13]];
 	}
-
+	else {
+		NSLog(@"Debug: replace simplelistview with gtdlistview");
+		[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:gtdListController];
+		showGTDView = YES;
+		[sender highlight:YES];
+		[sender setFont:[NSFont boldSystemFontOfSize:13]];
+	}
 }
 
 - (IBAction)newTaskAction:(id)sender {

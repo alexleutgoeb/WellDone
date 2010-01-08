@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="67"/>
+			<integer value="64"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -109,7 +109,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="NSOutlineView" id="848461419">
 								<reference key="NSNextResponder" ref="963355143"/>
-								<int key="NSvFlags">272</int>
+								<int key="NSvFlags">4368</int>
 								<string key="NSFrameSize">{398, 382}</string>
 								<reference key="NSSuperview" ref="963355143"/>
 								<bool key="NSEnabled">YES</bool>
@@ -792,7 +792,7 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{359, 361}, {400, 400}}</string>
+					<string>{{395, 377}, {400, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

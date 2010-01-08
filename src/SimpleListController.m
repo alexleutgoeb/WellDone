@@ -301,7 +301,7 @@
 		[predicateArguments addObject:searchText];
 	}
 	
-	if (contexts != nil && [[contexts count] intValue] > 0) {
+	if (contexts != nil && [contexts count] > 0) {
 		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND context IN %@"];
 		generatedPredicateString = extension;
 		[predicateArguments addObject:contexts];
