@@ -14,6 +14,7 @@
 @implementation Context 
 
 @dynamic title;
+@dynamic isChecked;
 @dynamic tasks;
 @dynamic remoteContexts;
 

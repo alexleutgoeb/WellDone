@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * isChecked;
 @property (nonatomic, retain) NSSet* tasks;
 @property (nonatomic, retain) NSSet* remoteContexts;
 
