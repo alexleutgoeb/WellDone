@@ -64,7 +64,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) SimpleListController *simpleListController;
-@property (nonatomic, retain, readonly) NSURL *coreDataDBLocaionURL;
+@property (nonatomic, retain, readonly) NSURL *coreDataDBLocationURL;
 
 - (SyncController *)sharedSyncController;
 
