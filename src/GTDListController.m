@@ -14,13 +14,15 @@
 
 @synthesize subViewControllers;
 
-#define COL_IMAGE_ID @"ImageID"
 
 - (id) init
 {
 	self = [super initWithNibName:@"GTDListView" bundle:nil];
 	if (self != nil)
 	{		
+		//[myview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
+		moc = [[NSApp delegate] managedObjectContext];
+		
 		iTasks = [[NSMutableArray alloc] init];
 		iGroupRowCell = [[NSTextFieldCell alloc] init];
 		[iGroupRowCell setEditable:NO];
@@ -51,21 +53,31 @@
     [iGroupRowCell release];
     [super dealloc];
 }
-/*
-- (void)outlineView:(NSOutlineView *)outlineView 
-	willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn 
-			   item:(id)item { 
-	int type = [(NGSidebarObject *)item getType]; 
-	switch (type) { 
-		case SIDEBAR_GROUP: { 
-			[cell setTitle: [item getParamValueForKey:@"NAME"] 
-			   andSubTitle: @"42 unreads" 
-				  withIcon: groupImage 
-				   forType: type]; 
-			break; 
-		} // other switch cases 
-	}
-*/
+
+
+- (void)groupTasksToGTD { 
+	
+	NSString *aTitle = @"neu";
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", aTitle];
+	[request setEntity:[NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc]];
+	[request setPredicate:predicate];
+	
+	NSError *error = nil;
+	NSArray *results = [moc executeFetchRequest:request error:&error];
+	//NSLog(@"DEBUG %@ ", results);
+	// error handling code
+	[iTasks addObject:results];
+	[request release];
+	
+	// Reload the children of the root item, "nil". This only works on 10.5 or higher
+    [gtdOutlineView reloadItem:nil reloadChildren:YES];
+    [gtdOutlineView expandItem:results];
+    NSInteger row = [gtdOutlineView rowForItem:results];
+    [gtdOutlineView scrollRowToVisible:row];
+    [gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+}
+
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 	NSTextFieldCell *acell = [tableColumn dataCell];
 	
@@ -77,7 +89,7 @@
 			[self setTaskUndone:acell];
 		}
 	}
-
+	[self groupTasksToGTD];
 }
 
 - (void)setTaskDone:(NSTextFieldCell*)cell {
@@ -136,26 +148,44 @@
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    id result = nil;
 
-    if ([item isKindOfClass:[Task class]]) {
-        if (tableColumn == nil || [[tableColumn identifier] isEqualToString:COL_IMAGE_ID]) {
-            result = [item title];
-        }
-    } else if ([item isKindOfClass:[Task class]]) {
-        if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:COL_IMAGE_ID]) {
-            result = [item title];
-            if (result == nil) {
-                result = NSLocalizedString(@"(Untitled)", @"Untitled title");
-            }
-        }             
-    }
+
+    id result = nil;
+	Task *task = [item representedObject];
+	NSDate *date = task.dueDate;
+	NSCalendarDate *taskDate = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate:[date timeIntervalSinceReferenceDate]];
+	NSCalendarDate *todaysDate = [NSCalendarDate calendarDate];
+
+	if ([taskDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
+		if ([taskDate dayOfYear] == [todaysDate dayOfYear]) {
+			if (task != nil) {
+				if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+					result = NSLocalizedString(@"Today", @"Today title");;
+				}
+			} 
+		} else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] + 3 )) {
+			if (task != nil) {
+				if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+					result = NSLocalizedString(@"In the next 3 days", @"Next 3 days title");;
+				}
+			} 
+		} else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] +7)) {
+			if (task != nil) {
+				if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+					result = NSLocalizedString(@"In the next 7 days", @"Next 7 days title");;
+				}
+			} 
+			
+		}
+	}
+	
+    
     return result;
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
     if ([item isKindOfClass:[Task class]]) {
-        if ([[tableColumn identifier] isEqualToString:COL_IMAGE_ID]) {
+        if ([[tableColumn identifier] isEqualToString:@"bla"]) {
             [item setTitle:object];
         }
     }    
@@ -170,11 +200,15 @@
 
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
     // The "nil" tableColumn is an indicator for the "full width" row
+	
     if (tableColumn == nil) {
-        if ([item isKindOfClass:[Task class]]) {
+		Task *task = [item representedObject];
+		//NSLog(@"Task title %@ ", task.title);
+        if ([task.title isEqualToString:@"neu"]) {
+			[iGroupRowCell setBackgroundColor:[NSColor redColor]];
             return iGroupRowCell;
-        } else if ([item isKindOfClass:[Task class]]) {
-            // For failed items with no metdata, we also use the group row cell
+        } else if ([task.title isEqualToString:@"test"]) {
+			[iGroupRowCell setBackgroundColor:[NSColor redColor]];
             return iGroupRowCell;            
         }
     }
