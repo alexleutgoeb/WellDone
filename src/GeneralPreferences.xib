@@ -130,7 +130,7 @@
 			<object class="NSUserDefaultsController" id="384059653">
 				<object class="NSMutableArray" key="NSDeclaredKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>meunbarIcon</string>
+					<string>menubarIcon</string>
 				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
@@ -148,19 +148,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.meunbarIcon</string>
+						<string key="label">value: values.menubarIcon</string>
 						<reference key="source" ref="9914010"/>
 						<reference key="destination" ref="384059653"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="9914010"/>
 							<reference key="NSDestination" ref="384059653"/>
-							<string key="NSLabel">value: values.meunbarIcon</string>
+							<string key="NSLabel">value: values.menubarIcon</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.meunbarIcon</string>
+							<string key="NSKeyPath">values.menubarIcon</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">670</int>
+					<int key="connectionID">671</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -241,6 +241,7 @@
 					<string>663.IBPluginDependency</string>
 					<string>664.IBPluginDependency</string>
 					<string>665.IBPluginDependency</string>
+					<string>666.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -248,6 +249,7 @@
 					<string>{{83, 349}, {551, 160}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -269,7 +271,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">670</int>
+			<int key="maxID">671</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
