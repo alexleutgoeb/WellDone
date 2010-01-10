@@ -17,6 +17,7 @@
 #import "ContextViewController.h"
 #import "SyncController.h"
 #import "TaskValueTransformer.h"
+#import "GeneralPreferences.h"
 #import "SyncPreferences.h"
 
 
@@ -69,9 +70,12 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 
 	// Init preferences window
+	GeneralPreferences *generalP = [[[GeneralPreferences alloc] init] autorelease];
+	SyncPreferences *syncP = [[[SyncPreferences alloc] init] autorelease];
+	
 	preferencesController = [[SS_PrefsController preferencesWithPanes:
-							  [NSArray arrayWithObject:[[[SyncPreferences alloc] init] autorelease]] delegate:self] retain];
-	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"sync", nil]];
+							  [NSArray arrayWithObjects:generalP, syncP, nil] delegate:self] retain];
+	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"general", @"sync", nil]];
 	[preferencesController setAlwaysShowsToolbar:YES];
 	
 	// Init syncController
