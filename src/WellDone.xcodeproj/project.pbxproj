@@ -76,6 +76,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		428DE20310F8A1420032348A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = WellDone;
+		};
 		6FC984D510F34D7000CF16A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
@@ -565,6 +572,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				428DE20410F8A1420032348A /* PBXTargetDependency */,
 			);
 			name = UnitTestCases;
 			productName = UnitTestCases;
@@ -757,6 +765,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		428DE20410F8A1420032348A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* WellDone */;
+			targetProxy = 428DE20310F8A1420032348A /* PBXContainerItemProxy */;
+		};
 		FA649C2810C30E7F0051F758 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libToodledoAPIMac;

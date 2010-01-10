@@ -14,6 +14,8 @@
 	IBOutlet NSOutlineView *gtdOutlineView;
 	NSTextFieldCell *iGroupRowCell;
 	NSMutableArray *iTasks;
+	IBOutlet NSOutlineView* myview;
+	NSManagedObjectContext *moc;
 }
 
 @property (nonatomic, retain) NSMutableArray *subViewControllers;
