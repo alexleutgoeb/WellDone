@@ -103,7 +103,7 @@
 	
 	// Init status bar menu
 	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
-	[self setStatusBarMenuVisible:menuVisible];
+	[self setStatusBarMenuVisible:menuVisible];	
 }
 
 - (BOOL)windowShouldClose:(id)window {
@@ -548,6 +548,12 @@
 			menuBarItem = nil;
 		}
 	}
+}
+
+- (void)startSync:(id)sender {
+	// TODO: check internet connection (or in controller)?
+	[syncProgress startAnimation:sender];
+	// TODO: call sync controller, wait for response
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
