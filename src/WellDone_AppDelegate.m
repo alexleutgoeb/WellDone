@@ -551,7 +551,6 @@
 }
 
 - (void)startSync:(id)sender {
-	// TODO: check internet connection (or in controller)?
 	[syncProgress startAnimation:sender];
 	// TODO: call sync controller, wait for response
 }

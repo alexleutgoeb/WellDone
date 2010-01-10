@@ -149,7 +149,7 @@
 	
 	// after completion save and inform delegate
 
-	// merge moc with deactivated undo manager
+	// TODO: merge moc with deactivated undo manager
 	NSError *error = nil;
 	[mainContext setMergePolicy:NSRollbackMergePolicy];
 	[context save:&error];
@@ -163,7 +163,8 @@
 }
 
 - (void)startSync:(NSManagedObjectContext *)moc {
-	// TODOD: start syncmanager
+	// TODO: start syncmanager
+	
 }
 
 @end
