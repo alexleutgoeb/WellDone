@@ -147,6 +147,7 @@
 	contextViewController = [[ContextViewController alloc] init];
 	
 	contextViewController.simpController = simpleListController;
+	[sidebarFolderController setSimpController:simpleListController];
 	
 	// Replace the placeholder views with the actual views from the controllers.
  	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];

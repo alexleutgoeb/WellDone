@@ -12,6 +12,7 @@
 #import <Tag.h>
 #import <Context.h>
 
+#define kFilterPredicateFolder	@"FilterPredicateFolder"
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
 
@@ -275,6 +276,11 @@
 	return NULL;
 }
 
+- (void) setTaskListFolderFilter:(Folder*) folderToFilterFor {
+	[taskListFilterPredicate setValue:folderToFilterFor forKey:kFilterPredicateFolder];
+	[self reloadTaskListWithFilters];
+}
+
 - (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor {
 	[taskListFilterPredicate setValue:contextsToFilterFor forKey:kFilterPredicateContext];
 	[self reloadTaskListWithFilters];
@@ -287,13 +293,29 @@
 - (void) reloadTaskListWithFilters {
 	NSPredicate *predicate = [self generateTaskListSearchPredicate];
 	[treeController setFetchPredicate:predicate];
+	NSPredicate *retrievedPredicate = [treeController fetchPredicate];
+	NSLog(@"Predicate in treecontroller: %@", [retrievedPredicate predicateFormat]);
 }
 
 - (NSPredicate *) generateTaskListSearchPredicate {
-	NSString *generatedPredicateString = @"parentTask == nil";
+	//NSString *generatedPredicateString = @"parentTask == nil";
+	NSString *generatedPredicateString = @"";
 	NSString *searchText = [taskListFilterPredicate objectForKey: kFilterPredicateSearch];
 	NSArray *contexts = [taskListFilterPredicate objectForKey: kFilterPredicateContext];
+	Folder *folder = [taskListFilterPredicate objectForKey: kFilterPredicateFolder];
 	NSMutableArray *predicateArguments = [NSMutableArray arrayWithCapacity:10];
+	
+	// will show inbox folder if the folder is not set:
+	if (folder == nil) {
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = nil AND parentTask == nil"];
+		generatedPredicateString = extension;
+	}
+	
+	if (folder != nil) {
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = %@ AND parentTask == nil"];
+		generatedPredicateString = extension;
+		[predicateArguments addObject:folder];
+	}
 	
 	if (searchText != nil && ![searchText isEqualToString:@""]) {
 		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND title contains[cd] %@"];
@@ -306,8 +328,29 @@
 		generatedPredicateString = extension;
 		[predicateArguments addObject:contexts];
 	}
+
+	
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat: generatedPredicateString argumentArray:predicateArguments];
+	
+	
+	
+	//DEBUG ONLY
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
+	//NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(title == %@)", title];
+	[fetchRequest setEntity:entity];	
+	[fetchRequest setPredicate:predicate];	
+	NSError *error;
+	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
+	Task *task;
+	NSLog(@"Finding tasks with predicate...");
+	for (task in result) {
+		NSLog(@"TASK: %@", [task title]);
+	}
+	
+	
 	return predicate;
 }
 

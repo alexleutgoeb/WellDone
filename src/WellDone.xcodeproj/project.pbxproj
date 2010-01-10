@@ -24,6 +24,7 @@
 		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
 		6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
+		6FB0A92C10FA5A6000990D07 /* DebugTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
 		6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
@@ -80,7 +81,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090 /* WellDone */;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = WellDone;
 		};
 		6FC984D510F34D7000CF16A3 /* PBXContainerItemProxy */ = {
@@ -169,6 +170,8 @@
 		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
 		6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioritySplitViewDelegate.m; sourceTree = "<group>"; };
 		6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
+		6FB0A92A10FA5A6000990D07 /* DebugTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTreeController.h; sourceTree = "<group>"; };
+		6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugTreeController.m; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
 		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
@@ -441,6 +444,8 @@
 				B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */,
 				6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */,
 				6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */,
+				6FB0A92A10FA5A6000990D07 /* DebugTreeController.h */,
+				6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */,
 			);
 			name = "View Classes";
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 				FA56EB9210EBBFC200228C43 /* SFHFKeychainUtils.m in Sources */,
 				42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */,
 				D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */,
+				6FB0A92C10FA5A6000990D07 /* DebugTreeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

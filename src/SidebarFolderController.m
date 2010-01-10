@@ -8,8 +8,15 @@
 
 #import "SidebarFolderController.h"
 
+#define rootNodeInbox			@"1"
+#define nodeInbox				@"1.1"
+#define rootNodeTaskFolders		@"2"
 
 @implementation SidebarFolderController
+
+
+#pragma mark -
+#pragma mark Initialization
 
 - (id) init
 {
@@ -21,49 +28,304 @@
 }
 
 - (void) awakeFromNib {
-
-		[sidebar setDefaultAction:@selector(buttonDefaultHandler:) target:self];
-		
-	/*
-		[sidebar addSection:@"1" caption:@"DEVICES"];
-		[sidebar addSection:@"2" caption:@"PLACES"];
-		
-		[sidebar addChild:@"1" key:@"1.1" caption:@"Machintosh HD" icon:[NSImage imageNamed:NSImageNameComputer] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"1" key:@"1.2" caption:@"Network" icon:[NSImage imageNamed:NSImageNameNetwork] action:@selector(buttonPres:) target:self];
-		
-		[sidebar addChild:@"2" key:@"2.1" url:NSHomeDirectory() action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.2" url:[NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.3" url:[NSHomeDirectory() stringByAppendingPathComponent:@"Pictures"] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.4" url:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.5" url:@"/Applications" action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.6" url:NSHomeDirectory() action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.7" url:[NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.8" url:[NSHomeDirectory() stringByAppendingPathComponent:@"Pictures"] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.9" url:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] action:@selector(buttonPres:) target:self];
-		[sidebar addChild:@"2" key:@"2.10" url:@"/Applications" action:@selector(buttonPres:) target:self];
-		
-		[sidebar addSection:@"3" caption:@"OTHER"];
-		[sidebar addChild:@"3" key:@"3.1" caption:@"Bonjour" icon:[NSImage imageNamed:NSImageNameBonjour]];
-		[sidebar addChild:@"3" key:@"3.2" caption:@"Mobile Me" icon:[NSImage imageNamed:NSImageNameDotMac]];
-		[sidebar addChild:@"3" key:@"3.3" caption:@"Users" icon:[NSImage imageNamed:NSImageNameUserGroup]];
-		[sidebar addChild:@"3" key:@"3.4" caption:@"Everyone" icon:[NSImage imageNamed:NSImageNameEveryone]];
-		[sidebar addChild:@"3" key:@"3.5" caption:@"Smart" icon:[NSImage imageNamed:NSImageNameSmartBadgeTemplate]];
-		[sidebar addChild:@"3.5" key:@"3.5.1" caption:@"SmartX" icon:[NSImage imageNamed:NSImageNameSmartBadgeTemplate]];
+	moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+	[sidebar setDefaultAction:@selector(buttonDefaultHandler:) target:sidebar];
+	[sidebar setViewController:self];
+	// Sub Delegates & Data Source
+	[sidebar setDataSource:sidebar];
+	[sidebar setDelegate:sidebar];
 	
-		[sidebar setBadge:@"1.2" count:5];
-		[sidebar setBadge:@"2.3" count:3];
-		[sidebar setBadge:@"3.1" count:4];
-		
-		[sidebar reloadData];
-		
-		[sidebar expandItem:@"3"];
-		*/
-		
+	// Insert initial root nodes
+	[self initRootNodes];
+	
+	// Insert nodes from persistent store
+	[self initFolderListFromStore];
+	
+	// Initialize listening to notifications by managedObjectContext
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	
+	[nc addObserver:self
+		   selector:@selector(reactToMOCSave:)
+			   name:NSManagedObjectContextDidSaveNotification
+			 object:nil];
 }
 
-- (IBAction)addChild: (id)sender{
-	[sidebar addChild:@"3" key:@"3.1" caption:@"Bonjour" icon:[NSImage imageNamed:NSImageNameBonjour]];
+
+/*
+ * Initialize all root nodes which group items in the source list view.
+ */
+- (void) initRootNodes {
+	[sidebar addSection:rootNodeInbox caption:@"INBOX"];
+	[sidebar addChild:rootNodeInbox 
+				  key:nodeInbox
+			  caption:@"Inbox"
+				 icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]	
+				 data: nil
+			   action:@selector(handleInboxSelection:) 
+			   target:self];
+	
+	[sidebar addSection:rootNodeTaskFolders caption:@"FOLDERS"];
 	[sidebar reloadData];
+	
+
+	
+	// Expand all sections' nodes
+	[sidebar expandItem:rootNodeInbox];
+	[sidebar expandItem:rootNodeTaskFolders];
+	
+	[sidebar selectItem:nodeInbox];
+}
+
+/*
+ * Initialize the folder list from the store.
+ */
+- (void)initFolderListFromStore {
+	NSEntityDescription *entityDescription = [NSEntityDescription
+											  entityForName:@"Folder" inManagedObjectContext:moc];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	[request setEntity:entityDescription];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == %@", NO];
+	
+	[request setPredicate:predicate];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+										initWithKey:@"order" ascending:YES];
+	[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	
+	NSError *error;
+	NSArray *folders = [moc executeFetchRequest:request error:&error];
+	if (folders == nil)
+	{
+		// TODO: Deal with error...
+	}
+	[self addFolders:folders toSection:rootNodeTaskFolders];
+	
+}
+
+#pragma mark -
+#pragma mark General Controller methods 
+
+/* ============================================================================
+ *  General Controller methods 
+ */
+
+/*
+ * Save all changes done to managed objects into the persistent store.
+ */
+- (void) saveChangesToStore {
+	NSError *error;
+	if (![moc save:&error]) {
+		NSLog(@"Error saving changes - error:%@",error);
+	}
+}
+
+/*
+ * This method will be called when a save-operatoin is done to the main managedObjectContext (central application delegate's moc).
+ * It reacts to some of these changes with updates to the folder tree view.
+ */
+- (void) reactToMOCSave:(NSNotification *)notification {
+	id object;
+	NSDictionary *userInfo = [notification userInfo];
+	
+	NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
+	while (object = [updatedObjects nextObject]) {
+		if ([object isKindOfClass: [Folder class]]) {
+			[self handleUpdatedFolder: object];
+			[sidebar reloadData];
+		}
+	}
+	
+	NSEnumerator *insertedObjects = [[userInfo objectForKey:NSInsertedObjectsKey] objectEnumerator];
+	while (object = [insertedObjects nextObject]) {
+		if ([object isKindOfClass: [Folder class]]) {
+			NSLog(@"Will insert Folder with name: %@", [object name]);
+			[self addFolder:object toSection:rootNodeTaskFolders];
+			[sidebar reloadData];	
+			[self saveFolderOrderingToStore];
+		}
+	}
+	
+	NSEnumerator *deletedObjects = [[userInfo objectForKey:NSDeletedObjectsKey] objectEnumerator];
+	while (object = [deletedObjects nextObject]) {
+		if ([object isKindOfClass: [Folder class]]) {
+			NSLog(@"Will delete Folder with name: %@", [object name]);
+			[self removeFolder: object];
+			[sidebar reloadData];	
+		}
+	}
+}
+
+/*
+ * Handles updates to the specified folder, stemming from the datasource (folder caption, deleted yes/no).
+ * If the folder is found in the list, but the object from the datasource has deleted == YES, the folder is deleted
+ * from the list.
+ * If the folder does not exist in the list (perhaps because the deleted flag was set to YES), the folder is readded
+ * to the list, if the deleted flag is set to NO.
+ */
+- (void) handleUpdatedFolder: (Folder *) updatedFolder {
+	NSLog(@"Will update Folder with name: %@", [updatedFolder name]);
+	SidebarFolderNode *nodeToUpdate = [sidebar nodeForKey:[updatedFolder objectID]];
+	if(nodeToUpdate == nil) {
+		NSLog(@"Did not find updated Folder in folder list - maybe it has been deleted and is readded now: %@", [updatedFolder name]);
+		// Folder is not in list, but it is not set deleted in datasource - add folder:
+		if ([updatedFolder deleted] == NO) {
+			NSLog(@"Folder '%@' is added to the list, because deleted-flag is NO", [updatedFolder name]);
+			[self addFolder:updatedFolder toSection:rootNodeTaskFolders];
+			nodeToUpdate = [sidebar nodeForKey:[updatedFolder objectID]];
+		}
+		// Deleted flag is set to yes - we won't handle folders which are not in the list and 
+		// are set deleted in datasource
+		else {
+			NSLog(@"Ignore update on folder '%@' because deleted-flag is YES and folder is not in list", [updatedFolder name]);
+			return;
+		}
+		
+	}
+	
+	if ([updatedFolder deleted]) {
+		NSLog(@"Delete folder '%@' from list because deleted-flag is YES", [updatedFolder name]);
+		[self removeFolder: updatedFolder];
+		return;
+	}
+	
+	if (![[nodeToUpdate caption] isEqualToString:[updatedFolder name]]) {
+		NSLog(@"New folder name '%@' for instead of '%@'", [updatedFolder name], [nodeToUpdate caption]);
+		[nodeToUpdate setCaption:[updatedFolder name]];
+	}
+}
+
+/*
+ * Save all folders' orderings which are children of rootNodeTaskFolders (see header) to the store.
+ * This option is preferred over fixOrderingForFolder:doSave:
+ */
+- (void) saveFolderOrderingToStore {
+	SidebarFolderNode *parentNode = [sidebar nodeForKey: rootNodeTaskFolders];
+	NSEnumerator *childrenEnum = [parentNode childrenEnumeration];
+	id child;
+	int counter = 0;
+	while (child = [childrenEnum nextObject]) {
+		counter++;
+		if ([child isKindOfClass: [SidebarFolderNode class]]) {
+			SidebarFolderNode *node = child;
+			NSLog(@"Will save order for folder node: %@", [node caption]);
+			Folder *currentListFolder = [node data];
+			[currentListFolder setOrder: [[NSNumber alloc] initWithInt: counter]];
+		}
+	}
+	[self saveChangesToStore];
+	
+}
+
+- (void) addNewFolderByContextMenu {
+	Folder *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:moc]; 
+	folder.name = @"New Folder";
+	[self saveChangesToStore];
+}
+
+- (void) deleteFolderByContextMenu: (Folder *)folderToDelete {
+	folderToDelete.deleted = [NSNumber numberWithBool:YES];
+	[self saveChangesToStore];
+}
+
+
+/*
+ * CURRENTLY NOT IN USE!
+ * Takes a given folder. If it has an ordering value of 0, it is seen as unordered, and it is assigned a new ordering value,
+ * which is maximum(all order numbers)+1
+ */
+- (void) fixOrderingForFolder:(Folder *)folder doSave:(BOOL)performSave {
+	if ([folder order] != nil) {
+		NSNumber *orderNumber = [folder order];
+		if ([orderNumber intValue] == 0) {
+			NSEntityDescription *entityDescription = [NSEntityDescription
+													  entityForName:@"Folder" inManagedObjectContext:moc];
+			NSFetchRequest *request = [[NSFetchRequest alloc] init];
+			[request setEntity:entityDescription];
+			
+			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+												initWithKey:@"order" ascending:NO];
+			[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+			[request setFetchLimit:1];
+			NSError *error;
+			NSArray *folders = [moc executeFetchRequest:request error:&error];
+			if (folders == nil)
+			{
+				// TODO: Deal with error...
+			}
+			//Get folder with the highest order count
+			Folder *lastFolder = [folders lastObject];
+			int newOrder;
+			if (lastFolder == nil) {
+				newOrder = 1;
+			}
+			else {
+				newOrder = [[lastFolder order] intValue]+1;
+			}
+			
+			NSNumber *newOrderNumber = [[NSNumber alloc] initWithInt:newOrder];
+			[folder setOrder:newOrderNumber];
+			
+			if(performSave) {
+				[self saveChangesToStore];
+			}
+		}
+	}
+}
+
+/*
+ * Adds a new folder to the given section. The folder entity has to provide a persistent id, or else
+ * it will not be added (entity has to have been saved at least once in the moc).
+ */
+- (void) addFolder:(Folder *) folder toSection:(NSString *)section {
+	if([[folder objectID] isTemporaryID] == YES) {
+		NSLog(@"New Folder has temporary objectid!");
+		return;
+	}
+	
+	[sidebar addChild:section 
+			   key:[folder objectID]
+		   caption:[folder name]
+			  icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]	
+			  data: folder
+			action:@selector(handleFolderSelection:) 
+			target:self];
+}
+
+/*
+ * Adds multiple folders to the given section. At the end, a reload command is sent so the list reloads all nodes.
+ */
+- (void) addFolders: (NSArray *) folders toSection:(NSString *)section {
+	id folder;
+	NSEnumerator *folderEnumerator = [folders objectEnumerator];
+	while (folder = [folderEnumerator nextObject]) {
+		if ([folder isKindOfClass: [Folder class]]) {
+			NSLog(@"Will insert Folder with name: %@", [folder name]);
+			[self addFolder:folder toSection:section];			
+		}
+	}
+	[sidebar reloadData];
+}
+
+/*
+ * Removes the given folder from the view.
+ */
+- (void) removeFolder:(Folder *) folder {
+	[sidebar removeItem: [folder objectID]];
+}
+
+- (void) handleFolderSelection:(id) sender {
+	NSLog(@"Selected Folder '%@'", [sender caption]);
+	[simpController setTaskListFolderFilter:[sender data]];
+}
+
+- (void) handleInboxSelection:(id) sender {
+	NSLog(@"Selected Inbox!");
+	[simpController setTaskListFolderFilter:nil];
+}
+
+- (void) setSimpController:(SimpleListController *) simpleListController {
+	simpController = simpleListController;
 }
 
 @end

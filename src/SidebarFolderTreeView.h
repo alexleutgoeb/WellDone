@@ -7,7 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Folder.h"
+#import <SidebarBadgeCell.h>
+#import <SidebarFolderTreeView.h>
+#import <Task.h>
+#import <Folder.h>
+#import <SidebarFolderNode.h>
 
 @interface SidebarFolderTreeView : NSOutlineView {
 @private
@@ -18,16 +22,12 @@
 	
 	NSMutableDictionary *_contents;
 	NSMutableArray *_roots;
+	NSViewController *myController;
+	NSMutableArray *allowedDragDestinations;
 }
 
-- (void) initRootNodes;
-- (void) initFolderListFromStore;
-- (void) saveChangesToStore;
-- (void) reactToMOCSave:(NSNotification *)notification;
-- (void) addFolder:(Folder *)folder toSection:(NSString *)section;
-- (void) addFolders: (NSArray *) folders toSection:(NSString *)section;
-- (void) removeFolder:(Folder *) folder;
-- (void) saveFolderOrderingToStore;
+- (SidebarFolderNode *) nodeForKey:(id)key;
+- (void)setViewController:(NSViewController *)myController;
 
 // Set Default Item Clicked Handler
 - (void)setDefaultAction:(SEL)action target:(id)target;
@@ -120,6 +120,12 @@
 - (void)setBadge:(id)key count:(NSInteger)badgeValue;
 - (void)unsetBadge:(id)key;
 
+// Context menu
+-(NSMenu*)defaultMenuForRow:(int)row;
+-(BOOL) isRowDeletable:(int)row;
+-(BOOL) mayAddFolderToRow:(int)row;
+-(void) contextMenuAddFolder: (id)sender;
+-(void) contextMenuDeleteFolder: (id)sender;
 
 @end
 

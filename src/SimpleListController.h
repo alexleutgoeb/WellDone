@@ -50,6 +50,7 @@
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
+- (void) setTaskListFolderFilter:(Folder*) folderToFilterFor;
 - (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor;
 - (void) setTaskListSearchFilter:(NSString*) searchText;
 - (NSPredicate *) generateTaskListSearchPredicate;

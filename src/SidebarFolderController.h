@@ -7,13 +7,33 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SidebarFolderTreeView.h"
-
+#import <SidebarFolderTreeView.h>
+#import <SidebarFolderNode.h>
+#import <SimpleListController.h>
 
 @interface SidebarFolderController : NSViewController {
 	IBOutlet SidebarFolderTreeView *sidebar;
+	NSManagedObjectContext *moc;
+	SimpleListController *simpController;
 }
 
-- (IBAction)addChild: (id)sender;
+- (void) initFolderListFromStore;
+- (void) initRootNodes;
 
+- (void) saveChangesToStore;
+
+- (void) reactToMOCSave:(NSNotification *)notification;
+- (void) handleUpdatedFolder: (Folder *) updatedFolder;
+- (void) addNewFolderByContextMenu;
+- (void) deleteFolderByContextMenu: (Folder *)folderToDelete;
+
+- (void) addFolder:(Folder *)folder toSection:(NSString *)section;
+- (void) addFolders: (NSArray *) folders toSection:(NSString *)section;
+- (void) removeFolder:(Folder *) folder;
+- (void) saveFolderOrderingToStore;
+
+- (void) handleFolderSelection:(id) sender;
+- (void) handleInboxSelection:(id) sender;
+
+- (void) setSimpController:(SimpleListController *) simpleListController;
 @end

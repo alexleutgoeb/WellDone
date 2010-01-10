@@ -5,17 +5,21 @@
 //  Created by Matteo Bertozzi on 3/8/09.
 //  Copyright 2009 Matteo Bertozzi. All rights reserved.
 //
-
-#import "SidebarBadgeCell.h"
-#import "SidebarFolderNode.h"
-#import "SidebarFolderTreeView.h"
+#import <SidebarBadgeCell.h>
+#import <SidebarFolderTreeView.h>
 #import <Task.h>
+#import <Folder.h>
+#import <SidebarFolderNode.h>
 
 #define kSidebarPBoardType		@"SidebarNodePBoardType"
-#define rootNodeTaskFolders		@"1"
+#define rootNodeInbox			@"1"
+#define nodeInbox				@"1.1"
+#define rootNodeTaskFolders		@"2"
 
 @implementation SidebarFolderTreeView
 
+#pragma mark -
+#pragma mark Initializing Code
 
 /* ============================================================================
  *  Initializing Code, should be run when view is instantiated
@@ -41,227 +45,24 @@
 	// drag and drop support
 	[self registerForDraggedTypes:[NSArray arrayWithObjects:kSidebarPBoardType, nil]];
 	
-	// Sub Delegates & Data Source
-	[self setDataSource:self];
-	[self setDelegate:self];
 	
-	// Insert initial root nodes
-	[self initRootNodes];
-	
-	// Insert nodes from persistent store
-	[self initFolderListFromStore];
-	
-	// Initialize listening to notifications by managedObjectContext
-	NSNotificationCenter *nc;
-	nc = [NSNotificationCenter defaultCenter];
-	
-	[nc addObserver:self
-		   selector:@selector(reactToMOCSave:)
-			   name:NSManagedObjectContextDidSaveNotification
-			 object:nil];
 	
 	return self;
 }
 
-/*
- * Initialize the folder list from the store.
- */
-- (void)initFolderListFromStore {
-	NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
-	NSEntityDescription *entityDescription = [NSEntityDescription
-											  entityForName:@"Folder" inManagedObjectContext:moc];
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	[request setEntity:entityDescription];
-	
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-										initWithKey:@"order" ascending:YES];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-	
-	NSError *error;
-	NSArray *folders = [moc executeFetchRequest:request error:&error];
-	if (folders == nil)
-	{
-		// TODO: Deal with error...
-	}
-	[self addFolders:folders toSection:rootNodeTaskFolders];
-	
+
+- (void)setViewController:(NSViewController *)newController
+{
+    if (newController)
+    {
+		myController = newController;
+    }
 }
 
-/*
- * Initialize all root nodes which group items in the source list view.
- */
-- (void) initRootNodes {
-	[self addSection:rootNodeTaskFolders caption:@"FOLDERS"];
-	[self reloadData];
-	
-	// Expand all sections' nodes
-	[self expandItem:rootNodeTaskFolders];
-	
-	//TODO: Insert missing sections (intelligent search queries,...)
-}
 
-/* ============================================================================
- *  General Controller methods 
- */
+#pragma mark -
+#pragma mark Add Root Folder to View
 
-/*
- * Save all changes done to managed objects into the persistent store.
- */
-- (void) saveChangesToStore {
-	NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
-	NSError *error;
-	if (![moc save:&error]) {
-		NSLog(@"Error saving changes - error:%@",error);
-	}
-}
-
-/*
- * This method will be called when a save-operatoin is done to the main managedObjectContext (central application delegate's moc).
- * It reacts to some of these changes with updates to the folder tree view.
-*/
-- (void) reactToMOCSave:(NSNotification *)notification {
-	id object;
-	NSDictionary *userInfo = [notification userInfo];
-	
-	NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
-	while (object = [updatedObjects nextObject]) {
-		if ([object isKindOfClass: [Folder class]]) {
-			NSLog(@"NYI: Will update Folder with name: %@", [object name]);
-			// TODO: handle updated objects
-			// TODO: handle deleted objects (flag: delete), they are not really deleted until synchronisation
-		}
-	}
-	
-	NSEnumerator *insertedObjects = [[userInfo objectForKey:NSInsertedObjectsKey] objectEnumerator];
-	while (object = [insertedObjects nextObject]) {
-		if ([object isKindOfClass: [Folder class]]) {
-			NSLog(@"Will insert Folder with name: %@", [object name]);
-			[self addFolder:object toSection:rootNodeTaskFolders];
-			[self reloadData];			
-		}
-	}
-	
-	NSEnumerator *deletedObjects = [[userInfo objectForKey:NSDeletedObjectsKey] objectEnumerator];
-	while (object = [deletedObjects nextObject]) {
-		if ([object isKindOfClass: [Folder class]]) {
-			NSLog(@"Will delete Folder with name: %@", [object name]);
-			[self removeFolder: object];
-			[self reloadData];	
-		}
-	}
-}
-
-/*
- * Save all folders' orderings which are children of rootNodeTaskFolders (see header) to the store
- */
-- (void) saveFolderOrderingToStore {
-	SidebarFolderNode *parentNode = [_contents objectForKey:rootNodeTaskFolders];
-	NSEnumerator *childrenEnum = [parentNode childrenEnumeration];
-	id child;
-	int counter = 0;
-	while (child = [childrenEnum nextObject]) {
-		counter++;
-		if ([child isKindOfClass: [SidebarFolderNode class]]) {
-			SidebarFolderNode *node = child;
-			NSLog(@"Will save order for folder node: %@", [node caption]);
-			Folder *currentListFolder = [node data];
-			[currentListFolder setOrder: [[NSNumber alloc] initWithInt: counter]];
-		}
-	}
-	[self saveChangesToStore];
-	
-}
-
-/*
- * CURRENTLY NOT IN USE!
- * Takes a given folder. If it has an ordering value of 0, it is seen as unordered, and it is assigned a new ordering value,
- * which is maximum(all order numbers)+1
- */
-- (void) fixOrderingForFolder:(Folder *)folder doSave:(BOOL)performSave {
-	if ([folder order] != nil) {
-		NSNumber *orderNumber = [folder order];
-		if ([orderNumber intValue] == 0) {
-			NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
-			NSEntityDescription *entityDescription = [NSEntityDescription
-													  entityForName:@"Folder" inManagedObjectContext:moc];
-			NSFetchRequest *request = [[NSFetchRequest alloc] init];
-			[request setEntity:entityDescription];
-			
-			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-												initWithKey:@"order" ascending:NO];
-			[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-			[request setFetchLimit:1];
-			NSError *error;
-			NSArray *folders = [moc executeFetchRequest:request error:&error];
-			if (folders == nil)
-			{
-				// TODO: Deal with error...
-			}
-			//Get folder with the highest order count
-			Folder *lastFolder = [folders lastObject];
-			int newOrder;
-			if (lastFolder == nil) {
-				newOrder = 1;
-			}
-			else {
-				newOrder = [[lastFolder order] intValue]+1;
-			}
-			
-			NSNumber *newOrderNumber = [[NSNumber alloc] initWithInt:newOrder];
-			[folder setOrder:newOrderNumber];
-			
-			if(performSave) {
-				[self saveChangesToStore];
-			}
-		}
-	}
-}
-
-/*
- * Adds a new folder to the given section. The folder entity has to provide a persistent id, or else
- * it will not be added (entity has to have been saved at least once in the moc).
- */
-- (void) addFolder:(Folder *) folder toSection:(NSString *)section {
-	if([[folder objectID] isTemporaryID] == YES) {
-		NSLog(@"New Folder has temporary objectid!");
-		return;
-	}
-	
-	[self addChild:section 
-			 key:[folder objectID]
-			 caption:[folder name]
-			 icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]	
-			 data: folder
-			 action:@selector(buttonPres:) 
-			 target:self];
-}
-
-/*
- * Adds multiple folders to the given section. At the end, a reload command is sent so the list reloads all nodes.
- */
-- (void) addFolders: (NSArray *) folders toSection:(NSString *)section {
-	id folder;
-	NSEnumerator *folderEnumerator = [folders objectEnumerator];
-	while (folder = [folderEnumerator nextObject]) {
-		if ([folder isKindOfClass: [Folder class]]) {
-			NSLog(@"Will insert Folder with name: %@", [folder name]);
-			[self addFolder:folder toSection:section];			
-		}
-	}
-	[self reloadData];
-}
-
-/*
- * Removes the given folder from the view.
- */
-- (void) removeFolder:(Folder *) folder {
-	[self removeItem: [folder objectID]];
-}
-
-- (void)setDefaultAction:(SEL)action target:(id)target {
-	_defaultAction = action;
-	_defaultActionTarget = target;
-}
 
 /* ============================================================================
  *  Add Root Folder to View
@@ -287,6 +88,9 @@
 	[_roots addObject:node];
 	//[node release];
 }
+
+#pragma mark -
+#pragma mark Add Child(ren) Folder to View
 
 /* ============================================================================
  *  Add Child(ren) Folder to View
@@ -390,6 +194,9 @@
 	//[node release];
 }
 
+#pragma mark -
+#pragma mark Insert Child Folder to View
+
 /* ============================================================================
  *  Insert Child Folder to View
  */
@@ -459,6 +266,9 @@
 	//[node release];
 }
 
+#pragma mark -
+#pragma mark Remove Items from View
+
 /* ============================================================================
  *  Remove Items from View
  */
@@ -486,6 +296,9 @@
 	[self removeItem:key];
 }
 
+#pragma mark -
+#pragma mark Selection of Items
+
 /* ============================================================================
  *  Selection of Items
  */
@@ -498,12 +311,17 @@
 	SidebarFolderNode *node = [_contents objectForKey:key];
 	if (node != nil && [node nodeType] != kSidebarNodeTypeSection) {
 		NSInteger rowIndex = [self rowForItem:node];
-		if (rowIndex >= 0) [self selectRow:rowIndex byExtendingSelection:NO];
+		NSIndexSet *set = [NSIndexSet indexSetWithIndex:rowIndex];
+		if (rowIndex >= 0) [self selectRowIndexes:set byExtendingSelection:NO];
+		NSLog(@"Selected row with index: %d", rowIndex);
 	}
 }
 
 - (void)unselectItem {
 }
+
+#pragma mark -
+#pragma mark Expand/Collapse of Items
 
 /* ============================================================================
  *  Expand/Collapse of Items
@@ -557,6 +375,9 @@
 	}
 }
 
+#pragma mark -
+#pragma mark Badges
+
 /* ============================================================================
  *  Badges
  */
@@ -569,6 +390,9 @@
 	SidebarFolderNode *node = [_contents objectForKey:key];
 	[node unsetBadgeValue];
 }
+
+#pragma mark -
+#pragma mark Delegate: Data Source
 
 /* ============================================================================
  *  Delegate: Data Source
@@ -616,6 +440,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 	return [item caption];
 }
 
+#pragma mark -
+#pragma mark Delegate: NSOutlineView
+
 /* ============================================================================
  * Delegate: NSOutlineView 
  */
@@ -651,6 +478,15 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
      forTableColumn:(NSTableColumn *)tableColumn
                item:(id)item
 {
+	if ([item isKindOfClass:[SidebarFolderNode class]]) {
+		if([item data] == nil) {
+			[cell setEditable:NO];
+		}
+		else {
+			[cell setEditable:YES];
+		}
+
+	}
 	if ([cell isKindOfClass:[SidebarBadgeCell class]]) {
 		SidebarBadgeCell *badgeCell = (SidebarBadgeCell *) cell;
 		[badgeCell setBadgeCount:[item badgeValue]];
@@ -689,13 +525,14 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 			 byItem:(id)item {
 	
 	if ([item isKindOfClass: [SidebarFolderNode class]]) {
+		
 		NSLog(@"Will save new name for folder: %@", [item caption]);
 		
 		if ([item data] != nil && [[item data] isKindOfClass: [Folder class]]) {
 			SidebarFolderNode *node = item;
 			Folder *folderToChange = [node data];
 			[folderToChange setName:object];
-			[self saveChangesToStore];
+			[myController saveChangesToStore];
 			
 			// Set caption on folder node in view
 			[node setCaption:object];
@@ -707,6 +544,9 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 
 
 }
+
+#pragma mark -
+#pragma mark Delegate: Drag & Drop
 
 /* ============================================================================
  *  Delegate: Drag & Drop
@@ -725,6 +565,27 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	// keep track of this nodes for drag feedback in "validateDrop"
 	dragNodesArray = items;
 	
+	// currently only 1-item drags are supported:
+	SidebarFolderNode *draggedItem = [dragNodesArray lastObject];
+	id draggedItemParentKey = [draggedItem parentKey];
+	
+	// dragged item is not a root node (root nodes have nil as parent key)
+	if (draggedItemParentKey != nil) {	
+		SidebarFolderNode *parentNode = [self nodeForKey:draggedItemParentKey];
+		allowedDragDestinations = [NSMutableArray arrayWithCapacity:([parentNode numberOfChildren]+1)];
+		[allowedDragDestinations addObject:parentNode];
+		NSEnumerator *enumerator = [parentNode childrenEnumeration];
+		id child;
+		while ((child = [enumerator nextObject]) != nil) {
+			[allowedDragDestinations addObject:child];
+		}
+	}
+	else {	
+		allowedDragDestinations = [NSMutableArray arrayWithCapacity:0];
+	}
+	
+
+	
 	return YES;
 }
 
@@ -738,13 +599,15 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
             proposedChildIndex:(NSInteger)index
 {
 
+	
 	if (item == nil) {
 		//NSLog(@"Tried to drag item to root note - won't let that happen...");
 		return NSDragOperationNone;
 	}
-	//NSLog(@"proposedItem: %@", [item caption]);
+	NSLog(@"proposedItem: %@, index: %d", [item caption], index);
 	if (![item isDraggable] && index >= 0) {
-		return NSDragOperationMove;
+		if ([allowedDragDestinations containsObject:item])
+			return NSDragOperationMove;
 	}
 		
 	return NSDragOperationNone;
@@ -788,11 +651,17 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 				[_roots addObject:node];
 			} else {
 				[_roots insertObject:node atIndex:index];
+			}	
+			[myController saveFolderOrderingToStore];
+			
+			[self reloadData];
+			
+			if ([[node data] isKindOfClass: [Folder class]]) {
+				[self selectItem:[[node data] objectID]];
 			}
-			[self saveFolderOrderingToStore];
 		}
 		
-		[self reloadData];
+		
 		return YES;
 	}
 	
@@ -812,6 +681,9 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	return NSCellHitContentArea;
 }
 
+#pragma mark -
+#pragma mark Delegate: Custom Drawing
+
 /* ============================================================================
  *  Custom Drawing
  */
@@ -827,6 +699,115 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 		[self setBackgroundColor:[NSColor colorWithCalibratedRed:232.0/255.0 green:232.0/255.0 blue:232.0/255.0 alpha:1.0]];
 	}
 	[super drawRect:rect];
+}
+
+#pragma mark -
+#pragma mark Context Menu
+
+/* ============================================================================
+ *  Context menu
+ */
+
+-(NSMenu*)menuForEvent:(NSEvent*)evt 
+{
+    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
+    int row=[self rowAtPoint:pt];
+    return [self defaultMenuForRow:row];
+}
+
+-(NSMenu*)defaultMenuForRow:(int)row
+{
+    //Uncomment this to highlight the current row if the user right-clicks onto a folder
+	//Currently, that is not seen as good behaviour.
+	/*
+	id item = [self itemAtRow:row];
+	if ([item isKindOfClass: [SidebarFolderNode class]]) {
+		if ([item data] != nil)
+			[self selectItem: [[item data] objectID]];
+	}*/
+	
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Folder menu"];
+
+	if ([self mayAddFolderToRow:row]) {
+		NSMenuItem *addItem = [NSMenuItem alloc];
+		[addItem initWithTitle:@"Add Folder" action:@selector(contextMenuAddFolder:) keyEquivalent: @""];
+		[theMenu addItem:addItem];
+	}
+	if ([self isRowDeletable:row]) {
+		NSMenuItem *deleteItem = [NSMenuItem alloc];
+		[deleteItem initWithTitle:@"Delete Folder" action:@selector(contextMenuDeleteFolder:) keyEquivalent: @""];
+		[deleteItem setRepresentedObject:[self itemAtRow:row]];
+		
+		//Uncomment for CMD+Backspace key equivalent (seems not to work now, for whatever reason)
+		/*const unichar backspace = 0x0008;
+		[deleteItem setKeyEquivalent:[NSString stringWithCharacters:&backspace length:1]];
+		[deleteItem setKeyEquivalentModifierMask:NSCommandKeyMask];*/
+		
+		[theMenu addItem:deleteItem];
+	}
+	
+	if ([[theMenu itemArray] count] == 0)
+		return nil;
+
+    // you'll need to find a way of getting the information about the 
+    // row that is to be removed to the removeSite method
+    // assuming that an ivar 'contextRow' is used for this
+    //contextRow = row;
+	
+    return theMenu;        
+}
+
+-(BOOL) isRowDeletable:(int)row {
+	if (row == -1) return NO;
+	id item = [self itemAtRow:row];
+	if ([item isKindOfClass: [SidebarFolderNode class]]) {
+		if ([item data] != nil)
+			return YES;
+	}
+	return NO;
+}
+
+-(BOOL) mayAddFolderToRow:(int)row {
+	if (row == -1) return YES;
+	id item = [self itemAtRow:row];
+	if ([item isKindOfClass: [SidebarFolderNode class]]) {
+		if ([item data] != nil)
+			return YES;
+		if ([item nodeKey] == rootNodeTaskFolders)
+			return YES;
+	}
+	return NO;
+}
+
+#pragma mark -
+#pragma mark Other
+
+/* ============================================================================
+ *  Other
+ */
+
+- (void)setDefaultAction:(SEL)action target:(id)target {
+	_defaultAction = action;
+	_defaultActionTarget = target;
+}
+
+- (SidebarFolderNode *) nodeForKey:(id)key {
+	return [_contents objectForKey:key];
+}
+
+- (void) contextMenuAddFolder: (id)sender {
+	[myController addNewFolderByContextMenu];
+}
+
+-(void) contextMenuDeleteFolder: (id)sender {
+	NSLog(@"Delete sender: %@", sender);
+	id representedObject = [sender representedObject];
+	NSLog(@"Represented object: %@", representedObject);
+	if ([representedObject isKindOfClass:[SidebarFolderNode class]]) {
+		//NSLog(@"Represented object data: %@", [representedObject data]);
+		[myController deleteFolderByContextMenu:[representedObject data]];
+	}
+	
 }
 
 @end
