@@ -554,7 +554,7 @@
     if ([keyPath isEqual:@"menubarIcon"]) {
 		[self setStatusBarMenuVisible:[[change objectForKey:NSKeyValueChangeNewKey] boolValue]];
     }
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 @end
