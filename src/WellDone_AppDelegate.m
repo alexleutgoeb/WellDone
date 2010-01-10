@@ -17,6 +17,7 @@
 #import "ContextViewController.h"
 #import "SyncController.h"
 #import "TaskValueTransformer.h"
+#import "GeneralPreferences.h"
 #import "SyncPreferences.h"
 
 
@@ -53,6 +54,11 @@
  */
 - (void)quitApp:(id)sender;
 
+/**
+ Toggle status bar menu visible / invisible
+ */
+- (void)setStatusBarMenuVisible:(BOOL)visible;
+
 @end
 
 
@@ -68,15 +74,25 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 
+	// user defaults
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	
 	// Init preferences window
+	GeneralPreferences *generalP = [[[GeneralPreferences alloc] init] autorelease];
+	SyncPreferences *syncP = [[[SyncPreferences alloc] init] autorelease];
+	
 	preferencesController = [[SS_PrefsController preferencesWithPanes:
-							  [NSArray arrayWithObject:[[[SyncPreferences alloc] init] autorelease]] delegate:self] retain];
-	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"sync", nil]];
+							  [NSArray arrayWithObjects:generalP, syncP, nil] delegate:self] retain];
+	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"general", @"sync", nil]];
 	[preferencesController setAlwaysShowsToolbar:YES];
 	
 	// Init syncController
 	self.syncController = [[SyncController alloc] init];
 	
+	// Add observer to user defaults
+	[defaults addObserver:self forKeyPath:@"menubarIcon" 
+				  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) 
+				  context:NULL];
 	
 	/* Init the custum transformer (for token-tags) */
 	TaskValueTransformer *taskValueTransformer;
@@ -85,26 +101,9 @@
 	// register it with the name that we refer to it with
 	[NSValueTransformer setValueTransformer:taskValueTransformer forName:@"TaskValueTransformer"];
 	
-	// Load 16x16 icon from icns file
-	NSImage *iconFile = [NSImage imageNamed:@"icon"];
-	NSArray *iconFileReps = [iconFile representations];
-	NSImage *menuBarIcon = nil;
-	
-	for(NSImageRep *imageRep in iconFileReps) {
-		if(imageRep.size.width == 16) {
-			menuBarIcon = [[[NSImage alloc] init] autorelease];
-			[menuBarIcon addRepresentation:imageRep];
-		}
-	}	
-	
-	// Init menubar menu
-	NSMenu *menu = [self createStatusBarMenu];
-	menuBarItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
-	[menuBarItem setMenu:menu];
-	[menuBarItem setHighlightMode:YES];
-	[menuBarItem setToolTip:@"WellDone"];
-	[menuBarItem setImage:menuBarIcon];
-	[menu release];
+	// Init status bar menu
+	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
+	[self setStatusBarMenuVisible:menuVisible];	
 }
 
 - (BOOL)windowShouldClose:(id)window {
@@ -516,9 +515,52 @@
 - (void)showApp:(id)sender {
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
+
 - (void)quitApp:(id)sender {
 	[[NSApplication sharedApplication] terminate:sender];
 }
 
+- (void)setStatusBarMenuVisible:(BOOL)visible {
+	if (visible) {
+		// Load 16x16 icon from icns file
+		NSImage *iconFile = [NSImage imageNamed:@"icon"];
+		NSArray *iconFileReps = [iconFile representations];
+		NSImage *menuBarIcon = nil;
+		
+		for(NSImageRep *imageRep in iconFileReps) {
+			if(imageRep.size.width == 16) {
+				menuBarIcon = [[[NSImage alloc] init] autorelease];
+				[menuBarIcon addRepresentation:imageRep];
+			}
+		}
+		
+		// Set menu
+		menuBarItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
+		NSMenu *menu = [self createStatusBarMenu];
+		[menuBarItem setMenu:menu];
+		[menuBarItem setHighlightMode:YES];
+		[menuBarItem setToolTip:@"WellDone"];
+		[menuBarItem setImage:menuBarIcon];
+		[menu release];
+	}
+	else {
+		if (menuBarItem != nil) {
+			[[NSStatusBar systemStatusBar] removeStatusItem:menuBarItem];
+			menuBarItem = nil;
+		}
+	}
+}
+
+- (void)startSync:(id)sender {
+	[syncProgress startAnimation:sender];
+	// TODO: call sync controller, wait for response
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqual:@"menubarIcon"]) {
+		[self setStatusBarMenuVisible:[[change objectForKey:NSKeyValueChangeNewKey] boolValue]];
+    }
+    // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
 
 @end

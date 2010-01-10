@@ -30,6 +30,8 @@
 	IBOutlet NSView* sidebarFolderPlaceholderView;
 	IBOutlet NSView* contextPlaceholderView;
 	
+	IBOutlet NSProgressIndicator *syncProgress;
+	
 	IBOutlet NSTextField* quickAddTask;
 	
 	//is necessary for setting the first responder (focus) to the current view, e.g. after inserting new task:
@@ -78,6 +80,11 @@
 - (void)showContextManagement:(id)sender;
 - (void)addNewTask:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
+
+/**
+ Starts the sync.
+ */
+- (IBAction)startSync:(id)sender;
 
 
 @end

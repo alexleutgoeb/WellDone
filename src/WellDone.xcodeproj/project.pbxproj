@@ -60,6 +60,8 @@
 		FA56EC0810EBCA9900228C43 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FA56EC0710EBCA9900228C43 /* icon.icns */; };
 		FA56EC6B10EE9CE300228C43 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA56EC6A10EE9CE300228C43 /* Localizable.strings */; };
 		FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
+		FA6A30FC10FA231700A77477 /* GeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6A30FB10FA231700A77477 /* GeneralPreferences.xib */; };
+		FA6A310110FA250400A77477 /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A310010FA250400A77477 /* GeneralPreferences.m */; };
 		FA90D40410C4124D00309192 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F110C4124D00309192 /* Folder.m */; };
 		FA90D40510C4124D00309192 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F310C4124D00309192 /* Note.m */; };
 		FA90D40610C4124D00309192 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3F510C4124D00309192 /* Tag.m */; };
@@ -222,6 +224,9 @@
 		FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		FA56EC0710EBCA9900228C43 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		FA56EC6010EE9CC100228C43 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FA6A30FB10FA231700A77477 /* GeneralPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralPreferences.xib; sourceTree = "<group>"; };
+		FA6A30FF10FA250400A77477 /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
+		FA6A310010FA250400A77477 /* GeneralPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferences.m; sourceTree = "<group>"; };
 		FA90D3F010C4124D00309192 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		FA90D3F110C4124D00309192 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		FA90D3F210C4124D00309192 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -368,6 +373,7 @@
 				D110F46910B8D72300304B4C /* TagManagement.xib */,
 				D110F48410B8DA6800304B4C /* ContextManagement.xib */,
 				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
+				FA6A30FB10FA231700A77477 /* GeneralPreferences.xib */,
 				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
 				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
 				D1B51A7710F690360053C847 /* ContextView.xib */,
@@ -558,6 +564,8 @@
 				FACF444B10D2EB5700B0237A /* SS_PrefsController.m */,
 				FACF445410D2ED0900B0237A /* SyncPreferences.h */,
 				FACF445510D2ED0900B0237A /* SyncPreferences.m */,
+				FA6A30FF10FA250400A77477 /* GeneralPreferences.h */,
+				FA6A310010FA250400A77477 /* GeneralPreferences.m */,
 			);
 			name = "Preferences Classes";
 			sourceTree = "<group>";
@@ -689,6 +697,7 @@
 				FA56EC0810EBCA9900228C43 /* icon.icns in Resources */,
 				FA56EC6B10EE9CE300228C43 /* Localizable.strings in Resources */,
 				D1B51A7810F690360053C847 /* ContextView.xib in Resources */,
+				FA6A30FC10FA231700A77477 /* GeneralPreferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +774,7 @@
 				42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */,
 				D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */,
 				6FB0A92C10FA5A6000990D07 /* DebugTreeController.m in Sources */,
+				FA6A310110FA250400A77477 /* GeneralPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
