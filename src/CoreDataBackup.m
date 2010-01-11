@@ -18,8 +18,16 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 - (IBAction)createBackupAction:(id)sender {
 
 	NSString *location = @"/Users/hatti/Desktop/";
-	NSError **error;
-	BOOL status = [self backupDatabaseFile:location error:&error]; //todo: rueckmeldung an gui
+	NSError *error;	
+	NSAlert *alert = [[NSAlert alloc] init];
+	if (![self backupDatabaseFile:location error:&error]){
+		NSString *message = NSLocalizedString(["@ Backup was successful,file was saved in the directory: " stringByAppendingString:location], @"backup was successful, saved file into the directory:" );
+		[alert setMessageText:message];	
+		[alert runModal];
+	}else {
+		[[NSAlert alertWithError:error] runModal];	
+	}
+
 	
 }
 
@@ -36,7 +44,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 		NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
 		[errorDetail setValue:@"Directory or Filename of the Database does not exist" forKey:NSLocalizedDescriptionKey]; //TODO: also give user the location
 		[errorDetail setValue:@"Please chose an existing directory" forKey:NSLocalizedRecoverySuggestionErrorKey];		
-		*error = [NSError errorWithDomain:CoreDataBackupError code:1 userInfo:errorDetail];
+		error = [NSError errorWithDomain:CoreDataBackupError code:1 userInfo:errorDetail];
 		return NO;
 	}
 	*/
@@ -64,8 +72,11 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 }
 
 
+- (BOOL)replaceDatabaseFileWithBackupFile:(NSString *)backupFilePath{
 
-// replace current core data file with a existing one (as from a backup). --> migrate (http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/CoreDataFramework/Classes/NSPersistentStoreCoordinator_Class/NSPersistentStoreCoordinator.html#//apple_ref/occ/instm/NSPersistentStoreCoordinator/migratePersistentStore:toURL:options:withType:error:) or newstart
+
+	return NO;
+}
 
 
 @end

@@ -339,7 +339,7 @@
 /**
     Implementation of the applicationShouldTerminate: method, used here to
     handle the saving of changes in the application managed object context
-    before the application terminates.
+    before the application terminates. this method also checks if a current backup should be replaced with an existing one
  */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 
@@ -384,6 +384,8 @@
         if (answer == NSAlertAlternateReturn) return NSTerminateCancel;
 
     }
+	
+	// backup stuff
 
     return NSTerminateNow;
 }
