@@ -180,19 +180,19 @@
 - (void)startSync:(NSManagedObjectContext *)moc {
 	NSManagedObjectContext *context = [syncManager syncData:moc];
 	
-	// TODO: merge moc with deactivated undo manager
-	NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
-	[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
-	
-	DLog(@"Changes: %@", [[context updatedObjects] description]);
-	
-	NSError *error;
-	if (![context save:&error]) {
-		// Update to handle the error appropriately.
-		DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
+	if (context != nil) {	
+		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
+		[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
+		
+		DLog(@"Changes: %@", [[context updatedObjects] description]);
+		
+		NSError *error;
+		if (![context save:&error]) {
+			// Update to handle the error appropriately.
+			DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
+		}
+		[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
 	}
-	[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
-	
 	// Inform delegate
 	// TODO: Check result of sync
 	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
