@@ -552,7 +552,9 @@
 }
 
 - (void)startSync:(id)sender {
+	DLog(@"Start sync in UI.");
 	[syncProgress startAnimation:sender];
+	[syncController sync];
 	// TODO: call sync controller, wait for response
 }
 
