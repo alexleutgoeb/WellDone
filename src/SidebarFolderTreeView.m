@@ -511,8 +511,9 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	}
 	
 	// Run Thread with selected Action
-	if (action != NULL)
-		[NSThread detachNewThreadSelector:action toTarget:target withObject:selectedNode];
+	if (action != NULL) {
+		[target performSelector:action withObject:selectedNode];
+	}
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor {
