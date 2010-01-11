@@ -82,68 +82,85 @@
 
 - (void)connectToService {
 	
-	// TODO: check internet connection before connecting
-	NSString *username = [usernameTextField stringValue];
-	NSString *password = [passwordTextField stringValue];
-	NSError *error = nil;
-	
-	SyncController *sc = [[NSApp delegate] sharedSyncController];
-	BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
-	
-	if (success == NO) {
-		// TODO: show detailed error
-		
+	// Check internet connection
+	if ([[NSApp delegate] isOnline] == NO) {
+		// offline
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 		[NSApp endSheet:[self window]];
 		
-		//NSAlert *alert = [NSAlert alertWithMessageText:@"Credentials wrong." defaultButton:@"OK" 
-		//								alternateButton:nil otherButton:nil 
-		//								informativeTextWithFormat:@"Please check your credentials."];
+		NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+		[errorDetail setValue:@"No internet connection" forKey:NSLocalizedDescriptionKey];
+		[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
+		[NSAlert alertWithError:[NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail]];
+		// [alert runModal];
 		
-		NSAlert *alert = [NSAlert alertWithError:error];
-		
-		[alert runModal];
+		// TODO: IMPLEMENT
 	}
 	else {
-		DLog(@"Connected to service, save credentials in defaults.");
-		NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
-
-		NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
-		
-		if (defaultServices == nil)
-			defaultServices = [NSMutableDictionary dictionary];
-		
-		NSMutableDictionary *serviceDic = [NSMutableDictionary dictionary];
-		[serviceDic setObject:username forKey:@"username"];
-		[serviceDic setObject:@"1" forKey:@"enabled"];
-		
-		if ([defaultServices objectForKey:serviceId] != nil) {
-			if (![username isEqualToString:[[defaultServices objectForKey:serviceId] objectForKey:@"username"]]) {
-				// TODO: remove remote objects with same serviceId
-			}
-		}
-		
-		[defaultServices setObject:serviceDic forKey:serviceId];
-		
-		[userPreferences setObject:defaultServices forKey:@"syncServices"];
-		[userPreferences synchronize];
-		
-		// save password to keychain
+		// online
+		NSString *username = [usernameTextField stringValue];
+		NSString *password = [passwordTextField stringValue];
 		NSError *error = nil;
-		NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceId];
-		[SFHFKeychainUtils storeUsername:username andPassword:password forServiceName:serviceName updateExisting:NO error:&error];
-		if (error != nil) {
-			DLog(@"Error while saving to keychain: %@.", error);
+		
+		SyncController *sc = [[NSApp delegate] sharedSyncController];
+		BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
+		
+		if (success == NO) {
+			// TODO: show detailed error
+			
+			if (notifyTarget)
+				[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
+			[NSApp endSheet:[self window]];
+			
+			//NSAlert *alert = [NSAlert alertWithMessageText:@"Credentials wrong." defaultButton:@"OK" 
+			//								alternateButton:nil otherButton:nil 
+			//								informativeTextWithFormat:@"Please check your credentials."];
+			
+			NSAlert *alert = [NSAlert alertWithError:error];
+			
+			[alert runModal];
+		}
+		else {
+			DLog(@"Connected to service, save credentials in defaults.");
+			NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
+
+			NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
+			
+			if (defaultServices == nil)
+				defaultServices = [NSMutableDictionary dictionary];
+			
+			NSMutableDictionary *serviceDic = [NSMutableDictionary dictionary];
+			[serviceDic setObject:username forKey:@"username"];
+			[serviceDic setObject:@"1" forKey:@"enabled"];
+			
+			if ([defaultServices objectForKey:serviceId] != nil) {
+				if (![username isEqualToString:[[defaultServices objectForKey:serviceId] objectForKey:@"username"]]) {
+					// TODO: remove remote objects with same serviceId
+				}
+			}
+			
+			[defaultServices setObject:serviceDic forKey:serviceId];
+			
+			[userPreferences setObject:defaultServices forKey:@"syncServices"];
+			[userPreferences synchronize];
+			
+			// save password to keychain
+			NSError *error = nil;
+			NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceId];
+			[SFHFKeychainUtils storeUsername:username andPassword:password forServiceName:serviceName updateExisting:NO error:&error];
+			if (error != nil) {
+				DLog(@"Error while saving to keychain: %@.", error);
+			}
+			
+			if (notifyTarget)
+				[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:YES];
+			[NSApp endSheet:[self window]];
 		}
 		
-		if (notifyTarget)
-			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:YES];
-		[NSApp endSheet:[self window]];
+		username = nil;
+		password = nil;
 	}
-	
-	username = nil;
-	password = nil;
 }
 
 - (void)windowWillClose:(id)sender {
