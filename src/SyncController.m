@@ -165,6 +165,8 @@
 	NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
 	[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
 	
+	DLog(@"Changes: %@", [[context updatedObjects] description]);
+	
 	NSError *error;
 	if (![context save:&error]) {
 		// Update to handle the error appropriately.

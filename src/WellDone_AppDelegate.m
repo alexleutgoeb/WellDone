@@ -58,6 +58,11 @@
  */
 - (void)setStatusBarMenuVisible:(BOOL)visible;
 
+/**
+ Callback for online notification
+ */
+- (void)setOnlineState:(NSNotification *)notification;
+
 @end
 
 
@@ -66,6 +71,7 @@
 @synthesize simpleListController;
 @synthesize syncController;
 @synthesize coreDataDBLocationURL;
+@synthesize backupDBLocationURL;
 @synthesize isOnline;
 
 #pragma mark -
@@ -112,9 +118,13 @@
 		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
 		CFRunLoopRun();
 	}
-	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(setIsOnline:) name: kReachabilityChangedNotification object: nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
 	
 	
+}
+
+- (void)setOnlineState:(NSNotification *)notification {
+	self.isOnline = [[notification object] boolValue];	
 }
 
 - (BOOL)windowShouldClose:(id)window {
@@ -349,7 +359,7 @@
 /**
     Implementation of the applicationShouldTerminate: method, used here to
     handle the saving of changes in the application managed object context
-    before the application terminates.
+    before the application terminates. this method also checks if a current backup should be replaced with an existing one
  */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 
@@ -394,6 +404,8 @@
         if (answer == NSAlertAlternateReturn) return NSTerminateCancel;
 
     }
+	
+	// backup stuff
 
     return NSTerminateNow;
 }
@@ -564,7 +576,6 @@
 	DLog(@"Start sync in UI.");
 	[syncProgress startAnimation:sender];
 	[syncController sync];
-	// TODO: call sync controller, wait for response
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
