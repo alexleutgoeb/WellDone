@@ -599,8 +599,15 @@
 #pragma mark SyncControllerDelegate methods
 
 - (void)syncControllerDidSyncWithSuccess:(SyncController *)sc {
-	DLog(@"Sync finihsed with success, hiding sync progress inidicator...");
+	DLog(@"Sync finished with success, hiding sync progress inidicator...");
 	[syncProgress stopAnimation:self];
+}
+
+- (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
+	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
+	[syncProgress stopAnimation:self];
+	NSAlert *alert = [NSAlert alertWithError:error];
+	[alert runModal];
 }
 
 @end
