@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">740</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="72"/>
+			<integer value="64"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -99,7 +99,7 @@
 			</object>
 			<object class="NSScrollView" id="858312636">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">4364</int>
+				<int key="NSvFlags">4382</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSClipView" id="963355143">
@@ -110,13 +110,13 @@
 							<object class="NSOutlineView" id="848461419">
 								<reference key="NSNextResponder" ref="963355143"/>
 								<int key="NSvFlags">4368</int>
-								<string key="NSFrameSize">{398, 382}</string>
+								<string key="NSFrameSize">{400, 383}</string>
 								<reference key="NSSuperview" ref="963355143"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTableHeaderView" key="NSHeaderView" id="279691375">
 									<reference key="NSNextResponder" ref="538321996"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrameSize">{398, 17}</string>
+									<string key="NSFrameSize">{400, 17}</string>
 									<reference key="NSSuperview" ref="538321996"/>
 									<reference key="NSTableView" ref="848461419"/>
 								</object>
@@ -272,7 +272,7 @@
 														<integer value="1"/>
 													</object>
 												</object>
-												<string key="NS.format">dd MMM yyyy HH:mm</string>
+												<string key="NS.format">dd.MM.yyyy HH:mm</string>
 												<bool key="NS.natural">NO</bool>
 											</object>
 											<string key="NSPlaceholderString">dd/MM/yyyy hh:ss</string>
@@ -291,7 +291,7 @@
 									</object>
 									<object class="NSTableColumn" id="929791503">
 										<string key="NSIdentifier">tags</string>
-										<double key="NSWidth">197</double>
+										<double key="NSWidth">199</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028234663852886e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -356,7 +356,7 @@
 								<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 							</object>
 						</object>
-						<string key="NSFrame">{{1, 17}, {398, 382}}</string>
+						<string key="NSFrame">{{0, 17}, {400, 383}}</string>
 						<reference key="NSSuperview" ref="858312636"/>
 						<reference key="NSNextKeyView" ref="848461419"/>
 						<reference key="NSDocView" ref="848461419"/>
@@ -381,8 +381,7 @@
 						<int key="NSsFlags">1</int>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
-						<double key="NSCurValue">0.01507537688442211</double>
-						<double key="NSPercent">0.49874686716791977</double>
+						<double key="NSPercent">0.995</double>
 					</object>
 					<object class="NSClipView" id="538321996">
 						<reference key="NSNextResponder" ref="858312636"/>
@@ -391,7 +390,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="279691375"/>
 						</object>
-						<string key="NSFrame">{{1, 0}, {398, 17}}</string>
+						<string key="NSFrameSize">{400, 17}</string>
 						<reference key="NSSuperview" ref="858312636"/>
 						<reference key="NSNextKeyView" ref="279691375"/>
 						<reference key="NSDocView" ref="279691375"/>
@@ -403,7 +402,7 @@
 				<string key="NSFrameSize">{400, 400}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="963355143"/>
-				<int key="NSsFlags">562</int>
+				<int key="NSsFlags">560</int>
 				<reference key="NSVScroller" ref="783213421"/>
 				<reference key="NSHScroller" ref="961531674"/>
 				<reference key="NSContentView" ref="963355143"/>
@@ -796,7 +795,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>DebugTreeController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{395, 377}, {400, 400}}</string>
+					<string>{{235, 143}, {400, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

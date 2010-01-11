@@ -148,7 +148,7 @@
 - (void) awakeFromNib {
 	// A couple of asserts to make sure the nib is properly assigned. These are easily
 	// forgotten and may take some time to verify.
-	NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
+	//NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
 	NSAssert(simpleListPlaceholderView != nil, @"Forgot to link the gtdList placeholder view!");
 	NSAssert(sidebarFolderPlaceholderView != nil, @"Forgot to link the sidebarFolder placeholder view!");
 	NSAssert(contextPlaceholderView != nil, @"Forgot to link the context placeholder view!");
@@ -179,7 +179,7 @@
 	// Replace the placeholder views with the actual views from the controllers.
  	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];	
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
-	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
+	//[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
 	[[hudTaskEditorController window] makeKeyAndOrderFront:nil];

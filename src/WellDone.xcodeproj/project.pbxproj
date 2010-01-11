@@ -21,8 +21,8 @@
 		6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */; };
 		6F22C29E10CC1A2A00ABFE19 /* SidebarFolderNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */; };
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
-		6F9A5B2E10FBA0B800CE21CB /* HUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUD.xib */; };
-		6F9A5B2F10FBA0B800CE21CB /* HUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUD.xib */; };
+		6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
+		6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
 		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
 		6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
@@ -32,8 +32,6 @@
 		6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
 		6FCE287010B6FE42002355CF /* TestDataGeneratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */; };
 		6FCE287310B6FE53002355CF /* TestDataGenerator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCE287210B6FE53002355CF /* TestDataGenerator.xib */; };
-		6FE405C310FB60E8002ECF9C /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FE405C210FB60E8002ECF9C /* HUDTaskEditor.xib */; };
-		6FE405C410FB60E8002ECF9C /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FE405C210FB60E8002ECF9C /* HUDTaskEditor.xib */; };
 		6FE405CD10FB69F9002ECF9C /* HUDTaskEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */; };
 		6FE405CE10FB69F9002ECF9C /* HUDTaskEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */; };
 		77C8280E06725ACE000B614F /* WellDone_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */; };
@@ -178,7 +176,7 @@
 		6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderNode.m; sourceTree = "<group>"; };
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
-		6F9A5B2D10FBA0B800CE21CB /* HUD.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUD.xib; sourceTree = "<group>"; };
+		6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUDTaskEditor.xib; sourceTree = "<group>"; };
 		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
 		6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioritySplitViewDelegate.m; sourceTree = "<group>"; };
 		6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 		6FCE286E10B6FE42002355CF /* TestDataGeneratorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDataGeneratorController.h; sourceTree = "<group>"; };
 		6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDataGeneratorController.m; sourceTree = "<group>"; };
 		6FCE287210B6FE53002355CF /* TestDataGenerator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestDataGenerator.xib; sourceTree = "<group>"; };
-		6FE405C210FB60E8002ECF9C /* HUDTaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUDTaskEditor.xib; sourceTree = "<group>"; };
 		6FE405CB10FB69F9002ECF9C /* HUDTaskEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDTaskEditorController.h; sourceTree = "<group>"; };
 		6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDTaskEditorController.m; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -381,7 +378,6 @@
 				FA56EC0710EBCA9900228C43 /* icon.icns */,
 				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
 				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
-				6FE405C210FB60E8002ECF9C /* HUDTaskEditor.xib */,
 				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
 				42262EB5109C8049005E4997 /* UnitTests-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -398,7 +394,7 @@
 				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
 				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
 				D1B51A7710F690360053C847 /* ContextView.xib */,
-				6F9A5B2D10FBA0B800CE21CB /* HUD.xib */,
+				6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -700,8 +696,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE405C410FB60E8002ECF9C /* HUDTaskEditor.xib in Resources */,
-				6F9A5B2E10FBA0B800CE21CB /* HUD.xib in Resources */,
+				6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,8 +723,7 @@
 				FA56EC6B10EE9CE300228C43 /* Localizable.strings in Resources */,
 				D1B51A7810F690360053C847 /* ContextView.xib in Resources */,
 				FA6A30FC10FA231700A77477 /* GeneralPreferences.xib in Resources */,
-				6FE405C310FB60E8002ECF9C /* HUDTaskEditor.xib in Resources */,
-				6F9A5B2F10FBA0B800CE21CB /* HUD.xib in Resources */,
+				6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
