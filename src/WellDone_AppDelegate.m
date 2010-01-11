@@ -58,6 +58,11 @@
  */
 - (void)setStatusBarMenuVisible:(BOOL)visible;
 
+/**
+ Callback for online notification
+ */
+- (void)setOnlineState:(NSNotification *)notification;
+
 @end
 
 
@@ -112,9 +117,13 @@
 		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
 		CFRunLoopRun();
 	}
-	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(setIsOnline:) name: kReachabilityChangedNotification object: nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
 	
 	
+}
+
+- (void)setOnlineState:(NSNotification *)notification {
+	self.isOnline = [[notification object] boolValue];	
 }
 
 - (BOOL)windowShouldClose:(id)window {
