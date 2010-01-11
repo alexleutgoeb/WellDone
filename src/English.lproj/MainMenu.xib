@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
 			<integer value="948"/>
+			<integer value="856"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2739,6 +2739,14 @@
 					</object>
 					<int key="connectionID">999</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">syncButton</string>
+						<reference key="source" ref="612578685"/>
+						<reference key="destination" ref="913840171"/>
+					</object>
+					<int key="connectionID">1023</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -4239,9 +4247,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{263, -3}, {861, 690}}</string>
+					<string>{{70, 359}, {861, 690}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{263, -3}, {861, 690}}</string>
+					<string>{{70, 359}, {861, 690}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
@@ -4440,7 +4448,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1022</int>
+			<int key="maxID">1023</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4534,6 +4542,7 @@
 							<string>sidebarTaskPlaceholderView</string>
 							<string>simpleListPlaceholderView</string>
 							<string>splitView</string>
+							<string>syncButton</string>
 							<string>syncProgress</string>
 							<string>window</string>
 						</object>
@@ -4546,6 +4555,7 @@
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSSplitView</string>
+							<string>NSButton</string>
 							<string>NSProgressIndicator</string>
 							<string>NSWindow</string>
 						</object>

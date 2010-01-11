@@ -35,6 +35,7 @@
 	IBOutlet NSView* contextPlaceholderView;
 	
 	IBOutlet NSProgressIndicator *syncProgress;
+	IBOutlet NSButton *syncButton;
 	
 	IBOutlet NSTextField* quickAddTask;
 	

@@ -11,6 +11,8 @@
 #import "SyncService.h"
 #import "TDApi.h"
 #import "SFHFKeychainUtils.h"
+#import "WellDone_AppDelegate.h"
+
 
 @interface SyncController ()
 
@@ -80,9 +82,13 @@
 				}
 				
 				if ([service objectForKey:@"username"] != nil && error == nil) {
-					BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
+					BOOL success = NO;
+					// Check internet connection	
+					if ([[NSApp delegate] isOnline] == YES) {
+						success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
+					}
 					DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
-					// TODO: if not successful try later with timer or deactivate service automatically ?
+					// TODO: if not successful or offline try later with timer or deactivate service automatically ?
 				}
 			}
 		}
@@ -143,37 +149,50 @@
 }
 
 - (void)sync {
-	// TODO: check for internet connection to services
-	
-	// Get new objectcontext from delegate
-	NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
-	
-	NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
-	[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
-	
-	// call syncmanager in background thread
-	DLog(@"Start sync in operation queue.");
-	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startSync:) object:context];
-	[syncQueue addOperation:op];
-	[context release];	
+
+	// Check internet connection	
+	if ([[NSApp delegate] isOnline] == NO) {
+		// offline
+		if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
+			NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+			[errorDetail setValue:@"No internet connection" forKey:NSLocalizedDescriptionKey];
+			[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
+			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail];
+			
+			[delegate syncController:self didSyncWithError:error];
+		}
+	}
+	else {
+		// Get new objectcontext from delegate
+		NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
+		
+		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+		[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
+		
+		// call syncmanager in background thread
+		DLog(@"Start sync in operation queue.");
+		NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startSync:) object:context];
+		[syncQueue addOperation:op];
+		[context release];
+	}
 }
 
 - (void)startSync:(NSManagedObjectContext *)moc {
 	NSManagedObjectContext *context = [syncManager syncData:moc];
 	
-	// TODO: merge moc with deactivated undo manager
-	NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
-	[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
-	
-	DLog(@"Changes: %@", [[context updatedObjects] description]);
-	
-	NSError *error;
-	if (![context save:&error]) {
-		// Update to handle the error appropriately.
-		DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
+	if (context != nil) {	
+		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
+		[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
+		
+		DLog(@"Changes: %@", [[context updatedObjects] description]);
+		
+		NSError *error;
+		if (![context save:&error]) {
+			// Update to handle the error appropriately.
+			DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
+		}
+		[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
 	}
-	[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
-	
 	// Inform delegate
 	// TODO: Check result of sync
 	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
