@@ -81,9 +81,10 @@
 }
 
 - (void)connectToService {
-	
+	// TODO: change !!
 	// Check internet connection
-	if ([[NSApp delegate] isOnline] == NO) {
+	if (1 == 2) {
+	//if ([[NSApp delegate] isOnline] == NO) {
 		// offline
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
