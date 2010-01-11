@@ -19,7 +19,7 @@
  */
 @interface _NSArrayControllerTreeNode : NSObject
 {
-
+	
 }
 - (unsigned int)count;
 - (id)observedObject;
@@ -38,6 +38,9 @@
 	NSManagedObjectContext *moc;
 	NSArray* dragType;
 	_NSArrayControllerTreeNode* draggedNode;
+	
+	// holds the control which is being edited
+	NSControl *editingControl;
 	
 	// Holds all filter predicates (string or array representation) for the task view which are currently active
 	NSMutableDictionary* taskListFilterPredicate;
