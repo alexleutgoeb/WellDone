@@ -314,12 +314,12 @@
 	[sidebar removeItem: [folder objectID]];
 }
 
-- (void) handleFolderSelection:(id) sender {
+- (IBAction) handleFolderSelection:(id) sender {
 	NSLog(@"Selected Folder '%@'", [sender caption]);
 	[simpController setTaskListFolderFilter:[sender data]];
 }
 
-- (void) handleInboxSelection:(id) sender {
+- (IBAction) handleInboxSelection:(id) sender {
 	NSLog(@"Selected Inbox!");
 	[simpController setTaskListFolderFilter:nil];
 }
