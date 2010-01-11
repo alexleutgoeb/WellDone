@@ -12,40 +12,55 @@
 @implementation CoreDataBackup
 
 
+// workaround for error domain initialization
+NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
+
+- (IBAction)createBackupAction:(id)sender {
+
+	NSString *location = @"/Users/hatti/Desktop/";
+	NSError **error;
+	BOOL status = [self backupDatabaseFile:location error:&error]; //todo: rueckmeldung an gui
+	
+}
+
 // make a copy of the core data file
-- (BOOL)backupDatabaseFile:(NSString *)backupPath {
+- (BOOL)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
     NSFileManager *fm = [NSFileManager defaultManager];
     
 	NSURL *currentDBFile = [[NSApp delegate] coreDataDBLocationURL];
-	
-//	NSLog([currentDBFile absoluteString]);
+	BOOL temp = [fm fileExistsAtPath:[currentDBFile absoluteString]];
 	
 	/*
-	NSLog(currentDBFile);
-	
-    // insist that the file which should be backuped does exist--> eher ein if
-//	NSAssert1([fm fileExistsAtPath:	[currentDBFile absoluteString], @"no db file at %@", currentDBFile]);
-
-	// create the new file (if the folder does not exist, the method creates it)
-	// todo: eventuell nicht noetig wegen copyItemAtURL
-	if (![fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:nil]){
-		//errorhandling
+    // insist that the file which should be backuped does exist
+	if (![fm fileExistsAtPath:[currentDBFile absoluteString]] && error !=nil){ // 
+		NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+		[errorDetail setValue:@"Directory or Filename of the Database does not exist" forKey:NSLocalizedDescriptionKey]; //TODO: also give user the location
+		[errorDetail setValue:@"Please chose an existing directory" forKey:NSLocalizedRecoverySuggestionErrorKey];		
+		*error = [NSError errorWithDomain:CoreDataBackupError code:1 userInfo:errorDetail];
+		return NO;
 	}
-		 */  
-			   
+	*/
+	// checks if the backup directory exisits and creates it if not
+	if (![fm fileExistsAtPath:backupPath]){ //TODO: isdirectory and can write
+		// create the new file (if the folder does not exist, the method creates it)
+		if (![fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:&error]){
+			return NO;
+		}	
+	}
 	
 	// create a file name out of the backupPath
-	NSDate *date = [NSDate date];
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"YYYY-MM-DD_HH_MM_SS"];
-//	NSString *dateString = [dateFormat stringFromDate:date]; 
-//	NSMutableString *backupFileName = [NSString stringWithString: currentDBFile];
-	//[backupFileName appendString:dateString];
-	//NSLog(@"The backup file will be named %@", backupFileName);
+	NSString *fileEnding;
+	fileEnding = [ [dateFormat stringFromDate:[NSDate date]] stringByAppendingString:@"_WellDone.welldonedoc"];
+
+	NSString *backupFileName;
+	backupFileName = [backupPath stringByAppendingString:fileEnding];
 	
-	//[fm copyItemAtURL:currentDBFile toURL:backupFileName error:nil];
-	
-    return YES;
+	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
+
+	return	[fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&error];
+
 }
 
 
