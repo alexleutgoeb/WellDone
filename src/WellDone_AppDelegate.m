@@ -71,6 +71,7 @@
 @synthesize simpleListController;
 @synthesize syncController;
 @synthesize coreDataDBLocationURL;
+@synthesize backupDBLocationURL;
 @synthesize isOnline;
 
 #pragma mark -

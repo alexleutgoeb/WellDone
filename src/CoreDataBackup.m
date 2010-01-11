@@ -17,7 +17,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 
 - (IBAction)createBackupAction:(id)sender {
 
-	NSString *location = @"/Users/hatti/Desktop/";
+	NSString *location = @"/Users/"; //TODO
 	NSError *error;	
 	NSAlert *alert = [[NSAlert alloc] init];
 	if (![self backupDatabaseFile:location error:&error]){
