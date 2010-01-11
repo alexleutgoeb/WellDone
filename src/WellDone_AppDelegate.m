@@ -92,6 +92,16 @@
 	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"general", @"sync", nil]];
 	[preferencesController setAlwaysShowsToolbar:YES];
 	
+	// Init reachability
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
+	
+	reachRef = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, [@"www.toodledo.com" cStringUsingEncoding:NSUTF8StringEncoding]);
+	
+	if (SCNetworkReachabilitySetCallback(reachRef, networkStatusDidChange, NULL) &&
+		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
+		CFRunLoopRun();
+	}
+	
 	// Init syncController
 	self.syncController = [[SyncController alloc] initWithDelegate:self];
 	
@@ -110,16 +120,6 @@
 	// Init status bar menu
 	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
 	[self setStatusBarMenuVisible:menuVisible];
-	
-	// Init reachability
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
-
-	reachRef = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, [@"www.toodledo.com" cStringUsingEncoding:NSUTF8StringEncoding]);
-	
-	if (SCNetworkReachabilitySetCallback(reachRef, networkStatusDidChange, NULL) &&
-		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
-		CFRunLoopRun();
-	}
 }
 
 - (void)setOnlineState:(NSNotification *)notification {
@@ -137,7 +137,7 @@
  */
 - (void)dealloc {
 	[syncController release];
-	
+	[syncButton release];
     [window release];
     [managedObjectContext release];
     [persistentStoreCoordinator release];
@@ -585,6 +585,7 @@
 - (void)startSync:(id)sender {
 	DLog(@"Start sync in UI.");
 	[syncProgress startAnimation:sender];
+	[syncButton setEnabled:NO];
 	[syncController sync];
 }
 
@@ -601,11 +602,13 @@
 - (void)syncControllerDidSyncWithSuccess:(SyncController *)sc {
 	DLog(@"Sync finished with success, hiding sync progress inidicator...");
 	[syncProgress stopAnimation:self];
+	[syncButton setEnabled:YES];
 }
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
 	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
 	[syncProgress stopAnimation:self];
+	[syncButton setEnabled:YES];
 	NSAlert *alert = [NSAlert alertWithError:error];
 	[alert runModal];
 }
