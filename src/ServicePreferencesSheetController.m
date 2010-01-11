@@ -81,10 +81,9 @@
 }
 
 - (void)connectToService {
-	// TODO: change !!
-	// Check internet connection
-	if (1 == 2) {
-	//if ([[NSApp delegate] isOnline] == NO) {
+
+	// Check internet connection	
+	if ([[NSApp delegate] isOnline] == NO) {
 		// offline
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
@@ -93,8 +92,8 @@
 		NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
 		[errorDetail setValue:@"No internet connection" forKey:NSLocalizedDescriptionKey];
 		[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
-		[NSAlert alertWithError:[NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail]];
-		// [alert runModal];
+		NSAlert *alert = [NSAlert alertWithError:[NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail]];
+		[alert runModal];
 		
 		// TODO: IMPLEMENT
 	}
@@ -106,17 +105,13 @@
 		
 		SyncController *sc = [[NSApp delegate] sharedSyncController];
 		BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
-		
+
 		if (success == NO) {
 			// TODO: show detailed error
 			
 			if (notifyTarget)
 				[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 			[NSApp endSheet:[self window]];
-			
-			//NSAlert *alert = [NSAlert alertWithMessageText:@"Credentials wrong." defaultButton:@"OK" 
-			//								alternateButton:nil otherButton:nil 
-			//								informativeTextWithFormat:@"Please check your credentials."];
 			
 			NSAlert *alert = [NSAlert alertWithError:error];
 			

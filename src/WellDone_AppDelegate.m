@@ -112,19 +112,19 @@
 	[self setStatusBarMenuVisible:menuVisible];
 	
 	// Init reachability
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
+
 	reachRef = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, [@"www.toodledo.com" cStringUsingEncoding:NSUTF8StringEncoding]);
 	
 	if (SCNetworkReachabilitySetCallback(reachRef, networkStatusDidChange, NULL) &&
 		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
 		CFRunLoopRun();
 	}
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
-	
-	
 }
 
 - (void)setOnlineState:(NSNotification *)notification {
-	self.isOnline = [[notification object] boolValue];	
+	self.isOnline = [[notification object] boolValue];
+	DLog(@"Set isOnline property in delegate to: %@", (isOnline ? @"YES" : @"NO"));
 }
 
 - (BOOL)windowShouldClose:(id)window {
