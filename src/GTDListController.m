@@ -52,14 +52,50 @@
 
 
 - (void)groupTasksToGTD { 
+	//Task *task = [item representedObject];
+	//NSDate *date = task.dueDate;
+	//NSCalendarDate *taskDate = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate:[date timeIntervalSinceReferenceDate]];
+	NSCalendarDate *todaysDate1 = [NSCalendarDate calendarDate];
+	NSDate *todaysDate = [NSDate date];
+	if (todaysDate1 == todaysDate) {
+		NSLog(@"date same");
+	} else {
+		NSLog(@"date not same");
+	}
+
+
 	
-	NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"title == %@", @"test"];	
+	
+	/*if ([taskDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
+	 if ([taskDate dayOfYear] == [todaysDate dayOfYear]) {
+	 if (task != nil) {
+	 if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+	 result = NSLocalizedString(@"Today", @"Today title");;
+	 }
+	 } 
+	 } else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] + 3 )) {
+	 if (task != nil) {
+	 if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+	 result = NSLocalizedString(@"In the next 3 days", @"Next 3 days title");;
+	 }
+	 } 
+	 } else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] +7)) {
+	 if (task != nil) {
+	 if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+	 result = NSLocalizedString(@"In the next 7 days", @"Next 7 days title");;
+	 }
+	 } 
+	 
+	 }
+	 }*/
+	
+	
+	NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"dueDate < %@", todaysDate];	
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery1 = [[SearchQuery alloc] initWithSearchPredicate:predicate1 title:@"Heute:"];
 	[iTasks addObject:searchQuery1];
 	NSLog(@"iTasks size %@ ", [searchQuery1 children]);
 	[searchQuery1 release];
-
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
 	[gtdOutlineView expandItem:searchQuery1];
@@ -67,7 +103,7 @@
 	[gtdOutlineView scrollRowToVisible:row1];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row1] byExtendingSelection:NO];
 	
-	NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
+	NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"dueDate > %@", todaysDate];	
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery2 = [[SearchQuery alloc] initWithSearchPredicate:predicate2 title:@"Die nächsten 3 Tage zu erledigen:"];
 	[iTasks addObject:searchQuery2];
@@ -79,7 +115,7 @@
 	[gtdOutlineView scrollRowToVisible:row2];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row2] byExtendingSelection:NO];
 
-	NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
+	NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"dueDate > %@", todaysDate];	
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery3 = [[SearchQuery alloc] initWithSearchPredicate:predicate3 title:@"Die nächsten 7 Tage zu erledigen:"];
 	[iTasks addObject:searchQuery3];
@@ -91,7 +127,7 @@
 	[gtdOutlineView scrollRowToVisible:row3];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row3] byExtendingSelection:NO];
 
-	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
+	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"dueDate > %@", todaysDate];	
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery4 = [[SearchQuery alloc] initWithSearchPredicate:predicate4 title:@"Kommende:"];
 	[iTasks addObject:searchQuery4];
@@ -102,23 +138,20 @@
 	NSInteger row4 = [gtdOutlineView rowForItem:searchQuery4];
 	[gtdOutlineView scrollRowToVisible:row4];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row4] byExtendingSelection:NO];
-	
-	NSLog(@"groupTasksToGTD called");
-	
+
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-	NSLog(@"willDisplayCell called");
 	NSTextFieldCell *acell = [tableColumn dataCell];
 	
-	/*if ([acell respondsToSelector:@selector(setTextColor:)]) {
-		Task *task = [item representedObject];
+	if ([acell respondsToSelector:@selector(setTextColor:)]) {
+		/*Task *task = [item representedObject];
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
 		} else {
 			[self setTaskUndone:acell];
-		}
-	}*/
+		}*/
+	}
 }
 
 - (void)setTaskDone:(NSTextFieldCell*)cell {
@@ -140,7 +173,7 @@
         }
     }    
 }
-*/
+
 
 - (void)taskChildrenChanged:(NSNotification *)note {
     [gtdOutlineView reloadItem:[note object] reloadChildren:YES];
@@ -156,7 +189,7 @@
 	 }
 	}
 }
-
+*/
 #pragma mark -
 #pragma mark NSOutlineView datasource and delegate methods
 
@@ -178,8 +211,6 @@
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-	NSLog(@"objectValueForTableColumn called");
-
     id result = nil;
 	//Task *task = [item representedObject];
 	//NSDate *date = task.dueDate;
@@ -202,10 +233,11 @@
         } else if ([[tableColumn identifier] isEqualToString:@"dueDate"]) {
             result = [item dueDate];            
             if (result == nil) {
-                result = NSLocalizedString(@"(Unknown)", @"Unknown camera model name");
+                result = NSLocalizedString(@"(Untitled)", @"Untitled dueDate");
             }
         } else if ([[tableColumn identifier] isEqualToString:@"tags"]) {
             result = [item tags];
+			result = NSLocalizedString(@"(Untitled)", @"Untitled tags");
         }            
     }
 	/*if ([taskDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
@@ -245,17 +277,6 @@
     }    
 }
 
-- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item {
-    if ([item isKindOfClass:[SearchItem class]]) {
-        SearchItem *searchItem = item;
-        if ([searchItem metadataItem] != nil) {
-            // We could dynamically change the thumbnail size, if desired
-            return 9.0; // The extra space is padding around the cell
-        }
-    }
-    return [outlineView rowHeight];
-}
-
 
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
     // The "nil" tableColumn is an indicator for the "full width" row
@@ -263,21 +284,10 @@
     if (tableColumn == nil) {
 		if ([item isKindOfClass:[SearchQuery class]]) {
             return iGroupRowCell;
-        } else if ([item isKindOfClass:[SearchItem class]] && [item metadataItem] == nil) {
+        } else if ([item isKindOfClass:[SearchItem class]]) {
             // For failed items with no metdata, we also use the group row cell
             return iGroupRowCell;            
         }
-		/*
-		Task *task = [item representedObject];
-		//NSLog(@"Task title %@ ", task.title);
-        if ([task.title isEqualToString:@"neu"]) {
-			[iGroupRowCell setBackgroundColor:[NSColor redColor]];
-            return iGroupRowCell;
-        } else if ([task.title isEqualToString:@"test"]) {
-			[iGroupRowCell setBackgroundColor:[NSColor redColor]];
-            return iGroupRowCell;            
-        }
-		 */
     }
     return nil;
 }

@@ -170,6 +170,10 @@
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
+												<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+													<bool key="NSAscending">YES</bool>
+													<string key="NSSelector">setTextColor:</string>
+												</object>
 											</object>
 											<object class="NSTableColumn" id="951037004">
 												<string key="NSIdentifier">dueDate</string>
@@ -205,6 +209,10 @@
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
+												<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+													<bool key="NSAscending">YES</bool>
+													<string key="NSSelector">setTextColor:</string>
+												</object>
 											</object>
 											<object class="NSTableColumn" id="584525873">
 												<string key="NSIdentifier">tags</string>
