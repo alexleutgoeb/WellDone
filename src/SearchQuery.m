@@ -8,8 +8,6 @@
 
 - (id)initWithSearchPredicate:(NSPredicate *)searchPredicate title:(NSString *)title {
 	
-	NSLog(@"searchPredicate %@ ", searchPredicate);
-	
 	moc = [[NSApp delegate] managedObjectContext];
 	_title = [title retain];
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
@@ -20,7 +18,7 @@
 	
 	NSError *error;
 	NSArray *tasks = [moc executeFetchRequest:request error:&error];
-	NSLog(@"tasks %@ ", tasks);
+
 	if (tasks == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	} 

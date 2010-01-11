@@ -33,14 +33,10 @@
 }
 
 - (void) awakeFromNib {
-	
-	NSLog(@"awakeFromNib called");
 	iTasks = [[NSMutableArray alloc] init];
 	iGroupRowCell = [[NSTextFieldCell alloc] init];
 	[iGroupRowCell setEditable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];
-	[iGroupRowCell setBackgroundColor:[NSColor blueColor]];
-	[iGroupRowCell setBackgroundColor:[NSColor blackColor]];
 	[self groupTasksToGTD];	
 }
 
@@ -52,49 +48,29 @@
 
 
 - (void)groupTasksToGTD { 
-	//Task *task = [item representedObject];
-	//NSDate *date = task.dueDate;
-	//NSCalendarDate *taskDate = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate:[date timeIntervalSinceReferenceDate]];
-	NSCalendarDate *todaysDate1 = [NSCalendarDate calendarDate];
-	NSDate *todaysDate = [NSDate date];
-	if (todaysDate1 == todaysDate) {
-		NSLog(@"date same");
-	} else {
-		NSLog(@"date not same");
-	}
+	// --------- Get the actual Date and format the time component
+	NSDate *temp = [NSDate date];	
+	NSCalendar* theCalendar = [NSCalendar currentCalendar];
+	unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+	NSDayCalendarUnit;
+	NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+	[theComps setHour:12];
+	[theComps setMinute:0];
+	[theComps setSecond:0];
+	NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
 
-
+	// --------- Computing GTD
+	NSTimeInterval secondsPerDay = 24 * 60 * 60;
+	NSDate *inThreeDays, *inSevenDays;
+	
+	inThreeDays = [todaysDate addTimeInterval:secondsPerDay*3];
+	inSevenDays = [todaysDate addTimeInterval:secondsPerDay*7];
 	
 	
-	/*if ([taskDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
-	 if ([taskDate dayOfYear] == [todaysDate dayOfYear]) {
-	 if (task != nil) {
-	 if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
-	 result = NSLocalizedString(@"Today", @"Today title");;
-	 }
-	 } 
-	 } else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] + 3 )) {
-	 if (task != nil) {
-	 if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
-	 result = NSLocalizedString(@"In the next 3 days", @"Next 3 days title");;
-	 }
-	 } 
-	 } else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] +7)) {
-	 if (task != nil) {
-	 if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
-	 result = NSLocalizedString(@"In the next 7 days", @"Next 7 days title");;
-	 }
-	 } 
-	 
-	 }
-	 }*/
-	
-	
-	NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"dueDate < %@", todaysDate];	
+	NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"dueDate = %@", todaysDate];	
 	// Create an instance of our datamodel and keep track of things.
-	SearchQuery *searchQuery1 = [[SearchQuery alloc] initWithSearchPredicate:predicate1 title:@"Heute:"];
+	SearchQuery *searchQuery1 = [[SearchQuery alloc] initWithSearchPredicate:predicate1 title:@"Today:"];
 	[iTasks addObject:searchQuery1];
-	NSLog(@"iTasks size %@ ", [searchQuery1 children]);
 	[searchQuery1 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
@@ -103,9 +79,9 @@
 	[gtdOutlineView scrollRowToVisible:row1];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row1] byExtendingSelection:NO];
 	
-	NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"dueDate > %@", todaysDate];	
+	NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", todaysDate, inThreeDays];	
 	// Create an instance of our datamodel and keep track of things.
-	SearchQuery *searchQuery2 = [[SearchQuery alloc] initWithSearchPredicate:predicate2 title:@"Die nächsten 3 Tage zu erledigen:"];
+	SearchQuery *searchQuery2 = [[SearchQuery alloc] initWithSearchPredicate:predicate2 title:@"The next 3 days:"];
 	[iTasks addObject:searchQuery2];
 	[searchQuery2 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
@@ -115,9 +91,9 @@
 	[gtdOutlineView scrollRowToVisible:row2];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row2] byExtendingSelection:NO];
 
-	NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"dueDate > %@", todaysDate];	
+	NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", inThreeDays, inSevenDays];	
 	// Create an instance of our datamodel and keep track of things.
-	SearchQuery *searchQuery3 = [[SearchQuery alloc] initWithSearchPredicate:predicate3 title:@"Die nächsten 7 Tage zu erledigen:"];
+	SearchQuery *searchQuery3 = [[SearchQuery alloc] initWithSearchPredicate:predicate3 title:@"The next 7 days:"];
 	[iTasks addObject:searchQuery3];
 	[searchQuery3 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
@@ -127,9 +103,9 @@
 	[gtdOutlineView scrollRowToVisible:row3];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row3] byExtendingSelection:NO];
 
-	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"dueDate > %@", todaysDate];	
+	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"dueDate > %@", inSevenDays];	
 	// Create an instance of our datamodel and keep track of things.
-	SearchQuery *searchQuery4 = [[SearchQuery alloc] initWithSearchPredicate:predicate4 title:@"Kommende:"];
+	SearchQuery *searchQuery4 = [[SearchQuery alloc] initWithSearchPredicate:predicate4 title:@"Upcoming:"];
 	[iTasks addObject:searchQuery4];
 	[searchQuery4 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
@@ -173,12 +149,12 @@
         }
     }    
 }
-
+*/
 
 - (void)taskChildrenChanged:(NSNotification *)note {
     [gtdOutlineView reloadItem:[note object] reloadChildren:YES];
 }
-
+/*
 - (void)taskItemChanged:(NSNotification *)note {
     // When an item changes, it only will affect the display state. So, we only need to redisplay its contents, and not reload it
     NSInteger row = [gtdOutlineView rowForItem:[note object]];
@@ -212,19 +188,12 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
     id result = nil;
-	//Task *task = [item representedObject];
-	//NSDate *date = task.dueDate;
-	//NSCalendarDate *taskDate = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate:[date timeIntervalSinceReferenceDate]];
-	//NSCalendarDate *todaysDate = [NSCalendarDate calendarDate];
 
-	
 	if ([item isKindOfClass:[SearchQuery class]]) {
-		NSLog(@"item isKindOfClass:[SearchQuery class]");
         if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
             result = [item title];
         }
     } else if ([item isKindOfClass:[Task class]]) {
-		NSLog(@"item isKindOfClass:[Task class]");
         if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:@"task"]) {
             result = [item title];
             if (result == nil) {
@@ -237,33 +206,10 @@
             }
         } else if ([[tableColumn identifier] isEqualToString:@"tags"]) {
             result = [item tags];
-			result = NSLocalizedString(@"(Untitled)", @"Untitled tags");
+			result = NSLocalizedString(@"", @"Untitled tags");
         }            
     }
-	/*if ([taskDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
-		if ([taskDate dayOfYear] == [todaysDate dayOfYear]) {
-			if (task != nil) {
-				if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
-					result = NSLocalizedString(@"Today", @"Today title");;
-				}
-			} 
-		} else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] + 3 )) {
-			if (task != nil) {
-				if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
-					result = NSLocalizedString(@"In the next 3 days", @"Next 3 days title");;
-				}
-			} 
-		} else if ([taskDate dayOfYear] <= ([todaysDate dayOfYear] +7)) {
-			if (task != nil) {
-				if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
-					result = NSLocalizedString(@"In the next 7 days", @"Next 7 days title");;
-				}
-			} 
-			
-		}
-	}*/
-	
-    
+
     return result;
 }
 
