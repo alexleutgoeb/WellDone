@@ -18,10 +18,14 @@
 #import "PrioritySplitViewDelegate.h"
 #import "ContextViewController.h"
 #import "SS_PrefsController.h"
+#import "SyncController.h"
+#import <netinet/in.h>
+#import <SystemConfiguration/SystemConfiguration.h>
 
-@class SyncController;
 
-@interface WellDone_AppDelegate : NSObject {
+#define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
+
+@interface WellDone_AppDelegate : NSObject<SyncControllerDelegate> {
     IBOutlet NSWindow *window;
 	IBOutlet NSSplitView *splitView;
 	PrioritySplitViewDelegate *splitViewDelegate;
@@ -60,6 +64,9 @@
 	SS_PrefsController *preferencesController;
 	
 	NSStatusItem *menuBarItem;
+	
+	BOOL isOnline;
+	SCNetworkReachabilityRef reachRef;
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -67,6 +74,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) SimpleListController *simpleListController;
 @property (nonatomic, retain, readonly) NSURL *coreDataDBLocationURL;
+@property (nonatomic, assign) BOOL isOnline;
 
 - (SyncController *)sharedSyncController;
 
@@ -81,6 +89,7 @@
 - (void)addNewTask:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
 
+
 /**
  Starts the sync.
  */
@@ -88,3 +97,5 @@
 
 
 @end
+
+void networkStatusDidChange(SCNetworkReachabilityRef name, SCNetworkConnectionFlags flags, void * info);

@@ -15,7 +15,6 @@
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
 #import "ContextViewController.h"
-#import "SyncController.h"
 #import "TaskValueTransformer.h"
 #import "GeneralPreferences.h"
 #import "SyncPreferences.h"
@@ -67,6 +66,7 @@
 @synthesize simpleListController;
 @synthesize syncController;
 @synthesize coreDataDBLocationURL;
+@synthesize isOnline;
 
 #pragma mark -
 #pragma mark Initialization & disposal
@@ -87,7 +87,7 @@
 	[preferencesController setAlwaysShowsToolbar:YES];
 	
 	// Init syncController
-	self.syncController = [[SyncController alloc] init];
+	self.syncController = [[SyncController alloc] initWithDelegate:self];
 	
 	// Add observer to user defaults
 	[defaults addObserver:self forKeyPath:@"menubarIcon" 
@@ -103,7 +103,18 @@
 	
 	// Init status bar menu
 	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
-	[self setStatusBarMenuVisible:menuVisible];	
+	[self setStatusBarMenuVisible:menuVisible];
+	
+	// Init reachability
+	reachRef = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, [@"www.toodledo.com" cStringUsingEncoding:NSUTF8StringEncoding]);
+	
+	if (SCNetworkReachabilitySetCallback(reachRef, networkStatusDidChange, NULL) &&
+		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
+		CFRunLoopRun();
+	}
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(setIsOnline:) name: kReachabilityChangedNotification object: nil];
+	
+	
 }
 
 - (BOOL)windowShouldClose:(id)window {
@@ -186,8 +197,6 @@
 - (SyncController *)sharedSyncController {
 	return syncController;
 }
-
-
 
 /*
  
@@ -565,4 +574,36 @@
     // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+#pragma mark -
+#pragma mark SyncControllerDelegate methods
+
+- (void)syncControllerDidSyncWithSuccess:(SyncController *)sc {
+	DLog(@"Sync finihsed with success, hiding sync progress inidicator...");
+	[syncProgress stopAnimation:self];
+}
+
 @end
+
+// C class for reachability callback
+void networkStatusDidChange(SCNetworkReachabilityRef name, SCNetworkConnectionFlags flags, void * info) {
+
+	//We're on the main RunLoop, so an NSAutoreleasePool is not necessary, but is added defensively
+	// in case someon uses the Reachablity object in a different thread.
+	NSAutoreleasePool* myPool = [[NSAutoreleasePool alloc] init];
+
+	// Post a notification to notify the client that the network reachability changed.
+	BOOL online = NO;
+	
+	if (name != NULL) {
+		if (flags != kSCNetworkFlagsReachable) {
+			online = NO;
+		} else {
+			online = YES;
+		}
+	}
+	
+	DLog(@"Changed reachability to %i.", online);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:[NSNumber numberWithBool:online]];
+	
+	[myPool release];
+}

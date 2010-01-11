@@ -22,12 +22,19 @@
 
 @implementation SyncController
 
-@synthesize syncServices, activeServicesCount;
+@synthesize syncServices, activeServicesCount, delegate;
+
+- (id)initWithDelegate:(id<SyncControllerDelegate>)aDelegate {
+	if (self = [self init]) {
+		self.delegate = aDelegate;
+	}
+	return self;
+}
 
 - (id)init {
 	if (self = [super init]) {
 		syncServices = [[NSMutableDictionary alloc] init];
-		syncManager = [[SyncManager alloc] initWithDelegate:self];
+		syncManager = [[SyncManager alloc] init];
 		syncQueue = [[NSOperationQueue alloc] init];
 		// Set operation count to 1, so that max 1 sync is active
 		[syncQueue setMaxConcurrentOperationCount:1];
@@ -152,8 +159,6 @@
 }
 
 - (void)startSync:(NSManagedObjectContext *)moc {
-	// TODO: start syncmanager
-	// after completion save and inform delegate
 	NSManagedObjectContext *context = [syncManager syncData:moc];
 	
 	// TODO: merge moc with deactivated undo manager
@@ -166,6 +171,12 @@
 		DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
 	}
 	[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
+	
+	// Inform delegate
+	// TODO: Check result of sync
+	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
+		[delegate syncControllerDidSyncWithSuccess:self];
+	}
 }
 
 - (void)syncContextDidSave:(NSNotification*)saveNotification {

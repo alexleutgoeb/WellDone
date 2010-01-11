@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
+		<string key="IBDocument.InterfaceBuilderVersion">732</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">740</string>
+			<string key="NS.object.0">732</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="67"/>
+			<integer value="72"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -204,6 +204,7 @@
 											<string key="NSContents">Text Cell</string>
 											<reference key="NSSupport" ref="413097696"/>
 											<reference key="NSControlView" ref="848461419"/>
+											<int key="NSTag">1</int>
 											<object class="NSColor" key="NSBackgroundColor" id="1036994668">
 												<int key="NSColorSpace">6</int>
 												<string key="NSCatalogName">System</string>
@@ -271,7 +272,7 @@
 														<integer value="1"/>
 													</object>
 												</object>
-												<string key="NS.format">dd.MM.yyyy HH:mm</string>
+												<string key="NS.format">dd MMM yyyy HH:mm</string>
 												<bool key="NS.natural">NO</bool>
 											</object>
 											<string key="NSPlaceholderString">dd/MM/yyyy hh:ss</string>
@@ -369,7 +370,7 @@
 						<reference key="NSSuperview" ref="858312636"/>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
-						<double key="NSCurValue">37</double>
+						<double key="NSCurValue">1</double>
 						<double key="NSPercent">0.13909779489040375</double>
 					</object>
 					<object class="NSScroller" id="961531674">
@@ -380,6 +381,7 @@
 						<int key="NSsFlags">1</int>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
+						<double key="NSCurValue">0.01507537688442211</double>
 						<double key="NSPercent">0.49874686716791977</double>
 					</object>
 					<object class="NSClipView" id="538321996">

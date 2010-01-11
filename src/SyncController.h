@@ -47,6 +47,9 @@
  */
 @interface SyncController : NSObject {
 @private
+	// Delegate for sync controller instance
+	id<SyncControllerDelegate> delegate;
+	
 	// List of available sync services
 	NSMutableDictionary *syncServices;
 	// Instance of the syncmanager
@@ -58,6 +61,11 @@
 	// counter for active services
 	NSInteger activeServicesCount;
 }
+
+/**
+ Getter and setter for delegate object
+ */
+@property(nonatomic, assign) id<SyncControllerDelegate> delegate;
 
 /**
  Getter for a list of all available sync services.
@@ -73,6 +81,17 @@
  Returns the number of active sync services.
  */
 @property(nonatomic, readonly) NSInteger activeServicesCount;
+
+
+/**
+ Custom initializer for setting the delegate.
+ Initializes a new SyncController object with the given delegate. The delegate 
+ must implement the SyncControllerDelegate protocol and is used to inform about 
+ the  sync process.
+ @param aDelegate		the delegate to be set
+ @return				the initialized object, or nil if an error occured
+ */
+- (id)initWithDelegate:(id<SyncControllerDelegate>)aDelegate;
 
 /**
  Enables a syncService in the sync controller.
