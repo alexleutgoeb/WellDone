@@ -15,18 +15,26 @@
 @interface SyncController ()
 
 - (void)enableAllServices;
+- (void)syncContextDidSave:(NSNotification*)saveNotification;
 
 @end
 
 
 @implementation SyncController
 
-@synthesize syncServices, activeServicesCount;
+@synthesize syncServices, activeServicesCount, delegate;
+
+- (id)initWithDelegate:(id<SyncControllerDelegate>)aDelegate {
+	if (self = [self init]) {
+		self.delegate = aDelegate;
+	}
+	return self;
+}
 
 - (id)init {
 	if (self = [super init]) {
 		syncServices = [[NSMutableDictionary alloc] init];
-		syncManager = [[SyncManager alloc] initWithDelegate:self];
+		syncManager = [[SyncManager alloc] init];
 		syncQueue = [[NSOperationQueue alloc] init];
 		// Set operation count to 1, so that max 1 sync is active
 		[syncQueue setMaxConcurrentOperationCount:1];
@@ -139,32 +147,42 @@
 	
 	// Get new objectcontext from delegate
 	NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
+	
 	NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
 	[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
 	
 	// call syncmanager in background thread
+	DLog(@"Start sync in operation queue.");
 	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startSync:) object:context];
 	[syncQueue addOperation:op];
-	[context release];
-	
-	// after completion save and inform delegate
-
-	// TODO: merge moc with deactivated undo manager
-	NSError *error = nil;
-	[mainContext setMergePolicy:NSRollbackMergePolicy];
-	[context save:&error];
-	
-	if (error != nil) {
-		// save error
-	}
-	else {
-		
-	}
+	[context release];	
 }
 
 - (void)startSync:(NSManagedObjectContext *)moc {
-	// TODO: start syncmanager
+	NSManagedObjectContext *context = [syncManager syncData:moc];
 	
+	// TODO: merge moc with deactivated undo manager
+	NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
+	[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
+	
+	NSError *error;
+	if (![context save:&error]) {
+		// Update to handle the error appropriately.
+		DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
+	}
+	[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
+	
+	// Inform delegate
+	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
+		[delegate syncControllerDidSyncWithSuccess:self];
+	}
+}
+
+- (void)syncContextDidSave:(NSNotification*)saveNotification {
+	DLog(@"Merge sync context in main context...");
+	NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
+	[mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    [mainContext mergeChangesFromContextDidSaveNotification:saveNotification];      
 }
 
 @end

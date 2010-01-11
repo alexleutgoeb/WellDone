@@ -18,10 +18,10 @@
 #import "PrioritySplitViewDelegate.h"
 #import "ContextViewController.h"
 #import "SS_PrefsController.h"
+#import "SyncController.h"
 
-@class SyncController;
 
-@interface WellDone_AppDelegate : NSObject {
+@interface WellDone_AppDelegate : NSObject<SyncControllerDelegate> {
     IBOutlet NSWindow *window;
 	IBOutlet NSSplitView *splitView;
 	PrioritySplitViewDelegate *splitViewDelegate;

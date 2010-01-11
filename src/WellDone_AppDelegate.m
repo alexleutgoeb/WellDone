@@ -15,7 +15,6 @@
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
 #import "ContextViewController.h"
-#import "SyncController.h"
 #import "TaskValueTransformer.h"
 #import "GeneralPreferences.h"
 #import "SyncPreferences.h"
@@ -87,7 +86,7 @@
 	[preferencesController setAlwaysShowsToolbar:YES];
 	
 	// Init syncController
-	self.syncController = [[SyncController alloc] init];
+	self.syncController = [[SyncController alloc] initWithDelegate:self];
 	
 	// Add observer to user defaults
 	[defaults addObserver:self forKeyPath:@"menubarIcon" 
@@ -552,7 +551,9 @@
 }
 
 - (void)startSync:(id)sender {
+	DLog(@"Start sync in UI.");
 	[syncProgress startAnimation:sender];
+	[syncController sync];
 	// TODO: call sync controller, wait for response
 }
 
@@ -561,6 +562,14 @@
 		[self setStatusBarMenuVisible:[[change objectForKey:NSKeyValueChangeNewKey] boolValue]];
     }
     // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+#pragma mark -
+#pragma mark SyncControllerDelegate methods
+
+- (void)syncControllerDidSyncWithSuccess:(SyncController *)sc {
+	DLog(@"Sync finihsed with success, hiding sync progress inidicator...");
+	[syncProgress stopAnimation:self];
 }
 
 @end
