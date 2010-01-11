@@ -52,44 +52,58 @@
 
 
 - (void)groupTasksToGTD { 
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
-	NSPredicate *imagesPredicate = [NSPredicate predicateWithFormat:@"(kMDItemContentTypeTree = 'public.image')"];
-	predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:imagesPredicate, predicate, nil]];
+	
+	NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"title == %@", @"test"];	
 	// Create an instance of our datamodel and keep track of things.
-	SearchQuery *searchQuery = [[SearchQuery alloc] initWithSearchPredicate:predicate title:@"Heute zu erledigen:"];
-	[iTasks addObject:searchQuery];
-	[searchQuery release];
+	SearchQuery *searchQuery1 = [[SearchQuery alloc] initWithSearchPredicate:predicate1 title:@"Heute:"];
+	[iTasks addObject:searchQuery1];
+	NSLog(@"iTasks size %@ ", [searchQuery1 children]);
+	[searchQuery1 release];
+
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
-	[gtdOutlineView expandItem:searchQuery];
-	NSInteger row = [gtdOutlineView rowForItem:searchQuery];
-	[gtdOutlineView scrollRowToVisible:row];
-	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+	[gtdOutlineView expandItem:searchQuery1];
+	NSInteger row1 = [gtdOutlineView rowForItem:searchQuery1];
+	[gtdOutlineView scrollRowToVisible:row1];
+	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row1] byExtendingSelection:NO];
+	
+	NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
+	// Create an instance of our datamodel and keep track of things.
+	SearchQuery *searchQuery2 = [[SearchQuery alloc] initWithSearchPredicate:predicate2 title:@"Die nächsten 3 Tage zu erledigen:"];
+	[iTasks addObject:searchQuery2];
+	[searchQuery2 release];
+	// Reload the children of the root item, "nil". This only works on 10.5 or higher
+	[gtdOutlineView reloadItem:nil reloadChildren:YES];
+	[gtdOutlineView expandItem:searchQuery2];
+	NSInteger row2 = [gtdOutlineView rowForItem:searchQuery2];
+	[gtdOutlineView scrollRowToVisible:row2];
+	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row2] byExtendingSelection:NO];
+
+	NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
+	// Create an instance of our datamodel and keep track of things.
+	SearchQuery *searchQuery3 = [[SearchQuery alloc] initWithSearchPredicate:predicate3 title:@"Die nächsten 7 Tage zu erledigen:"];
+	[iTasks addObject:searchQuery3];
+	[searchQuery3 release];
+	// Reload the children of the root item, "nil". This only works on 10.5 or higher
+	[gtdOutlineView reloadItem:nil reloadChildren:YES];
+	[gtdOutlineView expandItem:searchQuery3];
+	NSInteger row3 = [gtdOutlineView rowForItem:searchQuery3];
+	[gtdOutlineView scrollRowToVisible:row3];
+	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row3] byExtendingSelection:NO];
+
+	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];	
+	// Create an instance of our datamodel and keep track of things.
+	SearchQuery *searchQuery4 = [[SearchQuery alloc] initWithSearchPredicate:predicate4 title:@"Kommende:"];
+	[iTasks addObject:searchQuery4];
+	[searchQuery4 release];
+	// Reload the children of the root item, "nil". This only works on 10.5 or higher
+	[gtdOutlineView reloadItem:nil reloadChildren:YES];
+	[gtdOutlineView expandItem:searchQuery4];
+	NSInteger row4 = [gtdOutlineView rowForItem:searchQuery4];
+	[gtdOutlineView scrollRowToVisible:row4];
+	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row4] byExtendingSelection:NO];
 	
 	NSLog(@"groupTasksToGTD called");
-	/*
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	//NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dueDate == %@", todaysDate];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", @"neu"];
-	[request setEntity:[NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc]];
-	[request setPredicate:predicate];
-
-	NSError *error = nil;
-	NSArray *results = [moc executeFetchRequest:request error:&error];
-	
-	// error handling code
-	//[iTasks addObject:results];
-	[request release];
-	
-	SearchQuery *searchQuery = [[SearchQuery alloc] initWithSearchPredicate:predicate title:@"WAAAA"];
-	[iTasks addObject:searchQuery];
-	[searchQuery release];
-	// Reload the children of the root item, "nil". This only works on 10.5 or higher
-	[gtdOutlineView reloadItem:nil reloadChildren:YES];
-	//[gtdOutlineView expandItem:searchQuery];
-	NSInteger row = [gtdOutlineView rowForItem:searchQuery];
-	[gtdOutlineView scrollRowToVisible:row];
-	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];*/
 	
 }
 
@@ -105,9 +119,8 @@
 			[self setTaskUndone:acell];
 		}
 	}*/
-	[self groupTasksToGTD];
 }
-/*
+
 - (void)setTaskDone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor lightGrayColor]];
 }
@@ -115,7 +128,7 @@
 - (void)setTaskUndone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor blackColor]];
 }
-*/
+
 /*
 - (void)resultsOutlineDoubleClickAction:(NSOutlineView *)sender {
     // Open a page for all the selected items
@@ -128,7 +141,7 @@
     }    
 }
 */
-/*
+
 - (void)taskChildrenChanged:(NSNotification *)note {
     [gtdOutlineView reloadItem:[note object] reloadChildren:YES];
 }
@@ -143,7 +156,7 @@
 	 }
 	}
 }
-*/
+
 #pragma mark -
 #pragma mark NSOutlineView datasource and delegate methods
 
@@ -175,22 +188,24 @@
 
 	
 	if ([item isKindOfClass:[SearchQuery class]]) {
-        if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"task"]) {
+		NSLog(@"item isKindOfClass:[SearchQuery class]");
+        if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
             result = [item title];
         }
-    } else if ([item isKindOfClass:[SearchItem class]]) {
+    } else if ([item isKindOfClass:[Task class]]) {
+		NSLog(@"item isKindOfClass:[Task class]");
         if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:@"task"]) {
             result = [item title];
             if (result == nil) {
                 result = NSLocalizedString(@"(Untitled)", @"Untitled title");
             }
         } else if ([[tableColumn identifier] isEqualToString:@"dueDate"]) {
-            result = [item cameraModel];            
+            result = [item dueDate];            
             if (result == nil) {
                 result = NSLocalizedString(@"(Unknown)", @"Unknown camera model name");
             }
         } else if ([[tableColumn identifier] isEqualToString:@"tags"]) {
-            result = [item modifiedDate];
+            result = [item tags];
         }            
     }
 	/*if ([taskDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
@@ -221,7 +236,9 @@
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    if ([item isKindOfClass:[SearchItem class]]) {
+    
+	NSLog(@"setObjectValue called");
+	if ([item isKindOfClass:[SearchItem class]]) {
         if ([[tableColumn identifier] isEqualToString:@"done"]) {
             [item setTitle:object];
         }
