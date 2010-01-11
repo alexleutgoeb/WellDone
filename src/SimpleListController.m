@@ -106,12 +106,29 @@
 		[task setValue:tags forKey:@"tags"];
 	}
 }
+/*
+- (BOOL)shouldFocusCell:(NSCell *)cell atColumn:(NSInteger)column row:(NSInteger)row
+{
+	NSLog("shouldFocusCell");
+}
+
+- (BOOL)textShouldBeginEditing:(NSText *)textObject
+{
+	NSLog(@"textShouldBeginEditing: %@", [textObject className]);
+}
+*/
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
-{
-    //NSLog(@"controlTextDidEndEditing");
+{	
+	NSOutlineView *o = [aNotification object];
 	
-	NSTokenFieldCell *o = [aNotification object];
+    //NSLog(@"controlTextDidEndEditing, Tag: %@", [o tag]);
+
+	//NSLog(@"controlTextDidEndEditing");
+	
+	// check if edited column is the tokenfield (tags)
+	// if not then do nothing
+	if ([o editedColumn] != 3) return;
 	
 	NSArray *tokens = [o objectValue];
 	NSMutableArray *newTags = [[NSMutableArray alloc] init];

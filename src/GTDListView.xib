@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="3"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -170,6 +170,10 @@
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
+												<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+													<bool key="NSAscending">YES</bool>
+													<string key="NSSelector">setTextColor:</string>
+												</object>
 											</object>
 											<object class="NSTableColumn" id="951037004">
 												<string key="NSIdentifier">dueDate</string>
@@ -205,6 +209,10 @@
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
+												<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+													<bool key="NSAscending">YES</bool>
+													<string key="NSSelector">setTextColor:</string>
+												</object>
 											</object>
 											<object class="NSTableColumn" id="584525873">
 												<string key="NSIdentifier">tags</string>
@@ -246,7 +254,7 @@
 												<bytes key="NSWhite">MC41AA</bytes>
 											</object>
 										</object>
-										<double key="NSRowHeight">17</double>
+										<double key="NSRowHeight">20</double>
 										<int key="NSTvFlags">-767557632</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
@@ -308,15 +316,12 @@
 						<reference key="NSContentView" ref="709411455"/>
 						<reference key="NSHeaderClipView" ref="268457063"/>
 						<reference key="NSCornerView" ref="462664808"/>
-						<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
+						<bytes key="NSScrollAmts">QSAAAEEgAABBsAAAQbAAAA</bytes>
 					</object>
 				</object>
 				<string key="NSFrameSize">{400, 400}</string>
 				<reference key="NSSuperview"/>
 				<string key="NSClassName">GTDListView</string>
-			</object>
-			<object class="NSCustomObject" id="710982966">
-				<string key="NSClassName">GTDListController</string>
 			</object>
 			<object class="NSUserDefaultsController" id="764308978">
 				<bool key="NSSharedInstance">YES</bool>
@@ -328,6 +333,7 @@
 					<string>title</string>
 					<string>dueDate</string>
 					<string>tags</string>
+					<string>done</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -379,14 +385,6 @@
 					<int key="connectionID">2</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">gtdOutlineView</string>
-						<reference key="source" ref="710982966"/>
-						<reference key="destination" ref="475774575"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: delegate.managedObjectContext</string>
 						<reference key="source" ref="775269749"/>
@@ -401,74 +399,6 @@
 						</object>
 					</object>
 					<int key="connectionID">26</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.completed</string>
-						<reference key="source" ref="448554881"/>
-						<reference key="destination" ref="775269749"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="448554881"/>
-							<reference key="NSDestination" ref="775269749"/>
-							<string key="NSLabel">value: arrangedObjects.completed</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.completed</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">28</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.title</string>
-						<reference key="source" ref="835946425"/>
-						<reference key="destination" ref="775269749"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="835946425"/>
-							<reference key="NSDestination" ref="775269749"/>
-							<string key="NSLabel">value: arrangedObjects.title</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.title</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">30</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.dueDate</string>
-						<reference key="source" ref="951037004"/>
-						<reference key="destination" ref="775269749"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="951037004"/>
-							<reference key="NSDestination" ref="775269749"/>
-							<string key="NSLabel">value: arrangedObjects.dueDate</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.dueDate</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">32</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.tags</string>
-						<reference key="source" ref="584525873"/>
-						<reference key="destination" ref="775269749"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="584525873"/>
-							<reference key="NSDestination" ref="775269749"/>
-							<string key="NSLabel">value: arrangedObjects.tags</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.tags</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">TaskValueTransformer</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">35</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -587,11 +517,6 @@
 						<reference key="parent" ref="835946425"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="710982966"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
 						<reference key="object" ref="951037004"/>
 						<object class="NSMutableArray" key="children">
@@ -645,7 +570,6 @@
 					<string>1.WindowOrigin</string>
 					<string>1.editorWindowContentRectSynchronizationRect</string>
 					<string>10.IBPluginDependency</string>
-					<string>12.IBPluginDependency</string>
 					<string>17.CustomClassName</string>
 					<string>20.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
@@ -659,11 +583,10 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{422, 407}, {400, 400}}</string>
+					<string>{{133, 78}, {400, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{217, 442}, {480, 272}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>DateCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -693,7 +616,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">37</int>
+			<int key="maxID">45</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

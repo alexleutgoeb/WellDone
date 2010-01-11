@@ -50,12 +50,15 @@
 		D110F47110B8D92600304B4C /* TagManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F47010B8D92600304B4C /* TagManagementController.m */; };
 		D110F48510B8DA6800304B4C /* ContextManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D110F48410B8DA6800304B4C /* ContextManagement.xib */; };
 		D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F48B10B8DBDB00304B4C /* ContextManagementController.m */; };
+		D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58AF10FA9D8000CC204F /* SearchQuery.m */; };
+		D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58B910FA9FA300CC204F /* SearchItem.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
 		D1B51A7810F690360053C847 /* ContextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B51A7710F690360053C847 /* ContextView.xib */; };
 		D1ED7EFF10B090020065D79B /* TaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1ED7EFE10B090020065D79B /* TaskEditor.xib */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
+		FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA438BB510FB6CC60000224E /* SystemConfiguration.framework */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
@@ -212,6 +215,10 @@
 		D110F48410B8DA6800304B4C /* ContextManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContextManagement.xib; sourceTree = "<group>"; };
 		D110F48A10B8DBDB00304B4C /* ContextManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextManagementController.h; sourceTree = "<group>"; };
 		D110F48B10B8DBDB00304B4C /* ContextManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextManagementController.m; sourceTree = "<group>"; };
+		D11C58AE10FA9D8000CC204F /* SearchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQuery.h; sourceTree = "<group>"; };
+		D11C58AF10FA9D8000CC204F /* SearchQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuery.m; sourceTree = "<group>"; };
+		D11C58B810FA9FA300CC204F /* SearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItem.h; sourceTree = "<group>"; };
+		D11C58B910FA9FA300CC204F /* SearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		D164971B10D2E17B00DEB20A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		D1B51A7410F68FFE0053C847 /* ContextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextViewController.h; sourceTree = "<group>"; };
@@ -221,6 +228,7 @@
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
+		FA438BB510FB6CC60000224E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
@@ -285,6 +293,7 @@
 				6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */,
 				FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */,
 				FA56EB6410EBB95300228C43 /* Security.framework in Frameworks */,
+				FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +319,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA438BB510FB6CC60000224E /* SystemConfiguration.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				424209B610CFB96D00DB9F3F /* SenTestingKit.framework */,
 				FA56EB6310EBB95300228C43 /* Security.framework */,
@@ -496,6 +506,10 @@
 				FA90D40310C4124D00309192 /* Context.m */,
 				FA48B62C10D3DEDB0032F1D8 /* SyncService.h */,
 				FA48B62D10D3DEDC0032F1D8 /* SyncService.m */,
+				D11C58AE10FA9D8000CC204F /* SearchQuery.h */,
+				D11C58AF10FA9D8000CC204F /* SearchQuery.m */,
+				D11C58B810FA9FA300CC204F /* SearchItem.h */,
+				D11C58B910FA9FA300CC204F /* SearchItem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -795,6 +809,8 @@
 				6FB0A92C10FA5A6000990D07 /* DebugTreeController.m in Sources */,
 				FA6A310110FA250400A77477 /* GeneralPreferences.m in Sources */,
 				6FE405CE10FB69F9002ECF9C /* HUDTaskEditorController.m in Sources */,
+				D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */,
+				D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

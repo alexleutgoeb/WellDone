@@ -12,7 +12,8 @@
 @interface CoreDataBackup : NSObject {
 
 }
-
+- (IBAction)createBackupAction:(id)sender;
 - (BOOL)backupDatabaseFile:(NSString *)backupPath;
+- (BOOL)replaceDatabaseFileWithBackupFile:(NSString *)backupFilePath;
 
 @end

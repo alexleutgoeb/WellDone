@@ -86,7 +86,7 @@
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:entityDescription];
 	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == %@", NO];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == %@", [NSNumber numberWithInt:0]];
 	
 	[request setPredicate:predicate];
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
@@ -183,7 +183,7 @@
 		
 	}
 	
-	if ([updatedFolder deleted]) {
+	if ([[updatedFolder deleted] boolValue]) {
 		NSLog(@"Delete folder '%@' from list because deleted-flag is YES", [updatedFolder name]);
 		[self removeFolder: updatedFolder];
 		return;
@@ -220,6 +220,7 @@
 - (void) addNewFolderByContextMenu {
 	Folder *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:moc]; 
 	folder.name = @"New Folder";
+	folder.deleted = [NSNumber numberWithBool:NO];
 	[self saveChangesToStore];
 }
 

@@ -20,7 +20,6 @@
 
 
 @implementation SyncManager
-
 @synthesize delegate;
 @synthesize syncServices;
 
@@ -88,9 +87,12 @@
 		NSError *error = nil;
 		
 		// last edited dates
-		NSDictionary *lastDates = [syncService getLastModificationsDates:&error];
+		//NSDictionary *lastDates = [syncService getLastModificationsDates:&error];
 		
-		if (lastDates != nil && error == nil) {
+		
+		aManagedObjectContext = [self syncFolders:aManagedObjectContext withSyncService:syncService];
+		
+		/*if (lastDates != nil && error == nil) {
 				
 			// folder sync
 			
@@ -108,7 +110,7 @@
 			else {
 				// remote folders not changed, send local changes to remote if exist
 			}
-		}
+		}*/
 		
 		return aManagedObjectContext;
 	}
@@ -229,7 +231,7 @@
  Folder sync
  @author Michael
  */
-- (void) syncFolders:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
+- (NSManagedObjectContext *) syncFolders:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
 	
 	NSError *error = nil;
 	
@@ -254,11 +256,11 @@
 	
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Folder *localFolder in localFolders) {
-		
+		//[aManagedObjectContext deleteObject:localFolder];
 		NSEnumerator *enumerator = [localFolder.remoteFolders objectEnumerator];
 		
 		remoteFolder = nil;
-			
+		
 		while ((remoteFolder = [enumerator nextObject])) {
 			//wenn remoteobject existiert
 			if(remoteFolder.serviceIdentifier == syncService.identifier) break;
@@ -285,12 +287,25 @@
 				break;
 			}
 		}
-		
-		if(
+		for(GtdFolder *bla in foundGtdFolders) {
+			DLog(@"syncFolder foundFolder. %@", bla.title);
+		}
+		DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
+		DLog(@"remoteFolder.lastsyncDate: %@", remoteFolder.lastsyncDate);
+		DLog(@"localFolder.deleted: %@", localFolder.deleted);
+		//DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
+		if([localFolder.deleted integerValue] != 0) {
+			DLog(@"syncFolder deleting a folder.");
+			if(foundGtdFolder != nil)
+				[syncService deleteFolder:foundGtdFolder error:&error];
+			[aManagedObjectContext deleteObject:localFolder];
+		}
+		else if(
 		   (foundGtdFolder == nil && [localFolder.deleted integerValue] != 1) ||
 		   remoteFolder.lastsyncDate == nil ||
-		   remoteFolder.localFolder.modifiedDate > remoteFolder.lastsyncDate
+		   localFolder.modifiedDate > remoteFolder.lastsyncDate
 		   ) {
+			DLog(@"syncFolder writing data to remote.");
 			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
 			newGtdFolder.uid = [remoteFolder.remoteUid integerValue];
 			newGtdFolder.title = localFolder.name;
@@ -298,18 +313,24 @@
 				newGtdFolder.private = YES;
 			else newGtdFolder.private = NO;
 			//newGtdFolder.archived = localFolder.archived;
-			newGtdFolder.order = [localFolder.order integerValue];
+			//newGtdFolder.order = [localFolder.order integerValue];
 			
 			//add new folder if firstsync
-			if(remoteFolder.remoteUid == nil) remoteFolder.remoteUid = [NSNumber numberWithInt:[syncService addFolder:newGtdFolder error:&error]];
+			if(remoteFolder.remoteUid == nil) {
+				remoteFolder.remoteUid = [NSNumber numberWithInt:[syncService addFolder:newGtdFolder error:&error]];
+				DLog(@"Error while loading remote folders: %@", error);
+			}
 			//overwrite the remote remoteFolder with the local folder
 			else [syncService editFolder:newGtdFolder error:&error];
+			remoteFolder.lastsyncDate == [NSDate date];
 		}
-		else if(foundGtdFolder != nil) {
+		else if(foundGtdFolder != nil && [localFolder.deleted integerValue] != 1) {
+			DLog(@"syncFolder writing data to local.");
 			localFolder.name = foundGtdFolder.title;
 			if(foundGtdFolder.private == YES) localFolder.private = [NSNumber numberWithInt:1];
 			else localFolder.private = [NSNumber numberWithInt:0];
 			localFolder.order = [NSNumber numberWithInt:foundGtdFolder.order];
+			remoteFolder.lastsyncDate == [NSDate date];
 		}
 	}
 	
@@ -320,6 +341,8 @@
 		// Add new entities
 		RemoteFolder *rFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
 		Folder *lFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:aManagedObjectContext];
+		
+		DLog(@"syncFolder adding new folder to local.");
 		
 		// Set entity attributes
 		rFolder.serviceIdentifier = syncService.identifier;
@@ -335,6 +358,7 @@
 		//falls es zu einem rFolder element keinen gtdFolder gibt:
 			//wenn rFolder.localFolder.deleted != true -> [syncService addFolder]
 		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
+	return aManagedObjectContext;
 }
 /*
  
