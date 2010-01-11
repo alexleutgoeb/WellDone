@@ -173,6 +173,7 @@
 	[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
 	
 	// Inform delegate
+	// TODO: Check result of sync
 	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
 		[delegate syncControllerDidSyncWithSuccess:self];
 	}
