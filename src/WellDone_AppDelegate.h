@@ -18,6 +18,7 @@
 #import "PrioritySplitViewDelegate.h"
 #import "ContextViewController.h"
 #import "SS_PrefsController.h"
+#import "HUDTaskEditorController.h"
 
 @class SyncController;
 
@@ -47,7 +48,7 @@
 	TagManagementController* tagmanagementController;
 	ContextManagementController* contextmanagementController;
 	ContextViewController* contextViewController;
-	
+	HUDTaskEditorController* hudTaskEditorController;
 	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;

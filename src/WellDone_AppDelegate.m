@@ -144,15 +144,25 @@
 	sidebarTaskController = [[SidebarTaskController alloc] init];
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	contextViewController = [[ContextViewController alloc] init];
+	hudTaskEditorController = [[HUDTaskEditorController alloc] init];
+
+
 	
 	contextViewController.simpController = simpleListController;
 	[sidebarFolderController setSimpController:simpleListController];
+	hudTaskEditorController.simpController = simpleListController;
+	
+		
+	
 	
 	// Replace the placeholder views with the actual views from the controllers.
- 	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];
+ 	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];	
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
+	
+	[[hudTaskEditorController window] makeKeyAndOrderFront:nil];
+
 	
 	showGTDView = NO;
 	
