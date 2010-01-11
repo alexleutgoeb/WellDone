@@ -93,9 +93,7 @@
 		[errorDetail setValue:@"No internet connection" forKey:NSLocalizedDescriptionKey];
 		[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
 		NSAlert *alert = [NSAlert alertWithError:[NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail]];
-		[alert runModal];
-		
-		// TODO: IMPLEMENT
+		[alert runModal];		
 	}
 	else {
 		// online
