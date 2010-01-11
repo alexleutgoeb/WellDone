@@ -67,6 +67,12 @@
 - (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext;
 
 /**
+ Method for folder sync
+ 
+ */
+- (NSManagedObjectContext *)syncFolders:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService;
+
+/**
  Overrides local data with remote
  The method replaces the local data with remote entries. Warning: All local 
  data will be deleted.
