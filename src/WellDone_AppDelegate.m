@@ -20,6 +20,7 @@
 #import "SyncPreferences.h"
 #import "CLStringNumberValueTransformer.h"
 #import "Note.h"
+#import "WDNSDate+PrettyPrint.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -574,7 +575,7 @@
 	
 	NSDate *lastSyncDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
 	if (lastSyncDate != nil) {
-		menuItem = [menu addItemWithTitle:[NSString stringWithFormat:@"Last Sync: %@", lastSyncDate] action:nil keyEquivalent:@""];
+		menuItem = [menu addItemWithTitle:[NSString stringWithFormat:@"Last Sync: %@", [lastSyncDate prettyDate]] action:nil keyEquivalent:@""];
 	}
 	else {
 		menuItem = [menu addItemWithTitle:@"Last Sync: Never" action:nil keyEquivalent:@""];
@@ -681,7 +682,7 @@
 
 	NSDate *lastSyncDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
 	if (lastSyncDate != nil) {
-		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", lastSyncDate]];
+		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", [lastSyncDate prettyDate]]];
 	}
 	else {
 		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: Never"]];
