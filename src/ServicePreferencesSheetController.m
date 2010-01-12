@@ -130,7 +130,35 @@
 			
 			if ([defaultServices objectForKey:serviceId] != nil) {
 				if (![username isEqualToString:[[defaultServices objectForKey:serviceId] objectForKey:@"username"]]) {
-					// TODO: remove remote objects with same serviceId
+					DLog(@"New username for service, removing remote objects...");
+					NSError *error = nil;
+					NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
+					NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+					
+					NSEntityDescription *entity = [NSEntityDescription entityForName:@"RemoteObject" inManagedObjectContext:moc];
+					[fetchRequest setEntity:entity];
+					
+					NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(serviceIdentifier = '%@')", serviceId];
+					[fetchRequest setPredicate:predicate];
+					
+					NSArray *items = [moc executeFetchRequest:fetchRequest error:&error];
+					[fetchRequest release];
+					
+					if (error == nil) {
+						for (NSManagedObject *managedObject in items) {
+							[moc deleteObject:managedObject];
+						}
+						
+						if (![moc save:&error]) {
+							// TODO: error handling?
+							DLog(@"Error removing all remote objects, don't know what to do.");
+						} else {
+							DLog(@"Removed all remote objects.");
+						}
+					}
+				}
+				else {
+					DLog(@"Same username as last time, nothing to remove.");
 				}
 			}
 			
