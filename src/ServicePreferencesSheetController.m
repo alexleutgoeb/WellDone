@@ -138,11 +138,12 @@
 					NSEntityDescription *entity = [NSEntityDescription entityForName:@"RemoteObject" inManagedObjectContext:moc];
 					[fetchRequest setEntity:entity];
 					
-					NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(serviceIdentifier = '%@')", serviceId];
+					NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(serviceIdentifier like %@)", serviceId];
 					[fetchRequest setPredicate:predicate];
 					
 					NSArray *items = [moc executeFetchRequest:fetchRequest error:&error];
 					[fetchRequest release];
+					DLog(@"Items: %@", [items description]);
 					
 					if (error == nil) {
 						for (NSManagedObject *managedObject in items) {
@@ -150,12 +151,13 @@
 						}
 						
 						if (![moc save:&error]) {
-							// TODO: error handling?
 							DLog(@"Error removing all remote objects, don't know what to do.");
 						} else {
 							DLog(@"Removed all remote objects.");
 						}
 					}
+					
+					// TODO: Remove folder with deletet == 1 ?
 				}
 				else {
 					DLog(@"Same username as last time, nothing to remove.");
