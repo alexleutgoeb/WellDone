@@ -9,6 +9,8 @@
 #import "SyncManager.h"
 #import "Folder.h"
 #import "RemoteFolder.h"
+#import "Note.h"
+#import "Task.h"
 
 
 @interface SyncManager()
