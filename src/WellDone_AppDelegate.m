@@ -19,6 +19,7 @@
 #import "GeneralPreferences.h"
 #import "SyncPreferences.h"
 #import "CLStringNumberValueTransformer.h"
+#import "Note.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -63,6 +64,11 @@
  Callback for online notification
  */
 - (void)setOnlineState:(NSNotification *)notification;
+
+/**
+ Updates the modification dates of given managed objects.
+ */
+- (void)updateManagedObjectModificationDates:(NSNotification *)notification;
 
 @end
 
@@ -202,6 +208,12 @@
 	
 	[splitView setDelegate:splitViewDelegate];
 	[window makeFirstResponder:quickAddTask];
+	
+	// Add observer for listening to managedobject changes
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	
+	[nc addObserver:self selector:@selector(updateManagedObjectModificationDates:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
 }
 
 - (void) registerValueTransformers {
@@ -396,6 +408,11 @@
     before the application terminates. this method also checks if a current backup should be replaced with an existing one
  */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
+	
+	// Remove observers
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];	
 
     if (!managedObjectContext) return NSTerminateNow;
 
@@ -618,6 +635,23 @@
 		[self setStatusBarMenuVisible:[[change objectForKey:NSKeyValueChangeNewKey] boolValue]];
     }
     // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+- (void)updateManagedObjectModificationDates:(NSNotification *)notification {
+	NSDictionary *userInfoDictionary = [notification userInfo];
+    NSSet *changedObjects = [userInfoDictionary objectForKey:NSUpdatedObjectsKey];
+
+	if ([changedObjects count]) {
+		for (NSManagedObject *entity in changedObjects) {
+			if ([entity isKindOfClass:[Note class]] || 
+				[entity isKindOfClass:[Folder class]] || 
+				[entity isKindOfClass:[Task class]]) {
+				// TODO: Check for some properties (ie NOT order)
+				DLog(@"Changed: %@ %@", [entity description], [entity class]);
+				[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+			}
+		}
+	}
 }
 
 #pragma mark -
