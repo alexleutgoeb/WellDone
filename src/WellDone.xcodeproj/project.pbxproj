@@ -73,6 +73,7 @@
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
 		FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA438BB510FB6CC60000224E /* SystemConfiguration.framework */; };
+		FA43906910FCF90C0000224E /* WDNSDate+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
@@ -257,6 +258,8 @@
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
 		FA438BB510FB6CC60000224E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FA43906710FCF90C0000224E /* WDNSDate+PrettyPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WDNSDate+PrettyPrint.h"; sourceTree = "<group>"; };
+		FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WDNSDate+PrettyPrint.m"; sourceTree = "<group>"; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
@@ -594,6 +597,8 @@
 			children = (
 				FA56EB9010EBBFC200228C43 /* SFHFKeychainUtils.h */,
 				FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */,
+				FA43906710FCF90C0000224E /* WDNSDate+PrettyPrint.h */,
+				FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -875,6 +880,7 @@
 				6F03A47410FC698B0020CCA9 /* CLStringNumberValueTransformer.m in Sources */,
 				6F03A47610FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */,
 				6F03A47710FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */,
+				FA43906910FCF90C0000224E /* WDNSDate+PrettyPrint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
