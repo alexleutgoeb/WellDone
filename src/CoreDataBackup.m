@@ -17,11 +17,15 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 
 - (IBAction)createBackupAction:(id)sender {
 
-	NSString *location = @"/Users/"; //TODO
+	NSString *location = [[NSApp delegate] applicationSupportDirectory ]; //TODO
+
+	
+	
 	NSError *error;	
 	NSAlert *alert = [[NSAlert alloc] init];
-	if (![self backupDatabaseFile:location error:&error]){
-		NSString *message = NSLocalizedString(["@ Backup was successful,file was saved in the directory: " stringByAppendingString:location], @"backup was successful, saved file into the directory:" );
+	if ([self backupDatabaseFile:location error:&error]){
+		NSString *message = NSLocalizedString([@"Backup was successful. \nLocation of the backupfile: " stringByAppendingPathComponent: location], @"backup was successful, saved file into the directory:" );
+		
 		[alert setMessageText:message];	
 		[alert runModal];
 	}else {
