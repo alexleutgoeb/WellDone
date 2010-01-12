@@ -36,6 +36,7 @@
 	
 	IBOutlet NSProgressIndicator *syncProgress;
 	IBOutlet NSButton *syncButton;
+	NSMenuItem *syncMenuItem;
 	
 	IBOutlet NSTextField* quickAddTask;
 	

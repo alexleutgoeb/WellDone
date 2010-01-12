@@ -37,6 +37,7 @@
 @interface WellDone_AppDelegate ()
 
 @property (nonatomic, retain) SyncController *syncController;
+@property (nonatomic, retain) NSMenuItem *syncMenuItem;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
@@ -80,6 +81,7 @@
 @synthesize coreDataDBLocationURL;
 @synthesize backupDBLocationURL;
 @synthesize isOnline;
+@synthesize syncMenuItem;
 
 #pragma mark -
 #pragma mark Initialization & disposal
@@ -137,6 +139,7 @@
  */
 - (void)dealloc {
 	[syncController release];
+	[syncMenuItem release];
 	[syncButton release];
     [window release];
     [managedObjectContext release];
@@ -574,6 +577,7 @@
 	menuItem = [menu addItemWithTitle:@"Sync now" action:@selector(startSync:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to start the sync"];
 	[menuItem setTarget:self];
+	self.syncMenuItem = menuItem;
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
@@ -627,6 +631,7 @@
 	DLog(@"Start sync in UI.");
 	[syncProgress startAnimation:sender];
 	[syncButton setEnabled:NO];
+	[syncMenuItem setAction:nil];
 	[syncController sync];
 }
 
@@ -661,12 +666,14 @@
 	DLog(@"Sync finished with success, hiding sync progress inidicator...");
 	[syncProgress stopAnimation:self];
 	[syncButton setEnabled:YES];
+	[syncMenuItem setAction:@selector(startSync:)];
 }
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
 	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
 	[syncProgress stopAnimation:self];
 	[syncButton setEnabled:YES];
+	[syncMenuItem setAction:@selector(startSync:)];
 	NSAlert *alert = [NSAlert alertWithError:error];
 	[alert runModal];
 }
