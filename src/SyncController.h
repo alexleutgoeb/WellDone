@@ -60,27 +60,36 @@
 	
 	// counter for active services
 	NSInteger activeServicesCount;
+	
+	// String representation of last sync
+	NSString *lastSyncText;
 }
+
 
 /**
  Getter and setter for delegate object
  */
-@property(nonatomic, assign) id<SyncControllerDelegate> delegate;
+@property (nonatomic, assign) id<SyncControllerDelegate> delegate;
 
 /**
  Getter for a list of all available sync services.
  */
-@property(nonatomic, readonly) NSMutableDictionary *syncServices;
+@property (nonatomic, readonly) NSMutableDictionary *syncServices;
 
 /**
  Returns the number of available sync services.
  */
-@property(nonatomic, readonly) NSInteger servicesCount;
+@property (nonatomic, readonly) NSInteger servicesCount;
 
 /**
  Returns the number of active sync services.
  */
-@property(nonatomic, readonly) NSInteger activeServicesCount;
+@property (nonatomic, readonly) NSInteger activeServicesCount;
+
+/**
+ Getter and setter for last sync date string
+ */
+@property (nonatomic, copy) NSString *lastSyncText;
 
 
 /**

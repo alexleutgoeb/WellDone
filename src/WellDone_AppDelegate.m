@@ -20,7 +20,6 @@
 #import "SyncPreferences.h"
 #import "CLStringNumberValueTransformer.h"
 #import "Note.h"
-#import "WDNSDate+PrettyPrint.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -558,7 +557,6 @@
 }
 
 - (NSMenu *)createStatusBarMenu {
-	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	NSZone *menuZone = [NSMenu menuZone];
 	NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
 	NSMenuItem *menuItem;
@@ -573,13 +571,7 @@
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	NSDate *lastSyncDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
-	if (lastSyncDate != nil) {
-		menuItem = [menu addItemWithTitle:[NSString stringWithFormat:@"Last Sync: %@", [lastSyncDate prettyDate]] action:nil keyEquivalent:@""];
-	}
-	else {
-		menuItem = [menu addItemWithTitle:@"Last Sync: Never" action:nil keyEquivalent:@""];
-	}
+	menuItem = [menu addItemWithTitle:[NSString stringWithFormat:@"Last Sync: %@", syncController.lastSyncText] action:nil keyEquivalent:@""];
 	[menuItem setTarget:self];
 	self.syncTextMenuItem = menuItem;
 	
@@ -627,11 +619,17 @@
 		[menuBarItem setToolTip:@"WellDone"];
 		[menuBarItem setImage:menuBarIcon];
 		[menu release];
+		
+		// Add observer for sync text
+		[syncController addObserver:self forKeyPath:@"lastSyncText" options:NSKeyValueObservingOptionNew context:nil];
 	}
 	else {
 		if (menuBarItem != nil) {
 			[[NSStatusBar systemStatusBar] removeStatusItem:menuBarItem];
 			menuBarItem = nil;
+			
+			// Remove observer
+			[syncController removeObserver:self forKeyPath:@"lastSyncText"];
 		}
 	}
 }
@@ -648,6 +646,10 @@
     if ([keyPath isEqual:@"menubarIcon"]) {
 		[self setStatusBarMenuVisible:[[change objectForKey:NSKeyValueChangeNewKey] boolValue]];
     }
+	else if ([keyPath isEqualToString:@"lastSyncText"]) {
+		// Set new text for statusbar menu sync item
+		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", syncController.lastSyncText]];
+	}
     // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
@@ -676,17 +678,6 @@
 	[syncProgress stopAnimation:self];
 	[syncButton setEnabled:YES];
 	[syncMenuItem setAction:@selector(startSync:)];
-	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-	[defaults setObject:[NSDate date] forKey:@"lastSyncDate"];
-	[defaults synchronize];
-
-	NSDate *lastSyncDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
-	if (lastSyncDate != nil) {
-		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", [lastSyncDate prettyDate]]];
-	}
-	else {
-		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: Never"]];
-	}
 }
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
@@ -694,7 +685,6 @@
 	[syncProgress stopAnimation:self];
 	[syncButton setEnabled:YES];
 	[syncMenuItem setAction:@selector(startSync:)];
-	[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: Failed"]];
 	NSAlert *alert = [NSAlert alertWithError:error];
 	[alert runModal];
 }

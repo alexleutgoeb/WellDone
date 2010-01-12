@@ -12,6 +12,7 @@
 #import "TDApi.h"
 #import "SFHFKeychainUtils.h"
 #import "WellDone_AppDelegate.h"
+#import "WDNSDate+PrettyPrint.h"
 
 
 @interface SyncController ()
@@ -24,7 +25,7 @@
 
 @implementation SyncController
 
-@synthesize syncServices, activeServicesCount, delegate;
+@synthesize syncServices, activeServicesCount, delegate, lastSyncText;
 
 - (id)initWithDelegate:(id<SyncControllerDelegate>)aDelegate {
 	if (self = [self init]) {
@@ -42,10 +43,11 @@
 		[syncQueue setMaxConcurrentOperationCount:1];
 		activeServicesCount = 0;
 		
+		self.lastSyncText = @"Initializing...";
+		
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
 		
-		// TODO: start in background thread !!!!!
 		NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(enableAllServices) object:nil];
 		[syncQueue addOperation:op];
 	}
@@ -53,6 +55,7 @@
 }
 
 - (void) dealloc {
+	[lastSyncText release];
 	[syncQueue cancelAllOperations];
 	[syncQueue release];
 	[syncManager release];
@@ -61,8 +64,9 @@
 	[super dealloc];
 }
 
-- (void)enableAllServices {
+- (void)enableAllServices {	
 	// Activated services from user defaults
+	BOOL isActive = NO;
 	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
 	
@@ -86,12 +90,29 @@
 					// Check internet connection	
 					if ([[NSApp delegate] isOnline] == YES) {
 						success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
+						if (success)
+							isActive = YES;
 					}
 					DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
 					// TODO: if not successful or offline try later with timer or deactivate service automatically ?
 				}
 			}
 		}
+	}
+	
+	// Check last sync date
+	if (isActive != NO) {
+		NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+		NSDate *lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
+		if (lastDate == nil) {
+			self.lastSyncText = @"Never";
+		}
+		else {
+			self.lastSyncText = [lastDate prettyDate];
+		}
+	}
+	else {
+		self.lastSyncText = @"Never";
 	}
 }
 
@@ -126,6 +147,13 @@
 	// Remove password from memory
 	service.pwd = nil;
 	
+	// Check last sync date
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	NSDate *lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
+	if (lastDate != nil) {
+		self.lastSyncText = [lastDate prettyDate];
+	}
+	
 	return returnValue;
 }
 
@@ -140,6 +168,10 @@
 		returnValue = YES;
 		DLog(@"Service deactivated.");
 		activeServicesCount--;
+		
+		if (activeServicesCount == 0) {
+			self.lastSyncText = @"Never";
+		}
 	}
 	else {
 		DLog(@"Service not found, nothing to do, returning NO.");
@@ -158,7 +190,11 @@
 			[errorDetail setValue:@"You have no active sync service, please activate one in the preferences first." forKey:NSLocalizedRecoverySuggestionErrorKey];
 			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail];
 			
-			[delegate syncController:self didSyncWithError:error];
+			self.lastSyncText = @"Failed";
+			
+			if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
+				[delegate syncController:self didSyncWithError:error];
+			}
 		}
 	}
 	// Check internet connection	
@@ -170,7 +206,11 @@
 			[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
 			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-2 userInfo:errorDetail];
 			
-			[delegate syncController:self didSyncWithError:error];
+			self.lastSyncText = @"Failed";
+			
+			if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
+				[delegate syncController:self didSyncWithError:error];
+			}
 		}
 	}
 	else {
@@ -204,6 +244,14 @@
 		}
 		[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:context];
 	}
+	
+	// Set last sync date in defaults and lastSyncText
+	NSDate *now = [NSDate date];
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	[defaults setObject:now forKey:@"lastSyncDate"];
+	[defaults synchronize];
+	self.lastSyncText = [now prettyDate];
+	
 	// Inform delegate
 	// TODO: Check result of sync
 	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
