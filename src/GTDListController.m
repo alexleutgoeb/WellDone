@@ -190,21 +190,26 @@
     id result = nil;
 
 	if ([item isKindOfClass:[SearchQuery class]]) {
-        if (tableColumn == nil || [[tableColumn identifier] isEqualToString:@"done"]) {
+        if (tableColumn == nil) {
             result = [item title];
         }
     } else if ([item isKindOfClass:[Task class]]) {
-        if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:@"task"]) {
+        if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:TASK_ID]) {
             result = [item title];
             if (result == nil) {
                 result = NSLocalizedString(@"(Untitled)", @"Untitled title");
             }
-        } else if ([[tableColumn identifier] isEqualToString:@"dueDate"]) {
+        } else if ([[tableColumn identifier] isEqualToString:DONE_ID]) {
+            result = [item completed];
+            if (result == nil) {
+                result = NSLocalizedString(@"(Untitled)", @"Untitled title");
+            }
+        } else if ([[tableColumn identifier] isEqualToString:DUEDATE_ID]) {
             result = [item dueDate];            
             if (result == nil) {
                 result = NSLocalizedString(@"(Untitled)", @"Untitled dueDate");
             }
-        } else if ([[tableColumn identifier] isEqualToString:@"tags"]) {
+        } else if ([[tableColumn identifier] isEqualToString:TAGS_ID]) {
             result = [item tags];
 			result = NSLocalizedString(@"", @"Untitled tags");
         }            
