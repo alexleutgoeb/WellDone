@@ -36,4 +36,11 @@
 @dynamic childTasks;
 @dynamic remoteTasks;
 
+- (void)awakeFromInsert {
+	[super awakeFromInsert];
+	self.createDate = [NSDate date];
+	self.modifiedDate = [NSDate date];
+	self.deleted = [NSNumber numberWithBool:NO];
+}
+
 @end

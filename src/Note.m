@@ -21,4 +21,10 @@
 @dynamic folder;
 @dynamic remoteNotes;
 
+- (void)awakeFromInsert {
+	[super awakeFromInsert];
+	self.createDate = [NSDate date];
+	self.modifiedDate = [NSDate date];
+}
+
 @end

@@ -16,4 +16,9 @@
 @dynamic text;
 @dynamic tasks;
 
+- (void)awakeFromInsert {
+	[super awakeFromInsert];
+	self.deleted = [NSNumber numberWithBool:NO];
+}
+
 @end
