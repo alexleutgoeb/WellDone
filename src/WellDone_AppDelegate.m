@@ -554,7 +554,7 @@
 	[menuItem setToolTip:@"Last successful sync on: Never"];
 	[menuItem setTarget:self];
 	
-	menuItem = [menu addItemWithTitle:@"Sync now" action:nil keyEquivalent:@""];
+	menuItem = [menu addItemWithTitle:@"Sync now" action:@selector(startSync:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to start the sync"];
 	[menuItem setTarget:self];
 	
