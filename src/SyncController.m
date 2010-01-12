@@ -214,6 +214,8 @@
 		}
 	}
 	else {
+		self.lastSyncText = @"Syncing...";
+		
 		// Get new objectcontext from delegate
 		NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
 		
