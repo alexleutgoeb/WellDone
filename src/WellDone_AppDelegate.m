@@ -18,6 +18,7 @@
 #import "TaskValueTransformer.h"
 #import "GeneralPreferences.h"
 #import "SyncPreferences.h"
+#import "CLStringNumberValueTransformer.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -79,7 +80,7 @@
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-
+	[window makeMainWindow];
 	// user defaults
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	
@@ -110,13 +111,6 @@
 				  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) 
 				  context:NULL];
 	
-	/* Init the custum transformer (for token-tags) */
-	TaskValueTransformer *taskValueTransformer;
-	// create an autoreleased instance of our value transformer
-	taskValueTransformer = [[[TaskValueTransformer alloc] init]  autorelease];
-	// register it with the name that we refer to it with
-	[NSValueTransformer setValueTransformer:taskValueTransformer forName:@"TaskValueTransformer"];
-	
 	// Init status bar menu
 	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
 	[self setStatusBarMenuVisible:menuVisible];
@@ -146,6 +140,8 @@
 }
 
 - (void) awakeFromNib {
+	[self registerValueTransformers];
+	
 	// A couple of asserts to make sure the nib is properly assigned. These are easily
 	// forgotten and may take some time to verify.
 	//NSAssert(sidebarTaskPlaceholderView != nil, @"Forgot to link the sidebarTask placeholder view!");
@@ -167,23 +163,17 @@
 	contextViewController = [[ContextViewController alloc] init];
 	hudTaskEditorController = [[HUDTaskEditorController alloc] init];
 
-
-	
+	// Wire up some controllers with the SimpleListController
 	contextViewController.simpController = simpleListController;
 	[sidebarFolderController setSimpController:simpleListController];
 	hudTaskEditorController.simpController = simpleListController;
 	
-		
-	
-	
 	// Replace the placeholder views with the actual views from the controllers.
  	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];	
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
-	//[self replacePlaceholderView:&sidebarTaskPlaceholderView withViewOfController:sidebarTaskController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
-	[[hudTaskEditorController window] makeKeyAndOrderFront:nil];
-
+	[[hudTaskEditorController window] orderOut:nil];
 	
 	showGTDView = NO;
 	
@@ -214,6 +204,19 @@
 	[window makeFirstResponder:quickAddTask];
 }
 
+- (void) registerValueTransformers {
+	/* Init the custum transformer (for token-tags) */
+	TaskValueTransformer *taskValueTransformer;
+	taskValueTransformer = [[[TaskValueTransformer alloc] init]  autorelease];
+	[NSValueTransformer setValueTransformer:taskValueTransformer forName:@"TaskValueTransformer"];
+	
+	CLStringNumberValueTransformer *numberValueTransformer;
+	numberValueTransformer = [[[CLStringNumberValueTransformer alloc] init]  autorelease];
+	[NSValueTransformer setValueTransformer:numberValueTransformer forName:@"StringNumberValueTransformer"];
+	
+	
+}
+
 - (SyncController *)sharedSyncController {
 	return syncController;
 }
@@ -231,6 +234,27 @@
 	}
 }
 */
+
+#pragma mark -
+#pragma mark MainWindow UI Actions
+
+- (IBAction) toggleInspector:(id) sender {
+	if ([[hudTaskEditorController window] isVisible]) {
+		[[hudTaskEditorController window] orderOut:nil];
+	}
+	else {
+		NSRect rect = [window frame];
+		NSPoint mainWindowTopRight = NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+		
+		
+		//NSPoint rightTopOfMain = [window cascadeTopLeftFromPoint: NSZeroPoint];
+		[[hudTaskEditorController window] cascadeTopLeftFromPoint:mainWindowTopRight];
+		[[hudTaskEditorController window] orderFront:nil];
+
+	}
+		
+}
+
 
 #pragma mark -
 #pragma mark PrivateAPI

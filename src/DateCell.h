@@ -56,6 +56,7 @@ typedef enum {
     DateCellDetailMediumDateAndTime,            // ie: Apr 13, 1978, 5:05 PM
     DateCellDetailShortDateAndTime,             // ie: 4/13/1978, 5:05 PM
     DateCellDetailShortDate,                    // ie: 4/13/78
+	DateCellDetailMediumDate,
     DateCellDetailNumberOfDateFormats,          // Simply a count indicator
 } DateCellDetailLevel;
 

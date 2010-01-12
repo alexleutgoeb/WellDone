@@ -39,10 +39,10 @@ typedef enum _repeatValue
 } repeatValue;
 
 - (void) setRepeat:(id)sender {
-	//NSLog(@"Tag: %d",[[sender selectedItem] tag]);
-	//	NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects];
-	//	Task *selectedTask = [selectedTasks objectAtIndex:0];
-	//	[selectedTask setRepeat:1];
+	NSLog(@"Tag: %d",[[sender selectedItem] tag]);
+	NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects];
+	Task *selectedTask = [selectedTasks objectAtIndex:0];
+	[selectedTask setRepeat: [[NSNumber alloc] initWithInt:[[sender selectedItem] tag]]];
 }
 
 /*

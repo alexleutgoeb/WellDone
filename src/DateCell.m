@@ -94,14 +94,19 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDateFormatterStyle timeStyle = NSDateFormatterShortStyle;
     NSDateFormatterStyle dateStyle;
-    switch (detailLevel) {
+    //Uncomment to use different date formattings depending on available table column width
+	/*
+	switch (detailLevel) {
         case DateCellDetailFullDateAndTime: dateStyle = NSDateFormatterFullStyle; break;
         case DateCellDetailLongDateAndTime: dateStyle = NSDateFormatterLongStyle; break;
         case DateCellDetailMediumDateAndTime: dateStyle = NSDateFormatterMediumStyle; break;
         case DateCellDetailShortDateAndTime: dateStyle = NSDateFormatterShortStyle; break;
         case DateCellDetailShortDate: dateStyle = NSDateFormatterShortStyle; timeStyle = NSDateFormatterNoStyle; break;
-        case DateCellDetailNumberOfDateFormats: NSAssert(NO, @"shouldn't get called");
-    }
+        case DateCellDetailNumberOfDateFormats: NSAssert(NO, @"shouldn't get called"); break;
+    }*/
+	dateStyle = NSDateFormatterMediumStyle;
+	timeStyle = NSDateFormatterNoStyle;
+	
     [dateFormatter setDateStyle:dateStyle];
     [dateFormatter setTimeStyle:timeStyle];
     return [dateFormatter autorelease];
@@ -224,23 +229,26 @@ static CGFloat gDetailNaturalWidths[DateCellDetailNumberOfTodayAndYesterdays];
         NSCalendarDate *todaysDate = [NSCalendarDate calendarDate];
         if ([calendarDate yearOfCommonEra] == [todaysDate yearOfCommonEra]) {
             if ([calendarDate dayOfYear] == [todaysDate dayOfYear]) {
-                if (iLastWidth >= gDetailNaturalWidths[DateCellDetailTodayAndTime]) {
-                    stringToDraw = [NSString stringWithFormat:@"%@, %@", [self todayString], [[self timeDateFormatter] stringFromDate:date]];
-                } else if (iLastWidth >= gDetailNaturalWidths[DateCellDetailToday]) {
+				// Uncomment next 4 comments to show time
+                //if (iLastWidth >= gDetailNaturalWidths[DateCellDetailTodayAndTime]) {
+                //    stringToDraw = [NSString stringWithFormat:@"%@, %@", [self todayString], [[self timeDateFormatter] stringFromDate:date]];
+                //} else if (iLastWidth >= gDetailNaturalWidths[DateCellDetailToday]) {
                     stringToDraw = [self todayString];
-                }
+                //}
             } else if ([calendarDate dayOfYear] == ([todaysDate dayOfYear] - 1)) {
-                if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterdayAndTime]) {
-                    stringToDraw = [NSString stringWithFormat:@"%@, %@", [self yesterdayString], [[self timeDateFormatter] stringFromDate:date]];
-                } else if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterday]) {
+				// Uncomment next 4 comments to show time
+                //if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterdayAndTime]) {
+                //    stringToDraw = [NSString stringWithFormat:@"%@, %@", [self yesterdayString], [[self timeDateFormatter] stringFromDate:date]];
+                //} else if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterday]) {
                     stringToDraw = [self yesterdayString];
-                }
+                //}
             } else if ([calendarDate dayOfYear] == ([todaysDate dayOfYear] + 1)) {
-                if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterdayAndTime]) {
-                    stringToDraw = [NSString stringWithFormat:@"%@, %@", [self tomorrowString], [[self timeDateFormatter] stringFromDate:date]];
-                } else if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterday]) {
+                // Uncomment next 4 comments to show time
+				//if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterdayAndTime]) {
+                //    stringToDraw = [NSString stringWithFormat:@"%@, %@", [self tomorrowString], [[self timeDateFormatter] stringFromDate:date]];
+                //} else if (iLastWidth >= gDetailNaturalWidths[DateCellDetailYesterday]) {
                     stringToDraw = [self tomorrowString];
-                }
+                //}
             }
         }
     }

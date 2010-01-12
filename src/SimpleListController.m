@@ -351,23 +351,6 @@
 	NSPredicate *predicate = [NSPredicate predicateWithFormat: generatedPredicateString argumentArray:predicateArguments];
 	
 	
-	
-	//DEBUG ONLY
-	
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
-	//NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(title == %@)", title];
-	[fetchRequest setEntity:entity];	
-	[fetchRequest setPredicate:predicate];	
-	NSError *error;
-	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
-	Task *task;
-	NSLog(@"Finding tasks with predicate...");
-	for (task in result) {
-		NSLog(@"TASK: %@", [task title]);
-	}
-	
-	
 	return predicate;
 }
 

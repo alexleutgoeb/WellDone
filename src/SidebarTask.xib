@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">740</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="127"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1476,7 +1476,7 @@
 										<integer value="1"/>
 									</object>
 								</object>
-								<string key="NS.format">dd MMM yyyy HH:mm</string>
+								<string key="NS.format">dd.MM.yyyy HH:mm</string>
 								<bool key="NS.natural">NO</bool>
 							</object>
 							<reference key="NSControlView" ref="11488703"/>
@@ -3587,7 +3587,7 @@
 						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">dd MMM yyyy HH:mm</string>
+				<string key="NS.format">dd.MM.yyyy HH:mm</string>
 				<bool key="NS.natural">NO</bool>
 			</object>
 		</object>
@@ -3950,7 +3950,6 @@
 							<reference ref="439637026"/>
 							<reference ref="309516022"/>
 							<reference ref="381816501"/>
-							<reference ref="700938559"/>
 							<reference ref="369840120"/>
 							<reference ref="11488703"/>
 							<reference ref="818558653"/>
@@ -3965,6 +3964,7 @@
 							<reference ref="636525185"/>
 							<reference ref="525898359"/>
 							<reference ref="87569431"/>
+							<reference ref="700938559"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4609,7 +4609,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">331</int>
+			<int key="maxID">332</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

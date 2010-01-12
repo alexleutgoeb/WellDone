@@ -15,6 +15,22 @@
 		424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424209B610CFB96D00DB9F3F /* SenTestingKit.framework */; };
 		424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = 42262EC9109C818B005E4997 /* templateTestCases.m */; };
 		4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */; };
+		6F03A46810FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A45A10FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m */; };
+		6F03A46910FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A45C10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m */; };
+		6F03A46A10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A45E10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m */; };
+		6F03A46B10FC698B0020CCA9 /* CLPointsToUnitsTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46010FC698B0020CCA9 /* CLPointsToUnitsTransformer.m */; };
+		6F03A46C10FC698B0020CCA9 /* CLStringNumberValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46210FC698B0020CCA9 /* CLStringNumberValueTransformer.m */; };
+		6F03A46D10FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 6F03A46310FC698B0020CCA9 /* CLValueTransformers.rtfd */; };
+		6F03A46E10FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46510FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m */; };
+		6F03A46F10FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */; };
+		6F03A47010FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A45A10FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m */; };
+		6F03A47110FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A45C10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m */; };
+		6F03A47210FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A45E10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m */; };
+		6F03A47310FC698B0020CCA9 /* CLPointsToUnitsTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46010FC698B0020CCA9 /* CLPointsToUnitsTransformer.m */; };
+		6F03A47410FC698B0020CCA9 /* CLStringNumberValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46210FC698B0020CCA9 /* CLStringNumberValueTransformer.m */; };
+		6F03A47510FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 6F03A46310FC698B0020CCA9 /* CLValueTransformers.rtfd */; };
+		6F03A47610FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46510FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m */; };
+		6F03A47710FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */; };
 		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
 		6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */; };
 		6F22C1BB10CC01DD00ABFE19 /* SidebarBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */; };
@@ -165,6 +181,21 @@
 		4263A72310D1179D00C5FD7B /* SimpleListControllerTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListControllerTestCases.m; sourceTree = "<group>"; };
 		4263AABC10D1495200C5FD7B /* TaskValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskValueTransformer.h; sourceTree = "<group>"; };
 		4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskValueTransformer.m; sourceTree = "<group>"; };
+		6F03A45910FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDateToWeekdayValueTransformer.h; sourceTree = "<group>"; };
+		6F03A45A10FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDateToWeekdayValueTransformer.m; sourceTree = "<group>"; };
+		6F03A45B10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIsFaultBoolValueTransformer.h; sourceTree = "<group>"; };
+		6F03A45C10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIsFaultBoolValueTransformer.m; sourceTree = "<group>"; };
+		6F03A45D10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNotFaultBoolValueTransformer.h; sourceTree = "<group>"; };
+		6F03A45E10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNotFaultBoolValueTransformer.m; sourceTree = "<group>"; };
+		6F03A45F10FC698B0020CCA9 /* CLPointsToUnitsTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPointsToUnitsTransformer.h; sourceTree = "<group>"; };
+		6F03A46010FC698B0020CCA9 /* CLPointsToUnitsTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPointsToUnitsTransformer.m; sourceTree = "<group>"; };
+		6F03A46110FC698B0020CCA9 /* CLStringNumberValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLStringNumberValueTransformer.h; sourceTree = "<group>"; };
+		6F03A46210FC698B0020CCA9 /* CLStringNumberValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLStringNumberValueTransformer.m; sourceTree = "<group>"; };
+		6F03A46310FC698B0020CCA9 /* CLValueTransformers.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = CLValueTransformers.rtfd; sourceTree = "<group>"; };
+		6F03A46410FC698B0020CCA9 /* CLZeroPaddingValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLZeroPaddingValueTransformer.h; sourceTree = "<group>"; };
+		6F03A46510FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLZeroPaddingValueTransformer.m; sourceTree = "<group>"; };
+		6F03A46610FC698B0020CCA9 /* RadiansToDegreesTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiansToDegreesTransformer.h; sourceTree = "<group>"; };
+		6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiansToDegreesTransformer.m; sourceTree = "<group>"; };
 		6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderSourceListView.xib; sourceTree = "<group>"; };
 		6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderTreeView.m; sourceTree = "<group>"; };
 		6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarBadgeCell.m; sourceTree = "<group>"; };
@@ -300,6 +331,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6F03A45710FC69790020CCA9 /* Value Transformers */,
 				42375F3610F5F26A00A48318 /* Backup */,
 				D164971910D2E16F00DEB20A /* Custom Cells */,
 				77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */,
@@ -424,6 +456,28 @@
 				4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */,
 			);
 			name = ValueTransformer;
+			sourceTree = "<group>";
+		};
+		6F03A45710FC69790020CCA9 /* Value Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				6F03A45910FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.h */,
+				6F03A45A10FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m */,
+				6F03A45B10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.h */,
+				6F03A45C10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m */,
+				6F03A45D10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.h */,
+				6F03A45E10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m */,
+				6F03A45F10FC698B0020CCA9 /* CLPointsToUnitsTransformer.h */,
+				6F03A46010FC698B0020CCA9 /* CLPointsToUnitsTransformer.m */,
+				6F03A46110FC698B0020CCA9 /* CLStringNumberValueTransformer.h */,
+				6F03A46210FC698B0020CCA9 /* CLStringNumberValueTransformer.m */,
+				6F03A46310FC698B0020CCA9 /* CLValueTransformers.rtfd */,
+				6F03A46410FC698B0020CCA9 /* CLZeroPaddingValueTransformer.h */,
+				6F03A46510FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m */,
+				6F03A46610FC698B0020CCA9 /* RadiansToDegreesTransformer.h */,
+				6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */,
+			);
+			name = "Value Transformers";
 			sourceTree = "<group>";
 		};
 		6F5D249110AC5873002E9514 /* ViewController Classes */ = {
@@ -697,6 +751,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */,
+				6F03A46D10FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +779,7 @@
 				D1B51A7810F690360053C847 /* ContextView.xib in Resources */,
 				FA6A30FC10FA231700A77477 /* GeneralPreferences.xib in Resources */,
 				6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */,
+				6F03A47510FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +811,13 @@
 				BFCC7FEC10E95932000757D8 /* SyncManagerTestCases.m in Sources */,
 				421726C610F60D9C001490F5 /* CoreDataBackupTestCase.m in Sources */,
 				6FE405CD10FB69F9002ECF9C /* HUDTaskEditorController.m in Sources */,
+				6F03A46810FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m in Sources */,
+				6F03A46910FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m in Sources */,
+				6F03A46A10FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m in Sources */,
+				6F03A46B10FC698B0020CCA9 /* CLPointsToUnitsTransformer.m in Sources */,
+				6F03A46C10FC698B0020CCA9 /* CLStringNumberValueTransformer.m in Sources */,
+				6F03A46E10FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */,
+				6F03A46F10FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +868,13 @@
 				6FE405CE10FB69F9002ECF9C /* HUDTaskEditorController.m in Sources */,
 				D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */,
 				D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */,
+				6F03A47010FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m in Sources */,
+				6F03A47110FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.m in Sources */,
+				6F03A47210FC698B0020CCA9 /* CLNotFaultBoolValueTransformer.m in Sources */,
+				6F03A47310FC698B0020CCA9 /* CLPointsToUnitsTransformer.m in Sources */,
+				6F03A47410FC698B0020CCA9 /* CLStringNumberValueTransformer.m in Sources */,
+				6F03A47610FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */,
+				6F03A47710FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

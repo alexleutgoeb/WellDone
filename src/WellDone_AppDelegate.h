@@ -90,7 +90,9 @@
 - (void)showContextManagement:(id)sender;
 - (void)addNewTask:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
+- (void) registerValueTransformers;
 
+- (IBAction) toggleInspector:(id) sender;
 
 /**
  Starts the sync.
