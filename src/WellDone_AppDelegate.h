@@ -37,6 +37,7 @@
 	IBOutlet NSProgressIndicator *syncProgress;
 	IBOutlet NSButton *syncButton;
 	NSMenuItem *syncMenuItem;
+	NSMenuItem *syncTextMenuItem;
 	
 	IBOutlet NSTextField* quickAddTask;
 	
@@ -68,7 +69,7 @@
 	NSStatusItem *menuBarItem;
 	
 	BOOL isOnline;
-	SCNetworkReachabilityRef reachRef;
+	SCNetworkReachabilityRef reachRef;	
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

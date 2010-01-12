@@ -38,6 +38,7 @@
 
 @property (nonatomic, retain) SyncController *syncController;
 @property (nonatomic, retain) NSMenuItem *syncMenuItem;
+@property (nonatomic, retain) NSMenuItem *syncTextMenuItem;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
@@ -81,7 +82,7 @@
 @synthesize coreDataDBLocationURL;
 @synthesize backupDBLocationURL;
 @synthesize isOnline;
-@synthesize syncMenuItem;
+@synthesize syncMenuItem, syncTextMenuItem;
 
 #pragma mark -
 #pragma mark Initialization & disposal
@@ -556,6 +557,7 @@
 }
 
 - (NSMenu *)createStatusBarMenu {
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	NSZone *menuZone = [NSMenu menuZone];
 	NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
 	NSMenuItem *menuItem;
@@ -570,9 +572,15 @@
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	menuItem = [menu addItemWithTitle:@"Last Sync: Never" action:nil keyEquivalent:@""];
-	[menuItem setToolTip:@"Last successful sync on: Never"];
+	NSDate *lastSyncDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
+	if (lastSyncDate != nil) {
+		menuItem = [menu addItemWithTitle:[NSString stringWithFormat:@"Last Sync: %@", lastSyncDate] action:nil keyEquivalent:@""];
+	}
+	else {
+		menuItem = [menu addItemWithTitle:@"Last Sync: Never" action:nil keyEquivalent:@""];
+	}
 	[menuItem setTarget:self];
+	self.syncTextMenuItem = menuItem;
 	
 	menuItem = [menu addItemWithTitle:@"Sync now" action:@selector(startSync:) keyEquivalent:@""];
 	[menuItem setToolTip:@"Click to start the sync"];
@@ -667,6 +675,17 @@
 	[syncProgress stopAnimation:self];
 	[syncButton setEnabled:YES];
 	[syncMenuItem setAction:@selector(startSync:)];
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	[defaults setObject:[NSDate date] forKey:@"lastSyncDate"];
+	[defaults synchronize];
+
+	NSDate *lastSyncDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
+	if (lastSyncDate != nil) {
+		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", lastSyncDate]];
+	}
+	else {
+		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: Never"]];
+	}
 }
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
@@ -674,6 +693,7 @@
 	[syncProgress stopAnimation:self];
 	[syncButton setEnabled:YES];
 	[syncMenuItem setAction:@selector(startSync:)];
+	[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: Failed"]];
 	NSAlert *alert = [NSAlert alertWithError:error];
 	[alert runModal];
 }
