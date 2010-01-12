@@ -9,8 +9,10 @@
 #import "SimpleListController.h"
 #import <AppKit/NSTokenField.h>
 #import <AppKit/NSTokenFieldCell.h>
-#import <Tag.h>
-#import <Context.h>
+#import "Tag.h"
+#import "Context.h"
+#import "WellDone_AppDelegate.h"
+
 
 #define kFilterPredicateFolder	@"FilterPredicateFolder"
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
