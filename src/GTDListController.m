@@ -103,7 +103,7 @@
 	[gtdOutlineView scrollRowToVisible:row3];
 	[gtdOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:row3] byExtendingSelection:NO];
 
-	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"dueDate > %@", inSevenDays];	
+	NSPredicate *predicate4 = [NSPredicate predicateWithFormat:@"dueDate > %@ or dueDate = null", inSevenDays];	
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery4 = [[SearchQuery alloc] initWithSearchPredicate:predicate4 title:@"Upcoming:"];
 	[iTasks addObject:searchQuery4];
