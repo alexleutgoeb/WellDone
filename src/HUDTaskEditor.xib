@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="3"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -107,7 +107,7 @@
 									<string key="NSTitle">OtherViews</string>
 									<object class="NSMutableArray" key="NSMenuItems">
 										<bool key="EncodedWithXMLCoder">YES</bool>
-										<object class="NSMenuItem" id="929390888">
+										<object class="NSMenuItem" id="847309496">
 											<reference key="NSMenu" ref="1066540774"/>
 											<string key="NSTitle">No reminder</string>
 											<string key="NSKeyEquiv"/>
@@ -142,7 +142,7 @@
 											<int key="NSTag">60</int>
 											<reference key="NSTarget" ref="395362905"/>
 										</object>
-										<object class="NSMenuItem" id="460493203">
+										<object class="NSMenuItem" id="75503620">
 											<reference key="NSMenu" ref="1066540774"/>
 											<string key="NSTitle">2 h before</string>
 											<string key="NSKeyEquiv"/>
@@ -455,7 +455,7 @@
 											<int key="NSTag">2</int>
 											<reference key="NSTarget" ref="842809081"/>
 										</object>
-										<object class="NSMenuItem" id="1051175177">
+										<object class="NSMenuItem" id="1034109899">
 											<reference key="NSMenu" ref="284893283"/>
 											<string key="NSTitle">Yearly</string>
 											<string key="NSKeyEquiv"/>
@@ -466,7 +466,7 @@
 											<int key="NSTag">3</int>
 											<reference key="NSTarget" ref="842809081"/>
 										</object>
-										<object class="NSMenuItem" id="767172512">
+										<object class="NSMenuItem" id="761551844">
 											<reference key="NSMenu" ref="284893283"/>
 											<string key="NSTitle">Daily</string>
 											<string key="NSKeyEquiv"/>
@@ -477,7 +477,7 @@
 											<int key="NSTag">4</int>
 											<reference key="NSTarget" ref="842809081"/>
 										</object>
-										<object class="NSMenuItem" id="18548799">
+										<object class="NSMenuItem" id="799482297">
 											<reference key="NSMenu" ref="284893283"/>
 											<string key="NSTitle">2 per week</string>
 											<string key="NSKeyEquiv"/>
@@ -488,7 +488,7 @@
 											<int key="NSTag">5</int>
 											<reference key="NSTarget" ref="842809081"/>
 										</object>
-										<object class="NSMenuItem" id="620401419">
+										<object class="NSMenuItem" id="515439801">
 											<reference key="NSMenu" ref="284893283"/>
 											<string key="NSTitle">2 per month</string>
 											<string key="NSKeyEquiv"/>
@@ -499,7 +499,7 @@
 											<int key="NSTag">6</int>
 											<reference key="NSTarget" ref="842809081"/>
 										</object>
-										<object class="NSMenuItem" id="561877923">
+										<object class="NSMenuItem" id="340975382">
 											<reference key="NSMenu" ref="284893283"/>
 											<string key="NSTitle">2 per year</string>
 											<string key="NSKeyEquiv"/>
@@ -510,7 +510,7 @@
 											<int key="NSTag">7</int>
 											<reference key="NSTarget" ref="842809081"/>
 										</object>
-										<object class="NSMenuItem" id="615839662">
+										<object class="NSMenuItem" id="998678080">
 											<reference key="NSMenu" ref="284893283"/>
 											<string key="NSTitle">4 per year</string>
 											<string key="NSKeyEquiv"/>
@@ -1043,7 +1043,7 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
-			<object class="NSNumberFormatter" id="782190047">
+			<object class="NSNumberFormatter" id="870330753">
 				<object class="NSMutableDictionary" key="NS.attributes">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSArray" key="dict.sortedKeys">
@@ -1064,7 +1064,7 @@
 					<object class="NSMutableArray" key="dict.values">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<boolean value="YES"/>
-						<object class="NSAttributedString" id="245373746">
+						<object class="NSAttributedString" id="573872111">
 							<string key="NSString">-</string>
 							<object class="NSDictionary" key="NSAttributes">
 								<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1113,7 +1113,7 @@
 				<string key="NS.negativeformat">-0</string>
 				<nil key="NS.positiveattrs"/>
 				<nil key="NS.negativeattrs"/>
-				<reference key="NS.zero" ref="245373746"/>
+				<reference key="NS.zero" ref="573872111"/>
 				<object class="NSAttributedString" key="NS.nil">
 					<string key="NSString"/>
 				</object>
@@ -1143,7 +1143,7 @@
 				<bool key="NS.localized">YES</bool>
 				<bool key="NS.allowsfloats">YES</bool>
 			</object>
-			<object class="NSDateFormatter" id="779962090">
+			<object class="NSDateFormatter" id="879843474">
 				<object class="NSMutableDictionary" key="NS.attributes">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSArray" key="dict.sortedKeys">
@@ -1164,7 +1164,7 @@
 				<string key="NS.format">%d.%m.%Y</string>
 				<bool key="NS.natural">YES</bool>
 			</object>
-			<object class="NSArrayController" id="44596112">
+			<object class="NSArrayController" id="510490822">
 				<bool key="NSEditable">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
@@ -1423,7 +1423,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">formatter</string>
 						<reference key="source" ref="247310279"/>
-						<reference key="destination" ref="782190047"/>
+						<reference key="destination" ref="870330753"/>
 					</object>
 					<int key="connectionID">165</int>
 				</object>
@@ -1431,7 +1431,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">formatter</string>
 						<reference key="source" ref="835606032"/>
-						<reference key="destination" ref="779962090"/>
+						<reference key="destination" ref="879843474"/>
 					</object>
 					<int key="connectionID">168</int>
 				</object>
@@ -1439,7 +1439,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">formatter</string>
 						<reference key="source" ref="777992436"/>
-						<reference key="destination" ref="779962090"/>
+						<reference key="destination" ref="879843474"/>
 					</object>
 					<int key="connectionID">169</int>
 				</object>
@@ -1477,26 +1477,6 @@
 						</object>
 					</object>
 					<int key="connectionID">191</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.title</string>
-						<reference key="source" ref="144835531"/>
-						<reference key="destination" ref="15969858"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="144835531"/>
-							<reference key="NSDestination" ref="15969858"/>
-							<string key="NSLabel">value: selection.title</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.title</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSNoSelectionPlaceholder</string>
-								<string key="NS.object.0">Select Task to edit...</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">192</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1625,6 +1605,35 @@
 						</object>
 					</object>
 					<int key="connectionID">214</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.title</string>
+						<reference key="source" ref="144835531"/>
+						<reference key="destination" ref="15969858"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="144835531"/>
+							<reference key="NSDestination" ref="15969858"/>
+							<string key="NSLabel">value: selection.title</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.title</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSMultipleValuesPlaceholder</string>
+									<string>NSNoSelectionPlaceholder</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>Select single Task to edit...</string>
+									<string>Select Task to edit...</string>
+								</object>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">215</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1840,8 +1849,8 @@
 							<reference ref="1013870433"/>
 							<reference ref="712193174"/>
 							<reference ref="888951609"/>
-							<reference ref="460493203"/>
-							<reference ref="929390888"/>
+							<reference ref="75503620"/>
+							<reference ref="847309496"/>
 						</object>
 						<reference key="parent" ref="395362905"/>
 					</object>
@@ -1967,12 +1976,12 @@
 							<reference ref="1023788006"/>
 							<reference ref="327560409"/>
 							<reference ref="533386388"/>
-							<reference ref="1051175177"/>
-							<reference ref="767172512"/>
-							<reference ref="18548799"/>
-							<reference ref="620401419"/>
-							<reference ref="561877923"/>
-							<reference ref="615839662"/>
+							<reference ref="1034109899"/>
+							<reference ref="761551844"/>
+							<reference ref="799482297"/>
+							<reference ref="515439801"/>
+							<reference ref="340975382"/>
+							<reference ref="998678080"/>
 						</object>
 						<reference key="parent" ref="842809081"/>
 					</object>
@@ -2056,58 +2065,58 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">164</int>
-						<reference key="object" ref="782190047"/>
+						<reference key="object" ref="870330753"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">167</int>
-						<reference key="object" ref="779962090"/>
+						<reference key="object" ref="879843474"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">195</int>
-						<reference key="object" ref="44596112"/>
+						<reference key="object" ref="510490822"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Remindme Value Store</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">197</int>
-						<reference key="object" ref="460493203"/>
+						<reference key="object" ref="75503620"/>
 						<reference key="parent" ref="1066540774"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">202</int>
-						<reference key="object" ref="929390888"/>
+						<reference key="object" ref="847309496"/>
 						<reference key="parent" ref="1066540774"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">205</int>
-						<reference key="object" ref="1051175177"/>
+						<reference key="object" ref="1034109899"/>
 						<reference key="parent" ref="284893283"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">206</int>
-						<reference key="object" ref="767172512"/>
+						<reference key="object" ref="761551844"/>
 						<reference key="parent" ref="284893283"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">207</int>
-						<reference key="object" ref="18548799"/>
+						<reference key="object" ref="799482297"/>
 						<reference key="parent" ref="284893283"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">208</int>
-						<reference key="object" ref="620401419"/>
+						<reference key="object" ref="515439801"/>
 						<reference key="parent" ref="284893283"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">209</int>
-						<reference key="object" ref="561877923"/>
+						<reference key="object" ref="340975382"/>
 						<reference key="parent" ref="284893283"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">210</int>
-						<reference key="object" ref="615839662"/>
+						<reference key="object" ref="998678080"/>
 						<reference key="parent" ref="284893283"/>
 					</object>
 				</object>
@@ -2221,9 +2230,9 @@
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
-					<string>{{456, 505}, {277, 282}}</string>
+					<string>{{781, 518}, {277, 282}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{456, 505}, {277, 282}}</string>
+					<string>{{781, 518}, {277, 282}}</string>
 					<boolean value="YES"/>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>{{457, 460}, {141, 54}}</string>
@@ -2279,7 +2288,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">214</int>
+			<int key="maxID">215</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

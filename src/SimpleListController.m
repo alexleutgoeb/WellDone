@@ -38,6 +38,21 @@
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 	NSTextFieldCell *acell = [tableColumn dataCell];
 	
+	// Uncomment to set styling in cells:
+	/*
+	if ([cell isKindOfClass: [NSTextFieldCell class]]) {
+		NSFont *font = [NSFont fontWithName:@"Times-Roman" size:12.0];
+		NSArray *keys = [NSArray arrayWithObjects:NSFontAttributeName,NSBaselineOffsetAttributeName,nil];
+		
+		NSArray *values = [NSArray arrayWithObjects:font,[NSNumber numberWithFloat:100.0],nil];
+		NSDictionary *attributes = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+		NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:[cell stringValue] attributes:attributes];
+		//[cell setPlaceholderAttributedString:attributedString];
+		[cell setAttributedStringValue:attributedString];
+	}*/
+	
+
+	
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
 		Task *task = [item representedObject];
 		if ([task.completed boolValue] == YES) {

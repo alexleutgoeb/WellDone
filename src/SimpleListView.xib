@@ -337,7 +337,7 @@
 									</object>
 								</object>
 								<double key="NSRowHeight">20</double>
-								<int key="NSTvFlags">-767557632</int>
+								<int key="NSTvFlags">-633339904</int>
 								<reference key="NSDelegate"/>
 								<reference key="NSDataSource"/>
 								<object class="NSArray" key="NSSortDescriptors">
