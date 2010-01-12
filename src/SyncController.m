@@ -150,14 +150,25 @@
 
 - (void)sync {
 
+	// Check if at least one service is active
+	if (activeServicesCount == 0) {
+		if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
+			NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+			[errorDetail setValue:@"No sync service active" forKey:NSLocalizedDescriptionKey];
+			[errorDetail setValue:@"You have no active sync service, please activate one in the preferences first." forKey:NSLocalizedRecoverySuggestionErrorKey];
+			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail];
+			
+			[delegate syncController:self didSyncWithError:error];
+		}
+	}
 	// Check internet connection	
-	if ([[NSApp delegate] isOnline] == NO) {
+	else if ([[NSApp delegate] isOnline] == NO) {
 		// offline
 		if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
 			NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
 			[errorDetail setValue:@"No internet connection" forKey:NSLocalizedDescriptionKey];
 			[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
-			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail];
+			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-2 userInfo:errorDetail];
 			
 			[delegate syncController:self didSyncWithError:error];
 		}
