@@ -27,4 +27,8 @@
 	self.modifiedDate = [NSDate date];
 }
 
+- (NSString *)description {
+	return self.title;
+}
+
 @end

@@ -31,4 +31,8 @@
 	self.deleted = [NSNumber numberWithBool:NO];
 }
 
+- (NSString *)description {
+	return self.name;
+}
+
 @end
