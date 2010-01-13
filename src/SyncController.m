@@ -85,6 +85,7 @@
 				// Check if online
 				if (online == NO) {
 					needsOnline = YES;
+					DLog(@"Offline, can't enable services");
 					break;
 				}
 				else {
@@ -110,8 +111,8 @@
 	if (needsOnline) {
 		// Controller needs connection, not available, add observer to delegate and try again later
 		self.lastSyncText = @"Not Online.";
-		// TODO: implement
-		// [syncController addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+		self.status = SyncControllerOffline;
+		[[NSApp delegate] addObserver:self forKeyPath:@"isOnline" options:NSKeyValueObservingOptionNew context:nil];
 	}
 	else {
 		// Check last sync date
@@ -130,6 +131,18 @@
 		}
 		self.status = SyncControllerReady;
 	}
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqual:@"isOnline"]) {
+		if ([[change objectForKey:NSKeyValueChangeNewKey] integerValue] == YES) {
+			DLog(@"Now online, enable all services...");
+			// Remove observer and enable again.
+			[[NSApp delegate] removeObserver:self forKeyPath:@"isOnline"];
+			NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(enableAllServices) object:nil];
+			[syncQueue addOperation:op];
+		}
+    }
 }
 
 - (NSInteger)servicesCount {

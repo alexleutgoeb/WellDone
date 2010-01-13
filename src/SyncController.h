@@ -46,7 +46,8 @@
  */
 typedef enum {
 	SyncControllerReady = 0,
-	SyncControllerBusy
+	SyncControllerBusy,
+	SyncControllerOffline
 } SyncControllerState;
 
 
