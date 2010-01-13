@@ -17,7 +17,7 @@
 {
 	if ([theEvent keyCode] == 51) {
 		NSLog(@"keydown (del pressed) will remove the current taks");
-		[[[[NSApp delegate] simpleListController] treeController] remove:self];
+		[[[NSApp delegate] simpleListController] deleteSelectedTask];
 		//TODO: what to do with child tasks?
 	} else {
 		[super keyDown:theEvent];

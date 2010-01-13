@@ -71,7 +71,7 @@
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery1 = [[SearchQuery alloc] initWithSearchPredicate:predicate1 title:@"Today:"];
 	[iTasks addObject:searchQuery1];
-	[searchQuery1 release];
+	//[searchQuery1 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
 	[gtdOutlineView expandItem:searchQuery1];
@@ -83,7 +83,7 @@
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery2 = [[SearchQuery alloc] initWithSearchPredicate:predicate2 title:@"The next 3 days:"];
 	[iTasks addObject:searchQuery2];
-	[searchQuery2 release];
+	//[searchQuery2 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
 	[gtdOutlineView expandItem:searchQuery2];
@@ -95,7 +95,7 @@
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery3 = [[SearchQuery alloc] initWithSearchPredicate:predicate3 title:@"The next 7 days:"];
 	[iTasks addObject:searchQuery3];
-	[searchQuery3 release];
+	//[searchQuery3 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
 	[gtdOutlineView expandItem:searchQuery3];
@@ -107,9 +107,10 @@
 	// Create an instance of our datamodel and keep track of things.
 	SearchQuery *searchQuery4 = [[SearchQuery alloc] initWithSearchPredicate:predicate4 title:@"Upcoming:"];
 	[iTasks addObject:searchQuery4];
-	[searchQuery4 release];
+	//[searchQuery4 release];
 	// Reload the children of the root item, "nil". This only works on 10.5 or higher
 	[gtdOutlineView reloadItem:nil reloadChildren:YES];
+	[gtdOutlineView reloadData];
 	[gtdOutlineView expandItem:searchQuery4];
 	NSInteger row4 = [gtdOutlineView rowForItem:searchQuery4];
 	[gtdOutlineView scrollRowToVisible:row4];

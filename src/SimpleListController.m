@@ -66,6 +66,27 @@
 	
 }
 
+/*
+ * Set the currently selected task as deleted (flag).
+ */
+- (void) deleteSelectedTask {
+	NSArray *selectedTasks = [treeController selectedObjects];
+	id selectedTask;
+	for (selectedTask in selectedTasks) {
+		if ([selectedTask isKindOfClass: [Task class]]) {
+			[selectedTask setDeleted:[NSNumber numberWithBool:YES]];
+			//[myview reloadData]; 
+			[treeController fetch:nil];
+		}
+	}
+	NSError *error = nil;
+	if (![moc save:&error]) {
+		DLog(@"Error deleting selected Tasks, don't know what to do.");
+	} else {
+		DLog(@"Removed selected Tasks.");
+	}
+}
+
 - (void)setTaskDone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor lightGrayColor]];
 }
@@ -341,12 +362,12 @@
 	
 	// will show inbox folder if the folder is not set:
 	if (folder == nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = nil AND parentTask == nil"];
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = nil AND parentTask == nil AND deleted == 0"];
 		generatedPredicateString = extension;
 	}
 	
 	if (folder != nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = %@ AND parentTask == nil"];
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = %@ AND parentTask == nil AND deleted == 0"];
 		generatedPredicateString = extension;
 		[predicateArguments addObject:folder];
 	}

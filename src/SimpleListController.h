@@ -58,4 +58,5 @@
 - (void) setTaskListSearchFilter:(NSString*) searchText;
 - (NSPredicate *) generateTaskListSearchPredicate;
 - (void) reloadTaskListWithFilters;
+- (void) deleteSelectedTask;
 @end
