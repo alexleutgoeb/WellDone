@@ -25,7 +25,6 @@
 @dynamic remoteFolders;
 
 - (void)awakeFromInsert {
-	//DLog(@"XXXXXXXXXXXXXXXXXXX ADAFSGDG XXXXXXXXXXXXXXXX");
 	[super awakeFromInsert];
 	self.createDate = [NSDate date];
 	self.modifiedDate = [NSDate date];
