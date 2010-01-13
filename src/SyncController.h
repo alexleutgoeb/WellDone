@@ -42,6 +42,15 @@
 
 
 /**
+ Enum for sync controller states
+ */
+typedef enum {
+	SyncControllerReady = 0,
+	SyncControllerBusy
+} SyncControllerState;
+
+
+/**
  SyncController class
  The class is the main class for enabling services and trigger a sync.
  */
@@ -63,6 +72,9 @@
 	
 	// String representation of last sync
 	NSString *lastSyncText;
+	
+	// SyncControllerState
+	SyncControllerState status;
 }
 
 
@@ -90,6 +102,11 @@
  Getter and setter for last sync date string
  */
 @property (nonatomic, copy) NSString *lastSyncText;
+
+/**
+ Getter and setter fot synccontroller state property
+ */
+@property (nonatomic, assign) SyncControllerState status;
 
 
 /**

@@ -255,78 +255,97 @@
 	NSMutableArray *foundGtdFolders = [[NSMutableArray alloc] init];
 	GtdFolder *foundGtdFolder;
 	RemoteFolder *remoteFolder;
-	
+	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Folder *localFolder in localFolders) {
+		DLog(@"localFolder.name %@", localFolder.name);
 		//[aManagedObjectContext deleteObject:localFolder];
 		NSEnumerator *enumerator = [localFolder.remoteFolders objectEnumerator];
-		
+		DLog(@"localFolder.remoteFolder %@", [localFolder.remoteFolders description]);
 		remoteFolder = nil;
 		
 		while ((remoteFolder = [enumerator nextObject])) {
 			//wenn remoteobject existiert
-			if(remoteFolder.serviceIdentifier == syncService.identifier) break;
+			if([remoteFolder.serviceIdentifier isEqualToString:syncService.identifier]) break;
 			else remoteFolder = nil;
 		}
 		//now we can safely assume, that each local folder has a remoteFolder
 		//no remoteFolder was found, create one
 		if(remoteFolder == nil) {
+			DLog(@"creating remoteFolder for folder %@", localFolder.name);
 			remoteFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
 			remoteFolder.serviceIdentifier = syncService.identifier;
-			remoteFolder.remoteUid = nil;
+			remoteFolder.remoteUid = [NSNumber numberWithInteger:-1];
 			remoteFolder.lastsyncDate = nil;
 			remoteFolder.localFolder = localFolder;
 			NSMutableSet *mutableRemoteFolders = [localFolder mutableSetValueForKey:@"remoteFolders"];
 			[mutableRemoteFolders addObject:remoteFolder];
-		}
-		
-		//find gtdfolder
-		foundGtdFolder = nil;
-		for(GtdFolder *gtdFolder in gtdFolders) {
-			if(gtdFolder.uid == [remoteFolder.remoteUid integerValue]) {
-				[foundGtdFolders addObject:gtdFolder];
-				foundGtdFolder = gtdFolder;
-				break;
-			}
-		}
-		for(GtdFolder *bla in foundGtdFolders) {
-			DLog(@"syncFolder foundFolder. %@", bla.title);
-		}
-		DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
-		DLog(@"remoteFolder.lastsyncDate: %@", remoteFolder.lastsyncDate);
-		DLog(@"localFolder.deleted: %@", localFolder.deleted);
-		//DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
-		if([localFolder.deleted integerValue] != 0) {
-			DLog(@"syncFolder deleting a folder.");
-			if(foundGtdFolder != nil)
-				[syncService deleteFolder:foundGtdFolder error:&error];
-			[aManagedObjectContext deleteObject:localFolder];
-		}
-		else if(
-		   (foundGtdFolder == nil && [localFolder.deleted integerValue] != 1) ||
-		   remoteFolder.lastsyncDate == nil ||
-		   localFolder.modifiedDate > remoteFolder.lastsyncDate
-		   ) {
-			DLog(@"syncFolder writing data to remote.");
+			DLog(@"syncFolder addFolder.");
 			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
-			newGtdFolder.uid = [remoteFolder.remoteUid integerValue];
 			newGtdFolder.title = localFolder.name;
 			if([localFolder.private intValue] == 1)
 				newGtdFolder.private = YES;
 			else newGtdFolder.private = NO;
 			//newGtdFolder.archived = localFolder.archived;
 			//newGtdFolder.order = [localFolder.order integerValue];
-			
-			//add new folder if firstsync
-			if(remoteFolder.remoteUid == nil) {
-				remoteFolder.remoteUid = [NSNumber numberWithInt:[syncService addFolder:newGtdFolder error:&error]];
-				DLog(@"Error while loading remote folders: %@", error);
+			remoteFolder.remoteUid = [NSNumber numberWithLong:[syncService addFolder:newGtdFolder error:&error]];
+			DLog(@"new remoteUid: %@", remoteFolder.remoteUid);
+			remoteFolder.lastsyncDate = [NSDate date];
+			newGtdFolder.uid = [remoteFolder.remoteUid integerValue];
+			foundGtdFolder = newGtdFolder;
+		} else {
+			//find gtdfolder
+			foundGtdFolder = nil;
+			for(GtdFolder *gtdFolder in gtdFolders) {
+				DLog(@"found GtdFolder %@", gtdFolder.title);
+				DLog(@"gtdFolder.uid %i", gtdFolder.uid);
+				DLog(@"remoteFolder.remoteUid %@", remoteFolder.remoteUid);
+				if(gtdFolder.uid == [remoteFolder.remoteUid integerValue]) {
+					DLog(@"syncFolder matching remoteUid. %i", gtdFolder.uid);
+					[foundGtdFolders addObject:gtdFolder];
+					foundGtdFolder = gtdFolder;
+					break;
+				}
 			}
-			//overwrite the remote remoteFolder with the local folder
-			else [syncService editFolder:newGtdFolder error:&error];
-			remoteFolder.lastsyncDate == [NSDate date];
+			for(GtdFolder *bla in foundGtdFolders) {
+				DLog(@"syncFolder foundFolder. %@", bla.title);
+			}
 		}
-		else if(foundGtdFolder != nil && [localFolder.deleted integerValue] != 1) {
+		
+		DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
+		DLog(@"remoteFolder.lastsyncDate: %@", remoteFolder.lastsyncDate);
+		DLog(@"localFolder.deleted: %@", localFolder.deleted);
+		
+		//DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
+		if([localFolder.deleted integerValue] == 1) {
+			DLog(@"syncFolder deleting a folder.");
+			if(foundGtdFolder != nil)
+				[syncService deleteFolder:foundGtdFolder error:&error];
+			[aManagedObjectContext deleteObject:localFolder];
+		} else if(foundGtdFolder == nil) {
+			DLog(@"syncFolder deleting cos no foundGtdFolder");
+			if(remoteFolder.lastsyncDate != nil && [remoteFolder.lastsyncDate timeIntervalSinceDate:localFolder.modifiedDate] > 0) {
+				[aManagedObjectContext deleteObject:localFolder];
+			}
+		
+		} else if([localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate] > 0) {
+			//editFolder
+			DLog(@"syncFolder editFolder.");
+			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
+			newGtdFolder.uid = [remoteFolder.remoteUid integerValue];
+			DLog(@"check.");
+			newGtdFolder.title = localFolder.name;
+			if([localFolder.private intValue] == 1)
+				newGtdFolder.private = YES;
+			else newGtdFolder.private = NO;
+			//newGtdFolder.archived = localFolder.archived;
+			//newGtdFolder.order = [localFolder.order integerValue];
+			DLog(@"check2.");
+			//overwrite the remote remoteFolder with the local folder
+			[syncService editFolder:newGtdFolder error:&error];
+			DLog(@"check3.");
+			remoteFolder.lastsyncDate == [NSDate date];
+		} else {
 			DLog(@"syncFolder writing data to local.");
 			localFolder.name = foundGtdFolder.title;
 			if(foundGtdFolder.private == YES) localFolder.private = [NSNumber numberWithInt:1];
@@ -335,7 +354,6 @@
 			remoteFolder.lastsyncDate == [NSDate date];
 		}
 	}
-	
 	//NSMutableArray thxObjC = new NSMutableArray(gtdFolders);
 	//finally durchlaufe die gtdFolder die nicht zuordenbar waren und erzeuge sie lokal
 	[gtdFolders removeObjectsInArray:foundGtdFolders];
@@ -354,6 +372,8 @@
 		lFolder.name = gtdFolder.title;
 		lFolder.private = [NSNumber numberWithBool:gtdFolder.private];
 		lFolder.order = [NSNumber numberWithInteger:gtdFolder.order];
+		NSMutableSet *mutableRemoteFolders = [lFolder mutableSetValueForKey:@"remoteFolders"];
+		[mutableRemoteFolders addObject:rFolder];
 	}
 		
 	//zuerst innerhalb einer passenden datenstruktur jedem element aus rFolder das entsprechende element aus gtdFolder zuordnen

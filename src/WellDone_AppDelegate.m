@@ -114,6 +114,7 @@
 	
 	// Init syncController
 	self.syncController = [[SyncController alloc] initWithDelegate:self];
+	[syncController addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
 	
 	// Add observer to user defaults
 	[defaults addObserver:self forKeyPath:@"menubarIcon" 
@@ -139,6 +140,7 @@
  Implementation of dealloc, to release the retained variables.
  */
 - (void)dealloc {
+	[syncController removeObserver:syncController forKeyPath:@"status"];
 	[syncController release];
 	[syncMenuItem release];
 	[syncButton release];
@@ -641,9 +643,6 @@
 
 - (void)startSync:(id)sender {
 	DLog(@"Start sync in UI.");
-	[syncProgress startAnimation:sender];
-	[syncButton setEnabled:NO];
-	[syncMenuItem setAction:nil];
 	[syncController sync];
 }
 
@@ -654,6 +653,20 @@
 	else if ([keyPath isEqualToString:@"lastSyncText"]) {
 		// Set new text for statusbar menu sync item
 		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", syncController.lastSyncText]];
+	}
+	else if ([keyPath isEqualToString:@"status"]) {
+		// Set new text for statusbar menu sync item
+		SyncControllerState state = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+		if (state == SyncControllerBusy) {
+			[syncProgress startAnimation:self];
+			[syncButton setEnabled:NO];
+			[syncMenuItem setAction:nil];
+		}
+		else {
+			[syncProgress stopAnimation:self];
+			[syncButton setEnabled:YES];
+			[syncMenuItem setAction:@selector(startSync:)];
+		}
 	}
     // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
@@ -680,16 +693,10 @@
 
 - (void)syncControllerDidSyncWithSuccess:(SyncController *)sc {
 	DLog(@"Sync finished with success, hiding sync progress inidicator...");
-	[syncProgress stopAnimation:self];
-	[syncButton setEnabled:YES];
-	[syncMenuItem setAction:@selector(startSync:)];
 }
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
 	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
-	[syncProgress stopAnimation:self];
-	[syncButton setEnabled:YES];
-	[syncMenuItem setAction:@selector(startSync:)];
 	NSAlert *alert = [NSAlert alertWithError:error];
 	[alert runModal];
 }
