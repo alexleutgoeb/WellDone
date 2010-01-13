@@ -9,14 +9,19 @@
 #import <Cocoa/Cocoa.h>
 #import "GtdApi.h"
 #import "SS_PreferencePaneProtocol.h"
+#import "SyncController.h"
 
 
 @interface SyncPreferences : NSViewController <SS_PreferencePaneProtocol> {
 @private
     IBOutlet NSScrollView *scrollView_accountList;
     IBOutlet NSTableView *tableView_accountList;
-	IBOutlet NSTextField *textField_overview;	
+	IBOutlet NSTextField *textField_overview;
+	
+	BOOL editable;
 }
+
+@property (nonatomic, assign) BOOL editable;
 
 - (void)editServiceSheetDidEndForService:(NSString *)serviceId withSuccess:(BOOL)success;
 

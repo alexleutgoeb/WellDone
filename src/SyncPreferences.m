@@ -8,7 +8,6 @@
 
 #import "SyncPreferences.h"
 #import "WellDone_AppDelegate.h"
-#import "SyncController.h"
 #import "SyncService.h"
 #import "ServicePreferencesSheetController.h"
 #import "SFHFKeychainUtils.h"
@@ -21,6 +20,8 @@
 @end
 
 @implementation SyncPreferences
+
+@synthesize editable;
 
 - (id)init {
 	if (self = [super initWithNibName:@"SyncPreferences" bundle:nil]) {
@@ -37,11 +38,33 @@
 	[cell release];
 	
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
+	[sc addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+	if (sc.status > 0) {
+		self.editable = NO;
+		[tableView_accountList reloadData];
+	}
+	else {
+		self.editable = YES;
+		[tableView_accountList reloadData];
+	}
+	
 	[textField_overview setStringValue:[NSString stringWithFormat:@"%i service(s), %i active", sc.servicesCount, sc.activeServicesCount]];
 	
 	[tableView_accountList sizeToFit];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqual:@"status"]) {
+		if ([[change objectForKey:NSKeyValueChangeNewKey] integerValue] > 0) {
+			self.editable = NO;
+			[tableView_accountList reloadData];
+		}
+		else {
+			self.editable = YES;
+			[tableView_accountList reloadData];
+		}
+    }
+}
 
 #pragma mark SS_PreferencePaneProtocol methods
 

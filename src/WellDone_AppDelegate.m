@@ -92,6 +92,7 @@
 	[window makeMainWindow];
 	// user defaults
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	// TODO: set default values for userdefaults
 	
 	// Init preferences window
 	GeneralPreferences *generalP = [[[GeneralPreferences alloc] init] autorelease];
