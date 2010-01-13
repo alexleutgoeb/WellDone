@@ -14,12 +14,18 @@
 static NSDateFormatter *dateFormatter = nil;
 
 - (NSString *)prettyDateWithReference:(NSDate *)reference {
-	float diff = [reference timeIntervalSinceDate:self];
-	float distance = floor(diff);
 	
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
-	}    
+	}  
+	
+	// Remove time component
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+	NSDate *selfDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self]];
+	reference = [dateFormatter dateFromString:[dateFormatter stringFromDate:reference]];
+	float diff = [reference timeIntervalSinceDate:selfDate];
+	float distance = floor(diff);
 	
 	if (distance < 60 * 60 * 24) {
 		[dateFormatter setDateStyle:NSDateFormatterNoStyle];
