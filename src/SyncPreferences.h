@@ -15,7 +15,6 @@
 @private
     IBOutlet NSScrollView *scrollView_accountList;
     IBOutlet NSTableView *tableView_accountList;
-	IBOutlet NSButton *button_editService;
 	IBOutlet NSTextField *textField_overview;	
 }
 
