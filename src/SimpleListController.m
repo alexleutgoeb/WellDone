@@ -95,6 +95,35 @@
 	[cell setTextColor:[NSColor blackColor]];
 }
 
+//TODO: methodenkopf, unit tests, copy&paste
+- (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell 
+	completionsForSubstring:(NSString *)substring 
+			   indexOfToken:(NSInteger)tokenIndex 
+		indexOfSelectedItem:(NSInteger *)selectedIndex {
+	
+	NSLog(@"completionsForSubstring");
+	
+	// get all the saved tags from core data and save them into the item array
+	NSArray *items = [self getCurrentTags]; 
+	NSMutableArray  *result = [[NSMutableArray alloc]init];
+	NSString *currentTagName = [[NSString alloc]init];
+	
+	for (int i = 0; i < [items count]; i++) {
+		currentTagName = (NSString *) [[items objectAtIndex:i] text];
+		
+		// avoid to put the tagname twice into the list (in case that the typed name was in core data)
+		// also filter the tags out of the list which are not substrings of the user typed tagname
+		if (currentTagName != nil && ![currentTagName isEqualToString: substring] && !([currentTagName rangeOfString:substring].location == NSNotFound)){ 
+			[result addObject: currentTagName];
+		}
+	}	
+	
+	[result sortUsingSelector:@selector(compare:)];
+	
+	// add the current typed string from the user (substring param) as the first item
+	[result insertObject:substring atIndex:0];
+	return result;
+}
 
 //TODO: comments, tests
 - (NSArray *) getCurrentTags {
@@ -122,39 +151,6 @@
 		return  [result objectAtIndex:0];
 	}
 }
-
-- (void)updateTagsInTask:(NSString*)title Tags:(NSSet*)tags
-{
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(title == %@)", title];
-	[fetchRequest setEntity:entity];	
-	[fetchRequest setPredicate:predicate];	
-	NSError *error;
-	NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
-	
-	if ([result count] == 0) {
-		//NSLog(@"Task nicht gefunden!");
-		return;
-	}
-	else {
-		//NSLog(@"getTagByName returns: %@", [[result objectAtIndex:0] className]);
-		//NSLog(@"Task gefunden!");
-		NSManagedObject *task = [result objectAtIndex:0];
-		[task setValue:tags forKey:@"tags"];
-	}
-}
-/*
-- (BOOL)shouldFocusCell:(NSCell *)cell atColumn:(NSInteger)column row:(NSInteger)row
-{
-	NSLog("shouldFocusCell");
-}
-
-- (BOOL)textShouldBeginEditing:(NSText *)textObject
-{
-	NSLog(@"textShouldBeginEditing: %@", [textObject className]);
-}
-*/
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {	
@@ -215,7 +211,15 @@
 	//}
 	
 	// Tags im Task aktualisieren
-	[self updateTagsInTask:[selectedTask title] Tags:[NSSet setWithArray:newTags]];
+	[selectedTask setTags: [NSSet setWithArray:newTags]];
+	
+	// moc speichern
+	NSError *error = nil;
+	if (![moc save:&error]) {
+		DLog(@"Error updating task, don't know what to do.");
+	} else {
+		DLog(@"Updated tags in Task.");
+	}
 	
 }
 
