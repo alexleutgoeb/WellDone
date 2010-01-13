@@ -29,6 +29,7 @@
 	self.createDate = [NSDate date];
 	self.modifiedDate = [NSDate date];
 	self.deleted = [NSNumber numberWithBool:NO];
+	self.private = NO;
 }
 
 - (NSString *)description {
