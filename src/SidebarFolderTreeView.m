@@ -307,6 +307,18 @@
 	return([self itemAtRow:[self selectedRow]]);
 }
 
+/*
+ * Returns the currently selected folder. If there is no selection, or the selection
+ * is not a folder, NIL is returned.
+ */
+- (Folder *)selectedFolder {
+	id *selectedNode = [self selectedNode];
+	if ([[selectedNode data] isKindOfClass: [Folder class]]) {
+		return [selectedNode data];
+	}
+	return nil;
+}
+
 - (void)selectItem:(id)key {
 	SidebarFolderNode *node = [_contents objectForKey:key];
 	if (node != nil && [node nodeType] != kSidebarNodeTypeSection) {

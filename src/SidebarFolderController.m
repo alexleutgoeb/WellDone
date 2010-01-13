@@ -329,4 +329,8 @@
 	simpController = simpleListController;
 }
 
+- (Folder *) selectedFolder {
+	return [sidebar selectedFolder];
+}
+
 @end

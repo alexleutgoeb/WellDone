@@ -531,7 +531,12 @@
 }
 
 - (void)addNewTask:(id)sender {
-	NSManagedObject *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext]; 
+	Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext]; 
+	
+	Folder *selectedFolder = [sidebarFolderController selectedFolder];
+	if (selectedFolder != nil) {
+		[task setFolder:selectedFolder];
+	}
 	
 	if ([sender isKindOfClass:[NSTextField class]]) {
 		NSString *title = [sender stringValue];
