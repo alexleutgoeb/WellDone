@@ -76,7 +76,7 @@
 	[workingLabel setHidden:NO];
 	[workingIndicator startAnimation:self];
 	
-	// TODO: option to cancel thread
+	// TODO: option to cancel thread ?
 	[NSThread detachNewThreadSelector:@selector(connectToService) toTarget:self withObject:nil];
 }
 
@@ -104,9 +104,7 @@
 		SyncController *sc = [[NSApp delegate] sharedSyncController];
 		BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
 
-		if (success == NO) {
-			// TODO: show detailed error
-			
+		if (success == NO) {			
 			if (notifyTarget)
 				[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 			[NSApp endSheet:[self window]];
