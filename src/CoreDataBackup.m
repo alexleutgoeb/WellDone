@@ -17,9 +17,10 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 
 - (IBAction)createBackupAction:(id)sender {
 
-	NSString *location = [[NSApp delegate] applicationSupportDirectory ]; //TODO
-
 	
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+//	NSString *location = [[NSApp delegate] applicationSupportDirectory ]; 
+	NSString *location = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
 	
 	NSError *error;	
 	NSAlert *alert = [[NSAlert alloc] init];
@@ -37,6 +38,10 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 
 // make a copy of the core data file
 - (BOOL)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
+
+	//TODO: check the path ending
+	backupPath = [backupPath stringByAppendingString:@"/"];
+	//NSLog(backupPath);
     NSFileManager *fm = [NSFileManager defaultManager];
     
 	NSURL *currentDBFile = [[NSApp delegate] coreDataDBLocationURL];
