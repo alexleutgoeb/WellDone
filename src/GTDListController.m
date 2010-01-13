@@ -54,7 +54,7 @@
 	unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
 	NSDayCalendarUnit;
 	NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
-	[theComps setHour:12];
+	[theComps setHour:0];
 	[theComps setMinute:0];
 	[theComps setSecond:0];
 	NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
@@ -154,7 +154,7 @@
 - (void)taskChildrenChanged:(NSNotification *)note {
     [gtdOutlineView reloadItem:[note object] reloadChildren:YES];
 }
-/*
+
 - (void)taskItemChanged:(NSNotification *)note {
     // When an item changes, it only will affect the display state. So, we only need to redisplay its contents, and not reload it
     NSInteger row = [gtdOutlineView rowForItem:[note object]];
@@ -165,7 +165,7 @@
 	 }
 	}
 }
-*/
+
 #pragma mark -
 #pragma mark NSOutlineView datasource and delegate methods
 
@@ -207,7 +207,7 @@
         } else if ([[tableColumn identifier] isEqualToString:DUEDATE_ID]) {
             result = [item dueDate];            
             if (result == nil) {
-                result = NSLocalizedString(@"(Untitled)", @"Untitled dueDate");
+                result = NSLocalizedString(@"(No Date)", @"Untitled dueDate");
             }
         } else if ([[tableColumn identifier] isEqualToString:TAGS_ID]) {
             result = [item tags];
@@ -219,12 +219,14 @@
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    
-	NSLog(@"setObjectValue called");
-	if ([item isKindOfClass:[SearchItem class]]) {
-        if ([[tableColumn identifier] isEqualToString:@"done"]) {
+	if ([item isKindOfClass:[Task class]]) {		
+        if ([[tableColumn identifier] isEqualToString:TASK_ID]) {
             [item setTitle:object];
-        }
+        } else if ([[tableColumn identifier] isEqualToString:DONE_ID]) {
+			[item setCompleted:object];
+		} else if ([[tableColumn identifier] isEqualToString:DUEDATE_ID]) {
+			[item setDueDate:object];
+		}
     }    
 }
 
