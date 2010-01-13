@@ -25,7 +25,7 @@
 
 @implementation SyncController
 
-@synthesize syncServices, activeServicesCount, delegate, lastSyncText;
+@synthesize syncServices, activeServicesCount, delegate, lastSyncText, status;
 
 - (id)initWithDelegate:(id<SyncControllerDelegate>)aDelegate {
 	if (self = [self init]) {
@@ -36,6 +36,7 @@
 
 - (id)init {
 	if (self = [super init]) {
+		self.status = SyncControllerBusy;
 		syncServices = [[NSMutableDictionary alloc] init];
 		syncManager = [[SyncManager alloc] init];
 		syncQueue = [[NSOperationQueue alloc] init];
@@ -67,6 +68,8 @@
 - (void)enableAllServices {	
 	// Activated services from user defaults
 	BOOL isActive = NO;
+	self.status = SyncControllerBusy;
+	
 	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
 	
@@ -114,6 +117,7 @@
 	else {
 		self.lastSyncText = @"Never";
 	}
+	self.status = SyncControllerReady;
 }
 
 - (NSInteger)servicesCount {
@@ -122,6 +126,7 @@
 
 - (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser pwd:(NSString *)aPwd error:(NSError **)anError {
 	BOOL returnValue = NO;
+	self.status = SyncControllerBusy;
 	
 	SyncService *service = [syncServices objectForKey:anIdentifier];
 		
@@ -153,12 +158,13 @@
 	if (lastDate != nil) {
 		self.lastSyncText = [lastDate prettyDate];
 	}
-	
+	self.status = SyncControllerReady;
 	return returnValue;
 }
 
 - (BOOL)disableSyncService:(NSString *)anIdentifier {
 	BOOL returnValue = NO;
+	self.status = SyncControllerBusy;
 	
 	SyncService *service = [syncServices objectForKey:anIdentifier];
 	
@@ -177,10 +183,12 @@
 		DLog(@"Service not found, nothing to do, returning NO.");
 	}
 	
+	self.status = SyncControllerReady;
 	return returnValue;
 }
 
 - (void)sync {
+	self.status = SyncControllerBusy;
 
 	// Check if at least one service is active
 	if (activeServicesCount == 0) {
@@ -191,6 +199,7 @@
 			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail];
 			
 			self.lastSyncText = @"Failed";
+			self.status = SyncControllerReady;
 			
 			if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
 				[delegate syncController:self didSyncWithError:error];
@@ -207,6 +216,7 @@
 			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-2 userInfo:errorDetail];
 			
 			self.lastSyncText = @"Failed";
+			self.status = SyncControllerReady;
 			
 			if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
 				[delegate syncController:self didSyncWithError:error];
@@ -253,6 +263,7 @@
 	[defaults setObject:now forKey:@"lastSyncDate"];
 	[defaults synchronize];
 	self.lastSyncText = [now prettyDate];
+	self.status = SyncControllerReady;
 	
 	// Inform delegate
 	// TODO: Check result of sync

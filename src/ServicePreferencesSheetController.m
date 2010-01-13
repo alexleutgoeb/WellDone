@@ -76,7 +76,7 @@
 	[workingLabel setHidden:NO];
 	[workingIndicator startAnimation:self];
 	
-	// TODO: option to cancel thread
+	// TODO: option to cancel thread ?
 	[NSThread detachNewThreadSelector:@selector(connectToService) toTarget:self withObject:nil];
 }
 
@@ -104,9 +104,7 @@
 		SyncController *sc = [[NSApp delegate] sharedSyncController];
 		BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
 
-		if (success == NO) {
-			// TODO: show detailed error
-			
+		if (success == NO) {			
 			if (notifyTarget)
 				[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 			[NSApp endSheet:[self window]];
@@ -143,21 +141,79 @@
 					
 					NSArray *items = [moc executeFetchRequest:fetchRequest error:&error];
 					[fetchRequest release];
-					DLog(@"Items: %@", [items description]);
+					DLog(@"Found %i remote items to delete...", [items count]);
+					if (error == nil) {
+						for (NSManagedObject *managedObject in items) {
+							[moc deleteObject:managedObject];
+						}
+					}
+					error = nil;
+					DLog(@"Remove folders with deleted flag...");
+					fetchRequest = [[NSFetchRequest alloc] init];
+					
+					entity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:moc];
+					[fetchRequest setEntity:entity];
+					
+					predicate = [NSPredicate predicateWithFormat:@"deleted == 1"];
+					[fetchRequest setPredicate:predicate];
+					
+					items = [moc executeFetchRequest:fetchRequest error:&error];
+					[fetchRequest release];
+					DLog(@"Found %i folders to delete...", [items count]);
 					
 					if (error == nil) {
 						for (NSManagedObject *managedObject in items) {
 							[moc deleteObject:managedObject];
 						}
-						
-						if (![moc save:&error]) {
-							DLog(@"Error removing all remote objects, don't know what to do.");
-						} else {
-							DLog(@"Removed all remote objects.");
+					}
+					error = nil;
+					DLog(@"Remove tasks with deleted flag...");
+					fetchRequest = [[NSFetchRequest alloc] init];
+					
+					entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
+					[fetchRequest setEntity:entity];
+					
+					predicate = [NSPredicate predicateWithFormat:@"deleted == 1"];
+					[fetchRequest setPredicate:predicate];
+					
+					items = [moc executeFetchRequest:fetchRequest error:&error];
+					[fetchRequest release];
+					DLog(@"Found %i tasks to delete...", [items count]);
+					
+					if (error == nil) {
+						for (NSManagedObject *managedObject in items) {
+							[moc deleteObject:managedObject];
 						}
 					}
+					// TODO: Für contexts aktivieren
+					/*
+					error = nil;
+					DLog(@"Remove tasks with deleted flag...");
+					fetchRequest = [[NSFetchRequest alloc] init];
 					
-					// TODO: Remove folder with deletet == 1 ?
+					entity = [NSEntityDescription entityForName:@"Context" inManagedObjectContext:moc];
+					[fetchRequest setEntity:entity];
+					
+					predicate = [NSPredicate predicateWithFormat:@"deleted == 1"];
+					[fetchRequest setPredicate:predicate];
+					
+					items = [moc executeFetchRequest:fetchRequest error:&error];
+					[fetchRequest release];
+					DLog(@"Found %i contexts to delete...", [items count]);
+					
+					if (error == nil) {
+						for (NSManagedObject *managedObject in items) {
+							[moc deleteObject:managedObject];
+						}
+					} */
+					
+					error = nil;
+					
+					if (![moc save:&error]) {
+						DLog(@"Error removing all remote and deleted objects, don't know what to do.");
+					} else {
+						DLog(@"Removed all remote and deleted objects.");
+					}
 				}
 				else {
 					DLog(@"Same username as last time, nothing to remove.");
