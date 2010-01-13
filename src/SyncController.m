@@ -68,6 +68,8 @@
 - (void)enableAllServices {	
 	// Activated services from user defaults
 	BOOL isActive = NO;
+	BOOL online = [[NSApp delegate] isOnline];
+	BOOL needsOnline = NO;
 	self.status = SyncControllerBusy;
 	
 	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
@@ -80,44 +82,54 @@
 			if ([[service objectForKey:@"enabled"] boolValue] != NO) {
 				// activate service
 				
-				// Get password for service
-				NSError *error = nil;
-				NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceKey];
-				NSString *password = [SFHFKeychainUtils getPasswordForUsername:[service objectForKey:@"username"] andServiceName:serviceName error:&error];
-				if (error != nil) {
-					DLog(@"Error while saving to keychain: %@.", error);
+				// Check if online
+				if (online == NO) {
+					needsOnline = YES;
+					break;
 				}
-				
-				if ([service objectForKey:@"username"] != nil && error == nil) {
-					BOOL success = NO;
-					// Check internet connection	
-					if ([[NSApp delegate] isOnline] == YES) {
-						success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
+				else {
+					// Get password for service
+					NSError *error = nil;
+					NSString *serviceName = [NSString stringWithFormat:@"%@ <%@>", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], serviceKey];
+					NSString *password = [SFHFKeychainUtils getPasswordForUsername:[service objectForKey:@"username"] andServiceName:serviceName error:&error];
+					if (error != nil) {
+						DLog(@"Error while saving to keychain: %@.", error);
+					}
+					
+					if ([service objectForKey:@"username"] != nil && error == nil) {
+						BOOL success = [self enableSyncService:serviceKey withUser:[service objectForKey:@"username"] pwd:password error:nil];
 						if (success)
 							isActive = YES;
+						DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
 					}
-					DLog(@"Activate service '%@' at startup successful: %i.", serviceKey, success);
-					// TODO: if not successful or offline try later with timer or deactivate service automatically ?
 				}
 			}
 		}
 	}
 	
-	// Check last sync date
-	if (isActive != NO) {
-		NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-		NSDate *lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
-		if (lastDate == nil) {
-			self.lastSyncText = @"Never";
-		}
-		else {
-			self.lastSyncText = [lastDate prettyDate];
-		}
+	if (needsOnline) {
+		// Controller needs connection, not available, add observer to delegate and try again later
+		self.lastSyncText = @"Not Online.";
+		// TODO: implement
+		// [syncController addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
 	}
 	else {
-		self.lastSyncText = @"Never";
+		// Check last sync date
+		if (isActive != NO) {
+			NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+			NSDate *lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
+			if (lastDate == nil) {
+				self.lastSyncText = @"Never";
+			}
+			else {
+				self.lastSyncText = [lastDate prettyDate];
+			}
+		}
+		else {
+			self.lastSyncText = @"Never";
+		}
+		self.status = SyncControllerReady;
 	}
-	self.status = SyncControllerReady;
 }
 
 - (NSInteger)servicesCount {
