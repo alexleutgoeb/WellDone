@@ -36,4 +36,6 @@
 - (IBAction) handleInboxSelection:(id) sender;
 
 - (void) setSimpController:(SimpleListController *) simpleListController;
+- (Folder *) selectedFolder;
+
 @end
