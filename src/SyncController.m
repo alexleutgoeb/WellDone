@@ -51,7 +51,7 @@
 		NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(enableAllServices) object:nil];
 		[syncQueue addOperation:op];
 		
-		// NSNotificationCenter *nc = [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(updatePrettyDate) name:kNewDayNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(updatePrettyDate) name:kNewDayNotification object:nil];
 	}
 	return self;
 }
@@ -89,7 +89,10 @@
 }
 
 - (void)updatePrettyDate {
-	// TODO: implement
+	SyncControllerState oldState = self.status;
+	self.status = SyncControllerInit;
+	self.status = oldState;
+	
 }
 
 - (void)enableAllServices {	
