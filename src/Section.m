@@ -13,6 +13,8 @@
 @implementation Section 
 
 @dynamic title;
-@dynamic children;
+@dynamic childTasks;
+
 
 @end
+

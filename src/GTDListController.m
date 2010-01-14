@@ -204,8 +204,13 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
     id result = nil;
-
-	if ([item isKindOfClass:[SearchQuery class]]) {
+	NSTreeNode *node = item;
+	
+	if ([[node representedObject] isKindOfClass: [Section class]]) {
+		result = [[node representedObject] title];
+	}
+	
+	/*if ([item isKindOfClass:[Section class]]) {
         if (tableColumn == nil) {
             result = [item title];
         }
@@ -229,7 +234,7 @@
             result = [item tags];
 			result = NSLocalizedString(@"", @"Untitled tags");
         }            
-    }
+    }*/
 
     return result;
 }
@@ -249,10 +254,15 @@
 
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
     // The "nil" tableColumn is an indicator for the "full width" row
-
+	DLog(@"GTDListView: Represented object: %@", [item representedObject]);
     if (tableColumn == nil) {
-		if ([item isKindOfClass:[SearchQuery class]]) {
-            return iGroupRowCell;
+		if ([[item representedObject] isKindOfClass:[Section class]]) {
+            //return iGroupRowCell;
+			NSTextFieldCell *debugCell;
+			debugCell = [[[NSTextFieldCell alloc] init] retain];
+			//[debugCell setEditable:NO];
+			[debugCell setLineBreakMode:NSLineBreakByTruncatingTail];
+			return debugCell;
         } else if ([item isKindOfClass:[SearchItem class]]) {
             // For failed items with no metdata, we also use the group row cell
             return iGroupRowCell;            
@@ -262,7 +272,8 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-    return [item isKindOfClass:[SearchQuery class]];
+	id representedObject = [item representedObject];
+    return ([item isKindOfClass:[Section class]] || [representedObject isKindOfClass:[Section class]]);
 }
 
 
