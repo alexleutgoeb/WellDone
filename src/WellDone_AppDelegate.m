@@ -328,7 +328,9 @@
 
 - (IBAction) toggleInspector:(id) sender {
 	if ([[hudTaskEditorController window] isVisible]) {
+		[window removeChildWindow:[hudTaskEditorController window]];
 		[[hudTaskEditorController window] orderOut:nil];
+
 	}
 	else {
 		NSRect rect = [window frame];
@@ -337,8 +339,8 @@
 		
 		//NSPoint rightTopOfMain = [window cascadeTopLeftFromPoint: NSZeroPoint];
 		[[hudTaskEditorController window] cascadeTopLeftFromPoint:mainWindowTopRight];
-		[[hudTaskEditorController window] orderFront:nil];
-
+		//[[hudTaskEditorController window] orderFront:nil];
+		[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
 	}
 		
 }
