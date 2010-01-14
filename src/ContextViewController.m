@@ -33,24 +33,24 @@
  * Set the currently selected task as deleted (flag).
  */
 - (void) deleteSelectedContext {
-
 	NSArray *selectedContexts = [arrayController selectedObjects];
 	id selectedContext;
 	for (selectedContext in selectedContexts) {
 		if ([selectedContext isKindOfClass: [Context class]]) {
-			[selectedContext setDeleted:[NSNumber numberWithBool:NO]];
-			[myTableView reloadData]; 
+			[selectedContext setDeleted:[NSNumber numberWithBool:YES]];
+			//[myview reloadData]; 
 			[arrayController fetch:nil];
 		}
 	}
-	NSLog(@"bla");
-	NSLog([selectedContexts description]);
 	NSError *error = nil;
 	if (![moc save:&error]) {
-		DLog(@"Error deleting selected Tasks, don't know what to do.");
+		DLog(@"Error deleting selected Context, don't know what to do: %@", error);
+		//DLog(@"Error deleting selected Context, don't know what to do.");
 	} else {
-		DLog(@"Removed selected Tasks.");
+		DLog(@"Removed selected Context.");
 	}
+
+
 }
 
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex

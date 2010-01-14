@@ -69,7 +69,7 @@
 		D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58AF10FA9D8000CC204F /* SearchQuery.m */; };
 		D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58B910FA9FA300CC204F /* SearchItem.m */; };
 		D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D515910FF9B6B00D8DBD1 /* ContextView.m */; };
-		D14D53D810FFCD0F00D8DBD1 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D53D710FFCD0F00D8DBD1 /* Context.m */; };
+		D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D544010FFD3EB00D8DBD1 /* Context.m */; };
 		D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D14F4A1C10FF79E0007F1CE0 /* Section.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
@@ -260,8 +260,8 @@
 		D11C58B910FA9FA300CC204F /* SearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
 		D14D515810FF9B6B00D8DBD1 /* ContextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextView.h; sourceTree = "<group>"; };
 		D14D515910FF9B6B00D8DBD1 /* ContextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextView.m; sourceTree = "<group>"; };
-		D14D53D610FFCD0F00D8DBD1 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
-		D14D53D710FFCD0F00D8DBD1 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
+		D14D543F10FFD3EB00D8DBD1 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		D14D544010FFD3EB00D8DBD1 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
 		D14F4A1B10FF79E0007F1CE0 /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
 		D14F4A1C10FF79E0007F1CE0 /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
@@ -558,8 +558,8 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D14D53D610FFCD0F00D8DBD1 /* Context.h */,
-				D14D53D710FFCD0F00D8DBD1 /* Context.m */,
+				D14D543F10FFD3EB00D8DBD1 /* Context.h */,
+				D14D544010FFD3EB00D8DBD1 /* Context.m */,
 				D14F4A1B10FF79E0007F1CE0 /* Section.h */,
 				D14F4A1C10FF79E0007F1CE0 /* Section.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
@@ -922,7 +922,7 @@
 				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
 				D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */,
 				D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */,
-				D14D53D810FFCD0F00D8DBD1 /* Context.m in Sources */,
+				D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
