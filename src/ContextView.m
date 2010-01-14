@@ -37,6 +37,7 @@
 */	
 	
 	//id representedObject = [sender representedObject];
+	NSLog(@"contextview contextMenuDeleteContext");
 	[[[NSApp delegate] contextViewController] deleteSelectedContext];
 } 
 
@@ -65,8 +66,10 @@
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Context menu"];
 	if ([self isRowDeletable:row]) {
 		NSMenuItem *deleteItem = [NSMenuItem alloc];
-		[deleteItem initWithTitle:@"Delete Context" action:@selector(contextMenuDeleteContext::) keyEquivalent: @""];
+		[deleteItem initWithTitle:@"Delete Context" action:@selector(contextMenuDeleteContext:) keyEquivalent: @""];
 		[deleteItem setRepresentedObject:[self selectedRow]];
+		
+
 		
 		// Uncomment and correct/change items to create addTask item
 		/*if ([self mayAddTaskToRow:row]) {

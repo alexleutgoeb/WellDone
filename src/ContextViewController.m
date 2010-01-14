@@ -33,6 +33,7 @@
  * Set the currently selected task as deleted (flag).
  */
 - (void) deleteSelectedContext {
+		NSLog(@"contextviewCONTROLLER deleteSelectedContext");
 	NSArray *selectedContexts = [arrayController selectedObjects];
 	id selectedContext;
 	for (selectedContext in selectedContexts) {

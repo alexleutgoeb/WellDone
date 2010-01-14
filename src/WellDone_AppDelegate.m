@@ -87,6 +87,7 @@
 @implementation WellDone_AppDelegate
 
 @synthesize simpleListController;
+@synthesize contextViewController;
 @synthesize syncController;
 @synthesize coreDataDBLocationURL;
 @synthesize backupDBLocationURL;
