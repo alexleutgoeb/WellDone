@@ -15,7 +15,7 @@
 }
 
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSSet* children;
+@property (nonatomic, retain) NSSet* childTasks;
 
 @end
 
@@ -25,6 +25,6 @@
 - (void)removeChildrenObject:(Task *)value;
 - (void)addChildren:(NSSet *)value;
 - (void)removeChildren:(NSSet *)value;
-
 @end
+
 

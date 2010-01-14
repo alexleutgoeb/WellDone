@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -56,13 +56,13 @@
 									<object class="NSOutlineView" id="475774575">
 										<reference key="NSNextResponder" ref="709411455"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{608, 618}</string>
+										<string key="NSFrameSize">{610, 619}</string>
 										<reference key="NSSuperview" ref="709411455"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTableHeaderView" key="NSHeaderView" id="96820260">
 											<reference key="NSNextResponder" ref="268457063"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{608, 17}</string>
+											<string key="NSFrameSize">{610, 17}</string>
 											<reference key="NSSuperview" ref="268457063"/>
 											<reference key="NSTableView" ref="475774575"/>
 										</object>
@@ -105,7 +105,7 @@
 												<object class="NSButtonCell" key="NSDataCell" id="525624523">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Check</string>
+													<string key="NSContents"/>
 													<object class="NSFont" key="NSSupport" id="79253122">
 														<string key="NSName">LucidaGrande</string>
 														<double key="NSSize">13</double>
@@ -233,7 +233,7 @@
 											</object>
 											<object class="NSTableColumn" id="584525873">
 												<string key="NSIdentifier">tags</string>
-												<double key="NSWidth">407</double>
+												<double key="NSWidth">409</double>
 												<double key="NSMinWidth">10</double>
 												<double key="NSMaxWidth">3.4028234663852886e+38</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -289,7 +289,7 @@
 										<int key="NSTableViewDraggingDestinationStyle">0</int>
 									</object>
 								</object>
-								<string key="NSFrame">{{1, 17}, {608, 618}}</string>
+								<string key="NSFrame">{{0, 17}, {610, 619}}</string>
 								<reference key="NSSuperview" ref="161659408"/>
 								<reference key="NSNextKeyView" ref="475774575"/>
 								<reference key="NSDocView" ref="475774575"/>
@@ -322,7 +322,7 @@
 									<bool key="EncodedWithXMLCoder">YES</bool>
 									<reference ref="96820260"/>
 								</object>
-								<string key="NSFrame">{{1, 0}, {608, 17}}</string>
+								<string key="NSFrameSize">{610, 17}</string>
 								<reference key="NSSuperview" ref="161659408"/>
 								<reference key="NSNextKeyView" ref="96820260"/>
 								<reference key="NSDocView" ref="96820260"/>
@@ -334,7 +334,7 @@
 						<string key="NSFrameSize">{610, 636}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSNextKeyView" ref="709411455"/>
-						<int key="NSsFlags">562</int>
+						<int key="NSsFlags">560</int>
 						<reference key="NSVScroller" ref="225158880"/>
 						<reference key="NSHScroller" ref="146566403"/>
 						<reference key="NSContentView" ref="709411455"/>
@@ -368,7 +368,7 @@
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<string key="NSTreeContentChildrenKey">children</string>
+				<string key="NSTreeContentChildrenKey">childTasks</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -608,7 +608,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{68, 51}, {610, 636}}</string>
+					<string>{{392, 184}, {610, 636}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{217, 442}, {480, 272}}</string>
