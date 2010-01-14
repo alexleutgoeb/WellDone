@@ -12,7 +12,7 @@
 
 @implementation ContextViewController
 
-@synthesize simpController;
+@synthesize simpController, arrayController;
 
 - (id) init {
 	self = [super initWithNibName:@"ContextView" bundle:nil];
@@ -33,13 +33,13 @@
  * Set the currently selected task as deleted (flag).
  */
 - (void) deleteSelectedContext {
-	NSArray *selectedContexts = [treeController selectedObjects];
+	NSArray *selectedContexts = [arrayController selectedObjects];
 	id selectedContext;
 	for (selectedContext in selectedContexts) {
 		if ([selectedContext isKindOfClass: [Context class]]) {
 			[selectedContext setDeleted:[NSNumber numberWithBool:YES]];
 			//[myview reloadData]; 
-			[treeController fetch:nil];
+			[arrayController fetch:nil];
 		}
 	}
 	NSError *error = nil;

@@ -27,6 +27,15 @@
 }
 
 - (void)contextMenuDeleteContext: (id)sender {
+/*
+	id representedObject = [sender representedObject];
+	NSLog(@"Represented object: %@", representedObject);
+	if ([representedObject isKindOfClass:[SidebarFolderNode class]]) {
+		//NSLog(@"Represented object data: %@", [representedObject data]);
+		[myController deleteFolderByContextMenu:[representedObject data]];
+	}
+*/	
+	
 	//id representedObject = [sender representedObject];
 	[[[NSApp delegate] contextViewController] deleteSelectedContext];
 } 
