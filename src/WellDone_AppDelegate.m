@@ -197,6 +197,29 @@
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
+	
+	
+	NSError *error;
+	NSURL *url = [NSURL URLWithString:@"memory://store"];
+	id memoryStore = [[self persistentStoreCoordinator] persistentStoreForURL:url];
+	
+	gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+	[gtdListController.section setValue:@"My section" forKey:@"title"];
+	[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
+	
+	/*NSArray *items = [self fetchAllWithEntity:@"Task" error:&error];
+	for (id item in items) {
+		[item setValue:gtdListController.section forKey:@"section"];
+	}*/
+	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	[request setEntity:entityDescription];
+	
+	NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+	for (id item in items) {
+		[item setValue:gtdListController.section forKey:@"section"];
+	}
+	
 	[[hudTaskEditorController window] orderOut:nil];
 	
 	showGTDView = NO;
@@ -383,6 +406,15 @@
         [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
         return nil;
     }    
+	
+	NSURL *url = [NSURL URLWithString:@"memory://store"];
+	if (![persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType
+												  configuration:nil
+															URL:url
+														options:nil
+														  error:&error]) {
+		[[NSApplication sharedApplication] presentError:error];
+	}
 
     return persistentStoreCoordinator;
 }
@@ -410,6 +442,8 @@
 
     return managedObjectContext;
 }
+
+
 
 /**
     Returns the NSUndoManager for the application.  In this case, the manager
@@ -526,6 +560,8 @@
 		showGTDView = YES;
 		[sender highlight:YES];
 		[sender setFont:[NSFont boldSystemFontOfSize:13]];
+
+		 
 	}
 }
 
