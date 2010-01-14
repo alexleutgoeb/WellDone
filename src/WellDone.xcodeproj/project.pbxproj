@@ -32,6 +32,12 @@
 		6F03A47510FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 6F03A46310FC698B0020CCA9 /* CLValueTransformers.rtfd */; };
 		6F03A47610FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46510FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m */; };
 		6F03A47710FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */; };
+		6F0C0A0710FFC4C200AFD545 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */; };
+		6F0C0A0810FFC4C200AFD545 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */; };
+		6F0C0A2010FFC88800AFD545 /* DateTimePopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */; };
+		6F0C0A2110FFC88800AFD545 /* DateTimePopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */; };
+		6F0C0A2910FFCF6700AFD545 /* DateTimePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */; };
+		6F0C0A2A10FFCF6700AFD545 /* DateTimePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */; };
 		6F22C18E10CBFEF600ABFE19 /* FolderSourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */; };
 		6F22C1BA10CC01DD00ABFE19 /* SidebarFolderTreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */; };
 		6F22C1BB10CC01DD00ABFE19 /* SidebarBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */; };
@@ -205,6 +211,11 @@
 		6F03A46510FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLZeroPaddingValueTransformer.m; sourceTree = "<group>"; };
 		6F03A46610FC698B0020CCA9 /* RadiansToDegreesTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiansToDegreesTransformer.h; sourceTree = "<group>"; };
 		6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiansToDegreesTransformer.m; sourceTree = "<group>"; };
+		6F0C0A0510FFC4C200AFD545 /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
+		6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAttachedWindow.m; sourceTree = "<group>"; };
+		6F0C0A1E10FFC88800AFD545 /* DateTimePopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimePopupController.h; sourceTree = "<group>"; };
+		6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimePopupController.m; sourceTree = "<group>"; };
+		6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTimePopup.xib; sourceTree = "<group>"; };
 		6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderSourceListView.xib; sourceTree = "<group>"; };
 		6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderTreeView.m; sourceTree = "<group>"; };
 		6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarBadgeCell.m; sourceTree = "<group>"; };
@@ -448,6 +459,7 @@
 				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
 				D1B51A7710F690360053C847 /* ContextView.xib */,
 				6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */,
+				6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -528,6 +540,8 @@
 				D1B51A7510F68FFE0053C847 /* ContextViewController.m */,
 				6FE405CB10FB69F9002ECF9C /* HUDTaskEditorController.h */,
 				6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */,
+				6F0C0A1E10FFC88800AFD545 /* DateTimePopupController.h */,
+				6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -535,6 +549,8 @@
 		6F5D249210AC588D002E9514 /* View Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6F0C0A0510FFC4C200AFD545 /* MAAttachedWindow.h */,
+				6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */,
 				6F22C1B910CC01DD00ABFE19 /* SidebarFolderTreeView.h */,
 				6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */,
 				6F22C1B710CC01DD00ABFE19 /* SidebarBadgeCell.h */,
@@ -793,6 +809,7 @@
 			files = (
 				6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */,
 				6F03A46D10FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */,
+				6F0C0A2A10FFCF6700AFD545 /* DateTimePopup.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,6 +839,7 @@
 				6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */,
 				6F03A47510FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */,
 				FA43913810FD2A9B0000224E /* welcome.png in Resources */,
+				6F0C0A2910FFCF6700AFD545 /* DateTimePopup.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,6 +878,8 @@
 				6F03A46C10FC698B0020CCA9 /* CLStringNumberValueTransformer.m in Sources */,
 				6F03A46E10FC698B0020CCA9 /* CLZeroPaddingValueTransformer.m in Sources */,
 				6F03A46F10FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */,
+				6F0C0A0710FFC4C200AFD545 /* MAAttachedWindow.m in Sources */,
+				6F0C0A2010FFC88800AFD545 /* DateTimePopupController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +943,8 @@
 				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
 				D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */,
 				D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */,
+				6F0C0A0810FFC4C200AFD545 /* MAAttachedWindow.m in Sources */,
+				6F0C0A2110FFC88800AFD545 /* DateTimePopupController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

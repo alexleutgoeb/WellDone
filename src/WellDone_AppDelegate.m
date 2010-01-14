@@ -21,6 +21,7 @@
 #import "CLStringNumberValueTransformer.h"
 #import "Note.h"
 #import "RemindMeTimer.h"
+#import "DateTimePopupController.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -229,6 +230,8 @@
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
 	
+	//TODO remove this!
+	[DateTimePopupController showPopupAtLocation:NSZeroPoint forWindow:window callBack:nil to: nil];
 	
 	NSError *error;
 	NSURL *url = [NSURL URLWithString:@"memory://store"];
