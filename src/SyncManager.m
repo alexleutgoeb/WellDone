@@ -96,7 +96,8 @@
 		
 		
 		aManagedObjectContext = [self syncFolders:aManagedObjectContext withSyncService:syncService];
-		
+		aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService];
+								 
 		/*if (lastDates != nil && error == nil) {
 				
 			// folder sync
