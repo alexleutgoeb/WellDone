@@ -68,6 +68,7 @@
 		D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F48B10B8DBDB00304B4C /* ContextManagementController.m */; };
 		D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58AF10FA9D8000CC204F /* SearchQuery.m */; };
 		D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58B910FA9FA300CC204F /* SearchItem.m */; };
+		D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D515910FF9B6B00D8DBD1 /* ContextView.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
 		D1B51A7810F690360053C847 /* ContextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B51A7710F690360053C847 /* ContextView.xib */; };
@@ -256,6 +257,8 @@
 		D11C58AF10FA9D8000CC204F /* SearchQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuery.m; sourceTree = "<group>"; };
 		D11C58B810FA9FA300CC204F /* SearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItem.h; sourceTree = "<group>"; };
 		D11C58B910FA9FA300CC204F /* SearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
+		D14D515810FF9B6B00D8DBD1 /* ContextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextView.h; sourceTree = "<group>"; };
+		D14D515910FF9B6B00D8DBD1 /* ContextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextView.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		D164971B10D2E17B00DEB20A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		D1B51A7410F68FFE0053C847 /* ContextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextViewController.h; sourceTree = "<group>"; };
@@ -543,6 +546,8 @@
 				6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */,
 				6FB0A92A10FA5A6000990D07 /* DebugTreeController.h */,
 				6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */,
+				D14D515810FF9B6B00D8DBD1 /* ContextView.h */,
+				D14D515910FF9B6B00D8DBD1 /* ContextView.m */,
 			);
 			name = "View Classes";
 			sourceTree = "<group>";
@@ -911,6 +916,7 @@
 				420EA9CC10FDD7CB005D4E16 /* BackupPreferencesController.m in Sources */,
 				B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */,
 				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
+				D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

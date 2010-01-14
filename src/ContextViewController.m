@@ -29,6 +29,27 @@
 
 }
 
+/*
+ * Set the currently selected task as deleted (flag).
+ */
+- (void) deleteSelectedContext {
+	NSArray *selectedContexts = [treeController selectedObjects];
+	id selectedContext;
+	for (selectedContext in selectedContexts) {
+		if ([selectedContext isKindOfClass: [Context class]]) {
+			[selectedContext setDeleted:[NSNumber numberWithBool:YES]];
+			//[myview reloadData]; 
+			[treeController fetch:nil];
+		}
+	}
+	NSError *error = nil;
+	if (![moc save:&error]) {
+		DLog(@"Error deleting selected Tasks, don't know what to do.");
+	} else {
+		DLog(@"Removed selected Tasks.");
+	}
+}
+
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex
 {
     //[items replaceObjectAtIndex:rowIndex withObject:anObject];
@@ -45,6 +66,8 @@
 
 	[self contextsSelectionChanged];
 }
+
+
 
 - (void)contextsSelectionChanged {
 	if ([checkBoxFilter state]==NSOnState) {

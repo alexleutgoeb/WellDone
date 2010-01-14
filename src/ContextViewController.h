@@ -14,13 +14,16 @@
 	IBOutlet NSTableView* myTableView;
 	IBOutlet NSArrayController* arrayController;
 	IBOutlet NSButton* checkBoxFilter;
-	
+	NSManagedObjectContext *moc;
 	SimpleListController *simpController;
+	NSTreeController *treeController;
 }
 
 - (void)contextsSelectionChanged;
 - (IBAction)toggleFilteringByContext:(id)sender;
+- (void) deleteSelectedContext;
 
+@property (nonatomic, retain, readonly) NSTreeController *treeController;
 @property (nonatomic, retain) SimpleListController *simpController;
 
 @end
