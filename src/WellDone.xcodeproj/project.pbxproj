@@ -69,6 +69,7 @@
 		D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58AF10FA9D8000CC204F /* SearchQuery.m */; };
 		D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58B910FA9FA300CC204F /* SearchItem.m */; };
 		D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D515910FF9B6B00D8DBD1 /* ContextView.m */; };
+		D14D53D810FFCD0F00D8DBD1 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D53D710FFCD0F00D8DBD1 /* Context.m */; };
 		D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D14F4A1C10FF79E0007F1CE0 /* Section.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
@@ -100,7 +101,6 @@
 		FA90D40910C4124D00309192 /* RemoteTask.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3FB10C4124D00309192 /* RemoteTask.m */; };
 		FA90D40B10C4124D00309192 /* RemoteNote.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D3FF10C4124D00309192 /* RemoteNote.m */; };
 		FA90D40C10C4124D00309192 /* RemoteFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D40110C4124D00309192 /* RemoteFolder.m */; };
-		FA90D40D10C4124D00309192 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D40310C4124D00309192 /* Context.m */; };
 		FA90D4A410C41E8400309192 /* RemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90D4A310C41E8400309192 /* RemoteObject.m */; };
 		FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
 		FACF444C10D2EB5700B0237A /* SS_PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACF444B10D2EB5700B0237A /* SS_PrefsController.m */; };
@@ -260,6 +260,8 @@
 		D11C58B910FA9FA300CC204F /* SearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
 		D14D515810FF9B6B00D8DBD1 /* ContextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextView.h; sourceTree = "<group>"; };
 		D14D515910FF9B6B00D8DBD1 /* ContextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextView.m; sourceTree = "<group>"; };
+		D14D53D610FFCD0F00D8DBD1 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		D14D53D710FFCD0F00D8DBD1 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
 		D14F4A1B10FF79E0007F1CE0 /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
 		D14F4A1C10FF79E0007F1CE0 /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
@@ -309,8 +311,6 @@
 		FA90D3FF10C4124D00309192 /* RemoteNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteNote.m; sourceTree = "<group>"; };
 		FA90D40010C4124D00309192 /* RemoteFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFolder.h; sourceTree = "<group>"; };
 		FA90D40110C4124D00309192 /* RemoteFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFolder.m; sourceTree = "<group>"; };
-		FA90D40210C4124D00309192 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
-		FA90D40310C4124D00309192 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
 		FA90D4A210C41E8400309192 /* RemoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteObject.h; sourceTree = "<group>"; };
 		FA90D4A310C41E8400309192 /* RemoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteObject.m; sourceTree = "<group>"; };
 		FABE3F9310C1A33E000D72E9 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
@@ -558,6 +558,8 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D14D53D610FFCD0F00D8DBD1 /* Context.h */,
+				D14D53D710FFCD0F00D8DBD1 /* Context.m */,
 				D14F4A1B10FF79E0007F1CE0 /* Section.h */,
 				D14F4A1C10FF79E0007F1CE0 /* Section.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
@@ -579,8 +581,6 @@
 				FA90D3FF10C4124D00309192 /* RemoteNote.m */,
 				FA90D40010C4124D00309192 /* RemoteFolder.h */,
 				FA90D40110C4124D00309192 /* RemoteFolder.m */,
-				FA90D40210C4124D00309192 /* Context.h */,
-				FA90D40310C4124D00309192 /* Context.m */,
 				FA48B62C10D3DEDB0032F1D8 /* SyncService.h */,
 				FA48B62D10D3DEDC0032F1D8 /* SyncService.m */,
 				D11C58AE10FA9D8000CC204F /* SearchQuery.h */,
@@ -892,7 +892,6 @@
 				FA90D40910C4124D00309192 /* RemoteTask.m in Sources */,
 				FA90D40B10C4124D00309192 /* RemoteNote.m in Sources */,
 				FA90D40C10C4124D00309192 /* RemoteFolder.m in Sources */,
-				FA90D40D10C4124D00309192 /* Context.m in Sources */,
 				FA90D4A410C41E8400309192 /* RemoteObject.m in Sources */,
 				6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */,
 				4263AABE10D1495200C5FD7B /* TaskValueTransformer.m in Sources */,
@@ -923,6 +922,7 @@
 				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
 				D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */,
 				D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */,
+				D14D53D810FFCD0F00D8DBD1 /* Context.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,6 @@
 
 @dynamic isChecked;
 @dynamic title;
-@dynamic deleted;
 @dynamic remoteContexts;
 @dynamic tasks;
 
