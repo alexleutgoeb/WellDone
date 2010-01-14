@@ -77,6 +77,7 @@
 		FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA438BB510FB6CC60000224E /* SystemConfiguration.framework */; };
 		FA43906910FCF90C0000224E /* WDNSDate+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */; };
 		FA43913810FD2A9B0000224E /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = FA43913710FD2A9B0000224E /* welcome.png */; };
+		FA4781A010FF669700893DBC /* TaskContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA47819F10FF669700893DBC /* TaskContainer.m */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
@@ -268,6 +269,8 @@
 		FA43906710FCF90C0000224E /* WDNSDate+PrettyPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WDNSDate+PrettyPrint.h"; sourceTree = "<group>"; };
 		FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WDNSDate+PrettyPrint.m"; sourceTree = "<group>"; };
 		FA43913710FD2A9B0000224E /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
+		FA47819E10FF669700893DBC /* TaskContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContainer.h; sourceTree = "<group>"; };
+		FA47819F10FF669700893DBC /* TaskContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContainer.m; sourceTree = "<group>"; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				D11C58AF10FA9D8000CC204F /* SearchQuery.m */,
 				D11C58B810FA9FA300CC204F /* SearchItem.h */,
 				D11C58B910FA9FA300CC204F /* SearchItem.m */,
+				FA47819E10FF669700893DBC /* TaskContainer.h */,
+				FA47819F10FF669700893DBC /* TaskContainer.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -905,6 +910,7 @@
 				FA43906910FCF90C0000224E /* WDNSDate+PrettyPrint.m in Sources */,
 				420EA9CC10FDD7CB005D4E16 /* BackupPreferencesController.m in Sources */,
 				B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */,
+				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

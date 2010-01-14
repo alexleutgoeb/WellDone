@@ -82,7 +82,7 @@
 	}
 }
 
-- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext {
+- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray *)conflicts {
 	// TODO: implement
 	
 	if ([syncServices count] > 0) {

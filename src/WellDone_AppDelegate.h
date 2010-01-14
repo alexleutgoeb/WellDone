@@ -24,6 +24,8 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
+#define kNewDayNotification @"kNewDayNotification"
+
 
 @interface WellDone_AppDelegate : NSObject<SyncControllerDelegate> {
     IBOutlet NSWindow *window;
@@ -69,7 +71,11 @@
 	NSStatusItem *menuBarItem;
 	
 	BOOL isOnline;
-	SCNetworkReachabilityRef reachRef;	
+	SCNetworkReachabilityRef reachRef;
+	
+	NSDate *today;
+	NSTimer *secondsTimer;
+	NSDateFormatter *dateFormatter;
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -93,6 +99,7 @@
 - (void)addNewTask:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
 - (void) registerValueTransformers;
+- (NSString *)applicationSupportDirectory;
 
 - (IBAction) toggleInspector:(id) sender;
 

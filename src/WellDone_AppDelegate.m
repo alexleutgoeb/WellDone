@@ -40,6 +40,9 @@
 @property (nonatomic, retain) SyncController *syncController;
 @property (nonatomic, retain) NSMenuItem *syncMenuItem;
 @property (nonatomic, retain) NSMenuItem *syncTextMenuItem;
+@property (nonatomic, retain) NSTimer *secondsTimer;
+@property (nonatomic, retain) NSDateFormatter *dateFormatter;
+@property (nonatomic, retain) NSDate *today;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
@@ -73,6 +76,11 @@
  */
 - (void)updateManagedObjectModificationDates:(NSNotification *)notification;
 
+/**
+ Called every second, checks for some actions.
+ */
+- (void)checkSecondActions;
+
 @end
 
 
@@ -84,6 +92,7 @@
 @synthesize backupDBLocationURL;
 @synthesize isOnline;
 @synthesize syncMenuItem, syncTextMenuItem;
+@synthesize secondsTimer, dateFormatter, today;
 
 #pragma mark -
 #pragma mark Initialization & disposal
@@ -136,11 +145,30 @@
 	// start reminde me timer
 	RemindMeTimer *reminderMeTimer = [[RemindMeTimer alloc] init];
 	[reminderMeTimer startTimer];
+	
+	// Init seconds timer
+	dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+	today = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+	secondsTimer = [NSTimer scheduledTimerWithTimeInterval:2 target: self selector:@selector(checkSecondActions) userInfo:nil repeats:YES];
 }
 
 - (void)setOnlineState:(NSNotification *)notification {
 	self.isOnline = [[notification object] boolValue];
 	DLog(@"Set isOnline property in delegate to: %@", (isOnline ? @"YES" : @"NO"));
+}
+
+- (void)checkSecondActions {
+	// Check for tomorrow
+	NSDate *now = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+	if (![today isEqualToDate:now]) {
+		DLog(@"New day!");
+		today = now;
+		// Send notification
+		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
+		[dnc postNotificationName:kNewDayNotification object:nil];
+	}
 }
 
 - (BOOL)windowShouldClose:(id)window {
@@ -160,6 +188,9 @@
     [managedObjectContext release];
     [persistentStoreCoordinator release];
     [managedObjectModel release];
+	[secondsTimer release];
+	[dateFormatter release];
+	[today release];
     [super dealloc];
 }
 

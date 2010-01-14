@@ -64,7 +64,7 @@
  This method is the main method for syncing a managed object context with remote 
  data, fetched from the different sync services.
  */
-- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext;
+- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray *)conflicts;
 
 /**
  Method for folder sync

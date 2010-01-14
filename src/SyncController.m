@@ -19,6 +19,7 @@
 
 - (void)enableAllServices;
 - (void)syncContextDidSave:(NSNotification*)saveNotification;
+- (void)updatePrettyDate;
 
 @end
 
@@ -51,6 +52,8 @@
 		
 		NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(enableAllServices) object:nil];
 		[syncQueue addOperation:op];
+		
+		// NSNotificationCenter *nc = [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(updatePrettyDate) name:kNewDayNotification object:nil];
 	}
 	return self;
 }
@@ -63,6 +66,10 @@
 	[syncServices removeAllObjects];
 	[syncServices release];
 	[super dealloc];
+}
+
+- (void)updatePrettyDate {
+	// TODO: implement
 }
 
 - (void)enableAllServices {	
@@ -268,7 +275,7 @@
 - (void)startSync:(NSManagedObjectContext *)moc {
 	NSManagedObjectContext *context = [syncManager syncData:moc];
 	
-	if (context != nil) {	
+	if (context != nil) {
 		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
 		[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
 		
