@@ -56,6 +56,7 @@
 - (void)removeRemoteTasksObject:(RemoteTask *)value;
 - (void)addRemoteTasks:(NSSet *)value;
 - (void)removeRemoteTasks:(NSSet *)value;
+- (id)children;
 
 @end
 

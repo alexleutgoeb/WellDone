@@ -291,6 +291,7 @@
 								</object>
 								<string key="NSFrame">{{1, 17}, {608, 618}}</string>
 								<reference key="NSSuperview" ref="161659408"/>
+								<reference key="NSNextKeyView" ref="475774575"/>
 								<reference key="NSDocView" ref="475774575"/>
 								<reference key="NSBGColor" ref="682717110"/>
 								<int key="NScvFlags">4</int>
@@ -323,6 +324,7 @@
 								</object>
 								<string key="NSFrame">{{1, 0}, {608, 17}}</string>
 								<reference key="NSSuperview" ref="161659408"/>
+								<reference key="NSNextKeyView" ref="96820260"/>
 								<reference key="NSDocView" ref="96820260"/>
 								<reference key="NSBGColor" ref="682717110"/>
 								<int key="NScvFlags">4</int>
@@ -331,6 +333,7 @@
 						</object>
 						<string key="NSFrameSize">{610, 636}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSNextKeyView" ref="709411455"/>
 						<int key="NSsFlags">562</int>
 						<reference key="NSVScroller" ref="225158880"/>
 						<reference key="NSHScroller" ref="146566403"/>
@@ -359,39 +362,13 @@
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy">
-					<string key="NSEntityName">Task</string>
-					<object class="NSComparisonPredicate" key="NSFetchPredicate">
-						<object class="NSKeyPathExpression" key="NSLeftExpression">
-							<int key="NSExpressionType">3</int>
-							<string key="NSSelectorName">valueForKey:</string>
-							<object class="NSSelfExpression" key="NSOperand">
-								<int key="NSExpressionType">1</int>
-							</object>
-							<object class="NSMutableArray" key="NSArguments">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSKeyPathSpecifierExpression">
-									<int key="NSExpressionType">10</int>
-									<string key="NSKeyPath">parentTask</string>
-								</object>
-							</object>
-						</object>
-						<object class="NSConstantValueExpression" key="NSRightExpression">
-							<int key="NSExpressionType">0</int>
-							<nil key="NSConstantValueClassName"/>
-						</object>
-						<object class="NSEqualityPredicateOperator" key="NSPredicateOperator">
-							<int key="NSOperatorType">4</int>
-							<int key="NSModifier">0</int>
-							<bool key="NSNegate">NO</bool>
-							<int key="NSOptions">0</int>
-						</object>
-					</object>
+					<string key="NSEntityName">Section</string>
 				</object>
 				<bool key="_NSIsUsingManagedProxy">YES</bool>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<string key="NSTreeContentChildrenKey">childTasks</string>
+				<string key="NSTreeContentChildrenKey">children</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -436,6 +413,22 @@
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">37</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.title</string>
+						<reference key="source" ref="835946425"/>
+						<reference key="destination" ref="775269749"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="835946425"/>
+							<reference key="NSDestination" ref="775269749"/>
+							<string key="NSLabel">value: arrangedObjects.title</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.title</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">51</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -650,7 +643,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">46</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

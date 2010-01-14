@@ -68,6 +68,7 @@
 		D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F48B10B8DBDB00304B4C /* ContextManagementController.m */; };
 		D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58AF10FA9D8000CC204F /* SearchQuery.m */; };
 		D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58B910FA9FA300CC204F /* SearchItem.m */; };
+		D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D14F4A1C10FF79E0007F1CE0 /* Section.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
 		D1B51A7810F690360053C847 /* ContextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B51A7710F690360053C847 /* ContextView.xib */; };
@@ -256,6 +257,8 @@
 		D11C58AF10FA9D8000CC204F /* SearchQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuery.m; sourceTree = "<group>"; };
 		D11C58B810FA9FA300CC204F /* SearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItem.h; sourceTree = "<group>"; };
 		D11C58B910FA9FA300CC204F /* SearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
+		D14F4A1B10FF79E0007F1CE0 /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		D14F4A1C10FF79E0007F1CE0 /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		D164971B10D2E17B00DEB20A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		D1B51A7410F68FFE0053C847 /* ContextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextViewController.h; sourceTree = "<group>"; };
@@ -550,6 +553,8 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D14F4A1B10FF79E0007F1CE0 /* Section.h */,
+				D14F4A1C10FF79E0007F1CE0 /* Section.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
 				FA90D3F010C4124D00309192 /* Folder.h */,
 				FA90D3F110C4124D00309192 /* Folder.m */,
@@ -911,6 +916,7 @@
 				420EA9CC10FDD7CB005D4E16 /* BackupPreferencesController.m in Sources */,
 				B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */,
 				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
+				D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
