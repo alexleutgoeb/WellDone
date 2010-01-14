@@ -72,7 +72,7 @@
  */
 - (NSManagedObjectContext *)syncFolders:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService;
 
--(NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService withConflicts:(NSArray **)conflicts;
+-(NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService andConflicts:(NSArray **)conflicts;
 
 /**
  Overrides local data with remote

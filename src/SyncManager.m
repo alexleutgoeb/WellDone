@@ -96,7 +96,7 @@
 		
 		
 		aManagedObjectContext = [self syncFolders:aManagedObjectContext withSyncService:syncService];
-		aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService];
+		aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService andConflicts:*&conflicts];
 								 
 		/*if (lastDates != nil && error == nil) {
 				
@@ -394,7 +394,7 @@
  Task sync
  @author Michael
  */
-- (NSManagedObjectContext *) syncTasks:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService withConflicts: (NSArray **) conflicts {
+- (NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService andConflicts:(NSArray **)conflicts {
 	
 	NSError *error = nil;
 	
