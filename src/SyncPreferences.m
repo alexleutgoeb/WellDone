@@ -39,7 +39,7 @@
 	
 	SyncController *sc = [[NSApp delegate] sharedSyncController];
 	[sc addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-	if (sc.status > 0) {
+	if (sc.status == SyncControllerBusy || sc.status == SyncControllerInit) {
 		self.editable = NO;
 		[tableView_accountList reloadData];
 	}
@@ -55,7 +55,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqual:@"status"]) {
-		if ([[change objectForKey:NSKeyValueChangeNewKey] integerValue] > 0) {
+		SyncControllerState state = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+		if (state == SyncControllerBusy || state == SyncControllerInit) {
 			self.editable = NO;
 			[tableView_accountList reloadData];
 		}

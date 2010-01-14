@@ -85,6 +85,8 @@
 	// Check internet connection	
 	if ([[NSApp delegate] isOnline] == NO) {
 		// offline
+		SyncController *sc = [[NSApp delegate] sharedSyncController];
+		sc.status =SyncControllerOffline;
 		if (notifyTarget)
 			[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 		[NSApp endSheet:[self window]];
@@ -104,7 +106,7 @@
 		SyncController *sc = [[NSApp delegate] sharedSyncController];
 		BOOL success = [sc enableSyncService:serviceId withUser:username pwd:password error:&error];
 
-		if (success == NO) {			
+		if (success == NO) {
 			if (notifyTarget)
 				[notifyTarget editServiceSheetDidEndForService:serviceId withSuccess:NO];
 			[NSApp endSheet:[self window]];

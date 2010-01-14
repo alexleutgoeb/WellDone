@@ -669,17 +669,11 @@
 		[menuBarItem setToolTip:@"WellDone"];
 		[menuBarItem setImage:menuBarIcon];
 		[menu release];
-		
-		// Add observer for sync text
-		[syncController addObserver:self forKeyPath:@"lastSyncText" options:NSKeyValueObservingOptionNew context:nil];
 	}
 	else {
 		if (menuBarItem != nil) {
 			[[NSStatusBar systemStatusBar] removeStatusItem:menuBarItem];
 			menuBarItem = nil;
-			
-			// Remove observer
-			[syncController removeObserver:self forKeyPath:@"lastSyncText"];
 		}
 	}
 }
@@ -693,14 +687,10 @@
     if ([keyPath isEqual:@"menubarIcon"]) {
 		[self setStatusBarMenuVisible:[[change objectForKey:NSKeyValueChangeNewKey] boolValue]];
     }
-	else if ([keyPath isEqualToString:@"lastSyncText"]) {
-		// Set new text for statusbar menu sync item
-		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", syncController.lastSyncText]];
-	}
 	else if ([keyPath isEqualToString:@"status"]) {
 		// Set new text for statusbar menu sync item
 		SyncControllerState state = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
-		if (state == SyncControllerBusy) {
+		if (state == SyncControllerBusy || state == SyncControllerInit) {
 			[syncProgress startAnimation:self];
 			[syncButton setEnabled:NO];
 			[syncMenuItem setAction:nil];
@@ -710,6 +700,7 @@
 			[syncButton setEnabled:YES];
 			[syncMenuItem setAction:@selector(startSync:)];
 		}
+		[syncTextMenuItem setTitle:[NSString stringWithFormat:@"Last Sync: %@", syncController.lastSyncText]];
 	}
     // [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }

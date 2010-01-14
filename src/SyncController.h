@@ -47,7 +47,9 @@
 typedef enum {
 	SyncControllerReady = 0,
 	SyncControllerBusy,
-	SyncControllerOffline
+	SyncControllerOffline,
+	SyncControllerFailed,
+	SyncControllerInit
 } SyncControllerState;
 
 
@@ -70,9 +72,6 @@ typedef enum {
 	
 	// counter for active services
 	NSInteger activeServicesCount;
-	
-	// String representation of last sync
-	NSString *lastSyncText;
 	
 	// SyncControllerState
 	SyncControllerState status;
@@ -102,7 +101,7 @@ typedef enum {
 /**
  Getter and setter for last sync date string
  */
-@property (nonatomic, copy) NSString *lastSyncText;
+@property (nonatomic, readonly) NSString *lastSyncText;
 
 /**
  Getter and setter fot synccontroller state property

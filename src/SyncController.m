@@ -26,7 +26,7 @@
 
 @implementation SyncController
 
-@synthesize syncServices, activeServicesCount, delegate, lastSyncText, status;
+@synthesize syncServices, activeServicesCount, delegate, status;
 
 - (id)initWithDelegate:(id<SyncControllerDelegate>)aDelegate {
 	if (self = [self init]) {
@@ -37,16 +37,14 @@
 
 - (id)init {
 	if (self = [super init]) {
-		self.status = SyncControllerBusy;
+		self.status = SyncControllerInit;
 		syncServices = [[NSMutableDictionary alloc] init];
 		syncManager = [[SyncManager alloc] init];
 		syncQueue = [[NSOperationQueue alloc] init];
 		// Set operation count to 1, so that max 1 sync is active
 		[syncQueue setMaxConcurrentOperationCount:1];
 		activeServicesCount = 0;
-		
-		self.lastSyncText = @"Initializing...";
-		
+
 		// Add TDApi to available syncServices
 		[syncServices setObject:[[SyncService alloc] initWithApiClass:[TDApi class]] forKey:[TDApi identifier]];
 		
@@ -59,13 +57,35 @@
 }
 
 - (void) dealloc {
-	[lastSyncText release];
 	[syncQueue cancelAllOperations];
 	[syncQueue release];
 	[syncManager release];
 	[syncServices removeAllObjects];
 	[syncServices release];
 	[super dealloc];
+}
+
+- (NSString *)lastSyncText {
+	NSUserDefaults *defaults = nil;
+	NSDate *lastDate = nil;
+	
+	switch (status) {
+		case SyncControllerReady:
+			defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+			lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
+			if (lastDate == nil || activeServicesCount == 0)
+				return @"Never";
+			else
+				return [lastDate prettyDate];
+		case SyncControllerOffline:
+			return @"Offline";
+		case SyncControllerFailed:
+			return @"Failed";
+		case SyncControllerInit:
+			return @"Initializing...";
+		default:
+			return @"Syncing...";
+	}
 }
 
 - (void)updatePrettyDate {
@@ -117,25 +137,10 @@
 	
 	if (needsOnline) {
 		// Controller needs connection, not available, add observer to delegate and try again later
-		self.lastSyncText = @"Not Online.";
 		self.status = SyncControllerOffline;
 		[[NSApp delegate] addObserver:self forKeyPath:@"isOnline" options:NSKeyValueObservingOptionNew context:nil];
 	}
 	else {
-		// Check last sync date
-		if (isActive != NO) {
-			NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-			NSDate *lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
-			if (lastDate == nil) {
-				self.lastSyncText = @"Never";
-			}
-			else {
-				self.lastSyncText = [lastDate prettyDate];
-			}
-		}
-		else {
-			self.lastSyncText = @"Never";
-		}
 		self.status = SyncControllerReady;
 	}
 }
@@ -185,11 +190,6 @@
 	service.pwd = nil;
 	
 	// Check last sync date
-	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-	NSDate *lastDate = (NSDate *)[defaults objectForKey:@"lastSyncDate"];
-	if (lastDate != nil) {
-		self.lastSyncText = [lastDate prettyDate];
-	}
 	self.status = SyncControllerReady;
 	return returnValue;
 }
@@ -206,10 +206,6 @@
 		returnValue = YES;
 		DLog(@"Service deactivated.");
 		activeServicesCount--;
-		
-		if (activeServicesCount == 0) {
-			self.lastSyncText = @"Never";
-		}
 	}
 	else {
 		DLog(@"Service not found, nothing to do, returning NO.");
@@ -230,8 +226,7 @@
 			[errorDetail setValue:@"You have no active sync service, please activate one in the preferences first." forKey:NSLocalizedRecoverySuggestionErrorKey];
 			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-1 userInfo:errorDetail];
 			
-			self.lastSyncText = @"Failed";
-			self.status = SyncControllerReady;
+			self.status = SyncControllerFailed;
 			
 			if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
 				[delegate syncController:self didSyncWithError:error];
@@ -247,17 +242,14 @@
 			[errorDetail setValue:@"You have no internet connection, please connect first." forKey:NSLocalizedRecoverySuggestionErrorKey];
 			NSError *error = [NSError errorWithDomain:@"Custom domain" code:-2 userInfo:errorDetail];
 			
-			self.lastSyncText = @"Failed";
-			self.status = SyncControllerReady;
+			self.status = SyncControllerOffline;
 			
 			if ([delegate respondsToSelector:@selector(syncController:didSyncWithError:)]) {
 				[delegate syncController:self didSyncWithError:error];
 			}
 		}
 	}
-	else {
-		self.lastSyncText = @"Syncing...";
-		
+	else {		
 		// Get new objectcontext from delegate
 		NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
 		
@@ -273,9 +265,12 @@
 }
 
 - (void)startSync:(NSManagedObjectContext *)moc {
-	NSManagedObjectContext *context = [syncManager syncData:moc];
+	NSArray *conflicts = nil;
+	NSManagedObjectContext *context = [syncManager syncData:moc conflicts:&conflicts];
 	
 	if (context != nil) {
+		// TODO: Check conflicts
+		
 		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
 		[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
 		
@@ -294,7 +289,6 @@
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	[defaults setObject:now forKey:@"lastSyncDate"];
 	[defaults synchronize];
-	self.lastSyncText = [now prettyDate];
 	self.status = SyncControllerReady;
 	
 	// Inform delegate
