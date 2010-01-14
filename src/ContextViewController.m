@@ -44,10 +44,13 @@
 	}
 	NSError *error = nil;
 	if (![moc save:&error]) {
-		DLog(@"Error deleting selected Tasks, don't know what to do.");
+		DLog(@"Error deleting selected Context, don't know what to do: %@", error);
+		//DLog(@"Error deleting selected Context, don't know what to do.");
 	} else {
-		DLog(@"Removed selected Tasks.");
+		DLog(@"Removed selected Context.");
 	}
+
+
 }
 
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex
