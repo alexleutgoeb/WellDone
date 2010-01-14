@@ -220,7 +220,6 @@
 	} else {
 		DLog(@"Updated tags in Task.");
 	}
-	
 }
 
 

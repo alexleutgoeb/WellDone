@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="322"/>
+			<integer value="64"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -448,21 +448,19 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSArray" key="dict.sortedKeys">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<string>dateFormat_10_0</string>
 						<string>dateStyle</string>
 						<string>formatterBehavior</string>
 						<string>timeStyle</string>
 					</object>
 					<object class="NSMutableArray" key="dict.values">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<string>%d.%m.%Y</string>
-						<integer value="2"/>
-						<integer value="1000"/>
-						<integer value="0"/>
+						<integer value="1"/>
+						<integer value="1040"/>
+						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">%d.%m.%Y</string>
-				<bool key="NS.natural">YES</bool>
+				<string key="NS.format">dd/MM/yy HH:mm</string>
+				<bool key="NS.natural">NO</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -827,7 +825,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="0"/>
+					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

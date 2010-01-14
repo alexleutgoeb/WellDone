@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
+		<string key="IBDocument.InterfaceBuilderVersion">732</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
@@ -15,7 +15,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>740</string>
+				<string>732</string>
 				<string>1.2.2</string>
 			</object>
 		</object>
@@ -1097,9 +1097,9 @@
 								</object>
 							</object>
 						</object>
-						<string>.</string>
-						<integer value="1000"/>
 						<string>,</string>
+						<integer value="1000"/>
+						<string>.</string>
 						<real value="0.0"/>
 						<string>-0</string>
 						<string>-∞</string>
@@ -1137,8 +1137,8 @@
 					<bytes key="NS.mantissa">AAAAAAAAAAAAAAAAAAAAAA</bytes>
 				</object>
 				<nil key="NS.rounding"/>
-				<string key="NS.decimal">.</string>
-				<string key="NS.thousand">,</string>
+				<string key="NS.decimal">,</string>
+				<string key="NS.thousand">.</string>
 				<bool key="NS.hasthousands">NO</bool>
 				<bool key="NS.localized">YES</bool>
 				<bool key="NS.allowsfloats">YES</bool>
@@ -1148,21 +1148,19 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSArray" key="dict.sortedKeys">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<string>dateFormat_10_0</string>
 						<string>dateStyle</string>
 						<string>formatterBehavior</string>
 						<string>timeStyle</string>
 					</object>
 					<object class="NSMutableArray" key="dict.values">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<string>%d.%m.%Y</string>
-						<integer value="2"/>
-						<integer value="1000"/>
-						<integer value="0"/>
+						<integer value="1"/>
+						<integer value="1040"/>
+						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">%d.%m.%Y</string>
-				<bool key="NS.natural">YES</bool>
+				<string key="NS.format">dd/MM/yy HH:mm</string>
+				<bool key="NS.natural">NO</bool>
 			</object>
 			<object class="NSArrayController" id="510490822">
 				<bool key="NSEditable">YES</bool>
@@ -1480,39 +1478,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.startDate</string>
-						<reference key="source" ref="835606032"/>
-						<reference key="destination" ref="15969858"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="835606032"/>
-							<reference key="NSDestination" ref="15969858"/>
-							<string key="NSLabel">value: selection.startDate</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.startDate</string>
-							<object class="NSDictionary" key="NSOptions">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSArray" key="dict.sortedKeys">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>NSMultipleValuesPlaceholder</string>
-									<string>NSNoSelectionPlaceholder</string>
-									<string>NSNotApplicablePlaceholder</string>
-									<string>NSNullPlaceholder</string>
-								</object>
-								<object class="NSMutableArray" key="dict.values">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>dd.mm.yyyy, then 'Enter'</string>
-									<string>No selection</string>
-									<string>dd.mm.yyyy, then 'Enter'</string>
-									<string>dd.mm.yyyy, then 'Enter'</string>
-								</object>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">193</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.note</string>
 						<reference key="source" ref="912892876"/>
 						<reference key="destination" ref="15969858"/>
@@ -1634,6 +1599,39 @@
 						</object>
 					</object>
 					<int key="connectionID">215</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.startDate</string>
+						<reference key="source" ref="835606032"/>
+						<reference key="destination" ref="15969858"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="835606032"/>
+							<reference key="NSDestination" ref="15969858"/>
+							<string key="NSLabel">value: selection.startDate</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.startDate</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSMultipleValuesPlaceholder</string>
+									<string>NSNoSelectionPlaceholder</string>
+									<string>NSNotApplicablePlaceholder</string>
+									<string>NSNullPlaceholder</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>dd.mm.yyyy, then 'Enter'</string>
+									<string>dd.mm.yyyy, then 'Enter'</string>
+									<string>dd.mm.yyyy, then 'Enter'</string>
+									<string>dd.mm.yyyy, then 'Enter'</string>
+								</object>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">216</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2209,7 +2207,7 @@
 					<integer value="1000"/>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="0"/>
+					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
@@ -2230,9 +2228,9 @@
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
-					<string>{{781, 518}, {277, 282}}</string>
+					<string>{{719, 484}, {277, 282}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{781, 518}, {277, 282}}</string>
+					<string>{{719, 484}, {277, 282}}</string>
 					<boolean value="YES"/>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>{{457, 460}, {141, 54}}</string>
@@ -2288,7 +2286,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">215</int>
+			<int key="maxID">216</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

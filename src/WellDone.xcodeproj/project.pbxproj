@@ -58,6 +58,7 @@
 		B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BE2AA10B2FFC000B288EE /* SimpleListController.m */; };
 		B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4317EBB10B1544900C9841F /* SidebarTask.xib */; };
 		B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4317ED910B163F900C9841F /* SidebarTaskController.m */; };
+		B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B465D95A10FF2FE10055E308 /* RemindMeTimer.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 		B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */; };
 		BFCC7FEC10E95932000757D8 /* SyncManagerTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCC7FEB10E95932000757D8 /* SyncManagerTestCases.m */; };
@@ -237,6 +238,8 @@
 		B4317EBB10B1544900C9841F /* SidebarTask.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTask.xib; sourceTree = "<group>"; };
 		B4317ED810B163F900C9841F /* SidebarTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTaskController.h; sourceTree = "<group>"; };
 		B4317ED910B163F900C9841F /* SidebarTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTaskController.m; sourceTree = "<group>"; };
+		B465D95910FF2FE10055E308 /* RemindMeTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindMeTimer.h; sourceTree = "<group>"; };
+		B465D95A10FF2FE10055E308 /* RemindMeTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindMeTimer.m; sourceTree = "<group>"; };
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 		B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListOutlineView.h; sourceTree = "<group>"; };
 		B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListOutlineView.m; sourceTree = "<group>"; };
@@ -339,6 +342,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B465D95810FF2FBA0055E308 /* RemindMe Timer */,
 				6F03A45710FC69790020CCA9 /* Value Transformers */,
 				42375F3610F5F26A00A48318 /* Backup */,
 				D164971910D2E16F00DEB20A /* Custom Cells */,
@@ -572,6 +576,15 @@
 				D11C58B910FA9FA300CC204F /* SearchItem.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		B465D95810FF2FBA0055E308 /* RemindMe Timer */ = {
+			isa = PBXGroup;
+			children = (
+				B465D95910FF2FE10055E308 /* RemindMeTimer.h */,
+				B465D95A10FF2FE10055E308 /* RemindMeTimer.m */,
+			);
+			name = "RemindMe Timer";
 			sourceTree = "<group>";
 		};
 		D164971910D2E16F00DEB20A /* Custom Cells */ = {
@@ -891,6 +904,7 @@
 				6F03A47710FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */,
 				FA43906910FCF90C0000224E /* WDNSDate+PrettyPrint.m in Sources */,
 				420EA9CC10FDD7CB005D4E16 /* BackupPreferencesController.m in Sources */,
+				B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,7 @@
 #import "SyncPreferences.h"
 #import "CLStringNumberValueTransformer.h"
 #import "Note.h"
+#import "RemindMeTimer.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -131,6 +132,10 @@
 	// Init status bar menu
 	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
 	[self setStatusBarMenuVisible:menuVisible];
+
+	// start reminde me timer
+	RemindMeTimer *reminderMeTimer = [[RemindMeTimer alloc] init];
+	[reminderMeTimer startTimer];
 }
 
 - (void)setOnlineState:(NSNotification *)notification {

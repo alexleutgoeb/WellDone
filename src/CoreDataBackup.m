@@ -40,6 +40,16 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 // make a copy of the core data file
 - (id)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
 
+	// moc speichern
+	NSManagedObjectContext *moc;
+	moc = [[NSApp delegate] managedObjectContext];
+	NSError *err = nil;
+	if (![moc save:&err]) {
+		DLog(@"Error saving moc for backup, don't know what to do.");
+	} else {
+		DLog(@"Saved moc for backup.");
+	}
+	
 	//TODO: check the path ending
 	backupPath = [backupPath stringByAppendingString:@"/"];
 	//NSLog(backupPath);
