@@ -13,7 +13,7 @@
 
 }
 - (IBAction)createBackupAction:(id)sender;
-- (BOOL)backupDatabaseFile:(NSString *)backupPath;
+- (id)backupDatabaseFile:(NSString *)backupPath;
 - (BOOL)replaceDatabaseFileWithBackupFile:(NSString *)backupFilePath;
 
 @end

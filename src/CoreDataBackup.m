@@ -24,8 +24,9 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	
 	NSError *error;	
 	NSAlert *alert = [[NSAlert alloc] init];
-	if ([self backupDatabaseFile:location error:&error]){
-		NSString *message = NSLocalizedString([@"Backup was successful. \nLocation of the backupfile: " stringByAppendingPathComponent: location], @"backup was successful, saved file into the directory:" );
+	NSString *filelocation = [self backupDatabaseFile:location error:&error];
+	if (filelocation != nil){
+		NSString *message = NSLocalizedString([@"Backup was successful. \n You can find the Backupfile here: " stringByAppendingPathComponent: filelocation], @"backup was successful, location of the file is here:" );
 		
 		[alert setMessageText:message];	
 		[alert runModal];
@@ -37,7 +38,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 }
 
 // make a copy of the core data file
-- (BOOL)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
+- (id)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
 
 	//TODO: check the path ending
 	backupPath = [backupPath stringByAppendingString:@"/"];
@@ -45,23 +46,12 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
     NSFileManager *fm = [NSFileManager defaultManager];
     
 	NSURL *currentDBFile = [[NSApp delegate] coreDataDBLocationURL];
-	BOOL temp = [fm fileExistsAtPath:[currentDBFile absoluteString]];
-	
-	/*
-    // insist that the file which should be backuped does exist
-	if (![fm fileExistsAtPath:[currentDBFile absoluteString]] && error !=nil){ // 
-		NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-		[errorDetail setValue:@"Directory or Filename of the Database does not exist" forKey:NSLocalizedDescriptionKey]; //TODO: also give user the location
-		[errorDetail setValue:@"Please chose an existing directory" forKey:NSLocalizedRecoverySuggestionErrorKey];		
-		error = [NSError errorWithDomain:CoreDataBackupError code:1 userInfo:errorDetail];
-		return NO;
-	}
-	*/
+
 	// checks if the backup directory exisits and creates it if not
-	if (![fm fileExistsAtPath:backupPath]){ //TODO: isdirectory and can write
-		// create the new file (if the folder does not exist, the method creates it)
+	if (![fm fileExistsAtPath:backupPath]){ 
+		// create the new file (if the folder does not exist, the method creates it). Errors are handled in the NSError error and nil is returned in case of problems
 		if (![fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:&error]){
-			return NO;
+			return nil;
 		}	
 	}
 	
@@ -71,12 +61,15 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	NSString *fileEnding;
 	fileEnding = [ [dateFormat stringFromDate:[NSDate date]] stringByAppendingString:@"_WellDone.welldonedoc"];
 
-	NSString *backupFileName;
-	backupFileName = [backupPath stringByAppendingString:fileEnding];
+	NSString backupFileName = [backupPath stringByAppendingString:fileEnding];
 	
 	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
 
-	return	[fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&error];
+	if ([fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&error]){
+		return [backupFileURL absoluteString];
+	}else {
+		return nil;
+	}
 
 }
 

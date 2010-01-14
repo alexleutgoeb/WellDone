@@ -94,6 +94,12 @@
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	// TODO: set default values for userdefaults
 	
+	// set the default value for the backupPath to the application directory if user did not specify a specific path
+	if ([defaults objectForKey:@"backupPath"] == nil){
+		[defaults setObject:[self applicationSupportDirectory] forKey:@"backupPath"];
+	}
+	
+	
 	// Init preferences window
 	GeneralPreferences *generalP = [[[GeneralPreferences alloc] init] autorelease];
 	SyncPreferences *syncP = [[[SyncPreferences alloc] init] autorelease];
