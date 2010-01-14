@@ -9,8 +9,11 @@
 #import "SyncManager.h"
 #import "Folder.h"
 #import "RemoteFolder.h"
+#import "RemoteContext.h"
+#import "RemoteTask.h"
 #import "Note.h"
 #import "Task.h"
+#import "Context.h"
 
 
 @interface SyncManager()
@@ -328,9 +331,18 @@
 				[aManagedObjectContext deleteObject:localFolder];
 			}
 		
-		} else if([localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate] > 0) {
+		} else if([localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate] < 0) {
+			DLog(@"syncFolder writing data to local.");
+			DLog(@"timedifference: %i", [localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate]);
+			localFolder.name = foundGtdFolder.title;
+			if(foundGtdFolder.private == YES) localFolder.private = [NSNumber numberWithInt:1];
+			else localFolder.private = [NSNumber numberWithInt:0];
+			localFolder.order = [NSNumber numberWithInt:foundGtdFolder.order];
+			remoteFolder.lastsyncDate = [NSDate date];
+		} else {
 			//editFolder
 			DLog(@"syncFolder editFolder.");
+			DLog(@"timedifference: %i", [localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate]);
 			GtdFolder *newGtdFolder = [[GtdFolder alloc] init];
 			newGtdFolder.uid = [remoteFolder.remoteUid integerValue];
 			DLog(@"check.");
@@ -344,15 +356,9 @@
 			//overwrite the remote remoteFolder with the local folder
 			[syncService editFolder:newGtdFolder error:&error];
 			DLog(@"check3.");
-			remoteFolder.lastsyncDate == [NSDate date];
-		} else {
-			DLog(@"syncFolder writing data to local.");
-			localFolder.name = foundGtdFolder.title;
-			if(foundGtdFolder.private == YES) localFolder.private = [NSNumber numberWithInt:1];
-			else localFolder.private = [NSNumber numberWithInt:0];
-			localFolder.order = [NSNumber numberWithInt:foundGtdFolder.order];
-			remoteFolder.lastsyncDate == [NSDate date];
+			remoteFolder.lastsyncDate = [NSDate date];
 		}
+		DLog(@"error %@", [error description]);
 	}
 	//NSMutableArray thxObjC = new NSMutableArray(gtdFolders);
 	//finally durchlaufe die gtdFolder die nicht zuordenbar waren und erzeuge sie lokal
@@ -382,6 +388,192 @@
 		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
 	return aManagedObjectContext;
 }
+
+/**
+ Task sync
+ @author Michael
+ */
+- (NSManagedObjectContext *) syncTasks:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
+	
+	NSError *error = nil;
+	
+	//zuerst alle remoteTasks erstellen falls sie noch nicht existieren
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	NSArray *localTasks = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+	
+	[fetchRequest release];
+	
+	//now find a corresponding GTDfolder
+	NSMutableArray *gtdTasks = (NSMutableArray *) [syncService getTasks:&error];
+	NSMutableArray *foundGtdTasks = [[NSMutableArray alloc] init];
+	GtdTask *foundGtdTask;
+	RemoteTask *remoteTask;
+	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
+	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
+	for (Task *localTask in localTasks) {
+		DLog(@"localTask.name %@", localTask.title);
+		//[aManagedObjectContext deleteObject:localTask];
+		NSEnumerator *enumerator = [localTask.remoteTasks objectEnumerator];
+		DLog(@"localTask.remoteTask %@", [localTask.remoteTasks description]);
+		remoteTask = nil;
+		
+		while ((remoteTask = [enumerator nextObject])) {
+			//wenn remoteobject existiert
+			if([remoteTask.serviceIdentifier isEqualToString:syncService.identifier]) break;
+			else remoteTask = nil;
+		}
+		//now we can safely assume, that each local folder has a remoteTask
+		//no remoteTask was found, create one
+		if(remoteTask == nil) {
+			DLog(@"creating remoteTask for folder %@", localTask.title);
+			remoteTask = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
+			remoteTask.serviceIdentifier = syncService.identifier;
+			remoteTask.remoteUid = [NSNumber numberWithInteger:-1];
+			remoteTask.lastsyncDate = nil;
+			remoteTask.localTask = localTask;
+			NSMutableSet *mutableRemoteTasks = [localTask mutableSetValueForKey:@"remoteTasks"];
+			[mutableRemoteTasks addObject:remoteTask];
+			DLog(@"syncTask addTask.");
+			GtdTask *newGtdTask = [[GtdTask alloc] init];
+			newGtdTask.title = localTask.title;
+			//newGtdTask.archived = localTask.archived;
+			//newGtdTask.order = [localTask.order integerValue];
+			remoteTask.remoteUid = [NSNumber numberWithLong:[syncService addTask:newGtdTask error:&error]];
+			DLog(@"new remoteUid: %@", remoteTask.remoteUid);
+			remoteTask.lastsyncDate = [NSDate date];
+			newGtdTask.uid = [remoteTask.remoteUid integerValue];
+			foundGtdTask = newGtdTask;
+		} else {
+			//find gtdfolder
+			foundGtdTask = nil;
+			for(GtdTask *gtdTask in gtdTasks) {
+				DLog(@"found GtdTask %@", gtdTask.title);
+				DLog(@"gtdTask.uid %i", gtdTask.uid);
+				DLog(@"remoteTask.remoteUid %@", remoteTask.remoteUid);
+				if(gtdTask.uid == [remoteTask.remoteUid integerValue]) {
+					DLog(@"syncTask matching remoteUid. %i", gtdTask.uid);
+					[foundGtdTasks addObject:gtdTask];
+					foundGtdTask = gtdTask;
+					break;
+				}
+			}
+			for(GtdTask *bla in foundGtdTasks) {
+				DLog(@"syncTask foundTask. %@", bla.title);
+			}
+		}
+		
+		DLog(@"localTask.modifiedDate: %@", localTask.modifiedDate);
+		DLog(@"remoteTask.lastsyncDate: %@", remoteTask.lastsyncDate);
+		DLog(@"localTask.deleted: %@", localTask.deleted);
+		
+		//DLog(@"localTask.modifiedDate: %@", localTask.modifiedDate);
+		if([localTask.deleted integerValue] == 1) {
+			DLog(@"syncTask deleting a folder.");
+			if(foundGtdTask != nil)
+				[syncService deleteTask:foundGtdTask error:&error];
+			[aManagedObjectContext deleteObject:localTask];
+		} else if(foundGtdTask == nil) {
+			DLog(@"syncTask deleting cos no foundGtdTask");
+			if(remoteTask.lastsyncDate != nil && [remoteTask.lastsyncDate timeIntervalSinceDate:localTask.modifiedDate] > 0) {
+				[aManagedObjectContext deleteObject:localTask];
+			}
+			
+		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] < 0) {
+			//editTask
+			DLog(@"syncTask editTask.");
+			GtdTask *newGtdTask = [[GtdTask alloc] init];
+			newGtdTask.uid = [remoteTask.remoteUid integerValue];
+			DLog(@"check.");
+			newGtdTask.title = localTask.title;
+			newGtdTask.date_created = localTask.createDate;
+			newGtdTask.date_modified = localTask.modifiedDate;
+			newGtdTask.date_start = localTask.startDate;
+			newGtdTask.date_due = localTask.dueDate;			
+			newGtdTask.tags = [localTask.tags allObjects];
+			
+			//ULTRAZACH: finden von remoteUid des folders....
+			NSEnumerator *enumerator = [localTask.folder.remoteFolders objectEnumerator];
+			RemoteFolder *remoteFolder = nil;
+			
+			while ((remoteFolder = [enumerator nextObject])) {
+				//wenn remoteobject existiert
+				if([remoteFolder.serviceIdentifier isEqualToString:syncService.identifier]) break;
+				else remoteFolder = nil;
+			}
+			newGtdTask.folder = [remoteFolder.remoteUid integerValue];
+			
+			//ULTRAZACH: finden von remoteUid des folders....
+			enumerator = [localTask.context.remoteContexts objectEnumerator];
+			RemoteContext *remoteContext = nil;
+			
+			while ((remoteContext = [enumerator nextObject])) {
+				//wenn remoteobject existiert
+				if([remoteContext.serviceIdentifier isEqualToString:syncService.identifier]) break;
+				else remoteContext = nil;
+			}
+			newGtdTask.context = [remoteContext.remoteUid integerValue];
+			newGtdTask.priority = [localTask.priority integerValue];
+			if(localTask.completed == [NSNumber numberWithInt:1]) newGtdTask = [NSDate date];
+			newGtdTask.length = [localTask.length integerValue];
+			newGtdTask.note = localTask.note;
+			newGtdTask.star = (localTask.starred == [NSNumber numberWithInt:1] ? YES : NO);
+			newGtdTask.repeat = [localTask.repeat integerValue];
+			newGtdTask.status = [localTask.status integerValue];
+			newGtdTask.reminder = [localTask.reminder integerValue];
+			newGtdTask.parentId = [remoteTask.remoteUid intValue];
+			
+			//overwrite the remote remoteTask with the local folder
+			[syncService editTask:newGtdTask error:&error];
+			remoteTask.lastsyncDate == [NSDate date];
+		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] < 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+			DLog(@"syncTask writing data to local.");
+			localTask.title = foundGtdTask.title;
+			
+			
+			
+			remoteTask.lastsyncDate == [NSDate date];
+		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+			//conflict
+		}
+	}
+	//NSMutableArray thxObjC = new NSMutableArray(gtdTasks);
+	//finally durchlaufe die gtdTask die nicht zuordenbar waren und erzeuge sie lokal
+	[gtdTasks removeObjectsInArray:foundGtdTasks];
+	for(GtdTask *gtdTask in gtdTasks) {
+		// Add new entities
+		RemoteTask *rTask = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
+		Task *lTask = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
+		
+		DLog(@"syncTask adding new folder to local.");
+		
+		// Set entity attributes
+		rTask.serviceIdentifier = syncService.identifier;
+		rTask.remoteUid = [NSNumber numberWithInteger:gtdTask.uid];
+		rTask.lastsyncDate = [NSDate date];
+		rTask.localTask = lTask;
+		lTask.title = gtdTask.title;
+		lTask.createDate = gtdTask.date_created;
+		lTask.modifiedDate = gtdTask.date_modified;
+		lTask.startDate = gtdTask.date_start;
+		lTask.dueDate = gtdTask.date_due;			
+		lTask.tags = [NSSet setWithArray:gtdTask.tags];
+		//ULTRAZACH alle folders durchsuchen
+		
+		
+		NSMutableSet *mutableRemoteTasks = [lTask mutableSetValueForKey:@"remoteTasks"];
+		[mutableRemoteTasks addObject:rTask];
+	}
+	
+	//zuerst innerhalb einer passenden datenstruktur jedem element aus rTask das entsprechende element aus gtdTask zuordnen
+	//falls es zu einem rTask element keinen gtdTask gibt:
+	//wenn rTask.localTask.deleted != true -> [syncService addTask]
+	//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
+	return aManagedObjectContext;
+}
+
 /*
  
  syncpseudocode:
