@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Task.h"
+#import	"Section.h"
 
 @interface GTDListController : NSViewController {
 	NSMutableArray *subViewControllers;
@@ -16,9 +17,11 @@
 	NSMutableArray *iTasks;
 	IBOutlet NSOutlineView* myview;
 	NSManagedObjectContext *moc;
+	Section *section;
 }
 
 @property (nonatomic, retain) NSMutableArray *subViewControllers;
+@property (nonatomic, retain) Section *section;
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 - (void)setTaskDone:(NSTextFieldCell*)cell;
 - (void)setTaskUndone:(NSTextFieldCell*)cell;

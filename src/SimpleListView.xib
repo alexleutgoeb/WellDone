@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">740</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="64"/>
+			<integer value="320"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -291,18 +291,20 @@
 													<bool key="EncodedWithXMLCoder">YES</bool>
 													<object class="NSArray" key="dict.sortedKeys">
 														<bool key="EncodedWithXMLCoder">YES</bool>
+														<string>dateFormat</string>
 														<string>dateStyle</string>
 														<string>formatterBehavior</string>
 														<string>timeStyle</string>
 													</object>
 													<object class="NSMutableArray" key="dict.values">
 														<bool key="EncodedWithXMLCoder">YES</bool>
+														<string>dMMMy</string>
 														<integer value="1"/>
 														<integer value="1040"/>
 														<integer value="0"/>
 													</object>
 												</object>
-												<string key="NS.format">dd/MM/yy</string>
+												<string key="NS.format">dMMMy</string>
 												<bool key="NS.natural">NO</bool>
 											</object>
 											<string key="NSPlaceholderString">dd/MM/yyyy hh:ss</string>
@@ -459,7 +461,7 @@
 						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">dd/MM/yy HH:mm</string>
+				<string key="NS.format">dd.MM.yy HH:mm</string>
 				<bool key="NS.natural">NO</bool>
 			</object>
 		</object>
@@ -827,11 +829,11 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="1"/>
+					<integer value="2"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>DebugTreeController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{340, 453}, {611, 296}}</string>
+					<string>{{67, 453}, {611, 296}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

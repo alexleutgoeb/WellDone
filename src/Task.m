@@ -47,4 +47,9 @@
 	return self.title;
 }
 
+- (id)children 
+{
+    return nil;
+}
+
 @end
