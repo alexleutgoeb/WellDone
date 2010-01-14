@@ -64,13 +64,15 @@
  This method is the main method for syncing a managed object context with remote 
  data, fetched from the different sync services.
  */
-- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray *)conflicts;
+- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray **)conflicts;
 
 /**
  Method for folder sync
  
  */
 - (NSManagedObjectContext *)syncFolders:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService;
+
+-(NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService withConflicts:(NSArray **)conflicts;
 
 /**
  Overrides local data with remote

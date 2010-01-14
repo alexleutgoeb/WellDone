@@ -14,7 +14,7 @@
 #import "Note.h"
 #import "Task.h"
 #import "Context.h"
-
+#import "TaskContainer.h"
 
 @interface SyncManager()
 
@@ -82,7 +82,7 @@
 	}
 }
 
-- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray *)conflicts {
+- (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray **)conflicts {
 	// TODO: implement
 	
 	if ([syncServices count] > 0) {
@@ -394,7 +394,7 @@
  Task sync
  @author Michael
  */
-- (NSManagedObjectContext *) syncTasks:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
+- (NSManagedObjectContext *) syncTasks:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService withConflicts: (NSArray **) conflicts {
 	
 	NSError *error = nil;
 	
@@ -410,6 +410,7 @@
 	//now find a corresponding GTDfolder
 	NSMutableArray *gtdTasks = (NSMutableArray *) [syncService getTasks:&error];
 	NSMutableArray *foundGtdTasks = [[NSMutableArray alloc] init];
+	NSMutableArray *actualConflicts = [[NSMutableArray alloc] init];
 	GtdTask *foundGtdTask;
 	RemoteTask *remoteTask;
 	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
@@ -537,7 +538,10 @@
 			
 			remoteTask.lastsyncDate == [NSDate date];
 		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
-			//conflict
+			TaskContainer *tc = [[TaskContainer alloc] init];
+			tc.gtdTask = foundGtdTask;
+			tc.remoteTask = remoteTask;
+			[actualConflicts addObject:tc];
 		}
 	}
 	//NSMutableArray thxObjC = new NSMutableArray(gtdTasks);
