@@ -61,7 +61,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	NSString *fileEnding;
 	fileEnding = [ [dateFormat stringFromDate:[NSDate date]] stringByAppendingString:@"_WellDone.welldonedoc"];
 
-	NSString backupFileName = [backupPath stringByAppendingString:fileEnding];
+	NSString *backupFileName = [backupPath stringByAppendingString:fileEnding];
 	
 	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
 
