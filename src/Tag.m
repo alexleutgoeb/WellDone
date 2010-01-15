@@ -12,13 +12,13 @@
 
 @implementation Tag 
 
-@dynamic deleted;
+@dynamic deletedByApp;
 @dynamic text;
 @dynamic tasks;
 
 - (void)awakeFromInsert {
 	[super awakeFromInsert];
-	self.deleted = [NSNumber numberWithBool:NO];
+	self.deletedByApp = [NSNumber numberWithBool:NO];
 }
 
 - (NSString *)description {

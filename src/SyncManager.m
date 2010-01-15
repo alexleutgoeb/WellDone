@@ -318,10 +318,10 @@
 		
 		DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
 		DLog(@"remoteFolder.lastsyncDate: %@", remoteFolder.lastsyncDate);
-		DLog(@"localFolder.deleted: %@", localFolder.deleted);
+		DLog(@"localFolder.deletedByApp: %@", localFolder.deletedByApp);
 		
 		//DLog(@"localFolder.modifiedDate: %@", localFolder.modifiedDate);
-		if([localFolder.deleted integerValue] == 1) {
+		if([localFolder.deletedByApp integerValue] == 1) {
 			DLog(@"syncFolder deleting a folder.");
 			if(foundGtdFolder != nil)
 				[syncService deleteFolder:foundGtdFolder error:&error];
@@ -385,7 +385,7 @@
 		
 	//zuerst innerhalb einer passenden datenstruktur jedem element aus rFolder das entsprechende element aus gtdFolder zuordnen
 		//falls es zu einem rFolder element keinen gtdFolder gibt:
-			//wenn rFolder.localFolder.deleted != true -> [syncService addFolder]
+			//wenn rFolder.localFolder.deletedByApp != true -> [syncService addFolder]
 		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
 	return aManagedObjectContext;
 }
@@ -469,10 +469,10 @@
 		
 		DLog(@"localTask.modifiedDate: %@", localTask.modifiedDate);
 		DLog(@"remoteTask.lastsyncDate: %@", remoteTask.lastsyncDate);
-		DLog(@"localTask.deleted: %@", localTask.deleted);
+		DLog(@"localTask.deletedByApp: %@", localTask.deletedByApp);
 		
 		//DLog(@"localTask.modifiedDate: %@", localTask.modifiedDate);
-		if([localTask.deleted integerValue] == 1) {
+		if([localTask.deletedByApp integerValue] == 1) {
 			DLog(@"syncTask deleting a folder.");
 			if(foundGtdTask != nil)
 				[syncService deleteTask:foundGtdTask error:&error];
@@ -574,7 +574,7 @@
 	
 	//zuerst innerhalb einer passenden datenstruktur jedem element aus rTask das entsprechende element aus gtdTask zuordnen
 	//falls es zu einem rTask element keinen gtdTask gibt:
-	//wenn rTask.localTask.deleted != true -> [syncService addTask]
+	//wenn rTask.localTask.deletedByApp != true -> [syncService addTask]
 	//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
 	return aManagedObjectContext;
 }
@@ -590,12 +590,12 @@
 3. jetzt iteriere ich die remoteFolders durch und schau bei jedem ob es einen entsprechenden gtdFolder gibt.
 
 3a Wenn ich einen passenden gtdFolder finde dann als nächstes remoteFolder.localFolder.deleted prüfen:
-wenn deleted = true: lösche gtdFolder
+wenn deletedByApp = true: lösche gtdFolder
 sonst als nächstes das remoteFolder.localFolder lastmodified prüfen:
 wenn lastmodified > lastsync: gtdFolder mit daten aus remoteFolder.localFolder überschreiben
 wenn lastmodified <= lastsync: localFolder mit gtdFolder überschreiben
 
-3b wenn ich keinen passenden gtdFolder finde und remoteFolder.localFolder.deleted != true: neuen gtdFolder anlegen
+3b wenn ich keinen passenden gtdFolder finde und remoteFolder.localFolder.deletedByApp != true: neuen gtdFolder anlegen
 sonst wenn lastmodified <= lastsync dann bedeuted das, dass der folder in toodledo gelöscht wurde daher: remoteFolder deleten.
 
 4 jetzt die übriggebliebenen gtdFolders hernehmen und für jeden einen remoteFolder + remoteFolder.localFolder anlegen

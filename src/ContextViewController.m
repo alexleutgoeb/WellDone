@@ -37,7 +37,7 @@
 	id selectedContext;
 	for (selectedContext in selectedContexts) {
 		if ([selectedContext isKindOfClass: [Context class]]) {
-			[selectedContext setDeleted:[NSNumber numberWithBool:YES]];
+			[selectedContext setDeletedByApp:[NSNumber numberWithBool:YES]];
 			[myTableView reloadData]; 
 			[arrayController fetch:nil];
 		}

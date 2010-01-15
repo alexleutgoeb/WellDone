@@ -215,10 +215,6 @@
 	contextViewController = [[ContextViewController alloc] init];
 	hudTaskEditorController = [[HUDTaskEditorController alloc] init];
 	
-	[simpleListController reloadTaskListWithFilters];
-	[[simpleListController treeController] fetch:nil];
-	
-	
 	// Wire up some controllers with the SimpleListController
 	contextViewController.simpController = simpleListController;
 	[sidebarFolderController setSimpController:simpleListController];
@@ -229,6 +225,9 @@
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 
+	[simpleListController reloadTaskListWithFilters];
+	[[simpleListController treeController] fetch:nil];
+	
 	[self initGTDView];
 	
 	// Fix the ordering for the HUD-Window, so that it will really be shown on the first button-click:

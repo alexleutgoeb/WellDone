@@ -156,7 +156,7 @@
 					entity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:moc];
 					[fetchRequest setEntity:entity];
 					
-					predicate = [NSPredicate predicateWithFormat:@"deleted == 1"];
+					predicate = [NSPredicate predicateWithFormat:@"deletedByApp == 1"];
 					[fetchRequest setPredicate:predicate];
 					
 					items = [moc executeFetchRequest:fetchRequest error:&error];
@@ -175,7 +175,7 @@
 					entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
 					[fetchRequest setEntity:entity];
 					
-					predicate = [NSPredicate predicateWithFormat:@"deleted == 1"];
+					predicate = [NSPredicate predicateWithFormat:@"deletedByApp == 1"];
 					[fetchRequest setPredicate:predicate];
 					
 					items = [moc executeFetchRequest:fetchRequest error:&error];
@@ -196,7 +196,7 @@
 					entity = [NSEntityDescription entityForName:@"Context" inManagedObjectContext:moc];
 					[fetchRequest setEntity:entity];
 					
-					predicate = [NSPredicate predicateWithFormat:@"deleted == 1"];
+					predicate = [NSPredicate predicateWithFormat:@"deletedByApp == 1"];
 					[fetchRequest setPredicate:predicate];
 					
 					items = [moc executeFetchRequest:fetchRequest error:&error];

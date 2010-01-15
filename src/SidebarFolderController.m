@@ -86,7 +86,7 @@
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:entityDescription];
 	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == %@", [NSNumber numberWithInt:0]];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deletedByApp == %@", [NSNumber numberWithInt:0]];
 	
 	[request setPredicate:predicate];
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
@@ -158,7 +158,7 @@
 
 /*
  * Handles updates to the specified folder, stemming from the datasource (folder caption, deleted yes/no).
- * If the folder is found in the list, but the object from the datasource has deleted == YES, the folder is deleted
+ * If the folder is found in the list, but the object from the datasource has deletedByApp == YES, the folder is deleted
  * from the list.
  * If the folder does not exist in the list (perhaps because the deleted flag was set to YES), the folder is readded
  * to the list, if the deleted flag is set to NO.
@@ -169,7 +169,7 @@
 	if(nodeToUpdate == nil) {
 		NSLog(@"Did not find updated Folder in folder list - maybe it has been deleted and is readded now: %@", [updatedFolder name]);
 		// Folder is not in list, but it is not set deleted in datasource - add folder:
-		if ([updatedFolder deleted] == NO) {
+		if ([updatedFolder deletedByApp] == NO) {
 			NSLog(@"Folder '%@' is added to the list, because deleted-flag is NO", [updatedFolder name]);
 			[self addFolder:updatedFolder toSection:rootNodeTaskFolders];
 			nodeToUpdate = [sidebar nodeForKey:[updatedFolder objectID]];
@@ -183,7 +183,7 @@
 		
 	}
 	
-	if ([[updatedFolder deleted] boolValue]) {
+	if ([[updatedFolder deletedByApp] boolValue]) {
 		NSLog(@"Delete folder '%@' from list because deleted-flag is YES", [updatedFolder name]);
 		[self removeFolder: updatedFolder];
 		return;
@@ -220,16 +220,16 @@
 - (void) addNewFolderByContextMenu {
 	Folder *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:moc]; 
 	folder.name = @"New Folder";
-	folder.deleted = [NSNumber numberWithBool:NO];
+	folder.deletedByApp = [NSNumber numberWithBool:NO];
 	[self saveChangesToStore];
 }
 
 - (void) deleteFolderByContextMenu: (Folder *)folderToDelete {
-	folderToDelete.deleted = [NSNumber numberWithBool:YES];
+	folderToDelete.deletedByApp = [NSNumber numberWithBool:YES];
 	id task;
 	for (task in [folderToDelete tasks]) {
-		if ([task deleted] != [NSNumber numberWithBool:YES])
-			[task setDeleted:[NSNumber numberWithBool:YES]];
+		if ([task deletedByApp] != [NSNumber numberWithBool:YES])
+			[task setDeletedByApp:[NSNumber numberWithBool:YES]];
 	}
 	
 	[self saveChangesToStore];

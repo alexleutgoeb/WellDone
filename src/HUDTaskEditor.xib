@@ -624,6 +624,29 @@
 										<object class="NSTextView" id="912892876">
 											<reference key="NSNextResponder" ref="392144811"/>
 											<int key="NSvFlags">2322</int>
+											<object class="NSMutableSet" key="NSDragTypes">
+												<bool key="EncodedWithXMLCoder">YES</bool>
+												<object class="NSArray" key="set.sortedObjects">
+													<bool key="EncodedWithXMLCoder">YES</bool>
+													<string>Apple HTML pasteboard type</string>
+													<string>Apple PDF pasteboard type</string>
+													<string>Apple PICT pasteboard type</string>
+													<string>Apple PNG pasteboard type</string>
+													<string>Apple URL pasteboard type</string>
+													<string>CorePasteboardFlavorType 0x6D6F6F76</string>
+													<string>NSColor pasteboard type</string>
+													<string>NSFilenamesPboardType</string>
+													<string>NSStringPboardType</string>
+													<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+													<string>NeXT RTFD pasteboard type</string>
+													<string>NeXT Rich Text Format v1.0 pasteboard type</string>
+													<string>NeXT TIFF v4.0 pasteboard type</string>
+													<string>NeXT font pasteboard type</string>
+													<string>NeXT ruler pasteboard type</string>
+													<string>WebURLsWithTitlesPboardType</string>
+													<string>public.url</string>
+												</object>
+											</object>
 											<string key="NSFrameSize">{129, 348}</string>
 											<reference key="NSSuperview" ref="392144811"/>
 											<object class="NSTextContainer" key="NSTextContainer" id="785694649">
@@ -979,13 +1002,13 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSKeyPathSpecifierExpression">
 									<int key="NSExpressionType">10</int>
-									<string key="NSKeyPath">deleted</string>
+									<string key="NSKeyPath">deletedByApp</string>
 								</object>
 							</object>
 						</object>
 						<object class="NSConstantValueExpression" key="NSRightExpression">
 							<int key="NSExpressionType">0</int>
-							<boolean value="NO" key="NSConstantValue"/>
+							<integer value="0" key="NSConstantValue"/>
 						</object>
 						<object class="NSEqualityPredicateOperator" key="NSPredicateOperator">
 							<int key="NSOperatorType">4</int>

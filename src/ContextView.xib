@@ -59,7 +59,7 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSKeyPathSpecifierExpression">
 									<int key="NSExpressionType">10</int>
-									<string key="NSKeyPath">deleted</string>
+									<string key="NSKeyPath">deletedByApp</string>
 								</object>
 							</object>
 						</object>

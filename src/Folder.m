@@ -14,7 +14,7 @@
 
 @implementation Folder 
 
-@dynamic deleted;
+@dynamic deletedByApp;
 @dynamic order;
 @dynamic modifiedDate;
 @dynamic createDate;
@@ -28,7 +28,7 @@
 	[super awakeFromInsert];
 	self.createDate = [NSDate date];
 	self.modifiedDate = [NSDate date];
-	self.deleted = [NSNumber numberWithBool:NO];
+	self.deletedByApp = [NSNumber numberWithBool:NO];
 	self.private = [NSNumber numberWithBool:NO];
 }
 

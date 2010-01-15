@@ -15,9 +15,15 @@
 
 @dynamic isChecked;
 @dynamic title;
-@dynamic deleted;
+@dynamic deletedByApp;
 @dynamic modifiedDate;
 @dynamic remoteContexts;
 @dynamic tasks;
+
+- (void)awakeFromInsert {
+	[super awakeFromInsert];
+	self.modifiedDate = [NSDate date];
+	self.deletedByApp = [NSNumber numberWithBool:NO];
+}
 
 @end

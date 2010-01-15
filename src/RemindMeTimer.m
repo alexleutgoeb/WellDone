@@ -36,7 +36,7 @@
 	
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:moc];
-		NSPredicate *predicate = [NSPredicate predicateWithFormat: @"reminder != 0 AND (startDate - reminder * 60 <= %@ AND deleted == NO)", [NSDate date]];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat: @"reminder != 0 AND (startDate - reminder * 60 <= %@ AND deletedByApp == NO)", [NSDate date]];
 		[fetchRequest setEntity:entity];	
 		[fetchRequest setPredicate:predicate];	
 		NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];

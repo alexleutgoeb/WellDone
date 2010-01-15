@@ -102,13 +102,13 @@
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="NSKeyPathSpecifierExpression">
 											<int key="NSExpressionType">10</int>
-											<string key="NSKeyPath">deleted</string>
+											<string key="NSKeyPath">deletedByApp</string>
 										</object>
 									</object>
 								</object>
 								<object class="NSConstantValueExpression" key="NSRightExpression">
 									<int key="NSExpressionType">0</int>
-									<boolean value="NO" key="NSConstantValue"/>
+									<integer value="0" key="NSConstantValue"/>
 								</object>
 								<object class="NSEqualityPredicateOperator" key="NSPredicateOperator">
 									<int key="NSOperatorType">4</int>
@@ -833,7 +833,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>DebugTreeController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{67, 453}, {611, 296}}</string>
+					<string>{{312, 453}, {611, 296}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

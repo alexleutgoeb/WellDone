@@ -94,7 +94,7 @@
  */
 - (void) reactToMOCSave:(NSNotification *)notification {
 	NSLog(@"reactToMOCSave");
-	id object;
+	id object; 
 	NSDictionary *userInfo = [notification userInfo];
 	
 	/*NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];

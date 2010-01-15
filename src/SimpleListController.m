@@ -74,7 +74,7 @@
 	id selectedTask;
 	for (selectedTask in selectedTasks) {
 		if ([selectedTask isKindOfClass: [Task class]]) {
-			[selectedTask setDeleted:[NSNumber numberWithBool:YES]];
+			[selectedTask setDeletedByApp:[NSNumber numberWithBool:YES]];
 			//[myview reloadData]; 
 			[treeController fetch:nil];
 		}
@@ -365,12 +365,12 @@
 	
 	// will show inbox folder if the folder is not set:
 	if (folder == nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == nil AND parentTask == nil AND deleted == 0"];
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == nil AND parentTask == nil AND deletedByApp == 0"];
 		generatedPredicateString = extension;
 	}
 	
 	if (folder != nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == %@ AND parentTask == nil AND deleted == 0"];
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == %@ AND parentTask == nil AND deletedByApp == 0"];
 		generatedPredicateString = extension;
 		[predicateArguments addObject:folder];
 	}

@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * completed;
-@property (nonatomic, retain) NSNumber * deleted;
+@property (nonatomic, retain) NSNumber * deletedByApp;
 @property (nonatomic, retain) NSDate * dueDate;
 @property (nonatomic, retain) NSNumber * repeat;
 @property (nonatomic, retain) NSNumber * priority;

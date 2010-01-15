@@ -14,7 +14,7 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * deleted;
+@property (nonatomic, retain) NSNumber * deletedByApp;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSSet* tasks;
 

@@ -16,7 +16,7 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * deleted;
+@property (nonatomic, retain) NSNumber * deletedByApp;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSDate * modifiedDate;
 @property (nonatomic, retain) NSDate * createDate;

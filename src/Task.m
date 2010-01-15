@@ -18,7 +18,7 @@
 @dynamic status;
 @dynamic title;
 @dynamic completed;
-@dynamic deleted;
+@dynamic deletedByApp;
 @dynamic dueDate;
 @dynamic repeat;
 @dynamic priority;
@@ -40,7 +40,7 @@
 	[super awakeFromInsert];
 	self.createDate = [NSDate date];
 	self.modifiedDate = [NSDate date];
-	self.deleted = [NSNumber numberWithBool:NO];
+	self.deletedByApp = [NSNumber numberWithBool:NO];
 }
 
 - (NSString *)description {
