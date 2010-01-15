@@ -18,7 +18,7 @@
 #define DUEDATE_ID @"dueDate"
 #define TAGS_ID @"tags"
 
-@synthesize subViewControllers, section;
+@synthesize subViewControllers, section, sectionNext3Days, sectionNext7Days, sectionUpcoming;
 
 - (id) init
 {
@@ -26,22 +26,6 @@
 	if (self != nil)
 	{		
 		moc = [[NSApp delegate] managedObjectContext];
-		
-		/*NSError *error;
-		NSURL *url = [NSURL URLWithString:@"memory://store"];
-		id memoryStore = [[self persistentStoreCoordinator] persistentStoreForURL:url];
-		
-		section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section"
-												 inManagedObjectContext:[self managedObjectContext]] retain];
-		[section setValue:@"My section" forKey:@"name"];
-		[[self managedObjectContext] assignObject:section
-								toPersistentStore:memoryStore];
-		
-		NSArray *items = [self fetchAllWithEntity:@"Item" error:&error];
-		for (id item in items) {
-			[item setValue:section forKey:@"section"];
-		}
-		*/
 		
 	}
 	return self;
@@ -52,7 +36,7 @@
 	iGroupRowCell = [[NSTextFieldCell alloc] init];
 	[iGroupRowCell setEditable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];
-	[self groupTasksToGTD];	
+	//[self groupTasksToGTD];	
 }
 
 - (void)dealloc {

@@ -229,22 +229,108 @@
 	NSURL *url = [NSURL URLWithString:@"memory://store"];
 	id memoryStore = [[self persistentStoreCoordinator] persistentStoreForURL:url];
 	
-	gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-	[gtdListController.section setValue:@"My section" forKey:@"title"];
-	[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
+	// INIT GTDVIEW
+	// --------- Get the actual Date and format the time component
+	NSDate *temp = [NSDate date];	
+	NSCalendar* theCalendar = [NSCalendar currentCalendar];
+	unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+	NSDayCalendarUnit;
+	NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+	[theComps setHour:0];
+	[theComps setMinute:0];
+	[theComps setSecond:0];
+	NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
 	
-	/*NSArray *items = [self fetchAllWithEntity:@"Task" error:&error];
-	for (id item in items) {
-		[item setValue:gtdListController.section forKey:@"section"];
-	}*/
+	// --------- Computing GTD
+	NSTimeInterval secondsPerDay = 24 * 60 * 60;
+	NSDate *inThreeDays, *inSevenDays;
+	
+	inThreeDays = [todaysDate addTimeInterval:secondsPerDay*3];
+	inSevenDays = [todaysDate addTimeInterval:secondsPerDay*7];
+	// TODAY--------------------------------------------------------	
+	gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+	[gtdListController.section setValue:@"Today" forKey:@"title"];
+	[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
+
+	//----------------------------------------------------------------------
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate = %@", todaysDate];	
 	[request setEntity:entityDescription];
+	[request setPredicate:predicateToday];
 	
 	NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
 	for (id item in items) {
 		[item setValue:gtdListController.section forKey:@"section"];
 	}
+	
+	if (items == nil) {
+		NSLog(@"ERROR fetchRequest Tasks == nil!");
+	}
+	
+	// THE NEXT 3 DAYS--------------------------------------------------------
+
+	gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+	[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
+	[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
+	
+	NSEntityDescription *entityDescriptionNext3Days = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *requestNext3Days = [[NSFetchRequest alloc] init];
+	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", todaysDate, inThreeDays];
+	[requestNext3Days setEntity:entityDescriptionNext3Days];
+	[requestNext3Days setPredicate:predicateNext3Days];
+	
+	NSArray *itemsNext3Days = [managedObjectContext executeFetchRequest:requestNext3Days error:&error];
+	for (id item in itemsNext3Days) {
+		[item setValue:gtdListController.sectionNext3Days forKey:@"section"];
+	}
+	
+	if (itemsNext3Days == nil) {
+		NSLog(@"ERROR fetchRequest Tasks == nil!");
+	}
+
+	// THE NEXT 7 DAYS--------------------------------------------------------
+	
+	gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+	[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
+	[[self managedObjectContext] assignObject:gtdListController.sectionNext7Days toPersistentStore:memoryStore];
+	
+	NSEntityDescription *entityDescriptionNext7Day = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *requestNext7Days = [[NSFetchRequest alloc] init];
+	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", inThreeDays, inSevenDays];	
+	[requestNext7Days setEntity:entityDescriptionNext7Day];
+	[requestNext7Days setPredicate:predicateNext7Days];
+	
+	NSArray *itemsNext7Days = [managedObjectContext executeFetchRequest:requestNext7Days error:&error];
+	for (id item in itemsNext7Days) {
+		[item setValue:gtdListController.sectionNext7Days forKey:@"section"];
+	}
+	
+	if (itemsNext7Days == nil) {
+		NSLog(@"ERROR fetchRequest Tasks == nil!");
+	}
+	
+	// UPCOMING--------------------------------------------------------
+	gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+	[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
+	[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
+	
+	NSEntityDescription *entityDescriptionUpcoming = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *requestUpcoming = [[NSFetchRequest alloc] init];
+	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"dueDate > %@ or dueDate = null", inSevenDays];	
+	[requestUpcoming setEntity:entityDescriptionUpcoming];
+	[requestUpcoming setPredicate:predicateUpcoming];
+	
+	NSArray *itemsUpcoming = [managedObjectContext executeFetchRequest:requestUpcoming error:&error];
+	for (id item in itemsUpcoming) {
+		[item setValue:gtdListController.sectionUpcoming forKey:@"section"];
+	}
+	
+	if (itemsUpcoming == nil) {
+		NSLog(@"ERROR fetchRequest Tasks == nil!");
+	}
+	
+	// --------------------------------------------------------	
 	
 	[[hudTaskEditorController window] orderOut:nil];
 	
