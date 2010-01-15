@@ -365,12 +365,12 @@
 	
 	// will show inbox folder if the folder is not set:
 	if (folder == nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = nil AND parentTask == nil AND deleted == 0"];
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == nil AND parentTask == nil AND deleted == 0"];
 		generatedPredicateString = extension;
 	}
 	
 	if (folder != nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder = %@ AND parentTask == nil AND deleted == 0"];
+		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == %@ AND parentTask == nil AND deleted == 0"];
 		generatedPredicateString = extension;
 		[predicateArguments addObject:folder];
 	}
@@ -390,7 +390,7 @@
 	
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat: generatedPredicateString argumentArray:predicateArguments];
-	
+	DLog(@"Set predicate on Simplelist Outlineview: %@", generatedPredicateString);
 	
 	return predicate;
 }

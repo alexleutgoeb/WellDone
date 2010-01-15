@@ -215,6 +215,10 @@
 	contextViewController = [[ContextViewController alloc] init];
 	hudTaskEditorController = [[HUDTaskEditorController alloc] init];
 	
+	[simpleListController reloadTaskListWithFilters];
+	[[simpleListController treeController] fetch:nil];
+	
+	
 	// Wire up some controllers with the SimpleListController
 	contextViewController.simpController = simpleListController;
 	[sidebarFolderController setSimpController:simpleListController];
@@ -478,6 +482,11 @@
 		[task setValue:title forKey:@"title"]; 
 		[sender setStringValue:@""];
 	}
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+        NSLog(@"Error while saving new task:%@",error);
+    }
+	
 	[self showApp:self];
 	[window makeFirstResponder:currentListView];	
 }

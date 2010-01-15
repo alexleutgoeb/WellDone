@@ -226,6 +226,12 @@
 
 - (void) deleteFolderByContextMenu: (Folder *)folderToDelete {
 	folderToDelete.deleted = [NSNumber numberWithBool:YES];
+	id task;
+	for (task in [folderToDelete tasks]) {
+		if ([task deleted] != [NSNumber numberWithBool:YES])
+			[task setDeleted:[NSNumber numberWithBool:YES]];
+	}
+	
 	[self saveChangesToStore];
 }
 
