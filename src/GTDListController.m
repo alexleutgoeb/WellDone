@@ -238,7 +238,6 @@
 
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
     // The "nil" tableColumn is an indicator for the "full width" row
-	DLog(@"GTDListView: Represented object: %@", [item representedObject]);
     if (tableColumn == nil) {
 		if ([[item representedObject] isKindOfClass:[Section class]]) {
             //return iGroupRowCell;

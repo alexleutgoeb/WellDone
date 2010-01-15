@@ -87,27 +87,21 @@
 @property (nonatomic, retain, readonly) NSURL *backupDBLocationURL;
 @property (nonatomic, assign) BOOL isOnline;
 
-// Init methods
-- (void)initUserDefaults;
-- (void)initReachability;
-- (void)initPreferences;
-- (void)initSyncController;
-- (void)initTimers;
-
-// Actions received from views or controllers
-- (IBAction)startSync:(id)sender;
-- (IBAction) toggleInspector:(id) sender;
-- (IBAction)newTaskAction:(id)sender;
-- (IBAction)newFolderAction:(id)sender;
+// View manipulation
 - (IBAction)changeViewController:(id)sender;
-- (IBAction)showPreferencesWindow:(id)sender;
+- (IBAction)toggleInspector:(id) sender;
 - (void)showTestdatagenerator:(id)sender;
 - (void)showFolderManagement:(id)sender;
 - (void)showTagManagement:(id)sender;
 - (void)showContextManagement:(id)sender;
-- (void)addNewTask:(id)sender;
+- (IBAction)showPreferencesWindow:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
-- (void) registerValueTransformers;
+
+// Data manipulation
+- (IBAction)startSync:(id)sender;
+- (IBAction)newTaskAction:(id)sender;
+- (IBAction)newFolderAction:(id)sender;
+- (void)addNewTask:(id)sender;
 
 // Helper methods for other views
 - (SyncController *)sharedSyncController;

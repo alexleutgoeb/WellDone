@@ -45,6 +45,19 @@
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (nonatomic, retain) NSDate *today;
 
+// Init methods
+- (void)initUserDefaults;
+- (void)initReachability;
+- (void)initPreferences;
+- (void)initSyncController;
+- (void)initTimers;
+- (void)registerValueTransformers;
+- (void)initGTDView;
+- (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore;
+- (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore;
+- (void) initGTDitemSevenDays:(NSDate *)inThreeDays inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
+- (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore;
+
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
 /**
@@ -97,7 +110,9 @@
 @synthesize secondsTimer, dateFormatter, today;
 
 #pragma mark -
-#pragma mark Initialization & disposal
+#pragma mark Initialization
+
+
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
@@ -165,28 +180,16 @@
 	secondsTimer = [NSTimer scheduledTimerWithTimeInterval:2 target: self selector:@selector(checkSecondActions) userInfo:nil repeats:YES];	
 }
 
-- (void)setOnlineState:(NSNotification *)notification {
-	self.isOnline = [[notification object] boolValue];
-	DLog(@"Set isOnline property in delegate to: %@", (isOnline ? @"YES" : @"NO"));
+- (void)registerValueTransformers {
+	/* Init the custum transformer (for token-tags) */
+	TaskValueTransformer *taskValueTransformer;
+	taskValueTransformer = [[[TaskValueTransformer alloc] init]  autorelease];
+	[NSValueTransformer setValueTransformer:taskValueTransformer forName:@"TaskValueTransformer"];
+	
+	CLStringNumberValueTransformer *numberValueTransformer;
+	numberValueTransformer = [[[CLStringNumberValueTransformer alloc] init]  autorelease];
+	[NSValueTransformer setValueTransformer:numberValueTransformer forName:@"StringNumberValueTransformer"];
 }
-
-/*
- * Checks in a certain interval (defined in initTimers) for the time and executes certain actions
- * when certain time-events (e.g. new day starts) occur.
- */
-- (void)checkSecondActions {
-	// Check for tomorrow
-	NSDate *now = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
-	if (![today isEqualToDate:now]) {
-		DLog(@"New day!");
-		today = now;
-		// Send notification
-		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
-		[dnc postNotificationName:kNewDayNotification object:nil];
-	}
-}
-
-
 
 - (void) awakeFromNib {
 	[self registerValueTransformers];
@@ -211,7 +214,7 @@
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	contextViewController = [[ContextViewController alloc] init];
 	hudTaskEditorController = [[HUDTaskEditorController alloc] init];
-
+	
 	// Wire up some controllers with the SimpleListController
 	contextViewController.simpController = simpleListController;
 	[sidebarFolderController setSimpController:simpleListController];
@@ -221,15 +224,31 @@
  	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];	
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
+
+	[self initGTDView];
 	
+	// Fix the ordering for the HUD-Window, so that it will really be shown on the first button-click:
+	[[hudTaskEditorController window] orderOut:nil];
 	
+	[window makeFirstResponder:quickAddTask];
 	
+	// Add observer for listening to managedobject changes
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(updateManagedObjectModificationDates:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+}
+
+
+/*
+ * Initializes the Getting-Things-Done view, generating grouping items for "Today", "Next 3 Days",...
+ * These grouping items are transient entities, meaning they are only stored inmemory in Core Data.
+ */
+- (void)initGTDView {
+	showGTDView = NO;
 	
-	NSError *error;
 	NSURL *url = [NSURL URLWithString:@"memory://store"];
 	id memoryStore = [[self persistentStoreCoordinator] persistentStoreForURL:url];
-	
-	// INIT GTDVIEW
+
 	// --------- Get the actual Date and format the time component
 	NSDate *temp = [NSDate date];	
 	NSCalendar* theCalendar = [NSCalendar currentCalendar];
@@ -247,12 +266,21 @@
 	
 	inThreeDays = [todaysDate addTimeInterval:secondsPerDay*3];
 	inSevenDays = [todaysDate addTimeInterval:secondsPerDay*7];
-	// TODAY--------------------------------------------------------	
+	
+	[self initGTDitemToday:todaysDate inStore:memoryStore];
+	[self initGTDitemThreeDays:todaysDate inThreeDaysDate:inThreeDays inStore:memoryStore];
+	[self initGTDitemSevenDays:inThreeDays inSevenDaysDate:inSevenDays inStore:memoryStore];
+	[self initGTDitemUpcoming:inSevenDays inStore:memoryStore];
+	
+}
+
+- (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore {
+	NSError *error;
+
 	gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 	[gtdListController.section setValue:@"Today" forKey:@"title"];
 	[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
-
-	//----------------------------------------------------------------------
+	
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate = %@", todaysDate];	
@@ -267,9 +295,11 @@
 	if (items == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
-	
-	// THE NEXT 3 DAYS--------------------------------------------------------
+}
 
+- (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore { 
+	NSError *error;
+	
 	gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 	[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
 	[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
@@ -288,8 +318,10 @@
 	if (itemsNext3Days == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
+}
 
-	// THE NEXT 7 DAYS--------------------------------------------------------
+- (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inSevenDays inStore:(id)memoryStore { 
+	NSError *error;
 	
 	gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 	[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
@@ -309,8 +341,11 @@
 	if (itemsNext7Days == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
+}
+
+- (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore {
+	NSError *error;
 	
-	// UPCOMING--------------------------------------------------------
 	gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 	[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
 	[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
@@ -329,38 +364,165 @@
 	if (itemsUpcoming == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
-	
-	// --------------------------------------------------------	
-	
-	[[hudTaskEditorController window] orderOut:nil];
-	
-	showGTDView = NO;
-	
-	[window makeFirstResponder:quickAddTask];
-	
-	// Add observer for listening to managedobject changes
-	NSNotificationCenter *nc;
-	nc = [NSNotificationCenter defaultCenter];
-	
-	[nc addObserver:self selector:@selector(updateManagedObjectModificationDates:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
 }
 
-- (void) registerValueTransformers {
-	/* Init the custum transformer (for token-tags) */
-	TaskValueTransformer *taskValueTransformer;
-	taskValueTransformer = [[[TaskValueTransformer alloc] init]  autorelease];
-	[NSValueTransformer setValueTransformer:taskValueTransformer forName:@"TaskValueTransformer"];
-	
-	CLStringNumberValueTransformer *numberValueTransformer;
-	numberValueTransformer = [[[CLStringNumberValueTransformer alloc] init]  autorelease];
-	[NSValueTransformer setValueTransformer:numberValueTransformer forName:@"StringNumberValueTransformer"];
-	
-	
+#pragma mark -
+#pragma mark View manipulation
+
+- (IBAction) changeViewController:(id) sender {
+	if (showGTDView) {
+		NSLog(@"Debug: replace gtdlistview with simplelistview");
+		[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
+		showGTDView = NO;
+		[sender setFont:[NSFont systemFontOfSize:13]];
+	}
+	else {
+		NSLog(@"Debug: replace simplelistview with gtdlistview");
+		[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:gtdListController];
+		showGTDView = YES;
+		[sender highlight:YES];
+		[sender setFont:[NSFont boldSystemFontOfSize:13]];
+	}
 }
+
+- (IBAction) toggleInspector:(id) sender {
+	if ([[hudTaskEditorController window] isVisible]) {
+		[window removeChildWindow:[hudTaskEditorController window]];
+		[[hudTaskEditorController window] orderOut:nil];
+		
+	}
+	else {
+		NSRect rect = [window frame];
+		NSPoint mainWindowTopRight = NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+		[[hudTaskEditorController window] cascadeTopLeftFromPoint:mainWindowTopRight];
+		[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
+	}
+}
+
+/**
+ Shows the Folder Management Window after the Context Menu is clicked.
+ */
+- (void)showFolderManagement:(id)sender {
+	foldermanagementController = [[FolderManagementController alloc] init];
+	[[foldermanagementController window] orderFront:self];
+}
+
+/**
+ Implements the First responder chain call for "showTestdatagenerator". The corresponding controller is initialized
+ and the window is shown.
+ */
+- (void)showTestdatagenerator:(id)sender {
+	TestDataGeneratorController *testDataGeneratorController = [[TestDataGeneratorController alloc] init];
+	[[testDataGeneratorController window] orderFront:self];
+}
+
+/**
+ Shows the Tag Management Window after the Context Menu is clicked.
+ */
+- (void)showTagManagement:(id)sender {
+	tagmanagementController = [[TagManagementController alloc] init];
+	[[tagmanagementController window] orderFront:self];
+}
+
+/**
+ Shows the Context Management Window after the Context Menu is clicked.
+ */
+- (void)showContextManagement:(id)sender {
+	contextmanagementController = [[ContextManagementController alloc] init];
+	[[contextmanagementController window] orderFront:self];
+}
+
+- (IBAction)showPreferencesWindow:(id)sender {
+	[preferencesController showPreferencesWindow];
+}
+
+- (IBAction)filterTaskListByTitle:(id)sender {
+	NSSearchField *field = sender;
+	[simpleListController setTaskListSearchFilter:[field stringValue]];
+}
+
+
+#pragma mark -
+#pragma mark Data manipulation
+
+- (void)startSync:(id)sender {
+	DLog(@"Start sync in UI.");
+	[syncController sync];
+}
+
+- (IBAction)newTaskAction:(id)sender {
+	[self addNewTask:sender];
+}
+
+- (IBAction)newFolderAction:(id)sender {
+	NSManagedObject *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:managedObjectContext]; 
+	[folder setValue:@"New Folder" forKey:@"name"];
+	
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+        NSLog(@"Error while generating folders:%@",error);
+    }
+	// TODO: set cursor in folder
+}
+
+- (void)addNewTask:(id)sender {
+	Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext]; 
+	
+	Folder *selectedFolder = [sidebarFolderController selectedFolder];
+	if (selectedFolder != nil) {
+		[task setFolder:selectedFolder];
+	}
+	
+	if ([sender isKindOfClass:[NSTextField class]]) {
+		NSString *title = [sender stringValue];
+		[task setValue:title forKey:@"title"]; 
+		[sender setStringValue:@""];
+	}
+	[self showApp:self];
+	[window makeFirstResponder:currentListView];	
+}
+
+#pragma mark -
+#pragma mark Helper methods for other views
 
 - (SyncController *)sharedSyncController {
 	return syncController;
 }
+
+/**
+ Returns the support directory for the application, used to store the Core Data
+ store file.  This code uses a directory named "WellDone" for
+ the content, either in the NSApplicationSupportDirectory location or (if the
+ former cannot be found), the system's temporary directory.
+ */
+- (NSString *)applicationSupportDirectory {
+	
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+    return [basePath stringByAppendingPathComponent:@"WellDone"];
+}
+
+- (void)setOnlineState:(NSNotification *)notification {
+	self.isOnline = [[notification object] boolValue];
+	DLog(@"Set isOnline property in delegate to: %@", (isOnline ? @"YES" : @"NO"));
+}
+
+/*
+ * Checks in a certain interval (defined in initTimers) for the time and executes certain actions
+ * when certain time-events (e.g. new day starts) occur.
+ */
+- (void)checkSecondActions {
+	// Check for tomorrow
+	NSDate *now = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+	if (![today isEqualToDate:now]) {
+		DLog(@"New day!");
+		today = now;
+		// Send notification
+		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
+		[dnc postNotificationName:kNewDayNotification object:nil];
+	}
+}
+
 
 /*
  
@@ -376,27 +538,7 @@
 }
 */
 
-#pragma mark -
-#pragma mark MainWindow UI Actions
 
-- (IBAction) toggleInspector:(id) sender {
-	if ([[hudTaskEditorController window] isVisible]) {
-		[window removeChildWindow:[hudTaskEditorController window]];
-		[[hudTaskEditorController window] orderOut:nil];
-
-	}
-	else {
-		NSRect rect = [window frame];
-		NSPoint mainWindowTopRight = NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
-		
-		
-		//NSPoint rightTopOfMain = [window cascadeTopLeftFromPoint: NSZeroPoint];
-		[[hudTaskEditorController window] cascadeTopLeftFromPoint:mainWindowTopRight];
-		//[[hudTaskEditorController window] orderFront:nil];
-		[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
-	}
-		
-}
 
 
 #pragma mark -
@@ -427,18 +569,7 @@
 
 #pragma mark CoreData handling
 
-/**
-    Returns the support directory for the application, used to store the Core Data
-    store file.  This code uses a directory named "WellDone" for
-    the content, either in the NSApplicationSupportDirectory location or (if the
-    former cannot be found), the system's temporary directory.
- */
-- (NSString *)applicationSupportDirectory {
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-    return [basePath stringByAppendingPathComponent:@"WellDone"];
-}
 
 
 /**
@@ -603,99 +734,6 @@
     return NSTerminateNow;
 }
 
-
-/**
-  Implements the First responder chain call for "showTestdatagenerator". The corresponding controller is initialized
-  and the window is shown.
- */
-- (void)showTestdatagenerator:(id)sender {
-	TestDataGeneratorController *testDataGeneratorController = [[TestDataGeneratorController alloc] init];
-	[[testDataGeneratorController window] orderFront:self];
-}
-
-/**
-  Shows the Folder Management Window after the Context Menu is clicked.
- */
-- (void)showFolderManagement:(id)sender {
-	foldermanagementController = [[FolderManagementController alloc] init];
-	[[foldermanagementController window] orderFront:self];
-}
-
-/**
- Shows the Tag Management Window after the Context Menu is clicked.
- */
-- (void)showTagManagement:(id)sender {
-	tagmanagementController = [[TagManagementController alloc] init];
-	[[tagmanagementController window] orderFront:self];
-}
-
-/**
- Shows the Context Management Window after the Context Menu is clicked.
- */
-- (void)showContextManagement:(id)sender {
-	contextmanagementController = [[ContextManagementController alloc] init];
-	[[contextmanagementController window] orderFront:self];
-}
-
-- (IBAction) changeViewController:(id) sender {
-	if (showGTDView) {
-		NSLog(@"Debug: replace gtdlistview with simplelistview");
-		[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
-		showGTDView = NO;
-		[sender setFont:[NSFont systemFontOfSize:13]];
-	}
-	else {
-		NSLog(@"Debug: replace simplelistview with gtdlistview");
-		[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:gtdListController];
-		showGTDView = YES;
-		[sender highlight:YES];
-		[sender setFont:[NSFont boldSystemFontOfSize:13]];
-
-		 
-	}
-}
-
-- (IBAction)newTaskAction:(id)sender {
-	[self addNewTask:sender];
-}
-
-- (IBAction)newFolderAction:(id)sender {
-	NSManagedObject *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:managedObjectContext]; 
-	[folder setValue:@"New Folder" forKey:@"name"];
-	
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-        NSLog(@"Error while generating folders:%@",error);
-    }
-	// TODO: set cursor in folder
-}
-
-- (void)addNewTask:(id)sender {
-	Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext]; 
-	
-	Folder *selectedFolder = [sidebarFolderController selectedFolder];
-	if (selectedFolder != nil) {
-		[task setFolder:selectedFolder];
-	}
-	
-	if ([sender isKindOfClass:[NSTextField class]]) {
-		NSString *title = [sender stringValue];
-		[task setValue:title forKey:@"title"]; 
-		[sender setStringValue:@""];
-	}
-	[self showApp:self];
-	[window makeFirstResponder:currentListView];	
-}
-
-- (IBAction)filterTaskListByTitle:(id)sender {
-	NSSearchField *field = sender;
-	[simpleListController setTaskListSearchFilter:[field stringValue]];
-}
-
-- (IBAction)showPreferencesWindow:(id)sender {
-	[preferencesController showPreferencesWindow];
-}
-
 - (void)prefsWindowWillClose:(SS_PrefsController *)sender {
 	DLog(@"Closing preferences window...");
 	[sender destroyPreferencesWindow];
@@ -773,10 +811,6 @@
 	}
 }
 
-- (void)startSync:(id)sender {
-	DLog(@"Start sync in UI.");
-	[syncController sync];
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqual:@"menubarIcon"]) {

@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
@@ -15,7 +15,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>732</string>
+				<string>740</string>
 				<string>1.2.2</string>
 			</object>
 		</object>
@@ -49,7 +49,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="691030759">
-				<int key="NSWindowStyleMask">12439</int>
+				<int key="NSWindowStyleMask">8343</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{157, 179}, {277, 282}}</string>
 				<int key="NSWTFlags">-1535639552</int>
@@ -624,29 +624,6 @@
 										<object class="NSTextView" id="912892876">
 											<reference key="NSNextResponder" ref="392144811"/>
 											<int key="NSvFlags">2322</int>
-											<object class="NSMutableSet" key="NSDragTypes">
-												<bool key="EncodedWithXMLCoder">YES</bool>
-												<object class="NSArray" key="set.sortedObjects">
-													<bool key="EncodedWithXMLCoder">YES</bool>
-													<string>Apple HTML pasteboard type</string>
-													<string>Apple PDF pasteboard type</string>
-													<string>Apple PICT pasteboard type</string>
-													<string>Apple PNG pasteboard type</string>
-													<string>Apple URL pasteboard type</string>
-													<string>CorePasteboardFlavorType 0x6D6F6F76</string>
-													<string>NSColor pasteboard type</string>
-													<string>NSFilenamesPboardType</string>
-													<string>NSStringPboardType</string>
-													<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
-													<string>NeXT RTFD pasteboard type</string>
-													<string>NeXT Rich Text Format v1.0 pasteboard type</string>
-													<string>NeXT TIFF v4.0 pasteboard type</string>
-													<string>NeXT font pasteboard type</string>
-													<string>NeXT ruler pasteboard type</string>
-													<string>WebURLsWithTitlesPboardType</string>
-													<string>public.url</string>
-												</object>
-											</object>
 											<string key="NSFrameSize">{129, 348}</string>
 											<reference key="NSSuperview" ref="392144811"/>
 											<object class="NSTextContainer" key="NSTextContainer" id="785694649">
@@ -1159,7 +1136,7 @@
 						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">dd/MM/yy HH:mm</string>
+				<string key="NS.format">dd.MM.yy HH:mm</string>
 				<bool key="NS.natural">NO</bool>
 			</object>
 			<object class="NSArrayController" id="510490822">
