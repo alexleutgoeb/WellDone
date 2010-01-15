@@ -28,7 +28,7 @@ typedef enum _repeatValue
 - (IBAction)setRepeat:(id)sender;
 
 @property (nonatomic, retain) NSTextField* datedue;
-@property SimpleListController *simpController;
+@property (nonatomic, retain) SimpleListController *simpController;
 
 
 @end
