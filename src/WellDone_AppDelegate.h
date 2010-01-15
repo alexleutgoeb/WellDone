@@ -97,6 +97,7 @@
 - (void)showContextManagement:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
+- (void)initGTDView;
 
 // Data manipulation
 - (IBAction)startSync:(id)sender;

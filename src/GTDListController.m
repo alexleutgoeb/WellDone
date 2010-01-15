@@ -9,6 +9,7 @@
 #import "GTDListController.h"
 #import "SimpleListController.h"
 #import	"SearchQuery.h"
+#import "WellDone_AppDelegate.h"
 
 
 @implementation GTDListController
@@ -64,6 +65,22 @@
 		} else {
 			[self setTaskUndone:acell];
 		}
+		
+		// --------- Get the actual Date and format the time component
+		NSDate *temp = [NSDate date];	
+		NSCalendar* theCalendar = [NSCalendar currentCalendar];
+		unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+		NSDayCalendarUnit;
+		NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+		[theComps setHour:0];
+		[theComps setMinute:0];
+		[theComps setSecond:0];
+		NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
+		
+		if (task.dueDate != nil && task.dueDate > todaysDate) {
+			[self setTaskOverdue:acell];
+		}
+
 	}
 }
 
@@ -73,6 +90,10 @@
 
 - (void)setTaskUndone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor blackColor]];
+}
+
+- (void)setTaskOverdue:(NSTextFieldCell*)cell {
+	[cell setTextColor:[NSColor	redColor]];
 }
 
 /*
@@ -96,34 +117,35 @@
 	NSLog(@"reactToMOCSave");
 	id object; 
 	NSDictionary *userInfo = [notification userInfo];
+
 	
-	/*NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
+	NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
 	while (object = [updatedObjects nextObject]) {
 		if ([object isKindOfClass: [Task class]]) {
-			[self handleUpdatedFolder: object];
-			[sidebar reloadData];
+			NSLog(@"Will update Task with name: %@", [object title]);
+			[[[NSApplication sharedApplication] delegate] initGTDView];
+			[gtdOutlineView reloadData];
 		}
-	}*/
+	}
 	
 	NSEnumerator *insertedObjects = [[userInfo objectForKey:NSInsertedObjectsKey] objectEnumerator];
 	while (object = [insertedObjects nextObject]) {
 		if ([object isKindOfClass: [Task class]]) {
-			NSLog(@"Will insert Task with name: %@", [object name]);
-			//[self addFolder:object toSection:rootNodeTaskFolders];
-			//[sidebar reloadData];	
-			//[self saveFolderOrderingToStore];
+			NSLog(@"Will insert Task with name: %@", [object title]);
+			[[[NSApplication sharedApplication] delegate] initGTDView];
+			[gtdOutlineView reloadData];
 		}
 	}
-	/*
+	
 	NSEnumerator *deletedObjects = [[userInfo objectForKey:NSDeletedObjectsKey] objectEnumerator];
 	while (object = [deletedObjects nextObject]) {
 		if ([object isKindOfClass: [Task class]]) {
-			NSLog(@"Will delete Folder with name: %@", [object name]);
-			[self removeFolder: object];
-			[sidebar reloadData];	
+			NSLog(@"Will delete Task with name: %@", [object title]);
+			[[[NSApplication sharedApplication] delegate] initGTDView];
+			[gtdOutlineView reloadData];
 		}
 	}
-	*/
+	
 }
 
 #pragma mark -
