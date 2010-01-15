@@ -91,4 +91,32 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 }
 
 
+- (IBAction)restoreBackupAction:(id)sender {
+	int buttonPressed = NSRunCriticalAlertPanel(
+									@"Restore latest backup?",
+									@"Your changes since the last backup will be lost.",
+									@"Cancel",
+									@"Restore",
+									nil);
+	
+	NSLog(@"Button pressed: %d",buttonPressed);
+	
+	if (buttonPressed == 0) {
+		// restore button pressed
+		
+		NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+		[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
+		
+		
+		NSRunCriticalAlertPanel(
+								@"Backup will be restored after restart.",
+								@"WellDone will reset to the latest backup next time you start the program.",
+								@"OK",
+								nil,
+								nil);
+		
+		// TODO: restart app
+	}
+}
+
 @end

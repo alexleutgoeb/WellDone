@@ -112,10 +112,23 @@
 #pragma mark -
 #pragma mark Initialization
 
-
-
-
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
+	
+	// restore backup
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
+	NSString *restore = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
+	
+	NSLog(@"Restore: %@",restore);
+	
+	if ([restore isEqualToString:@"yes"]) {
+		//TODO: restore backup file
+		
+		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
+		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
+	}
+	
+	
 	[window makeMainWindow];
 	[self initUserDefaults];
 	[self initPreferences];
