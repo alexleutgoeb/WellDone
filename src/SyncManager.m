@@ -461,11 +461,14 @@
 			NSMutableSet *mutableRemoteTasks = [localTask mutableSetValueForKey:@"remoteTasks"];
 			[mutableRemoteTasks addObject:remoteTask];
 			DLog(@"syncTask addTask.");
+			
 			GtdTask *newGtdTask = [[GtdTask alloc] init];
 			newGtdTask.title = localTask.title;
+			newGtdTask.uid = 0;
 			//newGtdTask.archived = localTask.archived;
 			//newGtdTask.order = [localTask.order integerValue];
-			remoteTask.remoteUid = [NSNumber numberWithLong:[syncService addTask:newGtdTask error:&error]];
+			
+			remoteTask.remoteUid = [NSNumber numberWithInteger:[syncService addTask:newGtdTask error:&error]];
 			DLog(@"new remoteUid: %@", remoteTask.remoteUid);
 			remoteTask.lastsyncDate = [NSDate date];
 			newGtdTask.uid = [remoteTask.remoteUid integerValue];
