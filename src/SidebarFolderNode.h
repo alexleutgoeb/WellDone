@@ -53,7 +53,7 @@
 - (void)removeChild:(SidebarFolderNode *)node;
 - (NSInteger)indexOfChild:(SidebarFolderNode *)node;
 
-- (SidebarFolderNode *)childAtIndex:(int)index;
+- (SidebarFolderNode *)childItemAtIndex:(int)index;
 
 - (NSUInteger)numberOfChildren;
 

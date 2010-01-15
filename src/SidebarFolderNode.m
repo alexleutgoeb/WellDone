@@ -76,7 +76,7 @@
 	return [children indexOfObject:node];
 }
 
-- (SidebarFolderNode *)childAtIndex:(int)index {
+- (SidebarFolderNode *)childItemAtIndex:(int)index {
 	return([children objectAtIndex:index]);
 }
 

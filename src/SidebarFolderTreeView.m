@@ -421,7 +421,7 @@
 {
 	if (item == nil)
 		return [_roots objectAtIndex:index];
-	return [item childAtIndex:index];
+	return [item childItemAtIndex:index];
 }
 
 /*
@@ -819,7 +819,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	NSLog(@"Represented object: %@", representedObject);
 	if ([representedObject isKindOfClass:[SidebarFolderNode class]]) {
 		//NSLog(@"Represented object data: %@", [representedObject data]);
-		[myController deleteFolderByContextMenu:(SidebarFolderNode *)[representedObject data]];
+		[myController deleteFolderByContextMenu:((Folder *)[representedObject data])];
 	}
 	
 }
