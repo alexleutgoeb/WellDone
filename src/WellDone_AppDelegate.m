@@ -55,7 +55,7 @@
 - (void)initGTDView;
 - (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore;
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore;
-- (void) initGTDitemSevenDays:(NSDate *)inThreeDays inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
+- (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
 - (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
