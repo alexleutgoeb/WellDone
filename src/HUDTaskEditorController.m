@@ -40,12 +40,6 @@
 
 }
 
-
-typedef enum _repeatValue
-{
-	never = 0, daily, weekly, monthly
-} repeatValue;
-
 - (void) setRepeat:(id)sender {
 	NSLog(@"Tag: %d",[[sender selectedItem] tag]);
 	NSArray *selectedTasks = [[[[NSApp delegate] simpleListController] treeController] selectedObjects];
