@@ -8,6 +8,7 @@
 
 #import "HUDTaskEditorController.h"
 #import "SimpleListController.h"
+#import "WellDone_AppDelegate.h"
 
 
 @implementation HUDTaskEditorController
