@@ -11,10 +11,12 @@
 
 @implementation TaskContainer
 
+@synthesize remoteTask, gtdTask;
 
 - (void)dealloc {
 	[remoteTask release];
 	[gtdTask release];
+	[super dealloc];
 }
 
 @end
