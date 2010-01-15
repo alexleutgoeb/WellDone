@@ -18,6 +18,14 @@
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
 
+
+@interface SimpleListController ()
+
+- (BOOL)category:(NSManagedObject *)cat isSubCategoryOf:(NSManagedObject *)possibleSub;
+
+@end
+
+
 @implementation SimpleListController
 
 @synthesize treeController;
@@ -194,7 +202,7 @@
 		if (![currentTagNames containsObject:currentTagName]){
 			
 			//add tag to core data
-			NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+			Tag *tag = (Tag *)[NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
 			[tag setValue:currentTagName forKey:@"text"]; 		
 			
 			//add tag to currentTags and currentTagNames
@@ -274,7 +282,7 @@
 	NSManagedObject* dragged = [ draggedNode observedObject ];	 	 
 	NSManagedObject* newP = [ newParent observedObject ];
 	
-	if ( [ self category:dragged isSubCategoryOf:newP ] ) {
+	if ([self category:dragged isSubCategoryOf:newP ] ) {
 		return NO;
 	}		
 	
