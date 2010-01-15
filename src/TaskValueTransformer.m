@@ -30,9 +30,10 @@
 	
 	// check if value has the right class type
 	if ([[value className] compare: @"_NSFaultingMutableSet"]) {
-		[NSException raise: NSInternalInconsistencyException
-					format: @"Value (%@) has wrong type.",
-					[value className]];
+		//[NSException raise: NSInternalInconsistencyException
+		//			format: @"Value (%@) has wrong type.",
+		//			[value className]];
+		return nil;
 	}
 	
 	NSMutableArray *returnArray = [[NSMutableArray alloc] init];
