@@ -75,7 +75,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	
 	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
 
-	if ([fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&*error]){
+	if ([fm copyItemAtPath:[currentDBFile absoluteString] toPath:[backupFileURL absoluteString] error:&*error]){
 		return [backupFileURL absoluteString];
 	}else {
 		return nil;
