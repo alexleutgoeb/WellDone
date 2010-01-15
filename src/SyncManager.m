@@ -13,6 +13,7 @@
 #import "RemoteTask.h"
 #import "Note.h"
 #import "Task.h"
+#import "Tag.h"
 #import "Context.h"
 #import "TaskContainer.h"
 
@@ -396,10 +397,30 @@
 - (NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService andConflicts:(NSArray **)conflicts {
 	
 	NSError *error = nil;
+	NSMutableDictionary *possibleTags = [NSMutableDictionary dictionary];
 	
-	//zuerst alle remoteTasks erstellen falls sie noch nicht existieren
+	// Load all possible tags in a dictionary
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deletedByApp == %@", [NSNumber numberWithInt:0]];
+	[fetchRequest setPredicate:predicate];
+	NSArray *allTags = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+	[fetchRequest release];
+	if (allTags != nil && error == nil) {
+		// Save in dictionary
+		for (Tag *t in allTags) {
+			[possibleTags setObject:t forKey:[t description]];
+		}
+	}
+	else {
+		DLog(@"Error while retrieving all tags, cancelling...");
+		return nil;
+	}
+	
+	//zuerst alle remoteTasks erstellen falls sie noch nicht existieren
+	fetchRequest = [[NSFetchRequest alloc] init];
+	entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
 	[fetchRequest setEntity:entity];
 	
 	NSArray *localTasks = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -563,8 +584,24 @@
 		lTask.modifiedDate = gtdTask.date_modified;
 		lTask.startDate = gtdTask.date_start;
 		lTask.dueDate = gtdTask.date_due;
-		// TODO: WRONG, convert string tags from gtdTask to Tag objects, use existing if possible
-		// lTask.tags = [NSSet setWithArray:gtdTask.tags];
+		NSMutableSet *tagSet = [NSMutableSet set];
+		for (NSString *tagString in gtdTask.tags) {
+			if ([tagString length] > 0) {
+				if ([possibleTags objectForKey:tagString] != nil) {
+					// tag in db
+					[tagSet addObject:[possibleTags objectForKey:tagString]];
+				}
+				else {
+					// Not in db, add it to db, possible list and task
+					Tag *newTag = (Tag *)[NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:aManagedObjectContext];
+					newTag.text = tagString;
+					[possibleTags setObject:newTag forKey:tagString];
+					[tagSet addObject:newTag];
+				}
+			}
+		}
+		lTask.tags = [NSSet setWithSet:tagSet];
+
 		//ULTRAZACH alle folders durchsuchen
 		
 		
