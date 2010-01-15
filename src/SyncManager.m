@@ -89,7 +89,6 @@
 		
 		// Take only the first sync service from the list
 		id<GtdApi> syncService = [syncServices objectForKey:[[syncServices allKeys] objectAtIndex:0]];
-		NSError *error = nil;
 		
 		// last edited dates
 		//NSDictionary *lastDates = [syncService getLastModificationsDates:&error];
