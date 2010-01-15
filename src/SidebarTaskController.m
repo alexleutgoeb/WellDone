@@ -8,7 +8,7 @@
 
 #import "SidebarTaskController.h"
 #import "Task.h"
-
+#import "WellDone_AppDelegate.h"
 
 
 @implementation SidebarTaskController
