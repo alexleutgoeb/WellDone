@@ -10,6 +10,7 @@
 #import "Task.h"
 #import "Folder.h"
 #import "SidebarFolderNode.h"
+#import "SidebarFolderController.h"
 
 
 #define kSidebarPBoardType		@"SidebarNodePBoardType"
