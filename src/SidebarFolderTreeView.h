@@ -7,11 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <SidebarBadgeCell.h>
-#import <SidebarFolderTreeView.h>
-#import <Task.h>
-#import <Folder.h>
-#import <SidebarFolderNode.h>
+#import "SidebarBadgeCell.h"
+#import "SidebarFolderTreeView.h"
+#import "Task.h"
+#import "Folder.h"
+#import "SidebarFolderNode.h"
+#import "SidebarFolderController.h"
+
 
 @interface SidebarFolderTreeView : NSOutlineView {
 @private
@@ -22,14 +24,14 @@
 	
 	NSMutableDictionary *_contents;
 	NSMutableArray *_roots;
-	NSViewController *myController;
+	SidebarFolderController *myController;
 	NSMutableArray *allowedDragDestinations;
 }
 
 - (Folder *)selectedFolder;
 
 - (SidebarFolderNode *) nodeForKey:(id)key;
-- (void)setViewController:(NSViewController *)myController;
+- (void)setViewController:(SidebarFolderController *)myController;
 
 // Set Default Item Clicked Handler
 - (void)setDefaultAction:(SEL)action target:(id)target;
