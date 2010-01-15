@@ -25,7 +25,8 @@
 	self = [super initWithNibName:@"GTDListView" bundle:nil];
 	if (self != nil)
 	{		
-		moc = [[NSApp delegate] managedObjectContext];
+		//moc = [[NSApp delegate] managedObjectContext];
+		moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 		
 	}
 	return self;
@@ -37,6 +38,13 @@
 	[iGroupRowCell setEditable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];	
 	[gtdOutlineView expandItem:iGroupRowCell];
+	
+	// Initialize listening to notifications by managedObjectContext
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	
+	[nc addObserver:self selector:@selector(reactToMOCSave:)
+			   name:NSManagedObjectContextDidSaveNotification object:nil];
 }
 
 - (void)dealloc {
@@ -79,6 +87,44 @@
  }    
  }
  */
+
+/*
+ * This method will be called when a save-operatoin is done to the main managedObjectContext (central application delegate's moc).
+ * It reacts to some of these changes with updates to the folder tree view.
+ */
+- (void) reactToMOCSave:(NSNotification *)notification {
+	NSLog(@"reactToMOCSave");
+	id object;
+	NSDictionary *userInfo = [notification userInfo];
+	
+	/*NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
+	while (object = [updatedObjects nextObject]) {
+		if ([object isKindOfClass: [Task class]]) {
+			[self handleUpdatedFolder: object];
+			[sidebar reloadData];
+		}
+	}*/
+	
+	NSEnumerator *insertedObjects = [[userInfo objectForKey:NSInsertedObjectsKey] objectEnumerator];
+	while (object = [insertedObjects nextObject]) {
+		if ([object isKindOfClass: [Task class]]) {
+			NSLog(@"Will insert Task with name: %@", [object name]);
+			//[self addFolder:object toSection:rootNodeTaskFolders];
+			//[sidebar reloadData];	
+			//[self saveFolderOrderingToStore];
+		}
+	}
+	/*
+	NSEnumerator *deletedObjects = [[userInfo objectForKey:NSDeletedObjectsKey] objectEnumerator];
+	while (object = [deletedObjects nextObject]) {
+		if ([object isKindOfClass: [Task class]]) {
+			NSLog(@"Will delete Folder with name: %@", [object name]);
+			[self removeFolder: object];
+			[sidebar reloadData];	
+		}
+	}
+	*/
+}
 
 #pragma mark -
 #pragma mark NSOutlineView datasource and delegate methods

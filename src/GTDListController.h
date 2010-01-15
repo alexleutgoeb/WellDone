@@ -29,4 +29,6 @@
 - (void)setTaskDone:(NSTextFieldCell*)cell;
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
 
+- (void) reactToMOCSave:(NSNotification *)notification;
+
 @end
