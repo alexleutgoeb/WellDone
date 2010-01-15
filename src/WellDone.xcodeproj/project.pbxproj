@@ -180,7 +180,6 @@
 		32CA4F630368D1EE00C91783 /* WellDone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellDone_Prefix.pch; sourceTree = "<group>"; };
 		420EA9CA10FDD7CB005D4E16 /* BackupPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupPreferencesController.h; sourceTree = "<group>"; };
 		420EA9CB10FDD7CB005D4E16 /* BackupPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupPreferencesController.m; sourceTree = "<group>"; };
-		42262EB5109C8049005E4997 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
 		42375F4810F5F9BC00A48318 /* CoreDataBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataBackup.h; sourceTree = "<group>"; };
@@ -416,7 +415,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */,
 			);
 			name = WellDone;
 			sourceTree = "<group>";
@@ -439,7 +437,7 @@
 				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
 				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
 				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
-				42262EB5109C8049005E4997 /* UnitTests-Info.plist */,
+				4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
 				6FB162D910AD8CF200961A94 /* SimpleListView.xib */,
