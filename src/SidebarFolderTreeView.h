@@ -12,7 +12,8 @@
 #import "Task.h"
 #import "Folder.h"
 #import "SidebarFolderNode.h"
-#import "SidebarFolderController.h"
+
+@class SidebarFolderController;
 
 
 @interface SidebarFolderTreeView : NSOutlineView {
