@@ -16,6 +16,8 @@
 #import "Tag.h"
 #import "Context.h"
 #import "TaskContainer.h"
+#import "WDNSSet+subset.h"
+
 
 @interface SyncManager()
 
@@ -399,7 +401,7 @@
 	NSError *error = nil;
 	NSMutableDictionary *possibleTags = [NSMutableDictionary dictionary];
 	
-	// Load all possible tags in a dictionary
+	// Load all possible tags in a dictionary named possibleTags
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
 	[fetchRequest setEntity:entity];

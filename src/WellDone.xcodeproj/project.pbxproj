@@ -85,6 +85,7 @@
 		FA43906910FCF90C0000224E /* WDNSDate+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */; };
 		FA43913810FD2A9B0000224E /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = FA43913710FD2A9B0000224E /* welcome.png */; };
 		FA4781A010FF669700893DBC /* TaskContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA47819F10FF669700893DBC /* TaskContainer.m */; };
+		FA4786FF1101037600893DBC /* WDNSSet+subset.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4786FE1101037600893DBC /* WDNSSet+subset.m */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
@@ -285,6 +286,8 @@
 		FA43913710FD2A9B0000224E /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
 		FA47819E10FF669700893DBC /* TaskContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContainer.h; sourceTree = "<group>"; };
 		FA47819F10FF669700893DBC /* TaskContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContainer.m; sourceTree = "<group>"; };
+		FA4786FD1101037600893DBC /* WDNSSet+subset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WDNSSet+subset.h"; sourceTree = "<group>"; };
+		FA4786FE1101037600893DBC /* WDNSSet+subset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WDNSSet+subset.m"; sourceTree = "<group>"; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
@@ -643,6 +646,8 @@
 				FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */,
 				FA43906710FCF90C0000224E /* WDNSDate+PrettyPrint.h */,
 				FA43906810FCF90C0000224E /* WDNSDate+PrettyPrint.m */,
+				FA4786FD1101037600893DBC /* WDNSSet+subset.h */,
+				FA4786FE1101037600893DBC /* WDNSSet+subset.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -935,6 +940,7 @@
 				6F0C0A0810FFC4C200AFD545 /* MAAttachedWindow.m in Sources */,
 				6F0C0A2110FFC88800AFD545 /* DateTimePopupController.m in Sources */,
 				D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */,
+				FA4786FF1101037600893DBC /* WDNSSet+subset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
