@@ -53,7 +53,7 @@
 
 }
 
-- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex
+- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
 {
     //[items replaceObjectAtIndex:rowIndex withObject:anObject];
 	[self contextsSelectionChanged];
