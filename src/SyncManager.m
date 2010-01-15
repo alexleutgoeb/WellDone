@@ -562,8 +562,9 @@
 		lTask.createDate = gtdTask.date_created;
 		lTask.modifiedDate = gtdTask.date_modified;
 		lTask.startDate = gtdTask.date_start;
-		lTask.dueDate = gtdTask.date_due;			
-		lTask.tags = [NSSet setWithArray:gtdTask.tags];
+		lTask.dueDate = gtdTask.date_due;
+		// TODO: WRONG, convert string tags from gtdTask to Tag objects, use existing if possible
+		// lTask.tags = [NSSet setWithArray:gtdTask.tags];
 		//ULTRAZACH alle folders durchsuchen
 		
 		
