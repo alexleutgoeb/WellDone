@@ -74,7 +74,6 @@
 
 - (void)contextsSelectionChanged {
 	if ([checkBoxFilter state]==NSOnState) {
-		NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 		NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Context" inManagedObjectContext:moc];
 		NSFetchRequest *request = [[NSFetchRequest alloc] init];
 		[request setEntity:entityDescription];
