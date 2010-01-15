@@ -102,25 +102,29 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 	[window makeMainWindow];
-	// user defaults
-	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-	// TODO: set default values for userdefaults
+	[self initUserDefaults];
+	[self initPreferences];
+	[self initReachability];
+	[self initSyncController];
+	[self initTimers];
 	
+	// Init statusbar item
+	[self setStatusBarMenuVisible:[[[NSUserDefaultsController sharedUserDefaultsController] defaults] boolForKey:@"menubarIcon"]];
+}
+
+- (void)initUserDefaults {
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	// set the default value for the backupPath to the application directory if user did not specify a specific path
 	if ([defaults objectForKey:@"backupPath"] == nil){
 		[defaults setObject:[self applicationSupportDirectory] forKey:@"backupPath"];
 	}
-	
-	
-	// Init preferences window
-	GeneralPreferences *generalP = [[[GeneralPreferences alloc] init] autorelease];
-	SyncPreferences *syncP = [[[SyncPreferences alloc] init] autorelease];
-	
-	preferencesController = [[SS_PrefsController preferencesWithPanes:
-							  [NSArray arrayWithObjects:generalP, syncP, nil] delegate:self] retain];
-	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"general", @"sync", nil]];
-	[preferencesController setAlwaysShowsToolbar:YES];
-	
+	// Add observer to user defaults
+	[defaults addObserver:self forKeyPath:@"menubarIcon" 
+				  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) 
+				  context:NULL];
+}
+
+- (void)initReachability {
 	// Init reachability
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOnlineState:) name: kReachabilityChangedNotification object:nil];
 	
@@ -130,30 +134,35 @@
 		SCNetworkReachabilityScheduleWithRunLoop(reachRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)) {
 		CFRunLoopRun();
 	}
-	
+}
+
+- (void)initPreferences {
+	// Init preferences window
+	GeneralPreferences *generalP = [[[GeneralPreferences alloc] init] autorelease];
+	SyncPreferences *syncP = [[[SyncPreferences alloc] init] autorelease];
+	preferencesController = [[SS_PrefsController preferencesWithPanes:
+							  [NSArray arrayWithObjects:generalP, syncP, nil] delegate:self] retain];
+	[preferencesController setPanesOrder:[NSArray arrayWithObjects: @"general", @"sync", nil]];
+	[preferencesController setAlwaysShowsToolbar:YES];
+}
+
+- (void)initSyncController {
 	// Init syncController
 	self.syncController = [[SyncController alloc] initWithDelegate:self];
 	[syncController addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-	
-	// Add observer to user defaults
-	[defaults addObserver:self forKeyPath:@"menubarIcon" 
-				  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) 
-				  context:NULL];
-	
-	// Init status bar menu
-	BOOL menuVisible = [defaults boolForKey:@"menubarIcon"];
-	[self setStatusBarMenuVisible:menuVisible];
+}
 
-	// start reminde me timer
+- (void)initTimers {
+	// Remindme timer
 	RemindMeTimer *reminderMeTimer = [[RemindMeTimer alloc] init];
 	[reminderMeTimer startTimer];
 	
-	// Init seconds timer
+	// Seconds timer
 	dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 	today = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
-	secondsTimer = [NSTimer scheduledTimerWithTimeInterval:2 target: self selector:@selector(checkSecondActions) userInfo:nil repeats:YES];
+	secondsTimer = [NSTimer scheduledTimerWithTimeInterval:2 target: self selector:@selector(checkSecondActions) userInfo:nil repeats:YES];	
 }
 
 - (void)setOnlineState:(NSNotification *)notification {
@@ -161,6 +170,10 @@
 	DLog(@"Set isOnline property in delegate to: %@", (isOnline ? @"YES" : @"NO"));
 }
 
+/*
+ * Checks in a certain interval (defined in initTimers) for the time and executes certain actions
+ * when certain time-events (e.g. new day starts) occur.
+ */
 - (void)checkSecondActions {
 	// Check for tomorrow
 	NSDate *now = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
@@ -173,28 +186,7 @@
 	}
 }
 
-- (BOOL)windowShouldClose:(id)window {
-	[[NSApplication sharedApplication] hide:self];
-	return NO;
-}
 
-/**
- Implementation of dealloc, to release the retained variables.
- */
-- (void)dealloc {
-	[syncController removeObserver:syncController forKeyPath:@"status"];
-	[syncController release];
-	[syncMenuItem release];
-	[syncButton release];
-    [window release];
-    [managedObjectContext release];
-    [persistentStoreCoordinator release];
-    [managedObjectModel release];
-	[secondsTimer release];
-	[dateFormatter release];
-	[today release];
-    [super dealloc];
-}
 
 - (void) awakeFromNib {
 	[self registerValueTransformers];
@@ -231,8 +223,7 @@
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 	
 	
-	//TODO remove this!
-	[DateTimePopupController showPopupAtLocation:NSZeroPoint forWindow:window callBack:nil to: nil];
+	
 	
 	NSError *error;
 	NSURL *url = [NSURL URLWithString:@"memory://store"];
@@ -259,30 +250,6 @@
 	
 	showGTDView = NO;
 	
-	splitViewDelegate =
-	[[PrioritySplitViewDelegate alloc] init];
-	
-	[splitViewDelegate
-	 setPriority:LEFT_VIEW_PRIORITY
-	 forViewAtIndex:LEFT_VIEW_INDEX];
-	[splitViewDelegate
-	 setMinimumLength:LEFT_VIEW_MINIMUM_WIDTH
-	 forViewAtIndex:LEFT_VIEW_INDEX];
-	[splitViewDelegate
-	 setPriority:MAIN_VIEW_PRIORITY
-	 forViewAtIndex:MAIN_VIEW_INDEX];
-	[splitViewDelegate
-	 setMinimumLength:MAIN_VIEW_MINIMUM_WIDTH
-	 forViewAtIndex:MAIN_VIEW_INDEX];
-	[splitViewDelegate
-	 setPriority:RIGHT_VIEW_PRIORITY
-	 forViewAtIndex:RIGHT_VIEW_INDEX];
-	[splitViewDelegate
-	 setMinimumLength:RIGHT_VIEW_MINIMUM_WIDTH
-	 forViewAtIndex:RIGHT_VIEW_INDEX];
-	
-	
-	[splitView setDelegate:splitViewDelegate];
 	[window makeFirstResponder:quickAddTask];
 	
 	// Add observer for listening to managedobject changes
@@ -776,6 +743,33 @@
 	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
 	NSAlert *alert = [NSAlert alertWithError:error];
 	[alert runModal];
+}
+
+
+/*
+ * This is called when the main window should close.
+ */
+- (BOOL)windowShouldClose:(id)window {
+	[[NSApplication sharedApplication] hide:self];
+	return NO;
+}
+
+/**
+ Implementation of dealloc, to release the retained variables.
+ */
+- (void)dealloc {
+	[syncController removeObserver:syncController forKeyPath:@"status"];
+	[syncController release];
+	[syncMenuItem release];
+	[syncButton release];
+    [window release];
+    [managedObjectContext release];
+    [persistentStoreCoordinator release];
+    [managedObjectModel release];
+	[secondsTimer release];
+	[dateFormatter release];
+	[today release];
+    [super dealloc];
 }
 
 @end

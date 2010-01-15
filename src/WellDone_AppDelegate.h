@@ -15,67 +15,67 @@
 #import "FolderManagementController.h"
 #import "TagManagementController.h"
 #import "ContextManagementController.h"
-#import "PrioritySplitViewDelegate.h"
 #import "ContextViewController.h"
 #import "SS_PrefsController.h"
 #import "HUDTaskEditorController.h"
 #import "SyncController.h"
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
+#import "DateTimePopupController.h"
 
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 #define kNewDayNotification @"kNewDayNotification"
 
 
 @interface WellDone_AppDelegate : NSObject<SyncControllerDelegate> {
-    IBOutlet NSWindow *window;
+    
+	// Main layout
+	IBOutlet NSWindow *window;
 	IBOutlet NSSplitView *splitView;
-	PrioritySplitViewDelegate *splitViewDelegate;
+	
+	// Placeholder views
  	IBOutlet NSView* sidebarTaskPlaceholderView;
 	IBOutlet NSView* simpleListPlaceholderView;
 	IBOutlet NSView* sidebarFolderPlaceholderView;
 	IBOutlet NSView* contextPlaceholderView;
 	
+	// Connections to required Views
+	NSView* currentListView;
+	IBOutlet NSPanel* foldermanagement;
+	
+	// View items
 	IBOutlet NSProgressIndicator *syncProgress;
 	IBOutlet NSButton *syncButton;
 	NSMenuItem *syncMenuItem;
 	NSMenuItem *syncTextMenuItem;
-	
 	IBOutlet NSTextField* quickAddTask;
+	NSStatusItem *menuBarItem;
 	
-	//is necessary for setting the first responder (focus) to the current view, e.g. after inserting new task:
-	NSView* currentListView;
+	// Controllers
+	SidebarTaskController *sidebarTaskController;
+	SimpleListController *simpleListController;
+	SidebarFolderController *sidebarFolderController;
+	GTDListController *gtdListController;
+	FolderManagementController *foldermanagementController;
+	TagManagementController *tagmanagementController;
+	ContextManagementController *contextmanagementController;
+	ContextViewController *contextViewController;
+	HUDTaskEditorController *hudTaskEditorController;
+	SyncController *syncController;
+	SS_PrefsController *preferencesController;
 	
-	IBOutlet NSPanel* foldermanagement;
-    
-	SidebarTaskController* sidebarTaskController;
-	SimpleListController* simpleListController;
-	SidebarFolderController* sidebarFolderController;
-	GTDListController* gtdListController;
-	FolderManagementController* foldermanagementController;
-	TagManagementController* tagmanagementController;
-	ContextManagementController* contextmanagementController;
-	ContextViewController* contextViewController;
-	HUDTaskEditorController* hudTaskEditorController;
-	
+	// Data model support
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
 	
+	// Application State
 	BOOL showGTDView; 
-	
-@private
-	SyncController *syncController;
-	SS_PrefsController *preferencesController;
-	
-	NSStatusItem *menuBarItem;
-	
-	BOOL isOnline;
-	SCNetworkReachabilityRef reachRef;
-	
 	NSDate *today;
 	NSTimer *secondsTimer;
 	NSDateFormatter *dateFormatter;
+	BOOL isOnline;
+	SCNetworkReachabilityRef reachRef;
 }
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -87,8 +87,16 @@
 @property (nonatomic, retain, readonly) NSURL *backupDBLocationURL;
 @property (nonatomic, assign) BOOL isOnline;
 
-- (SyncController *)sharedSyncController;
+// Init methods
+- (void)initUserDefaults;
+- (void)initReachability;
+- (void)initPreferences;
+- (void)initSyncController;
+- (void)initTimers;
 
+// Actions received from views or controllers
+- (IBAction)startSync:(id)sender;
+- (IBAction) toggleInspector:(id) sender;
 - (IBAction)newTaskAction:(id)sender;
 - (IBAction)newFolderAction:(id)sender;
 - (IBAction)changeViewController:(id)sender;
@@ -100,15 +108,10 @@
 - (void)addNewTask:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
 - (void) registerValueTransformers;
+
+// Helper methods for other views
+- (SyncController *)sharedSyncController;
 - (NSString *)applicationSupportDirectory;
-
-- (IBAction) toggleInspector:(id) sender;
-
-/**
- Starts the sync.
- */
-- (IBAction)startSync:(id)sender;
-
 
 @end
 

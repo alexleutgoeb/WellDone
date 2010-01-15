@@ -20,7 +20,7 @@
 
 /* NSPoint buttonPoint = NSMakePoint(NSMidX([toggleButton frame]),
  NSMidY([toggleButton frame]));*/
-+ (void)showPopupAtLocation:(NSPoint)location forWindow:(NSWindow *)window callBack:(SEL)callBack to:(id)callBackTarget
++ (DateTimePopupController *)showPopupAtLocation:(NSPoint)location forWindow:(NSWindow *)window callBack:(SEL)callBack to:(id)callBackTarget
 {
 	//TODO Remove this!!
 	location = NSMakePoint(NSMidX([window frame]),
@@ -45,6 +45,8 @@
 	[popupWindow setArrowHeight: 5.0]; //[arrowHeightSlider floatValue]];
     //[popupWindow orderFront:nil];
 	[window addChildWindow:popupWindow ordered:NSWindowAbove];
+	
+	return controller;
 }
 
 		 

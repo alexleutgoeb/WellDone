@@ -29,6 +29,6 @@
 	//IBOutlet NSView *view;
     //MAAttachedWindow *popupWindow;
 }
-+ (void)showPopupAtLocation:(NSPoint)location forWindow:(NSWindow *)window callBack:(SEL)callBack to:(id)callBackTarget;
++ (DateTimePopupController *)showPopupAtLocation:(NSPoint)location forWindow:(NSWindow *)window callBack:(SEL)callBack to:(id)callBackTarget;
 
 @end

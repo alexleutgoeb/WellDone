@@ -30,6 +30,13 @@
 	
 	[taskObjectController bind:@"content" toObject:taskTreeController withKeyPath:@"selection.self" options:[[NSDictionary alloc] init]];
 	[estimatedWorkingTime bind:@"value" toObject:taskObjectController withKeyPath:@"selection.length" options:[[NSDictionary alloc] init]];*/
+	//TODO remove this!
+	
+	
+	// Uncomment for DatePicker usage - currently not working!
+	/*NSWindow *window = [self window];
+	DateTimePopupController *dateTimePopupController = [DateTimePopupController showPopupAtLocation:NSZeroPoint forWindow:window callBack:nil to: nil];*/
+
 }
 
 
