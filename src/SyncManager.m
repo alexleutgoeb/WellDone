@@ -461,10 +461,12 @@
 			NSMutableSet *mutableRemoteTasks = [localTask mutableSetValueForKey:@"remoteTasks"];
 			[mutableRemoteTasks addObject:remoteTask];
 			DLog(@"syncTask addTask.");
-			
+
 			GtdTask *newGtdTask = [[GtdTask alloc] init];
 			newGtdTask.title = localTask.title;
 			newGtdTask.uid = 0;
+			if ([localTask.tags count] > 0)
+				newGtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
 			//newGtdTask.archived = localTask.archived;
 			//newGtdTask.order = [localTask.order integerValue];
 			
