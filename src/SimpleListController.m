@@ -259,7 +259,7 @@
 	return YES;	
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)index {
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index {
 	NSLog(@"Drag&Drop: acceptDrop called");
 	_NSArrayControllerTreeNode* parentNode = item;
 	NSManagedObject* draggedTreeNode = [ draggedNode observedObject ];	
@@ -267,7 +267,7 @@
 	return YES;		
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index {
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
 	NSLog(@"Drag&Drop: validateDrop called");
 	_NSArrayControllerTreeNode* newParent = item;
 	
@@ -327,7 +327,7 @@
  table column these methods are never called. The NSLog statements have been
  included to prove that these methods are not called.
  */
-- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
 	NSLog(@"Drag&Drop: numberOfChildrenOfItem called");
 	return 1;
 }
@@ -337,7 +337,7 @@
 	return NO;
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item {
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
 	NSLog(@"Drag&Drop: child called");	
 	return NULL;
 }
