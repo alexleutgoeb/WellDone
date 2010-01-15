@@ -323,7 +323,8 @@
 
 - (IBAction) handleFolderSelection:(id) sender {
 	NSLog(@"Selected Folder '%@'", [sender caption]);
-	[simpController setTaskListFolderFilter:[sender data]];
+	if ([[sender data] isKindOfClass:[Folder class]])
+		[simpController setTaskListFolderFilter:(Folder *)[sender data]];
 }
 
 - (IBAction) handleInboxSelection:(id) sender {
