@@ -71,6 +71,7 @@
 	
 	// Application State
 	BOOL showGTDView; 
+	BOOL loadSection;
 	NSDate *today;
 	NSTimer *secondsTimer;
 	NSDateFormatter *dateFormatter;
