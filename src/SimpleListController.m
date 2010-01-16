@@ -31,7 +31,19 @@
 @synthesize treeController;
 
 - (id) init {
-	self = [super initWithNibName:@"SimpleListView" bundle:nil];
+	[super initWithNibName:@"SimpleListView" bundle:nil];
+	
+	//TODO: Update todaysDate at midnight!
+	NSDate *temp = [NSDate date];	
+	NSCalendar* theCalendar = [NSCalendar currentCalendar];
+	unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+	NSDayCalendarUnit;
+	NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+	[theComps setHour:0];
+	[theComps setMinute:0];
+	[theComps setSecond:0];
+	todaysDate = [theCalendar dateFromComponents:theComps];
+	
 	if (self != nil)
 	{		
 		[myview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
@@ -39,6 +51,11 @@
 		taskListFilterPredicate = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	return self;
+}
+
+- (id)initWithNibName:(NSString *)n bundle:(NSBundle *)b
+{
+    return [self init];
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
@@ -61,29 +78,18 @@
 		[cell setAttributedStringValue:attributedString];
 	}*/
 	
-
-	
+	NSTreeNode *node = item;
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
-		Task *task = [item representedObject];
+		Task *task = [node representedObject];
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
 		} else {
-			[self setTaskUndone:acell];
-		}
-		
-		// --------- Get the actual Date and format the time component
-		NSDate *temp = [NSDate date];	
-		NSCalendar* theCalendar = [NSCalendar currentCalendar];
-		unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
-		NSDayCalendarUnit;
-		NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
-		[theComps setHour:0];
-		[theComps setMinute:0];
-		[theComps setSecond:0];
-		NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
-		
-		if (task.dueDate != nil && task.dueDate > todaysDate) {
-			[self setTaskOverdue:acell];
+			if (task.dueDate != nil && task.dueDate > todaysDate) {
+				[self setTaskOverdue:acell];
+				DLog(@"Set cell overdue...");
+			}
+			else 
+				[self setTaskUndone:acell];
 		}
 	}
 	

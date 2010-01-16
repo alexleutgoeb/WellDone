@@ -38,6 +38,16 @@
 - (id) init
 {
 	self = [super initWithNibName:@"GTDListView" bundle:nil];
+	NSDate *temp = [NSDate date];	
+	NSCalendar* theCalendar = [NSCalendar currentCalendar];
+	unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+	NSDayCalendarUnit;
+	NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+	[theComps setHour:0];
+	[theComps setMinute:0];
+	[theComps setSecond:0];
+	todaysDate = [theCalendar dateFromComponents:theComps];
+	
 	if (self != nil)
 	{		
 		//moc = [[NSApp delegate] managedObjectContext];
@@ -69,6 +79,8 @@
 	
 	[nc addObserver:self selector:@selector(reactToMOCSave:)
 			   name:NSManagedObjectContextDidSaveNotification object:nil];
+	
+
 }
 
 - (void)dealloc {
@@ -86,24 +98,13 @@
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
 		} else {
-			[self setTaskUndone:acell];
+			if (task.dueDate != nil && task.dueDate > todaysDate) {
+				[self setTaskOverdue:acell];
+				DLog(@"Set cell overdue...");
+			}
+			else 
+				[self setTaskUndone:acell];
 		}
-		
-		// --------- Get the actual Date and format the time component
-		NSDate *temp = [NSDate date];	
-		NSCalendar* theCalendar = [NSCalendar currentCalendar];
-		unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
-		NSDayCalendarUnit;
-		NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
-		[theComps setHour:0];
-		[theComps setMinute:0];
-		[theComps setSecond:0];
-		NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
-		
-		if (task.dueDate != nil && task.dueDate > todaysDate) {
-			[self setTaskOverdue:acell];
-		}
-
 	}
 }
 
@@ -116,7 +117,8 @@
 }
 
 - (void)setTaskOverdue:(NSTextFieldCell*)cell {
-	[cell setTextColor:[NSColor	redColor]];
+	if (!([cell textColor] == [NSColor redColor]))
+		[cell setTextColor:[NSColor	redColor]];
 }
 
 /*
@@ -447,6 +449,8 @@
             return iGroupRowCell;            
         }
     }
+	
+	
     return nil;
 }
 

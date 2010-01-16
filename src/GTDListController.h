@@ -47,6 +47,8 @@
 	
 	// Holds all filter predicates (string or array representation) for the task view which are currently active
 	NSMutableDictionary* taskListFilterPredicate;
+	
+	NSDate* todaysDate;
 }
 
 @property (nonatomic, retain) NSMutableArray *subViewControllers;

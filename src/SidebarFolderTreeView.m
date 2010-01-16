@@ -691,7 +691,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 			return NO;
 		if ([[targetItem data] isKindOfClass: [Folder class]]) {
 			[myController addDraggedTaskToFolder: ((Folder *)[targetItem data])];
-
+			return YES;
 		}
 	}
 	

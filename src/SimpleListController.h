@@ -46,6 +46,9 @@
 	
 	// Holds all filter predicates (string or array representation) for the task view which are currently active
 	NSMutableDictionary* taskListFilterPredicate;
+	
+	// Holds today's date for distinction which tasks are overdue
+	NSDate* todaysDate;
 }
 
 @property (nonatomic, retain, readonly) NSTreeController *treeController;
