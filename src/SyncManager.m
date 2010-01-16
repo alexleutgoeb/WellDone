@@ -485,6 +485,8 @@
 						gtdTask.status = [localTask.status integerValue];
 						gtdTask.reminder = [localTask.reminder integerValue];
 						gtdTask.parentId = [remoteTask.remoteUid intValue];
+						gtdTask.date_due = localTask.dueDate;
+						gtdTask.date_start = localTask.startDate;
 						
 						if ([localTask.tags count] > 0)
 							gtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
@@ -563,7 +565,9 @@
 			newGtdTask.status = [localTask.status integerValue];
 			newGtdTask.reminder = [localTask.reminder integerValue];
 			newGtdTask.parentId = [remoteTask.remoteUid intValue];
-			
+			newGtdTask.date_due = localTask.dueDate;
+			newGtdTask.date_start = localTask.startDate;
+
 			if ([localTask.tags count] > 0)
 				newGtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
 			if([localTask.completed boolValue] == YES)
