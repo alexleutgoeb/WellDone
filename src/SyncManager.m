@@ -98,7 +98,8 @@
 		
 		
 		aManagedObjectContext = [self syncFolders:aManagedObjectContext withSyncService:syncService];
-		aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService andConflicts:*&conflicts];
+		aManagedObjectContext = [self syncContexts:aManagedObjectContext withSyncService:syncService];
+		//aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService andConflicts:*&conflicts];
 								 
 		/*if (lastDates != nil && error == nil) {
 				
@@ -391,6 +392,153 @@
 		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
 	return aManagedObjectContext;
 }
+
+
+/**
+ Context sync
+ @author Michael
+ */
+- (NSManagedObjectContext *) syncContexts:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
+	
+	NSError *error = nil;
+	
+	//zuerst alle remoteContexts erstellen falls sie noch nicht existieren
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Context" inManagedObjectContext:aManagedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	NSArray *localContexts = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+	
+	/*entity = [NSEntityDescription entityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
+	 [fetchRequest setEntity:entity];
+	 
+	 NSArray *remoteContexts = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];*/
+	[fetchRequest release];
+	
+	//now find a corresponding GTDcontext
+	NSMutableArray *gtdContexts = (NSMutableArray *) [syncService getContexts:&error];
+	NSMutableArray *foundGtdContexts = [[NSMutableArray alloc] init];
+	GtdContext *foundGtdContext;
+	RemoteContext *remoteContext;
+	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
+	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
+	for (Context *localContext in localContexts) {
+		DLog(@"localContext.title %@", localContext.title);
+		//[aManagedObjectContext deleteObject:localContext];
+		NSEnumerator *enumerator = [localContext.remoteContexts objectEnumerator];
+		DLog(@"localContext.remoteContext %@", [localContext.remoteContexts description]);
+		remoteContext = nil;
+		
+		while ((remoteContext = [enumerator nextObject])) {
+			//wenn remoteobject existiert
+			if([remoteContext.serviceIdentifier isEqualToString:syncService.identifier]) break;
+			else remoteContext = nil;
+		}
+		//now we can safely assume, that each local context has a remoteContext
+		//no remoteContext was found, create one
+		if(remoteContext == nil) {
+			DLog(@"creating remoteContext for context %@", localContext.title);
+			remoteContext = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
+			remoteContext.serviceIdentifier = syncService.identifier;
+			remoteContext.remoteUid = [NSNumber numberWithInteger:-1];
+			remoteContext.lastsyncDate = nil;
+			remoteContext.localContext = localContext;
+			NSMutableSet *mutableRemoteContexts = [localContext mutableSetValueForKey:@"remoteContexts"];
+			[mutableRemoteContexts addObject:remoteContext];
+			DLog(@"syncContext addContext.");
+			GtdContext *newGtdContext = [[GtdContext alloc] init];
+			newGtdContext.title = localContext.title;
+
+			remoteContext.remoteUid = [NSNumber numberWithLong:[syncService addContext:newGtdContext error:&error]];
+			DLog(@"new remoteUid: %@", remoteContext.remoteUid);
+			remoteContext.lastsyncDate = [NSDate date];
+			newGtdContext.uid = [remoteContext.remoteUid integerValue];
+			foundGtdContext = newGtdContext;
+		} else {
+			//find gtdcontext
+			foundGtdContext = nil;
+			for(GtdContext *gtdContext in gtdContexts) {
+				DLog(@"found GtdContext %@", gtdContext.title);
+				DLog(@"gtdContext.uid %i", gtdContext.uid);
+				DLog(@"remoteContext.remoteUid %@", remoteContext.remoteUid);
+				if(gtdContext.uid == [remoteContext.remoteUid integerValue]) {
+					DLog(@"syncContext matching remoteUid. %i", gtdContext.uid);
+					[foundGtdContexts addObject:gtdContext];
+					foundGtdContext = gtdContext;
+					break;
+				}
+			}
+			for(GtdContext *bla in foundGtdContexts) {
+				DLog(@"syncContext foundContext. %@", bla.title);
+			}
+		}
+		
+		DLog(@"localContext.modifiedDate: %@", localContext.modifiedDate);
+		DLog(@"remoteContext.lastsyncDate: %@", remoteContext.lastsyncDate);
+		DLog(@"localContext.deletedByApp: %@", localContext.deletedByApp);
+		
+		//DLog(@"localContext.modifiedDate: %@", localContext.modifiedDate);
+		if([localContext.deletedByApp integerValue] == 1) {
+			DLog(@"syncContext deleting a context.");
+			if(foundGtdContext != nil)
+				[syncService deleteContext:foundGtdContext error:&error];
+			[aManagedObjectContext deleteObject:localContext];
+		} else if(foundGtdContext == nil) {
+			DLog(@"syncContext deleting cos no foundGtdContext");
+			if(remoteContext.lastsyncDate != nil && [remoteContext.lastsyncDate timeIntervalSinceDate:localContext.modifiedDate] > 0) {
+				[aManagedObjectContext deleteObject:localContext];
+			}
+			
+		} else if ([localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate] == 0) {
+			DLog(@"XXXXXXXXXXXXXXXXXXX MODIFIEDDATE EQUAL LASTSYNCDATE MOTHERFUCKER *ÜXXXXXXXXXXXX");
+		} else if([localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate] < 0) {
+			DLog(@"syncContext writing data to local.");
+			DLog(@"timedifference: %i", [localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate]);
+			localContext.title = foundGtdContext.title;
+			remoteContext.lastsyncDate = [NSDate date];
+		} else {
+			//editContext
+			DLog(@"syncContext editContext.");
+			DLog(@"timedifference: %i", [localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate]);
+			GtdContext *newGtdContext = [[GtdContext alloc] init];
+			newGtdContext.uid = [remoteContext.remoteUid integerValue];
+			DLog(@"check.");
+			newGtdContext.title = localContext.title;
+			DLog(@"check2.");
+			//overwrite the remote remoteContext with the local context
+			[syncService editContext:newGtdContext error:&error];
+			DLog(@"check3.");
+			remoteContext.lastsyncDate = [NSDate date];
+		}
+		DLog(@"error %@", [error description]);
+	}
+	//NSMutableArray thxObjC = new NSMutableArray(gtdContexts);
+	//finally durchlaufe die gtdContext die nicht zuordenbar waren und erzeuge sie lokal
+	[gtdContexts removeObjectsInArray:foundGtdContexts];
+	for(GtdContext *gtdContext in gtdContexts) {
+		// Add new entities
+		RemoteContext *rContext = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
+		Context *lContext = [NSEntityDescription insertNewObjectForEntityForName:@"Context" inManagedObjectContext:aManagedObjectContext];
+		
+		DLog(@"syncContext adding new context to local.");
+		
+		// Set entity attributes
+		rContext.serviceIdentifier = syncService.identifier;
+		rContext.remoteUid = [NSNumber numberWithInteger:gtdContext.uid];
+		rContext.lastsyncDate = [NSDate date];
+		rContext.localContext = lContext;
+		lContext.title = gtdContext.title;		
+		NSMutableSet *mutableRemoteContexts = [lContext mutableSetValueForKey:@"remoteContexts"];
+		[mutableRemoteContexts addObject:rContext];
+	}
+	
+	//zuerst innerhalb einer passenden datenstruktur jedem element aus rContext das entsprechende element aus gtdContext zuordnen
+	//falls es zu einem rContext element keinen gtdContext gibt:
+	//wenn rContext.localContext.deletedByApp != true -> [syncService addContext]
+	//falls unzugeordnete gtdcontext übrigbleiben -> neue context lokal anlegen und gleich daten übernehmen
+	return aManagedObjectContext;
+}
+
 
 /**
  Task sync
