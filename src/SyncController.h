@@ -28,8 +28,9 @@
 /**
  Callback method for notifying the delegate about conflicts in sync.
  @param sc the sync controller instance
+ @param conflicts An array with TaskContainer objects representing sync conflicts.
  */
-- (void)syncControllerDidSyncWithConflicts:(SyncController *)sc;
+- (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts;
 
 /**
  Callback method for notifying the delegate about an error while syncing.

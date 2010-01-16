@@ -297,10 +297,18 @@
 	[defaults synchronize];
 	self.status = SyncControllerReady;
 	
-	// Inform delegate
-	// TODO: Check result of sync
-	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
-		[delegate syncControllerDidSyncWithSuccess:self];
+	// Check for conflicts
+	if (conflicts != nil) {
+		// Inform delegate
+		if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithConflicts:conflicts:)]) {
+			[delegate syncControllerDidSyncWithConflicts:self conflicts:[conflicts retain]];
+		}
+	}
+	else {
+		// Inform delegate
+		if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
+			[delegate syncControllerDidSyncWithSuccess:self];
+		}
 	}
 }
 
