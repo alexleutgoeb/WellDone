@@ -875,7 +875,10 @@
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
 				// TODO: Check for some properties (ie NOT order)
-				[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+				if ([[entity changedValues] count] > 0) {
+					DLog(@"Updated values: %@", [[entity changedValues] description]);
+					[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+				}
 			}
 		}
 	}
