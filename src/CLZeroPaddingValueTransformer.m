@@ -8,7 +8,7 @@
 #import "CLZeroPaddingValueTransformer.h"
 
 
-@implementation ZeroPaddingValueTransformer
+@implementation CLZeroPaddingValueTransformer
 
 + (Class)transformedValueClass;
 {

@@ -18,6 +18,14 @@
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
 
+
+@interface SimpleListController ()
+
+- (BOOL)category:(NSManagedObject *)cat isSubCategoryOf:(NSManagedObject *)possibleSub;
+
+@end
+
+
 @implementation SimpleListController
 
 @synthesize treeController;
@@ -62,6 +70,21 @@
 		} else {
 			[self setTaskUndone:acell];
 		}
+		
+		// --------- Get the actual Date and format the time component
+		NSDate *temp = [NSDate date];	
+		NSCalendar* theCalendar = [NSCalendar currentCalendar];
+		unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+		NSDayCalendarUnit;
+		NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+		[theComps setHour:0];
+		[theComps setMinute:0];
+		[theComps setSecond:0];
+		NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
+		
+		if (task.dueDate != nil && task.dueDate > todaysDate) {
+			[self setTaskOverdue:acell];
+		}
 	}
 	
 }
@@ -93,6 +116,10 @@
 
 - (void)setTaskUndone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor blackColor]];
+}
+
+- (void)setTaskOverdue:(NSTextFieldCell*)cell {
+	[cell setTextColor:[NSColor	redColor]];
 }
 
 //TODO: methodenkopf, unit tests, copy&paste
@@ -194,7 +221,7 @@
 		if (![currentTagNames containsObject:currentTagName]){
 			
 			//add tag to core data
-			NSManagedObject *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
+			Tag *tag = (Tag *)[NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:moc]; 
 			[tag setValue:currentTagName forKey:@"text"]; 		
 			
 			//add tag to currentTags and currentTagNames
@@ -256,14 +283,8 @@
 	return YES;	
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change 
-					  context:(void *)context {
-    if ( [keyPath isEqualToString:@"draggedTask"] ) {
-		DLog(@"Dragged task changed: %@", object);
-    }
-}
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)index {
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index {
 	NSLog(@"Drag&Drop: acceptDrop called");
 	_NSArrayControllerTreeNode* parentNode = item;
 	NSManagedObject* draggedTreeNode = [ draggedNode observedObject ];	
@@ -271,7 +292,8 @@
 	return YES;		
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index {
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
+	NSLog(@"Drag&Drop: validateDrop called");
 	_NSArrayControllerTreeNode* newParent = item;
 	
 	// drags to the root are always acceptable
@@ -285,7 +307,7 @@
 	NSManagedObject* dragged = [ ((NSTreeNode *)draggedNode) observedObject ];	 	 
 	NSManagedObject* newP = [ newParent observedObject ];
 	
-	if ( [ self category:dragged isSubCategoryOf:newP ] ) {
+	if ([self category:dragged isSubCategoryOf:newP ] ) {
 		return NO;
 	}		
 	
@@ -329,7 +351,7 @@
  table column these methods are never called. The NSLog statements have been
  included to prove that these methods are not called.
  */
-- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
 	NSLog(@"Drag&Drop: numberOfChildrenOfItem called");
 	return 1;
 }
@@ -339,7 +361,7 @@
 	return NO;
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item {
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
 	NSLog(@"Drag&Drop: child called");	
 	return NULL;
 }

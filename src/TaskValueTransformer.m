@@ -46,7 +46,7 @@
 	return returnArray;
 }
 
-- (id) reverseTranswformedValue:(id) value
+- (id)reverseTransformedValue:(id)value
 {
 	// should return Tag-OBJECTs?????
 	

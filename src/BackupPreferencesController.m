@@ -16,7 +16,7 @@
 	
 	int result;
 	
-    NSArray *fileTypes = [NSArray arrayWithObject:@"td"];
+    // NSArray *fileTypes = [NSArray arrayWithObject:@"td"];
 	
     NSOpenPanel *oPanel = [NSOpenPanel openPanel];
 	

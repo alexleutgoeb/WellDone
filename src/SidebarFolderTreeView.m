@@ -5,12 +5,13 @@
 //  Created by Matteo Bertozzi on 3/8/09.
 //  Copyright 2009 Matteo Bertozzi. All rights reserved.
 //
-#import <SidebarBadgeCell.h>
-#import <SidebarFolderTreeView.h>
-#import <Task.h>
-#import <Folder.h>
-#import <SidebarFolderNode.h>
-#import "SimpleListController.h"
+
+#import "SidebarBadgeCell.h"
+#import "SidebarFolderTreeView.h"
+#import "Task.h"
+#import "Folder.h"
+#import "SidebarFolderNode.h"
+#import "SidebarFolderController.h"
 
 #define kSidebarPBoardType		@"SidebarNodePBoardType"
 #define kTasksPBoardType @"TasksPBoardType"
@@ -54,7 +55,7 @@
 }
 
 
-- (void)setViewController:(NSViewController *)newController
+- (void)setViewController:(SidebarFolderController *)newController
 {
     if (newController)
     {
@@ -315,9 +316,9 @@
  * is not a folder, NIL is returned.
  */
 - (Folder *)selectedFolder {
-	id *selectedNode = [self selectedNode];
+	id selectedNode = [self selectedNode];
 	if ([[selectedNode data] isKindOfClass: [Folder class]]) {
-		return [selectedNode data];
+		return (Folder *)[selectedNode data];
 	}
 	return nil;
 }
@@ -423,7 +424,7 @@
 {
 	if (item == nil)
 		return [_roots objectAtIndex:index];
-	return [item childAtIndex:index];
+	return [item childItemAtIndex:index];
 }
 
 /*
@@ -836,7 +837,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	NSLog(@"Represented object: %@", representedObject);
 	if ([representedObject isKindOfClass:[SidebarFolderNode class]]) {
 		//NSLog(@"Represented object data: %@", [representedObject data]);
-		[myController deleteFolderByContextMenu:[representedObject data]];
+		[myController deleteFolderByContextMenu:((Folder *)[representedObject data])];
 	}
 	
 }

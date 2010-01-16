@@ -9,8 +9,14 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface GTDListView : NSView {
+@interface GTDListView : NSOutlineView {
 	
 }
+
+- (void)keyDown:(NSEvent *)theEvent;
+- (NSMenu*)menuForEvent:(NSEvent*)evt;
+- (NSMenu*)defaultMenuForRow:(int)row;
+- (BOOL)isRowDeletable:(int)row;
+- (void)contextMenuDeleteTask: (id)sender;
 
 @end

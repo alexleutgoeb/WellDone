@@ -8,6 +8,7 @@
 
 #import "HUDTaskEditorController.h"
 #import "SimpleListController.h"
+#import "WellDone_AppDelegate.h"
 
 
 @implementation HUDTaskEditorController
@@ -38,12 +39,6 @@
 	DateTimePopupController *dateTimePopupController = [DateTimePopupController showPopupAtLocation:NSZeroPoint forWindow:window callBack:nil to: nil];*/
 
 }
-
-
-typedef enum _repeatValue
-{
-	never = 0, daily, weekly, monthly
-} repeatValue;
 
 - (void) setRepeat:(id)sender {
 	NSLog(@"Tag: %d",[[sender selectedItem] tag]);

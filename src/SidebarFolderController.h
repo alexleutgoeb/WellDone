@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <SidebarFolderTreeView.h>
-#import <SidebarFolderNode.h>
-#import <SimpleListController.h>
+#import "SidebarFolderTreeView.h"
+#import "SidebarFolderNode.h"
+#import "SimpleListController.h"
+
 
 @interface SidebarFolderController : NSViewController {
 	IBOutlet SidebarFolderTreeView *sidebar;

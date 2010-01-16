@@ -55,7 +55,7 @@
 - (void)initGTDView;
 - (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore;
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore;
-- (void) initGTDitemSevenDays:(NSDate *)inThreeDays inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
+- (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
 - (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
@@ -108,14 +108,28 @@
 @synthesize isOnline;
 @synthesize syncMenuItem, syncTextMenuItem;
 @synthesize secondsTimer, dateFormatter, today;
+@synthesize gtdListController;
 
 #pragma mark -
 #pragma mark Initialization
 
-
-
-
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
+	
+	// restore backup
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
+	NSString *restore = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
+	
+	NSLog(@"Restore: %@",restore);
+	
+	if ([restore isEqualToString:@"yes"]) {
+		//TODO: restore backup file
+		
+		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
+		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
+	}
+	
+	
 	[window makeMainWindow];
 	[self initUserDefaults];
 	[self initPreferences];
@@ -227,7 +241,7 @@
 
 	[simpleListController reloadTaskListWithFilters];
 	[[simpleListController treeController] fetch:nil];
-	
+	loadSection = YES;
 	[self initGTDView];
 	
 	// Fix the ordering for the HUD-Window, so that it will really be shown on the first button-click:
@@ -270,6 +284,26 @@
 	inThreeDays = [todaysDate addTimeInterval:secondsPerDay*3];
 	inSevenDays = [todaysDate addTimeInterval:secondsPerDay*7];
 	
+	if (loadSection) {
+		gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+		[gtdListController.section setValue:@"Today" forKey:@"title"];
+		[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
+		
+		gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
+		[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
+		
+		gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+		[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
+		[[self managedObjectContext] assignObject:gtdListController.sectionNext7Days toPersistentStore:memoryStore];
+		
+		gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
+		[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
+		
+		loadSection = NO;
+	}
+	
 	[self initGTDitemToday:todaysDate inStore:memoryStore];
 	[self initGTDitemThreeDays:todaysDate inThreeDaysDate:inThreeDays inStore:memoryStore];
 	[self initGTDitemSevenDays:inThreeDays inSevenDaysDate:inSevenDays inStore:memoryStore];
@@ -279,10 +313,6 @@
 
 - (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore {
 	NSError *error;
-
-	gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-	[gtdListController.section setValue:@"Today" forKey:@"title"];
-	[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
 	
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -303,10 +333,6 @@
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore { 
 	NSError *error;
 	
-	gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-	[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
-	[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
-	
 	NSEntityDescription *entityDescriptionNext3Days = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext3Days = [[NSFetchRequest alloc] init];
 	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", todaysDate, inThreeDays];
@@ -326,10 +352,6 @@
 - (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inSevenDays inStore:(id)memoryStore { 
 	NSError *error;
 	
-	gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-	[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
-	[[self managedObjectContext] assignObject:gtdListController.sectionNext7Days toPersistentStore:memoryStore];
-	
 	NSEntityDescription *entityDescriptionNext7Day = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext7Days = [[NSFetchRequest alloc] init];
 	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", inThreeDays, inSevenDays];	
@@ -348,10 +370,6 @@
 
 - (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore {
 	NSError *error;
-	
-	gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-	[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
-	[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
 	
 	NSEntityDescription *entityDescriptionUpcoming = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestUpcoming = [[NSFetchRequest alloc] init];
@@ -845,7 +863,8 @@
 - (void)updateManagedObjectModificationDates:(NSNotification *)notification {
 	NSDictionary *userInfoDictionary = [notification userInfo];
     NSSet *changedObjects = [userInfoDictionary objectForKey:NSUpdatedObjectsKey];
-
+	DLog(@"Changed %i objects.", [changedObjects count]);
+	
 	if ([changedObjects count]) {
 		for (NSManagedObject *entity in changedObjects) {
 			if ([entity isKindOfClass:[Note class]] || 
@@ -853,7 +872,6 @@
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
 				// TODO: Check for some properties (ie NOT order)
-				DLog(@"Changed: %@ %@", [entity description], [entity class]);
 				[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
 			}
 		}

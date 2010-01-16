@@ -10,6 +10,12 @@
 #import "SimpleListController.h"
 
 
+typedef enum _repeatValue
+{
+	never = 0, daily, weekly, monthly
+} repeatValue;
+
+
 @interface HUDTaskEditorController : NSWindowController {
 	IBOutlet NSObjectController* taskObjectController;
 	IBOutlet NSTextView* note;
@@ -22,7 +28,7 @@
 - (IBAction)setRepeat:(id)sender;
 
 @property (nonatomic, retain) NSTextField* datedue;
-@property SimpleListController *simpController;
+@property (nonatomic, retain) SimpleListController *simpController;
 
 
 @end

@@ -60,7 +60,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	// checks if the backup directory exisits and creates it if not
 	if (![fm fileExistsAtPath:backupPath]){ 
 		// create the new file (if the folder does not exist, the method creates it). Errors are handled in the NSError error and nil is returned in case of problems
-		if (![fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:&error]){
+		if (![fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:&*error]){
 			return nil;
 		}	
 	}
@@ -75,7 +75,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	
 	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
 
-	if ([fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&error]){
+	if ([fm copyItemAtPath:[currentDBFile absoluteString] toPath:[backupFileURL absoluteString] error:&*error]){
 		return [backupFileURL absoluteString];
 	}else {
 		return nil;
@@ -90,5 +90,33 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	return NO;
 }
 
+
+- (IBAction)restoreBackupAction:(id)sender {
+	int buttonPressed = NSRunCriticalAlertPanel(
+									@"Restore latest backup?",
+									@"Your changes since the last backup will be lost.",
+									@"Cancel",
+									@"Restore",
+									nil);
+	
+	NSLog(@"Button pressed: %d",buttonPressed);
+	
+	if (buttonPressed == 0) {
+		// restore button pressed
+		
+		NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+		[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
+		
+		
+		NSRunCriticalAlertPanel(
+								@"Backup will be restored after restart.",
+								@"WellDone will reset to the latest backup next time you start the program.",
+								@"OK",
+								nil,
+								nil);
+		
+		// TODO: restart app
+	}
+}
 
 @end

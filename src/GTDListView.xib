@@ -38,7 +38,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -57,14 +57,12 @@
 										<int key="NSvFlags">4352</int>
 										<string key="NSFrameSize">{610, 619}</string>
 										<reference key="NSSuperview" ref="709411455"/>
-										<reference key="NSWindow"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTableHeaderView" key="NSHeaderView" id="96820260">
 											<reference key="NSNextResponder" ref="268457063"/>
 											<int key="NSvFlags">256</int>
 											<string key="NSFrameSize">{610, 17}</string>
 											<reference key="NSSuperview" ref="268457063"/>
-											<reference key="NSWindow"/>
 											<reference key="NSTableView" ref="475774575"/>
 										</object>
 										<object class="_NSCornerView" key="NSCornerView" id="462664808">
@@ -72,7 +70,6 @@
 											<int key="NSvFlags">-2147483392</int>
 											<string key="NSFrame">{{384, 0}, {16, 17}}</string>
 											<reference key="NSSuperview" ref="161659408"/>
-											<reference key="NSWindow"/>
 										</object>
 										<object class="NSMutableArray" key="NSTableColumns">
 											<bool key="EncodedWithXMLCoder">YES</bool>
@@ -293,8 +290,6 @@
 								</object>
 								<string key="NSFrame">{{0, 17}, {610, 619}}</string>
 								<reference key="NSSuperview" ref="161659408"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="475774575"/>
 								<reference key="NSDocView" ref="475774575"/>
 								<reference key="NSBGColor" ref="682717110"/>
 								<int key="NScvFlags">4</int>
@@ -304,7 +299,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{384, 17}, {15, 367}}</string>
 								<reference key="NSSuperview" ref="161659408"/>
-								<reference key="NSWindow"/>
 								<reference key="NSTarget" ref="161659408"/>
 								<string key="NSAction">_doScroller:</string>
 								<double key="NSPercent">0.975767366720517</double>
@@ -314,8 +308,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{1, 384}, {384, 15}}</string>
 								<reference key="NSSuperview" ref="161659408"/>
-								<reference key="NSWindow"/>
-								<bool key="NSEnabled">YES</bool>
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="161659408"/>
 								<string key="NSAction">_doScroller:</string>
@@ -330,8 +322,6 @@
 								</object>
 								<string key="NSFrameSize">{610, 17}</string>
 								<reference key="NSSuperview" ref="161659408"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="96820260"/>
 								<reference key="NSDocView" ref="96820260"/>
 								<reference key="NSBGColor" ref="682717110"/>
 								<int key="NScvFlags">4</int>
@@ -340,9 +330,7 @@
 						</object>
 						<string key="NSFrameSize">{610, 636}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="709411455"/>
-						<int key="NSsFlags">688</int>
+						<int key="NSsFlags">560</int>
 						<reference key="NSVScroller" ref="225158880"/>
 						<reference key="NSHScroller" ref="146566403"/>
 						<reference key="NSContentView" ref="709411455"/>
@@ -352,8 +340,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{610, 636}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<string key="NSClassName">GTDListView</string>
 			</object>
 			<object class="NSUserDefaultsController" id="764308978">
@@ -438,6 +424,22 @@
 						</object>
 					</object>
 					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">treeController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="775269749"/>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">gtdOutlineView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="475774575"/>
+					</object>
+					<int key="connectionID">58</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -617,7 +619,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{32, 24}, {610, 636}}</string>
+					<string>{{16, 120}, {610, 636}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{217, 442}, {480, 272}}</string>
@@ -652,7 +654,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">55</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -673,12 +675,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>gtdOutlineView</string>
-							<string>myview</string>
+							<string>treeController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSOutlineView</string>
-							<string>NSOutlineView</string>
+							<string>NSTreeController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -688,7 +690,11 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">GTDListView</string>
-					<string key="superclassName">NSView</string>
+					<string key="superclassName">NSOutlineView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">contextMenuDeleteTask:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">GTDListView.h</string>

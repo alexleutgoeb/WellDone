@@ -53,7 +53,7 @@
 
 }
 
-- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex
+- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
 {
     //[items replaceObjectAtIndex:rowIndex withObject:anObject];
 	[self contextsSelectionChanged];
@@ -74,7 +74,6 @@
 
 - (void)contextsSelectionChanged {
 	if ([checkBoxFilter state]==NSOnState) {
-		NSManagedObjectContext *moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 		NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Context" inManagedObjectContext:moc];
 		NSFetchRequest *request = [[NSFetchRequest alloc] init];
 		[request setEntity:entityDescription];

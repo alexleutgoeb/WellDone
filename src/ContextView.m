@@ -67,7 +67,7 @@
 	if ([self isRowDeletable:row]) {
 		NSMenuItem *deleteItem = [NSMenuItem alloc];
 		[deleteItem initWithTitle:@"Delete Context" action:@selector(contextMenuDeleteContext:) keyEquivalent: @""];
-		[deleteItem setRepresentedObject:[self selectedRow]];
+		[deleteItem setRepresentedObject:[NSNumber numberWithInt:[self selectedRow]]];
 		
 
 		
