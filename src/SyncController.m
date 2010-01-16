@@ -255,6 +255,9 @@
 	else {		
 		// Get new objectcontext from delegate
 		NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
+		// Save moc before creating new
+		NSError *error = nil;
+		[mainContext save:&error];
 		
 		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
 		[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
