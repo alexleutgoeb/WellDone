@@ -63,6 +63,7 @@
 - (void)setTaskOverdue:(NSTextFieldCell*)cell;
 
 - (void) reactToMOCSave:(NSNotification *)notification;
+- (void) updateGTDAfterMidnight:(NSNotification *)notification;
 
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
