@@ -86,16 +86,16 @@
 		} else {
 			if (task.dueDate != nil && [todaysDate timeIntervalSinceDate:task.dueDate] > 0) {
 				[self setTaskOverdue:acell];
-				DLog(@"Set cell with value '%@' overdue...", [task title]);
+				// DLog(@"Set cell with value '%@' overdue...", [task title]);
 			}
 			else  {
 				[self setTaskUndone:acell];
-				DLog(@"Set cell with value '%@' and date '%@' UNDONE...", [task title], [task dueDate]);
+				// DLog(@"Set cell with value '%@' and date '%@' UNDONE...", [task title], [task dueDate]);
 			}
 		}
 	}
 	else {
-		DLog (@"COULD NOT STYLE CELL FOR COLUMN %@", [tableColumn identifier]);
+		// DLog (@"COULD NOT STYLE CELL FOR COLUMN %@", [tableColumn identifier]);
 	}
 
 	// This is a fix for a bug in NSOutlineView, where selected cells behave strange
