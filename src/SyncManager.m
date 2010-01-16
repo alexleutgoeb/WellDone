@@ -86,7 +86,6 @@
 }
 
 - (NSManagedObjectContext *)syncData:(NSManagedObjectContext *)aManagedObjectContext conflicts:(NSArray **)conflicts {
-	// TODO: implement
 	
 	if ([syncServices count] > 0) {
 		
@@ -99,7 +98,7 @@
 		
 		aManagedObjectContext = [self syncFolders:aManagedObjectContext withSyncService:syncService];
 		aManagedObjectContext = [self syncContexts:aManagedObjectContext withSyncService:syncService];
-		//aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService andConflicts:*&conflicts];
+		aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService andConflicts:*&conflicts];
 								 
 		/*if (lastDates != nil && error == nil) {
 				
@@ -129,117 +128,7 @@
 	}
 }
 
-- (NSManagedObjectContext *)replaceLocalData:(NSManagedObjectContext *)aManagedObjectContext {
 
-	DLog(@"Replacing local data with remote...");
-	
-	if ([syncServices count] > 0) {
-		
-		// Take only the first sync service from the list
-		id<GtdApi> syncService = [syncServices objectForKey:[[syncServices allKeys] objectAtIndex:0]];
-		DLog(@"Using sync service: '%@'.", [syncService identifier]);
-		NSError *error = nil;
-		
-		// First check if remote folders are accessible
-		NSArray *remoteFolders = [syncService getFolders:&error];
-		if (remoteFolders != nil && error == nil) {
-			// ok, remove local data
-			error = nil;
-			NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-			NSEntityDescription *entity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:aManagedObjectContext];
-			[fetchRequest setEntity:entity];
-			NSArray *items = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
-			[fetchRequest release];
-			
-			for (NSManagedObject *managedObject in items) {
-				DLog(@"Delete folder: %@", managedObject);
-				[aManagedObjectContext deleteObject:managedObject];
-			}
-			
-			if (![aManagedObjectContext save:&error]) {
-				// TODO: error handling?
-				DLog(@"Error deleting all folders, don't know what to do.");
-				return nil;
-			}
-			else {
-				// all folders deleted, store remote
-				for (GtdFolder *gtdFolder in remoteFolders) {
-					// Add new entities
-					RemoteFolder *rFolder = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
-					Folder *lFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:aManagedObjectContext];
-					
-					// Set entity attributes
-					rFolder.serviceIdentifier = syncService.identifier;
-					rFolder.remoteUid = [NSNumber numberWithInteger:gtdFolder.uid];
-					rFolder.lastsyncDate = [NSDate date];
-					rFolder.localFolder = lFolder;
-					lFolder.name = gtdFolder.title;
-					lFolder.private = [NSNumber numberWithBool:gtdFolder.private];
-					lFolder.order = [NSNumber numberWithInteger:gtdFolder.order];
-					
-					DLog(@"Added folder: %@", lFolder);
-				}
-				
-				// all ok
-				return aManagedObjectContext;
-			}
-			
-		}
-		else {
-			DLog(@"Error while loading remote folders: %@", error);
-			return nil;
-		}
-		
-	}
-	else {
-		// no sync service registered, return nil
-		return nil;
-	}
-	
-}
-
-/**
- generische variante zum erstellen von remoteObjects
- 
- @author: Michael
- 
-*/
-/*- (void) checkAndCreateRemoteObjects:(NSArray *) remoteObjects withObjectName: (NSString) objectName fromObjectContext: (NSManagedObjectContext *) aManagedObjectContext {
-	
-	NSError *error = nil;
-	
-	//zuerst alle remoteFolders erstellen falls sie noch nicht existieren
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:objectName inManagedObjectContext:aManagedObjectContext];
-	[fetchRequest setEntity:entity];
-	NSArray *localObjects = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
-	
-	BOOL foundRemoteObject;
-	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
-	for (NSManagedObject *localObject in localObjects) {
-		
-		foundRemoteObject = NO;
-		NSEnumerator *enumerator = [localObject.remoteObjects objectEnumerator];
-		
-		RemoteObject *remoteObject = nil;
-		
-		while ((remoteObject = [enumerator nextObject])) {
-			//wenn remoteobject existiert
-			if(remoteObject.serviceIdentifier == syncService.identifier) foundRemoteObject = YES;
-		}
-		
-		if(foundRemoteObject == NO) {
-			//create Remotefolder
-			RemoteObject ro = createRemoteObject(objectName, localObject);
-		}
-	}
-}*/
-
-/**
- Folder sync
- @author Michael
- */
 - (NSManagedObjectContext *) syncFolders:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
 	
 	NSError *error = nil;
@@ -251,10 +140,6 @@
 	
 	NSArray *localFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
 	
-	/*entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
-	[fetchRequest setEntity:entity];
-	
-	NSArray *remoteFolders = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];*/
 	[fetchRequest release];
 	
 	//now find a corresponding GTDfolder
@@ -266,7 +151,6 @@
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Folder *localFolder in localFolders) {
 		DLog(@"localFolder.name %@", localFolder.name);
-		//[aManagedObjectContext deleteObject:localFolder];
 		NSEnumerator *enumerator = [localFolder.remoteFolders objectEnumerator];
 		DLog(@"localFolder.remoteFolder %@", [localFolder.remoteFolders description]);
 		remoteFolder = nil;
@@ -364,7 +248,7 @@
 		}
 		DLog(@"error %@", [error description]);
 	}
-	//NSMutableArray thxObjC = new NSMutableArray(gtdFolders);
+	
 	//finally durchlaufe die gtdFolder die nicht zuordenbar waren und erzeuge sie lokal
 	[gtdFolders removeObjectsInArray:foundGtdFolders];
 	for(GtdFolder *gtdFolder in gtdFolders) {
@@ -386,18 +270,10 @@
 		[mutableRemoteFolders addObject:rFolder];
 	}
 		
-	//zuerst innerhalb einer passenden datenstruktur jedem element aus rFolder das entsprechende element aus gtdFolder zuordnen
-		//falls es zu einem rFolder element keinen gtdFolder gibt:
-			//wenn rFolder.localFolder.deletedByApp != true -> [syncService addFolder]
-		//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
 	return aManagedObjectContext;
 }
 
 
-/**
- Context sync
- @author Michael
- */
 - (NSManagedObjectContext *) syncContexts:(NSManagedObjectContext *) aManagedObjectContext withSyncService: (id<GtdApi>) syncService {
 	
 	NSError *error = nil;
@@ -409,10 +285,6 @@
 	
 	NSArray *localContexts = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
 	
-	/*entity = [NSEntityDescription entityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
-	 [fetchRequest setEntity:entity];
-	 
-	 NSArray *remoteContexts = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];*/
 	[fetchRequest release];
 	
 	//now find a corresponding GTDcontext
@@ -424,7 +296,6 @@
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Context *localContext in localContexts) {
 		DLog(@"localContext.title %@", localContext.title);
-		//[aManagedObjectContext deleteObject:localContext];
 		NSEnumerator *enumerator = [localContext.remoteContexts objectEnumerator];
 		DLog(@"localContext.remoteContext %@", [localContext.remoteContexts description]);
 		remoteContext = nil;
@@ -477,7 +348,6 @@
 		DLog(@"remoteContext.lastsyncDate: %@", remoteContext.lastsyncDate);
 		DLog(@"localContext.deletedByApp: %@", localContext.deletedByApp);
 		
-		//DLog(@"localContext.modifiedDate: %@", localContext.modifiedDate);
 		if([localContext.deletedByApp integerValue] == 1) {
 			DLog(@"syncContext deleting a context.");
 			if(foundGtdContext != nil)
@@ -489,8 +359,8 @@
 				[aManagedObjectContext deleteObject:localContext];
 			}
 			
-		} else if ([localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate] == 0) {
-			DLog(@"XXXXXXXXXXXXXXXXXXX MODIFIEDDATE EQUAL LASTSYNCDATE MOTHERFUCKER *ÜXXXXXXXXXXXX");
+		//} else if ([localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate] == 0) {
+
 		} else if([localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate] < 0) {
 			DLog(@"syncContext writing data to local.");
 			DLog(@"timedifference: %i", [localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate]);
@@ -502,17 +372,14 @@
 			DLog(@"timedifference: %i", [localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate]);
 			GtdContext *newGtdContext = [[GtdContext alloc] init];
 			newGtdContext.uid = [remoteContext.remoteUid integerValue];
-			DLog(@"check.");
 			newGtdContext.title = localContext.title;
-			DLog(@"check2.");
 			//overwrite the remote remoteContext with the local context
 			[syncService editContext:newGtdContext error:&error];
-			DLog(@"check3.");
 			remoteContext.lastsyncDate = [NSDate date];
 		}
 		DLog(@"error %@", [error description]);
 	}
-	//NSMutableArray thxObjC = new NSMutableArray(gtdContexts);
+
 	//finally durchlaufe die gtdContext die nicht zuordenbar waren und erzeuge sie lokal
 	[gtdContexts removeObjectsInArray:foundGtdContexts];
 	for(GtdContext *gtdContext in gtdContexts) {
@@ -531,19 +398,10 @@
 		NSMutableSet *mutableRemoteContexts = [lContext mutableSetValueForKey:@"remoteContexts"];
 		[mutableRemoteContexts addObject:rContext];
 	}
-	
-	//zuerst innerhalb einer passenden datenstruktur jedem element aus rContext das entsprechende element aus gtdContext zuordnen
-	//falls es zu einem rContext element keinen gtdContext gibt:
-	//wenn rContext.localContext.deletedByApp != true -> [syncService addContext]
-	//falls unzugeordnete gtdcontext übrigbleiben -> neue context lokal anlegen und gleich daten übernehmen
 	return aManagedObjectContext;
 }
 
 
-/**
- Task sync
- @author Michael, Alex
- */
 - (NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService andConflicts:(NSArray **)conflicts {
 	
 	NSError *error = nil;
@@ -867,29 +725,5 @@
 	}
 	return aManagedObjectContext;
 }
-
-/*
- 
- syncpseudocode:
- 
-1. via syncService die gtdFolders holen.
-
-2. aus dem managedObjectContext die remoteFolders holen.
-
-3. jetzt iteriere ich die remoteFolders durch und schau bei jedem ob es einen entsprechenden gtdFolder gibt.
-
-3a Wenn ich einen passenden gtdFolder finde dann als nächstes remoteFolder.localFolder.deleted prüfen:
-wenn deletedByApp = true: lösche gtdFolder
-sonst als nächstes das remoteFolder.localFolder lastmodified prüfen:
-wenn lastmodified > lastsync: gtdFolder mit daten aus remoteFolder.localFolder überschreiben
-wenn lastmodified <= lastsync: localFolder mit gtdFolder überschreiben
-
-3b wenn ich keinen passenden gtdFolder finde und remoteFolder.localFolder.deletedByApp != true: neuen gtdFolder anlegen
-sonst wenn lastmodified <= lastsync dann bedeuted das, dass der folder in toodledo gelöscht wurde daher: remoteFolder deleten.
-
-4 jetzt die übriggebliebenen gtdFolders hernehmen und für jeden einen remoteFolder + remoteFolder.localFolder anlegen
-
-bei den anderen wird es fast ident sein. nur bei tasks und notes kommt der fall dazu, dass zb gtdTask.lastEdit auch > lastSync ist und dann der user gepromptet werden muss.
-*/
 
 @end
