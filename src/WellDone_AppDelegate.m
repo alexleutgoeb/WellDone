@@ -894,6 +894,9 @@
 	[alert runModal];
 }
 
+- (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts {
+	DLog(@"Sync finihsed with conflict(s): %i", [conflicts count]);
+}
 
 /*
  * This is called when the main window should close.
