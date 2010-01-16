@@ -215,10 +215,7 @@
 			[aManagedObjectContext deleteObject:localFolder];
 		} else if(foundGtdFolder == nil) {
 			DLog(@"syncFolder deleting cos no foundGtdFolder");
-			if(remoteFolder.lastsyncDate != nil && [remoteFolder.lastsyncDate timeIntervalSinceDate:localFolder.modifiedDate] > 0) {
-				[aManagedObjectContext deleteObject:localFolder];
-			}
-		
+			[aManagedObjectContext deleteObject:localFolder];
 		} else if([localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate] < 0) {
 			DLog(@"syncFolder writing data to local.");
 			DLog(@"timedifference: %i", [localFolder.modifiedDate timeIntervalSinceDate:remoteFolder.lastsyncDate]);
@@ -292,7 +289,7 @@
 	NSMutableArray *foundGtdContexts = [[NSMutableArray alloc] init];
 	GtdContext *foundGtdContext;
 	RemoteContext *remoteContext;
-	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
+	DLog(@"xxxxxxxxxxxxx    schleifenbeginn  contexts  xxxxxxxxxxxx ");
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Context *localContext in localContexts) {
 		DLog(@"localContext.title %@", localContext.title);
@@ -349,15 +346,13 @@
 		DLog(@"localContext.deletedByApp: %@", localContext.deletedByApp);
 		
 		if([localContext.deletedByApp integerValue] == 1) {
-			DLog(@"syncContext deleting a context.");
+			DLog(@"syncContext deleting context: %@", localContext.title);
 			if(foundGtdContext != nil)
 				[syncService deleteContext:foundGtdContext error:&error];
 			[aManagedObjectContext deleteObject:localContext];
 		} else if(foundGtdContext == nil) {
-			DLog(@"syncContext deleting cos no foundGtdContext");
-			if(remoteContext.lastsyncDate != nil && [remoteContext.lastsyncDate timeIntervalSinceDate:localContext.modifiedDate] > 0) {
-				[aManagedObjectContext deleteObject:localContext];
-			}
+			DLog(@"syncContext deleting cos no foundGtdContext: %@", localContext.title);
+			[aManagedObjectContext deleteObject:localContext];
 			
 		//} else if ([localContext.modifiedDate timeIntervalSinceDate:remoteContext.lastsyncDate] == 0) {
 
