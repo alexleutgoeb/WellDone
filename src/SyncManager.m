@@ -474,7 +474,7 @@
 					DLog(@"Gtd task:   %@", gtdTask.date_modified);
 					DLog(@"Last sync:  %@", remoteTask.lastsyncDate);
 					
-					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0) {
+					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0) {
 						// Update of remote task by local task
 						DLog(@"Update remote task by local task (newer)...");
 						gtdTask.title = localTask.title;
@@ -516,14 +516,111 @@
 						}
 					}
 					
-					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
 						// Update of local task by remote one
 						DLog(@"Update local task by remote task (newer)...");
+						// Set local task properties
+						localTask.title = gtdTask.title;
+						localTask.status = [NSNumber numberWithInt:gtdTask.status];
+						localTask.startDate = gtdTask.date_start;
+						localTask.starred = [NSNumber numberWithBool:gtdTask.star];
+						localTask.repeat = [NSNumber numberWithInt:gtdTask.repeat];
+						localTask.reminder = [NSNumber numberWithInt:gtdTask.reminder];
+						localTask.priority = [NSNumber numberWithInt:gtdTask.priority];
+						localTask.note = gtdTask.note;
+						localTask.length = [NSNumber numberWithInt:gtdTask.length];
+						localTask.dueDate = gtdTask.date_due;
+						localTask.completed = (gtdTask.completed == nil) ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt:1];
 						
-						// TODO: implement update local folder
+						// Tags
+						NSMutableSet *tagSet = [NSMutableSet set];
+						for (NSString *tagString in gtdTask.tags) {
+							if ([tagString length] > 0) {
+								if ([possibleTags objectForKey:tagString] != nil) {
+									// tag in db
+									[tagSet addObject:[possibleTags objectForKey:tagString]];
+								}
+								else {
+									// Not in db, add it to db, possible list and task
+									Tag *newTag = (Tag *)[NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:aManagedObjectContext];
+									newTag.text = tagString;
+									[possibleTags setObject:newTag forKey:tagString];
+									[tagSet addObject:newTag];
+								}
+							}
+						}
+						localTask.tags = [NSSet setWithSet:tagSet];
+						
+						// Context
+						if (gtdTask.context > 0) {
+							fetchRequest = [[NSFetchRequest alloc] init];
+							entity = [NSEntityDescription entityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
+							[fetchRequest setEntity:entity];
+							NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", gtdTask.context, syncService.identifier];
+							[fetchRequest setPredicate:predicate];
+							error = nil;
+							NSArray *allContext = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+							if (allContext != nil && [allContext count] == 1) {
+								// Found context
+								RemoteContext *remoteContext = [allContext objectAtIndex:0];
+								localTask.context = remoteContext.localContext;
+							}
+							else {
+								// Error, context should be in database, annoying...
+							}
+							[fetchRequest release];
+						}
+						
+						// Folder
+						if (gtdTask.folder > 0) {
+							fetchRequest = [[NSFetchRequest alloc] init];
+							entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+							[fetchRequest setEntity:entity];
+							NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", gtdTask.folder, syncService.identifier];
+							[fetchRequest setPredicate:predicate];
+							error = nil;
+							NSArray *allFolder = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+							if (allFolder != nil && [allFolder count] == 1) {
+								// Found folder
+								RemoteFolder *remoteFolder = [allFolder objectAtIndex:0];
+								localTask.folder = remoteFolder.localFolder;
+							}
+							else {
+								// Error, folder should be in database, annoying...
+							}
+							[fetchRequest release];
+						}
+						
+						// Parent task
+						if (gtdTask.parentId == 0) {
+							// Inbox
+							localTask.parentTask = nil;
+						}
+						else if (gtdTask.parentId > 0) {
+							// Has parent task, look up
+							fetchRequest = [[NSFetchRequest alloc] init];
+							entity = [NSEntityDescription entityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
+							[fetchRequest setEntity:entity];
+							NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", gtdTask.parentId, syncService.identifier];
+							[fetchRequest setPredicate:predicate];
+							error = nil;
+							NSArray *allTasks = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+							if (allTasks != nil && [allTasks count] == 1) {
+								// Found parent task
+								RemoteTask *remoteParentTask = [allTasks objectAtIndex:0];
+								localTask.parentTask = remoteParentTask.localTask;
+							}
+							else {
+								// Error, task should be in database, annoying...
+							}
+							[fetchRequest release];
+						}
+						
+						remoteTask.lastsyncDate = [NSDate date];
+						DLog(@"Task '%@' updated successfully.", localTask.title);
 					}
 					
-					else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+					else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
 						// Conflict
 						DLog(@"task conflicted, create a conflict container");
 						TaskContainer *tc = [[[TaskContainer alloc] init] autorelease];

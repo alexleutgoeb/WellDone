@@ -81,7 +81,9 @@
 	[nc addObserver:self selector:@selector(reactToMOCSave:)
 			   name:NSManagedObjectContextDidSaveNotification object:nil];
 	
-
+	[nc addObserver:self selector:@selector(updateGTDAfterMidnight:)
+			   name:kNewDayNotification object:nil];
+	
 }
 
 - (void)dealloc {
@@ -287,6 +289,13 @@
 	} else {
 		DLog(@"Updated tags in Task.");
 	}
+}
+
+- (void) updateGTDAfterMidnight:(NSNotification *)notification {
+	NSLog(@"Will updateGTDAfterMidnight");
+	[[[NSApplication sharedApplication] delegate] initGTDView];
+	[gtdOutlineView reloadData];
+	
 }
 
 /*
