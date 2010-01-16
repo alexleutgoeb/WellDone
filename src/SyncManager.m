@@ -510,7 +510,7 @@
 						error = nil;
 						[syncService editTask:gtdTask error:&error];
 						if (error == nil) {
-							remoteTask.lastsyncDate == [NSDate date];
+							remoteTask.lastsyncDate = [NSDate date];
 							DLog(@"Task '%@' updated successfully.", localTask.title);
 						}
 					}
