@@ -432,7 +432,7 @@
 	//now find a corresponding GTDfolder
 	NSMutableArray *gtdTasks = (NSMutableArray *) [syncService getTasks:&error];
 
-	NSMutableArray *actualConflicts = [[NSMutableArray alloc] init];
+	NSMutableArray *actualConflicts = [[[NSMutableArray alloc] init] autorelease];
 
 	RemoteTask *remoteTask;
 	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
@@ -709,6 +709,7 @@
 		
 	}
 
+	*conflicts = actualConflicts;
 	return aManagedObjectContext;
 }
 
