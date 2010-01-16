@@ -479,7 +479,7 @@
 					DLog(@"Gtd task:   %@", gtdTask.date_modified);
 					DLog(@"Last sync:  %@", remoteTask.lastsyncDate);
 					
-					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0) {
+					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0) {
 						// Update of remote task by local task
 						DLog(@"Update remote task by local task (newer)...");
 						gtdTask.title = localTask.title;
@@ -521,7 +521,7 @@
 						}
 					}
 					
-					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
 						// Update of local task by remote one
 						DLog(@"Update local task by remote task (newer)...");
 						// Set local task properties
@@ -625,7 +625,7 @@
 						DLog(@"Task '%@' updated successfully.", localTask.title);
 					}
 					
-					else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+					else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
 						// Conflict
 						DLog(@"task conflicted, create a conflict container");
 						TaskContainer *tc = [[[TaskContainer alloc] init] autorelease];
