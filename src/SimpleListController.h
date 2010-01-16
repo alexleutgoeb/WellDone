@@ -66,4 +66,5 @@
 - (void) reloadTaskListWithFilters;
 - (void) deleteSelectedTask;
 - (Task *) getDraggedTask;
+- (void)userSelectedRow:(id)sender;
 @end

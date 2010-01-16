@@ -70,6 +70,7 @@
 	iTasks = [[NSMutableArray alloc] init];
 	iGroupRowCell = [[NSTextFieldCell alloc] init];
 	[iGroupRowCell setEditable:NO];
+	[iGroupRowCell setSelectable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];	
 	[gtdOutlineView expandItem:iGroupRowCell];
 	
@@ -92,20 +93,38 @@
 
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 	NSTextFieldCell *acell = [tableColumn dataCell];
+	
+	// Uncomment to set styling in cells:
+	/*
+	 if ([cell isKindOfClass: [NSTextFieldCell class]]) {
+	 NSFont *font = [NSFont fontWithName:@"Times-Roman" size:12.0];
+	 NSArray *keys = [NSArray arrayWithObjects:NSFontAttributeName,NSBaselineOffsetAttributeName,nil];
+	 
+	 NSArray *values = [NSArray arrayWithObjects:font,[NSNumber numberWithFloat:100.0],nil];
+	 NSDictionary *attributes = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+	 NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:[cell stringValue] attributes:attributes];
+	 //[cell setPlaceholderAttributedString:attributedString];
+	 [cell setAttributedStringValue:attributedString];
+	 }*/
+	
 	NSTreeNode *node = item;
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
 		Task *task = [node representedObject];
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
 		} else {
-			if (task.dueDate != nil && task.dueDate > todaysDate) {
+			if (task.dueDate != nil && [todaysDate timeIntervalSinceDate:task.dueDate] > 0) {
 				[self setTaskOverdue:acell];
-				DLog(@"Set cell overdue...");
 			}
-			else 
+			else  {
 				[self setTaskUndone:acell];
+			}
 		}
 	}
+	
+	// This is a fix for a bug in NSOutlineView, where selected cells behave strange
+	// when the highlighting mode is set to SourceList:
+	[acell setStringValue:[acell stringValue]];
 }
 
 - (void)setTaskDone:(NSTextFieldCell*)cell {

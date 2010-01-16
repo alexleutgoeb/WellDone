@@ -84,15 +84,23 @@
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
 		} else {
-			if (task.dueDate != nil && task.dueDate > todaysDate) {
+			if (task.dueDate != nil && [todaysDate timeIntervalSinceDate:task.dueDate] > 0) {
 				[self setTaskOverdue:acell];
-				DLog(@"Set cell overdue...");
+				DLog(@"Set cell with value '%@' overdue...", [task title]);
 			}
-			else 
+			else  {
 				[self setTaskUndone:acell];
+				DLog(@"Set cell with value '%@' and date '%@' UNDONE...", [task title], [task dueDate]);
+			}
 		}
 	}
-	
+	else {
+		DLog (@"COULD NOT STYLE CELL FOR COLUMN %@", [tableColumn identifier]);
+	}
+
+	// This is a fix for a bug in NSOutlineView, where selected cells behave strange
+	// when the highlighting mode is set to SourceList:
+	[acell setStringValue:[acell stringValue]];
 }
 
 /*
@@ -272,7 +280,18 @@
 	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
 	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
 	[ sortDesc release ];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelectedRow:)  name:NSOutlineViewSelectionDidChangeNotification object:myview];
 }	
+
+
+/*
+ * This is called when the user selects a row.
+ * This was intended to call reloadData, to ensure that colors in the selection are drawn correc
+ */
+- (void)userSelectedRow:(id)sender {
+	//[myview reloadData];
+}
 
 - (BOOL) outlineView : (NSOutlineView *) outlineView  
 		  writeItems : (NSArray*) items 

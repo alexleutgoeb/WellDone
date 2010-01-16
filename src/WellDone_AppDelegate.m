@@ -408,7 +408,8 @@
 
 - (IBAction) toggleInspector:(id) sender {
 	if ([[hudTaskEditorController window] isVisible]) {
-		[window removeChildWindow:[hudTaskEditorController window]];
+		//Uncomment for child-window behaviour:
+		//[window removeChildWindow:[hudTaskEditorController window]];
 		[[hudTaskEditorController window] orderOut:nil];
 		
 	}
@@ -416,7 +417,9 @@
 		NSRect rect = [window frame];
 		NSPoint mainWindowTopRight = NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
 		[[hudTaskEditorController window] cascadeTopLeftFromPoint:mainWindowTopRight];
-		[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
+		//Uncomment for child-window behaviour:
+		//[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
+		[[hudTaskEditorController window] orderFront:nil];
 	}
 }
 

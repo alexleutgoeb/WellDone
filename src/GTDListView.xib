@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -55,7 +55,7 @@
 									<bool key="EncodedWithXMLCoder">YES</bool>
 									<object class="NSOutlineView" id="475774575">
 										<reference key="NSNextResponder" ref="709411455"/>
-										<int key="NSvFlags">4352</int>
+										<int key="NSvFlags">4368</int>
 										<string key="NSFrameSize">{610, 619}</string>
 										<reference key="NSSuperview" ref="709411455"/>
 										<bool key="NSEnabled">YES</bool>
@@ -260,7 +260,7 @@
 											</object>
 										</object>
 										<double key="NSIntercellSpacingWidth">3</double>
-										<double key="NSIntercellSpacingHeight">2</double>
+										<double key="NSIntercellSpacingHeight">0.0</double>
 										<object class="NSColor" key="NSBackgroundColor">
 											<int key="NSColorSpace">5</int>
 											<bytes key="NSCMYK">MC4wMTk5OTk5OTk1NSAwLjAxOTk5OTk5OTU1IDAuMTAwMDAwMDAxNSAwAA</bytes>
@@ -286,7 +286,9 @@
 										<int key="NSDraggingSourceMaskForLocal">15</int>
 										<int key="NSDraggingSourceMaskForNonLocal">0</int>
 										<bool key="NSAllowsTypeSelect">YES</bool>
-										<int key="NSTableViewDraggingDestinationStyle">0</int>
+										<int key="NSTableViewSelectionHighlightStyle">1</int>
+										<int key="NSTableViewDraggingDestinationStyle">1</int>
+										<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 									</object>
 								</object>
 								<string key="NSFrame">{{0, 17}, {610, 619}}</string>
@@ -340,7 +342,7 @@
 						<reference key="NSContentView" ref="709411455"/>
 						<reference key="NSHeaderClipView" ref="268457063"/>
 						<reference key="NSCornerView" ref="462664808"/>
-						<bytes key="NSScrollAmts">QSAAAEEgAABBsAAAQbAAAA</bytes>
+						<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 					</object>
 				</object>
 				<string key="NSFrameSize">{610, 636}</string>

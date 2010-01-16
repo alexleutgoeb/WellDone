@@ -806,7 +806,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>DebugTreeController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{411, 148}, {611, 296}}</string>
+					<string>{{411, 149}, {611, 296}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -878,6 +878,10 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SimpleListController</string>
 					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">userSelectedRow:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
