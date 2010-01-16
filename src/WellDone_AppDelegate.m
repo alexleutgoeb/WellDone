@@ -53,7 +53,7 @@
 - (void)initTimers;
 - (void)registerValueTransformers;
 - (void)initGTDView;
-- (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore;
+- (void) initGTDitemToday:(NSDate *)todaysDate todayEnd:(NSDate *)todaysDateEnd inStore:(id)memoryStore;
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore;
 - (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
 - (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore;
@@ -275,7 +275,12 @@
 	[theComps setHour:0];
 	[theComps setMinute:0];
 	[theComps setSecond:0];
+	NSDateComponents* theComps2 = [theCalendar components:theUnitFlags fromDate:temp];
+	[theComps2 setHour:23];
+	[theComps2 setMinute:59];
+	[theComps2 setSecond:59];
 	NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
+	NSDate* todaysDateEnd = [theCalendar dateFromComponents:theComps2];
 	
 	// --------- Computing GTD
 	NSTimeInterval secondsPerDay = 24 * 60 * 60;
@@ -304,19 +309,19 @@
 		loadSection = NO;
 	}
 	
-	[self initGTDitemToday:todaysDate inStore:memoryStore];
-	[self initGTDitemThreeDays:todaysDate inThreeDaysDate:inThreeDays inStore:memoryStore];
+	[self initGTDitemToday:todaysDate todayEnd:todaysDateEnd inStore:memoryStore];
+	[self initGTDitemThreeDays:todaysDateEnd inThreeDaysDate:inThreeDays inStore:memoryStore];
 	[self initGTDitemSevenDays:inThreeDays inSevenDaysDate:inSevenDays inStore:memoryStore];
 	[self initGTDitemUpcoming:inSevenDays inStore:memoryStore];
 	
 }
 
-- (void) initGTDitemToday:(NSDate *)todaysDate inStore:(id)memoryStore {
+- (void) initGTDitemToday:(NSDate *)todaysDate todayEnd:(NSDate *)todaysDateEnd inStore:(id)memoryStore {
 	NSError *error;
 	
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate = %@", todaysDate];	
+	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@", todaysDate, todaysDateEnd];	
 	[request setEntity:entityDescription];
 	[request setPredicate:predicateToday];
 	
