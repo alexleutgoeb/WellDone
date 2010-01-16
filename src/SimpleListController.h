@@ -38,12 +38,17 @@
 	NSManagedObjectContext *moc;
 	NSArray* dragType;
 	_NSArrayControllerTreeNode* draggedNode;
+	Task *draggedTask;
+	
 	
 	// holds the control which is being edited
 	NSControl *editingControl;
 	
 	// Holds all filter predicates (string or array representation) for the task view which are currently active
 	NSMutableDictionary* taskListFilterPredicate;
+	
+	// Holds today's date for distinction which tasks are overdue
+	NSDate* todaysDate;
 }
 
 @property (nonatomic, retain, readonly) NSTreeController *treeController;
@@ -51,6 +56,7 @@
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 - (void)setTaskDone:(NSTextFieldCell*)cell;
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
+- (void)setTaskOverdue:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
 - (void) setTaskListFolderFilter:(Folder*) folderToFilterFor;
@@ -59,4 +65,6 @@
 - (NSPredicate *) generateTaskListSearchPredicate;
 - (void) reloadTaskListWithFilters;
 - (void) deleteSelectedTask;
+- (Task *) getDraggedTask;
+- (void)userSelectedRow:(id)sender;
 @end

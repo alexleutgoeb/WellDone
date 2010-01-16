@@ -542,7 +542,7 @@
 
 /**
  Task sync
- @author Michael
+ @author Michael, Alex
  */
 - (NSManagedObjectContext *)syncTasks:(NSManagedObjectContext *)aManagedObjectContext withSyncService:(id<GtdApi>)syncService andConflicts:(NSArray **)conflicts {
 	
@@ -579,166 +579,203 @@
 	
 	//now find a corresponding GTDfolder
 	NSMutableArray *gtdTasks = (NSMutableArray *) [syncService getTasks:&error];
-	NSMutableArray *foundGtdTasks = [[NSMutableArray alloc] init];
-	NSMutableArray *actualConflicts = [[NSMutableArray alloc] init];
-	GtdTask *foundGtdTask;
+
+	NSMutableArray *actualConflicts = [[[NSMutableArray alloc] init] autorelease];
+
 	RemoteTask *remoteTask;
 	DLog(@"xxxxxxxxxxxxx    schleifenbeginn    xxxxxxxxxxxx ");
 	//lokale Objekte nach remoteObjekten durchsuchen und gegebenenfalls adden
 	for (Task *localTask in localTasks) {
-		DLog(@"localTask.name %@", localTask.title);
-		//[aManagedObjectContext deleteObject:localTask];
-		NSEnumerator *enumerator = [localTask.remoteTasks objectEnumerator];
-		DLog(@"localTask.remoteTask %@", [localTask.remoteTasks description]);
-		remoteTask = nil;
-		
-		while ((remoteTask = [enumerator nextObject])) {
-			//wenn remoteobject existiert
-			if([remoteTask.serviceIdentifier isEqualToString:syncService.identifier]) break;
-			else remoteTask = nil;
+		DLog(@"Looking for a remote task for '%@'...", localTask.title);
+
+		if ([[localTask.remoteTasks subsetWithKey:@"serviceIdentifier" value:syncService.identifier] count] == 1) {
+			// Remote task found
+			remoteTask = [[localTask.remoteTasks subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
+			DLog(@"Found remote task with remote uid: %i.", remoteTask.remoteUid);
+			
+			// Look for a corresponding gtdtask
+			NSSet *gtdTaskSet = [NSSet setWithArray:gtdTasks];
+			if ([[gtdTaskSet subsetWithKey:@"uid" value:remoteTask.remoteUid] count] == 1) {
+				// Found corresponding gtdtask, update both
+				GtdTask *gtdTask = [[gtdTaskSet subsetWithKey:@"uid" value:remoteTask.remoteUid] anyObject];
+				DLog(@"Found GtdTask...");
+				
+				// Check if task was deleted locally
+				DLog(@"Check if task was deleted locally...");
+				if ([localTask.deletedByApp boolValue] == YES) {
+					// Task deleted locally, delete remote, afterwards local
+					error = nil;
+					[syncService deleteTask:gtdTask error:&error];
+					if (error == nil) {
+						// Task deleted remotely
+						[aManagedObjectContext deleteObject:localTask];
+					}
+					DLog(@"Task was deleted locally, so deleted remotely too.");
+				}
+				else {
+					// Task not deleted, update
+					DLog(@"Task was not deleted locally, update...");
+					
+					// Check last modified dates
+					DLog(@"Local task: %@", localTask.modifiedDate);
+					DLog(@"Gtd task:   %@", gtdTask.date_modified);
+					DLog(@"Last sync:  %@", remoteTask.lastsyncDate);
+					
+					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0) {
+						// Update of remote task by local task
+						DLog(@"Update remote task by local task (newer)...");
+						gtdTask.title = localTask.title;
+						gtdTask.priority = [localTask.priority integerValue];
+						gtdTask.length = [localTask.length integerValue];
+						gtdTask.note = localTask.note;
+						gtdTask.star = [localTask.starred boolValue];
+						gtdTask.repeat = [localTask.repeat integerValue];
+						gtdTask.status = [localTask.status integerValue];
+						gtdTask.reminder = [localTask.reminder integerValue];
+						gtdTask.parentId = [remoteTask.remoteUid intValue];
+						gtdTask.date_due = localTask.dueDate;
+						gtdTask.date_start = localTask.startDate;
+						
+						if ([localTask.tags count] > 0)
+							gtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
+						if([localTask.completed boolValue] == YES)
+							gtdTask = [NSDate date];
+
+						RemoteFolder *remoteFolder = [[localTask.folder.remoteFolders subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
+						if (remoteFolder)
+							gtdTask.folder = [remoteFolder.remoteUid intValue];
+						else
+							gtdTask.folder = 0;
+
+						
+						RemoteContext *remoteContext = [[localTask.context.remoteContexts subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
+						if (remoteContext)
+							gtdTask.context = [remoteContext.remoteUid intValue];
+						else
+							gtdTask.context = 0;
+						
+						// Overwrite the remote task with the local one
+						error = nil;
+						[syncService editTask:gtdTask error:&error];
+						if (error == nil) {
+							remoteTask.lastsyncDate = [NSDate date];
+							DLog(@"Task '%@' updated successfully.", localTask.title);
+						}
+					}
+					
+					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+						// Update of local task by remote one
+						DLog(@"Update local task by remote task (newer)...");
+						
+						// TODO: implement update local folder
+					}
+					
+					else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
+						// Conflict
+						DLog(@"task conflicted, create a conflict container");
+						TaskContainer *tc = [[[TaskContainer alloc] init] autorelease];
+						tc.gtdTask = gtdTask;
+						tc.remoteTask = remoteTask;
+						[actualConflicts addObject:tc];
+					}
+					else {
+						// Nothing to do
+						DLog(@"Task has not changed since last sync, nothing to do.");
+					}
+				}
+				// Remove gtdTask from array finally
+				[gtdTasks removeObject:gtdTask];
+			}
+			else {
+				// Task not found, deleted remotely
+				DLog(@"No corresponding gtd task found, remove locally.");
+				[aManagedObjectContext deleteObject:localTask];
+				// If getDeletedTasks not called, delete the task
+			}
 		}
-		//now we can safely assume, that each local folder has a remoteTask
-		//no remoteTask was found, create one
-		if(remoteTask == nil) {
-			DLog(@"creating remoteTask for folder %@", localTask.title);
+		else {
+			// No remote task found, create one
+			DLog(@"No remote task found, create one...");
 			remoteTask = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
 			remoteTask.serviceIdentifier = syncService.identifier;
-			remoteTask.remoteUid = [NSNumber numberWithInteger:-1];
-			remoteTask.lastsyncDate = nil;
 			remoteTask.localTask = localTask;
-			NSMutableSet *mutableRemoteTasks = [localTask mutableSetValueForKey:@"remoteTasks"];
-			[mutableRemoteTasks addObject:remoteTask];
-			DLog(@"syncTask addTask.");
-
+			
+			DLog(@"Sync new remote task to api...");
 			GtdTask *newGtdTask = [[GtdTask alloc] init];
+
 			newGtdTask.title = localTask.title;
 			newGtdTask.uid = 0;
-			if ([localTask.tags count] > 0)
-				newGtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
-			//newGtdTask.archived = localTask.archived;
-			//newGtdTask.order = [localTask.order integerValue];
-			
-			remoteTask.remoteUid = [NSNumber numberWithInteger:[syncService addTask:newGtdTask error:&error]];
-			DLog(@"new remoteUid: %@", remoteTask.remoteUid);
-			remoteTask.lastsyncDate = [NSDate date];
-			newGtdTask.uid = [remoteTask.remoteUid integerValue];
-			foundGtdTask = newGtdTask;
-		} else {
-			//find gtdfolder
-			foundGtdTask = nil;
-			for(GtdTask *gtdTask in gtdTasks) {
-				DLog(@"found GtdTask %@", gtdTask.title);
-				DLog(@"gtdTask.uid %i", gtdTask.uid);
-				DLog(@"remoteTask.remoteUid %@", remoteTask.remoteUid);
-				if(gtdTask.uid == [remoteTask.remoteUid integerValue]) {
-					DLog(@"syncTask matching remoteUid. %i", gtdTask.uid);
-					[foundGtdTasks addObject:gtdTask];
-					foundGtdTask = gtdTask;
-					break;
-				}
-			}
-			for(GtdTask *bla in foundGtdTasks) {
-				DLog(@"syncTask foundTask. %@", bla.title);
-			}
-		}
-		
-		DLog(@"localTask.modifiedDate: %@", localTask.modifiedDate);
-		DLog(@"remoteTask.lastsyncDate: %@", remoteTask.lastsyncDate);
-		DLog(@"localTask.deletedByApp: %@", localTask.deletedByApp);
-		
-		//DLog(@"localTask.modifiedDate: %@", localTask.modifiedDate);
-		if([localTask.deletedByApp integerValue] == 1) {
-			DLog(@"syncTask deleting a folder.");
-			if(foundGtdTask != nil)
-				[syncService deleteTask:foundGtdTask error:&error];
-			[aManagedObjectContext deleteObject:localTask];
-		} else if(foundGtdTask == nil) {
-			DLog(@"syncTask deleting cos no foundGtdTask");
-			if(remoteTask.lastsyncDate != nil && [remoteTask.lastsyncDate timeIntervalSinceDate:localTask.modifiedDate] > 0) {
-				[aManagedObjectContext deleteObject:localTask];
-			}
-			
-		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] < 0) {
-			//editTask
-			DLog(@"syncTask editTask.");
-			GtdTask *newGtdTask = [[GtdTask alloc] init];
-			newGtdTask.uid = [remoteTask.remoteUid integerValue];
-			DLog(@"check.");
-			newGtdTask.title = localTask.title;
-			newGtdTask.date_created = localTask.createDate;
-			newGtdTask.date_modified = localTask.modifiedDate;
-			newGtdTask.date_start = localTask.startDate;
-			newGtdTask.date_due = localTask.dueDate;			
-			newGtdTask.tags = [localTask.tags allObjects];
-			
-			//ULTRAZACH: finden von remoteUid des folders....
-			NSEnumerator *enumerator = [localTask.folder.remoteFolders objectEnumerator];
-			RemoteFolder *remoteFolder = nil;
-			
-			while ((remoteFolder = [enumerator nextObject])) {
-				//wenn remoteobject existiert
-				if([remoteFolder.serviceIdentifier isEqualToString:syncService.identifier]) break;
-				else remoteFolder = nil;
-			}
-			newGtdTask.folder = [remoteFolder.remoteUid integerValue];
-			
-			//ULTRAZACH: finden von remoteUid des folders....
-			enumerator = [localTask.context.remoteContexts objectEnumerator];
-			RemoteContext *remoteContext = nil;
-			
-			while ((remoteContext = [enumerator nextObject])) {
-				//wenn remoteobject existiert
-				if([remoteContext.serviceIdentifier isEqualToString:syncService.identifier]) break;
-				else remoteContext = nil;
-			}
-			newGtdTask.context = [remoteContext.remoteUid integerValue];
 			newGtdTask.priority = [localTask.priority integerValue];
-			if(localTask.completed == [NSNumber numberWithInt:1]) newGtdTask = [NSDate date];
 			newGtdTask.length = [localTask.length integerValue];
 			newGtdTask.note = localTask.note;
-			newGtdTask.star = (localTask.starred == [NSNumber numberWithInt:1] ? YES : NO);
+			newGtdTask.star = [localTask.starred boolValue];
 			newGtdTask.repeat = [localTask.repeat integerValue];
 			newGtdTask.status = [localTask.status integerValue];
 			newGtdTask.reminder = [localTask.reminder integerValue];
 			newGtdTask.parentId = [remoteTask.remoteUid intValue];
+			newGtdTask.date_due = localTask.dueDate;
+			newGtdTask.date_start = localTask.startDate;
+
+			if ([localTask.tags count] > 0)
+				newGtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
+			if([localTask.completed boolValue] == YES)
+				newGtdTask = [NSDate date];
 			
-			//overwrite the remote remoteTask with the local folder
-			[syncService editTask:newGtdTask error:&error];
-			remoteTask.lastsyncDate == [NSDate date];
-		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] < 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
-			DLog(@"syncTask writing data to local.");
-			localTask.title = foundGtdTask.title;
+			RemoteFolder *remoteFolder = [[localTask.folder.remoteFolders subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
+			if (remoteFolder)
+				newGtdTask.folder = [remoteFolder.remoteUid intValue];
 			
-			
-			
-			remoteTask.lastsyncDate == [NSDate date];
-		} else if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0 && [foundGtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0) {
-			TaskContainer *tc = [[TaskContainer alloc] init];
-			tc.gtdTask = foundGtdTask;
-			tc.remoteTask = remoteTask;
-			[actualConflicts addObject:tc];
+			RemoteContext *remoteContext = [[localTask.context.remoteContexts subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
+			if (remoteContext)
+				newGtdTask.context = [remoteContext.remoteUid intValue];
+
+			error = nil;
+			remoteTask.remoteUid = [NSNumber numberWithInt:[syncService addTask:newGtdTask error:&error]];
+			if (error != nil) {
+				// Error while syncing, rollback?
+				DLog(@"Error: Can't add task '%@' to api: %@", localTask.title, [error localizedDescription]);
+				// Remove remote task again
+				[aManagedObjectContext deleteObject:remoteTask];
+			}
+			else {
+				// Task added
+				DLog(@"Task added to api with remote id: %@.", remoteTask.remoteUid);
+				remoteTask.lastsyncDate = [NSDate date];
+			}
+			[newGtdTask release];
 		}
 	}
-	//NSMutableArray thxObjC = new NSMutableArray(gtdTasks);
-	//finally durchlaufe die gtdTask die nicht zuordenbar waren und erzeuge sie lokal
-	[gtdTasks removeObjectsInArray:foundGtdTasks];
-	for(GtdTask *gtdTask in gtdTasks) {
+	
+	
+	
+	// Iterate undone gtdTasks and add locally
+	for (GtdTask *gtdTask in gtdTasks) {
+		DLog(@"Adding new local task '%@'...", gtdTask.title);
+		
 		// Add new entities
-		RemoteTask *rTask = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
-		Task *lTask = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
+		RemoteTask *remoteTask = [NSEntityDescription insertNewObjectForEntityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
+		Task *localTask = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
 		
-		DLog(@"syncTask adding new folder to local.");
+		// Set remote task properties
+		remoteTask.localTask = localTask;
+		remoteTask.serviceIdentifier = syncService.identifier;
+		remoteTask.lastsyncDate = [NSDate date];
+		remoteTask.remoteUid = [NSNumber numberWithInt:gtdTask.uid];
 		
-		// Set entity attributes
-		rTask.serviceIdentifier = syncService.identifier;
-		rTask.remoteUid = [NSNumber numberWithInteger:gtdTask.uid];
-		rTask.lastsyncDate = [NSDate date];
-		rTask.localTask = lTask;
-		lTask.title = gtdTask.title;
-		lTask.createDate = gtdTask.date_created;
-		lTask.modifiedDate = gtdTask.date_modified;
-		lTask.startDate = gtdTask.date_start;
-		lTask.dueDate = gtdTask.date_due;
+		// Set local task properties
+		localTask.title = gtdTask.title;
+		localTask.status = [NSNumber numberWithInt:gtdTask.status];
+		localTask.startDate = gtdTask.date_start;
+		localTask.starred = [NSNumber numberWithBool:gtdTask.star];
+		localTask.repeat = [NSNumber numberWithInt:gtdTask.repeat];
+		localTask.reminder = [NSNumber numberWithInt:gtdTask.reminder];
+		localTask.priority = [NSNumber numberWithInt:gtdTask.priority];
+		localTask.note = gtdTask.note;
+		localTask.length = [NSNumber numberWithInt:gtdTask.length];
+		localTask.dueDate = gtdTask.date_due;
+		localTask.completed = (gtdTask.completed == nil) ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt:1];
+		
+		// Tags
 		NSMutableSet *tagSet = [NSMutableSet set];
 		for (NSString *tagString in gtdTask.tags) {
 			if ([tagString length] > 0) {
@@ -755,19 +792,79 @@
 				}
 			}
 		}
-		lTask.tags = [NSSet setWithSet:tagSet];
-
-		//ULTRAZACH alle folders durchsuchen
+		localTask.tags = [NSSet setWithSet:tagSet];
 		
+		// Context
+		if (gtdTask.context > 0) {
+			fetchRequest = [[NSFetchRequest alloc] init];
+			entity = [NSEntityDescription entityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
+			[fetchRequest setEntity:entity];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", gtdTask.context, syncService.identifier];
+			[fetchRequest setPredicate:predicate];
+			error = nil;
+			NSArray *allContext = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+			if (allContext != nil && [allContext count] == 1) {
+				// Found context
+				RemoteContext *remoteContext = [allContext objectAtIndex:0];
+				localTask.context = remoteContext.localContext;
+			}
+			else {
+				// Error, context should be in database, annoying...
+			}
+			[fetchRequest release];
+		}
 		
-		NSMutableSet *mutableRemoteTasks = [lTask mutableSetValueForKey:@"remoteTasks"];
-		[mutableRemoteTasks addObject:rTask];
+		// Folder
+		if (gtdTask.folder > 0) {
+			fetchRequest = [[NSFetchRequest alloc] init];
+			entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+			[fetchRequest setEntity:entity];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", gtdTask.folder, syncService.identifier];
+			[fetchRequest setPredicate:predicate];
+			error = nil;
+			NSArray *allFolder = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+			if (allFolder != nil && [allFolder count] == 1) {
+				// Found folder
+				RemoteFolder *remoteFolder = [allFolder objectAtIndex:0];
+				localTask.folder = remoteFolder.localFolder;
+			}
+			else {
+				// Error, folder should be in database, annoying...
+			}
+			[fetchRequest release];
+		}
+		
+		// Parent task
+		if (gtdTask.parentId == 0) {
+			// Inbox
+			localTask.parentTask = nil;
+		}
+		else if (gtdTask.parentId > 0) {
+			// Has parent task, look up
+			fetchRequest = [[NSFetchRequest alloc] init];
+			entity = [NSEntityDescription entityForName:@"RemoteTask" inManagedObjectContext:aManagedObjectContext];
+			[fetchRequest setEntity:entity];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", gtdTask.parentId, syncService.identifier];
+			[fetchRequest setPredicate:predicate];
+			error = nil;
+			NSArray *allTasks = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+			if (allTasks != nil && [allTasks count] == 1) {
+				// Found parent task
+				RemoteTask *remoteParentTask = [allTasks objectAtIndex:0];
+				localTask.parentTask = remoteParentTask.localTask;
+			}
+			else {
+				// Error, task should be in database, annoying...
+			}
+			[fetchRequest release];
+		}
+		
 	}
-	
-	//zuerst innerhalb einer passenden datenstruktur jedem element aus rTask das entsprechende element aus gtdTask zuordnen
-	//falls es zu einem rTask element keinen gtdTask gibt:
-	//wenn rTask.localTask.deletedByApp != true -> [syncService addTask]
-	//falls unzugeordnete gtdfolder übrigbleiben -> neue folder lokal anlegen und gleich daten übernehmen
+
+	if ([actualConflicts count] > 0) {
+		// Conflicts
+		*conflicts = actualConflicts;
+	}
 	return aManagedObjectContext;
 }
 

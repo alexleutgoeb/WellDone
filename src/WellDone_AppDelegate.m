@@ -108,6 +108,7 @@
 @synthesize isOnline;
 @synthesize syncMenuItem, syncTextMenuItem;
 @synthesize secondsTimer, dateFormatter, today;
+@synthesize gtdListController;
 
 #pragma mark -
 #pragma mark Initialization
@@ -407,7 +408,8 @@
 
 - (IBAction) toggleInspector:(id) sender {
 	if ([[hudTaskEditorController window] isVisible]) {
-		[window removeChildWindow:[hudTaskEditorController window]];
+		//Uncomment for child-window behaviour:
+		//[window removeChildWindow:[hudTaskEditorController window]];
 		[[hudTaskEditorController window] orderOut:nil];
 		
 	}
@@ -415,7 +417,9 @@
 		NSRect rect = [window frame];
 		NSPoint mainWindowTopRight = NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
 		[[hudTaskEditorController window] cascadeTopLeftFromPoint:mainWindowTopRight];
-		[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
+		//Uncomment for child-window behaviour:
+		//[window addChildWindow:[hudTaskEditorController window] ordered:NSWindowAbove];
+		[[hudTaskEditorController window] orderFront:nil];
 	}
 }
 
@@ -576,8 +580,8 @@
 */
 - (void) replacePlaceholderView:(NSView**)placeholder withViewOfController:(NSViewController*)viewController
 {
-	NSParameterAssert(viewController != nil);
-	NSParameterAssert(*placeholder != nil);
+	//NSParameterAssert(viewController != nil);
+	//NSParameterAssert(*placeholder != nil);
 	
 	NSView *newView = [viewController view];
 	NSView *superview = [*placeholder superview];
@@ -862,7 +866,8 @@
 - (void)updateManagedObjectModificationDates:(NSNotification *)notification {
 	NSDictionary *userInfoDictionary = [notification userInfo];
     NSSet *changedObjects = [userInfoDictionary objectForKey:NSUpdatedObjectsKey];
-
+	DLog(@"Changed %i objects.", [changedObjects count]);
+	
 	if ([changedObjects count]) {
 		for (NSManagedObject *entity in changedObjects) {
 			if ([entity isKindOfClass:[Note class]] || 
@@ -870,7 +875,6 @@
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
 				// TODO: Check for some properties (ie NOT order)
-				DLog(@"Changed: %@ %@", [entity description], [entity class]);
 				[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
 			}
 		}
@@ -890,6 +894,9 @@
 	[alert runModal];
 }
 
+- (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts {
+	DLog(@"Sync finihsed with conflict(s): %i", [conflicts count]);
+}
 
 /*
  * This is called when the main window should close.

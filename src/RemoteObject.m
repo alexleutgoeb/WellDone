@@ -15,4 +15,11 @@
 @dynamic remoteUid;
 @dynamic serviceIdentifier;
 
+- (void)awakeFromInsert {
+	[super awakeFromInsert];
+	self.lastsyncDate = nil;
+	self.remoteUid = [NSNumber numberWithInt:-1];
+	self.serviceIdentifier = nil;
+}
+
 @end

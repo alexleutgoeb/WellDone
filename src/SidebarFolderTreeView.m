@@ -5,6 +5,7 @@
 //  Created by Matteo Bertozzi on 3/8/09.
 //  Copyright 2009 Matteo Bertozzi. All rights reserved.
 //
+
 #import "SidebarBadgeCell.h"
 #import "SidebarFolderTreeView.h"
 #import "Task.h"
@@ -12,13 +13,14 @@
 #import "SidebarFolderNode.h"
 #import "SidebarFolderController.h"
 
-
 #define kSidebarPBoardType		@"SidebarNodePBoardType"
+#define kTasksPBoardType @"TasksPBoardType"
 #define rootNodeInbox			@"1"
 #define nodeInbox				@"1.1"
 #define rootNodeTaskFolders		@"2"
 
 @implementation SidebarFolderTreeView
+
 
 #pragma mark -
 #pragma mark Initializing Code
@@ -45,7 +47,7 @@
 	[self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
 	
 	// drag and drop support
-	[self registerForDraggedTypes:[NSArray arrayWithObjects:kSidebarPBoardType, nil]];
+	[self registerForDraggedTypes:[NSArray arrayWithObjects:kSidebarPBoardType, kTasksPBoardType, nil]];
 	
 	
 	
@@ -619,12 +621,16 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 		//NSLog(@"Tried to drag item to root note - won't let that happen...");
 		return NSDragOperationNone;
 	}
-	NSLog(@"proposedItem: %@, index: %d", [item caption], index);
 	if (![item isDraggable] && index >= 0) {
 		if ([allowedDragDestinations containsObject:item])
 			return NSDragOperationMove;
 	}
-		
+	
+	if ([[info draggingPasteboard] availableTypeFromArray:[NSArray arrayWithObject:kTasksPBoardType]]) {
+		return NSDragOperationMove;
+	}
+
+	
 	return NSDragOperationNone;
 }
 
@@ -678,6 +684,15 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 		
 		
 		return YES;
+	}
+	
+	else if ([pboard availableTypeFromArray:[NSArray arrayWithObject:kTasksPBoardType]]) {
+		if (![targetItem isKindOfClass:[SidebarFolderNode class]])
+			return NO;
+		if ([[targetItem data] isKindOfClass: [Folder class]]) {
+			[myController addDraggedTaskToFolder: ((Folder *)[targetItem data])];
+			return YES;
+		}
 	}
 	
 	return NO;

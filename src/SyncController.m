@@ -255,6 +255,9 @@
 	else {		
 		// Get new objectcontext from delegate
 		NSManagedObjectContext *mainContext = [[NSApp delegate] managedObjectContext];
+		// Save moc before creating new
+		NSError *error = nil;
+		[mainContext save:&error];
 		
 		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
 		[context setPersistentStoreCoordinator:[mainContext persistentStoreCoordinator]];
@@ -277,7 +280,7 @@
 		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
 		[dnc addObserver:self selector:@selector(syncContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:context];
 		
-		DLog(@"Changes: %@", [[context updatedObjects] description]);
+		DLog(@"Changes: %i.", [[context updatedObjects] count]);
 		
 		NSError *error;
 		if (![context save:&error]) {
@@ -294,10 +297,18 @@
 	[defaults synchronize];
 	self.status = SyncControllerReady;
 	
-	// Inform delegate
-	// TODO: Check result of sync
-	if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
-		[delegate syncControllerDidSyncWithSuccess:self];
+	// Check for conflicts
+	if (conflicts != nil) {
+		// Inform delegate
+		if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithConflicts:conflicts:)]) {
+			[delegate syncControllerDidSyncWithConflicts:self conflicts:[conflicts retain]];
+		}
+	}
+	else {
+		// Inform delegate
+		if ([delegate respondsToSelector:@selector(syncControllerDidSyncWithSuccess:)]) {
+			[delegate syncControllerDidSyncWithSuccess:self];
+		}
 	}
 }
 

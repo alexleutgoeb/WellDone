@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="10"/>
+			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -52,7 +52,7 @@
 				<int key="NSWindowStyleMask">8343</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{157, 179}, {277, 282}}</string>
-				<int key="NSWTFlags">-1535639552</int>
+				<int key="NSWTFlags">611844096</int>
 				<string key="NSWindowTitle">Tasks Inspector</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
@@ -2228,9 +2228,9 @@
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
-					<string>{{719, 484}, {277, 282}}</string>
+					<string>{{573, 497}, {277, 282}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{719, 484}, {277, 282}}</string>
+					<string>{{573, 497}, {277, 282}}</string>
 					<boolean value="YES"/>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>{{457, 460}, {141, 54}}</string>

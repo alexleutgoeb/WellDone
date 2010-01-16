@@ -38,5 +38,5 @@
 
 - (void) setSimpController:(SimpleListController *) simpleListController;
 - (Folder *) selectedFolder;
-
+- (void) addDraggedTaskToFolder: (Folder *) folder;
 @end

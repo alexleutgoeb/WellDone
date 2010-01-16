@@ -315,6 +315,15 @@
 }
 
 /*
+ * Adds the given folder to the currently dragged task (from SimpleList).
+ */
+- (void) addDraggedTaskToFolder: (Folder *) folder {
+	Task *task = [simpController getDraggedTask];
+	task.folder = folder;
+	[self saveChangesToStore];
+}
+
+/*
  * Removes the given folder from the view.
  */
 - (void) removeFolder:(Folder *) folder {

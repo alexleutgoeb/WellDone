@@ -29,6 +29,7 @@
 	NSMutableArray *allowedDragDestinations;
 }
 
+
 - (Folder *)selectedFolder;
 
 - (SidebarFolderNode *) nodeForKey:(id)key;

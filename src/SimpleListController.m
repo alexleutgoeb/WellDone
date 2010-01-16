@@ -13,7 +13,7 @@
 #import "Context.h"
 #import "WellDone_AppDelegate.h"
 
-
+#define kTasksPBoardType @"TasksPBoardType"
 #define kFilterPredicateFolder	@"FilterPredicateFolder"
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
@@ -31,7 +31,19 @@
 @synthesize treeController;
 
 - (id) init {
-	self = [super initWithNibName:@"SimpleListView" bundle:nil];
+	[super initWithNibName:@"SimpleListView" bundle:nil];
+	
+	//TODO: Update todaysDate at midnight!
+	NSDate *temp = [NSDate date];	
+	NSCalendar* theCalendar = [NSCalendar currentCalendar];
+	unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+	NSDayCalendarUnit;
+	NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+	[theComps setHour:0];
+	[theComps setMinute:0];
+	[theComps setSecond:0];
+	todaysDate = [theCalendar dateFromComponents:theComps];
+	
 	if (self != nil)
 	{		
 		[myview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
@@ -39,6 +51,11 @@
 		taskListFilterPredicate = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	return self;
+}
+
+- (id)initWithNibName:(NSString *)n bundle:(NSBundle *)b
+{
+    return [self init];
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
@@ -61,17 +78,29 @@
 		[cell setAttributedStringValue:attributedString];
 	}*/
 	
-
-	
+	NSTreeNode *node = item;
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
-		Task *task = [item representedObject];
+		Task *task = [node representedObject];
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
 		} else {
-			[self setTaskUndone:acell];
+			if (task.dueDate != nil && [todaysDate timeIntervalSinceDate:task.dueDate] > 0) {
+				[self setTaskOverdue:acell];
+				DLog(@"Set cell with value '%@' overdue...", [task title]);
+			}
+			else  {
+				[self setTaskUndone:acell];
+				DLog(@"Set cell with value '%@' and date '%@' UNDONE...", [task title], [task dueDate]);
+			}
 		}
 	}
-	
+	else {
+		DLog (@"COULD NOT STYLE CELL FOR COLUMN %@", [tableColumn identifier]);
+	}
+
+	// This is a fix for a bug in NSOutlineView, where selected cells behave strange
+	// when the highlighting mode is set to SourceList:
+	[acell setStringValue:[acell stringValue]];
 }
 
 /*
@@ -101,6 +130,10 @@
 
 - (void)setTaskUndone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor blackColor]];
+}
+
+- (void)setTaskOverdue:(NSTextFieldCell*)cell {
+	[cell setTextColor:[NSColor	redColor]];
 }
 
 //TODO: methodenkopf, unit tests, copy&paste
@@ -241,13 +274,24 @@
 // create a sortDescriptor based on the name attribute. This will give us an ordered tree.
 - (void)awakeFromNib {	
 	NSLog(@"Drag&Drop: awakeFromNib called");
-	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];	
+	dragType = [NSArray arrayWithObjects: kTasksPBoardType, nil];	
 	[ dragType retain ]; 
 	[ myview registerForDraggedTypes:dragType ];
 	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
 	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
 	[ sortDesc release ];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelectedRow:)  name:NSOutlineViewSelectionDidChangeNotification object:myview];
 }	
+
+
+/*
+ * This is called when the user selects a row.
+ * This was intended to call reloadData, to ensure that colors in the selection are drawn correc
+ */
+- (void)userSelectedRow:(id)sender {
+	//[myview reloadData];
+}
 
 - (BOOL) outlineView : (NSOutlineView *) outlineView  
 		  writeItems : (NSArray*) items 
@@ -256,8 +300,14 @@
 	[ pboard declareTypes:dragType owner:self ];		
 	// items is an array of _NSArrayControllerTreeNode  
 	draggedNode = [ items objectAtIndex:0 ];
+	if ([[draggedNode observedObject] isKindOfClass: [Task class]]) {
+		draggedTask = [draggedNode observedObject];
+		[draggedTask retain];
+		[self addObserver:self forKeyPath:@"draggedTask" options:0 context:nil];	
+			}
 	return YES;	
 }
+
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)index {
 	NSLog(@"Drag&Drop: acceptDrop called");
@@ -279,7 +329,7 @@
 	// Verify that we are not dragging a parent to one of it's ancestors
 	// causes a parent loop where a group of nodes point to each other and disappear
 	// from the control	
-	NSManagedObject* dragged = [ draggedNode observedObject ];	 	 
+	NSManagedObject* dragged = [ ((NSTreeNode *)draggedNode) observedObject ];	 	 
 	NSManagedObject* newP = [ newParent observedObject ];
 	
 	if ([self category:dragged isSubCategoryOf:newP ] ) {
@@ -311,7 +361,6 @@
 
 // This method gets called by the framework but the values from bindings are used instead
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {	
-	// NSLog(@"Drag&Drop: objectValueForTableColumn called");
 	return NULL;
 }
 
@@ -401,6 +450,14 @@
 	DLog(@"Set predicate on Simplelist Outlineview: %@", generatedPredicateString);
 	
 	return predicate;
+}
+
+/*
+ * Returns the currently dragged Task object, if there is any. Returns nil else.
+ */
+- (Task *) getDraggedTask {
+	DLog(@"Item in pasteboard is now: %@", draggedTask);
+	return draggedTask;
 }
 
 @end
