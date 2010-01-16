@@ -559,8 +559,8 @@
 */
 - (void) replacePlaceholderView:(NSView**)placeholder withViewOfController:(NSViewController*)viewController
 {
-	NSParameterAssert(viewController != nil);
-	NSParameterAssert(*placeholder != nil);
+	//NSParameterAssert(viewController != nil);
+	//NSParameterAssert(*placeholder != nil);
 	
 	NSView *newView = [viewController view];
 	NSView *superview = [*placeholder superview];

@@ -13,7 +13,7 @@
 #import "Context.h"
 #import "WellDone_AppDelegate.h"
 
-
+#define kTasksPBoardType @"TasksPBoardType"
 #define kFilterPredicateFolder	@"FilterPredicateFolder"
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
@@ -233,7 +233,7 @@
 // create a sortDescriptor based on the name attribute. This will give us an ordered tree.
 - (void)awakeFromNib {	
 	NSLog(@"Drag&Drop: awakeFromNib called");
-	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];	
+	dragType = [NSArray arrayWithObjects: kTasksPBoardType, nil];	
 	[ dragType retain ]; 
 	[ myview registerForDraggedTypes:dragType ];
 	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
@@ -248,7 +248,19 @@
 	[ pboard declareTypes:dragType owner:self ];		
 	// items is an array of _NSArrayControllerTreeNode  
 	draggedNode = [ items objectAtIndex:0 ];
+	if ([[draggedNode observedObject] isKindOfClass: [Task class]]) {
+		draggedTask = [draggedNode observedObject];
+		[draggedTask retain];
+		[self addObserver:self forKeyPath:@"draggedTask" options:0 context:nil];	
+			}
 	return YES;	
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change 
+					  context:(void *)context {
+    if ( [keyPath isEqualToString:@"draggedTask"] ) {
+		DLog(@"Dragged task changed: %@", object);
+    }
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)index {
@@ -260,7 +272,6 @@
 }
 
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index {
-	NSLog(@"Drag&Drop: validateDrop called");
 	_NSArrayControllerTreeNode* newParent = item;
 	
 	// drags to the root are always acceptable
@@ -271,7 +282,7 @@
 	// Verify that we are not dragging a parent to one of it's ancestors
 	// causes a parent loop where a group of nodes point to each other and disappear
 	// from the control	
-	NSManagedObject* dragged = [ draggedNode observedObject ];	 	 
+	NSManagedObject* dragged = [ ((NSTreeNode *)draggedNode) observedObject ];	 	 
 	NSManagedObject* newP = [ newParent observedObject ];
 	
 	if ( [ self category:dragged isSubCategoryOf:newP ] ) {
@@ -303,7 +314,6 @@
 
 // This method gets called by the framework but the values from bindings are used instead
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {	
-	// NSLog(@"Drag&Drop: objectValueForTableColumn called");
 	return NULL;
 }
 
@@ -393,6 +403,14 @@
 	DLog(@"Set predicate on Simplelist Outlineview: %@", generatedPredicateString);
 	
 	return predicate;
+}
+
+/*
+ * Returns the currently dragged Task object, if there is any. Returns nil else.
+ */
+- (Task *) getDraggedTask {
+	DLog(@"Item in pasteboard is now: %@", draggedTask);
+	return draggedTask;
 }
 
 @end

@@ -38,6 +38,8 @@
 	NSManagedObjectContext *moc;
 	NSArray* dragType;
 	_NSArrayControllerTreeNode* draggedNode;
+	Task *draggedTask;
+	
 	
 	// holds the control which is being edited
 	NSControl *editingControl;
@@ -59,4 +61,5 @@
 - (NSPredicate *) generateTaskListSearchPredicate;
 - (void) reloadTaskListWithFilters;
 - (void) deleteSelectedTask;
+- (Task *) getDraggedTask;
 @end

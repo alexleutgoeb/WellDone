@@ -314,6 +314,12 @@
 	[sidebar reloadData];
 }
 
+- (void) addDraggedTaskToFolder: (Folder *) folder {
+	Task *task = [simpController getDraggedTask];
+	task.folder = folder;
+	[self saveChangesToStore];
+}
+
 /*
  * Removes the given folder from the view.
  */
