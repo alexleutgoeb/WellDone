@@ -863,7 +863,8 @@
 - (void)updateManagedObjectModificationDates:(NSNotification *)notification {
 	NSDictionary *userInfoDictionary = [notification userInfo];
     NSSet *changedObjects = [userInfoDictionary objectForKey:NSUpdatedObjectsKey];
-
+	DLog(@"Changed %i objects.", [changedObjects count]);
+	
 	if ([changedObjects count]) {
 		for (NSManagedObject *entity in changedObjects) {
 			if ([entity isKindOfClass:[Note class]] || 
@@ -871,7 +872,6 @@
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
 				// TODO: Check for some properties (ie NOT order)
-				DLog(@"Changed: %@ %@", [entity description], [entity class]);
 				[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
 			}
 		}
