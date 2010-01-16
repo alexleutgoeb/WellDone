@@ -713,7 +713,10 @@
 		
 	}
 
-	*conflicts = actualConflicts;
+	if ([actualConflicts count] > 0) {
+		// Conflicts
+		*conflicts = actualConflicts;
+	}
 	return aManagedObjectContext;
 }
 
