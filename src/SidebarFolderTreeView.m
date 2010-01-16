@@ -689,12 +689,10 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 	else if ([pboard availableTypeFromArray:[NSArray arrayWithObject:kTasksPBoardType]]) {
 		if (![targetItem isKindOfClass:[SidebarFolderNode class]])
 			return NO;
-	
-		Task *draggedTask = [[[NSApp delegate] simpleListController] getDraggedTask];
-		if (draggedTask != nil) {
-			[myController addDraggedTaskToFolder: [targetItem data]];
-		}
+		if ([[targetItem data] isKindOfClass: [Folder class]]) {
+			[myController addDraggedTaskToFolder: ((Folder *)[targetItem data])];
 
+		}
 	}
 	
 	return NO;
