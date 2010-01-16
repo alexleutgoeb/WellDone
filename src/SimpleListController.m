@@ -70,6 +70,21 @@
 		} else {
 			[self setTaskUndone:acell];
 		}
+		
+		// --------- Get the actual Date and format the time component
+		NSDate *temp = [NSDate date];	
+		NSCalendar* theCalendar = [NSCalendar currentCalendar];
+		unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
+		NSDayCalendarUnit;
+		NSDateComponents* theComps = [theCalendar components:theUnitFlags fromDate:temp];
+		[theComps setHour:0];
+		[theComps setMinute:0];
+		[theComps setSecond:0];
+		NSDate* todaysDate = [theCalendar dateFromComponents:theComps];
+		
+		if (task.dueDate != nil && task.dueDate > todaysDate) {
+			[self setTaskOverdue:acell];
+		}
 	}
 	
 }
@@ -101,6 +116,10 @@
 
 - (void)setTaskUndone:(NSTextFieldCell*)cell {
 	[cell setTextColor:[NSColor blackColor]];
+}
+
+- (void)setTaskOverdue:(NSTextFieldCell*)cell {
+	[cell setTextColor:[NSColor	redColor]];
 }
 
 //TODO: methodenkopf, unit tests, copy&paste

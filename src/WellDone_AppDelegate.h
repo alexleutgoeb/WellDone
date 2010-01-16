@@ -83,6 +83,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) SimpleListController *simpleListController;
+@property (nonatomic, retain, readonly) GTDListController *gtdListController;
 @property (nonatomic, retain, readonly) ContextViewController *contextViewController;
 @property (nonatomic, retain, readonly) NSURL *coreDataDBLocationURL;
 @property (nonatomic, retain, readonly) NSURL *backupDBLocationURL;

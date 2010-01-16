@@ -51,6 +51,7 @@
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 - (void)setTaskDone:(NSTextFieldCell*)cell;
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
+- (void)setTaskOverdue:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
 - (void) setTaskListFolderFilter:(Folder*) folderToFilterFor;

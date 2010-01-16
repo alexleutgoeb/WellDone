@@ -108,6 +108,7 @@
 @synthesize isOnline;
 @synthesize syncMenuItem, syncTextMenuItem;
 @synthesize secondsTimer, dateFormatter, today;
+@synthesize gtdListController;
 
 #pragma mark -
 #pragma mark Initialization
