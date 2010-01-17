@@ -78,7 +78,7 @@
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
 		D1B51A7810F690360053C847 /* ContextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B51A7710F690360053C847 /* ContextView.xib */; };
-		D1F25A5E1103A34900A3BBAA /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F25A5D1103A34900A3BBAA /* Section.m */; };
+		D1F25AAA1103A99700A3BBAA /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F25AA91103A99700A3BBAA /* Section.m */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
 		FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA438BB510FB6CC60000224E /* SystemConfiguration.framework */; };
@@ -279,8 +279,8 @@
 		D1B51A7410F68FFE0053C847 /* ContextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextViewController.h; sourceTree = "<group>"; };
 		D1B51A7510F68FFE0053C847 /* ContextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextViewController.m; sourceTree = "<group>"; };
 		D1B51A7710F690360053C847 /* ContextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContextView.xib; sourceTree = "<group>"; };
-		D1F25A5C1103A34900A3BBAA /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
-		D1F25A5D1103A34900A3BBAA /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		D1F25AA81103A99700A3BBAA /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		D1F25AA91103A99700A3BBAA /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
@@ -583,8 +583,8 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D1F25A5C1103A34900A3BBAA /* Section.h */,
-				D1F25A5D1103A34900A3BBAA /* Section.m */,
+				D1F25AA81103A99700A3BBAA /* Section.h */,
+				D1F25AA91103A99700A3BBAA /* Section.m */,
 				D14D543F10FFD3EB00D8DBD1 /* Context.h */,
 				D14D544010FFD3EB00D8DBD1 /* Context.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
@@ -958,7 +958,7 @@
 				D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */,
 				FA4786FF1101037600893DBC /* WDNSSet+subset.m in Sources */,
 				FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */,
-				D1F25A5E1103A34900A3BBAA /* Section.m in Sources */,
+				D1F25AAA1103A99700A3BBAA /* Section.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

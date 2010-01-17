@@ -116,7 +116,7 @@
 #pragma mark Initialization
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-	
+	/*
 	// restore backup
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	NSString *backupFileName = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
@@ -149,7 +149,7 @@
 		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
 		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
 	}
-	
+	*/
 	
 	[window makeMainWindow];
 	[self initUserDefaults];
@@ -311,28 +311,28 @@
 	
 	if (loadSection) {
 		gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.section setValue:@"Today" forKey:@"title"];
-		[gtdListController.section setValue:[[NSNumber alloc] initWithInt:1] forKey:@"position"];
+		[gtdListController.section setValue:@"Today" forKey:@"name"];
+		[gtdListController.section setValue:[[NSNumber alloc] initWithInt:1] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
 
 		gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
-		[gtdListController.sectionNext3Days setValue:[[NSNumber alloc] initWithInt:2] forKey:@"position"];
+		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"name"];
+		[gtdListController.sectionNext3Days setValue:[[NSNumber alloc] initWithInt:2] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
 		
 		gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
-		[gtdListController.sectionNext7Days setValue:[[NSNumber alloc] initWithInt:3] forKey:@"position"];
+		[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"name"];
+		[gtdListController.sectionNext7Days setValue:[[NSNumber alloc] initWithInt:3] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext7Days toPersistentStore:memoryStore];
 		
 		gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
-		[gtdListController.sectionUpcoming setValue:[[NSNumber alloc] initWithInt:4] forKey:@"position"];
+		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"name"];
+		[gtdListController.sectionUpcoming setValue:[[NSNumber alloc] initWithInt:4] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
 		
 		gtdListController.sectionDone = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionDone setValue:@"Done" forKey:@"title"];
-		[gtdListController.sectionDone setValue:[[NSNumber alloc] initWithInt:5] forKey:@"position"];
+		[gtdListController.sectionDone setValue:@"Done" forKey:@"name"];
+		[gtdListController.sectionDone setValue:[[NSNumber alloc] initWithInt:5] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionDone toPersistentStore:memoryStore];
 		
 		loadSection = NO;

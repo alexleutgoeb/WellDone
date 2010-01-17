@@ -67,11 +67,12 @@
 - (void) awakeFromNib {
 	NSLog(@"Drag&Drop: awakeFromNib called");
 	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];	
-	[ dragType retain ]; 
-	[ gtdOutlineView registerForDraggedTypes:dragType ];
-	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
-	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
-	[ sortDesc release ];
+	[dragType retain ]; 
+	[gtdOutlineView registerForDraggedTypes:dragType ];
+	
+	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+	[treeController setSortDescriptors:[NSArray arrayWithObject:sortDesc]];
+	[sortDesc release ];
 
 	
 	iTasks = [[NSMutableArray alloc] init];
@@ -433,7 +434,7 @@
     id result = nil;
 	NSTreeNode *node = item;
 	if ([[node representedObject] isKindOfClass: [Section class]]) {
-		result = [[node representedObject] title];
+		result = [[node representedObject] name];
 	} else if ([[node representedObject] isKindOfClass: [Task class]]) {
         if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:TASK_ID]) {
             result = [[node representedObject] title];

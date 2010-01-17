@@ -12,8 +12,8 @@
 
 @implementation Section 
 
+@dynamic name;
 @dynamic title;
-@dynamic position;
 @dynamic childTasks;
 
 @end

@@ -14,8 +14,8 @@
 {
 }
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSNumber * position;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * title;
 @property (nonatomic, retain) NSSet* childTasks;
 
 @end
