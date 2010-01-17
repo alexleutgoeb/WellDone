@@ -11,11 +11,10 @@
 
 @implementation ConflictResolverController
 
-@synthesize currentView;
+@synthesize tasks;
 
 - (id)init {
 	if (self = [super initWithWindowNibName:@"ConflictResolver"]) {
-		DLog(@"done");
 	}
 	return self;
 }
@@ -25,42 +24,20 @@
 	
     NSView *contentView = [[self window] contentView];
     [contentView setWantsLayer:YES];
-    [contentView addSubview:[self currentView]];
-    
-    transition = [CATransition animation];
-    [transition setType:kCATransitionPush];
-    [transition setSubtype:kCATransitionFromLeft];
-    
-    NSDictionary *ani = [NSDictionary dictionaryWithObject:transition forKey:@"subviews"];
-    [contentView setAnimations:ani];
 	
-	[self.window center];
-	
-	[conflictTextField setStringValue:[NSString stringWithFormat:@"There are %i sync conflicts involving Tasks.", 23]];
+	[conflictTextField setStringValue:[NSString stringWithFormat:@"There are %i sync conflicts.", [tasks count]]];
 }
 
-- (void)setCurrentView:(LinkedView *)newView {
-    if (!currentView) {
-        currentView = newView;
-        return;
-    }
-    NSView *contentView = [[self window] contentView];
-    [[contentView animator] replaceSubview:currentView with:newView];
-    currentView = newView;
-}
+- (IBAction)expandView:(id)sender {
 
-- (IBAction)nextView:(id)sender {
-    if (![[self currentView] nextView])
-		return;
-    [transition setSubtype:kCATransitionFromRight];
-    [self setCurrentView:[[self currentView] nextView]];
-}
-
-- (IBAction)previousView:(id)sender {
-    if (![[self currentView] previousView])
-		return;
-    [transition setSubtype:kCATransitionFromLeft];
-    [self setCurrentView:[[self currentView] previousView]];
+	NSRect frame = self.window.frame;
+	frame.origin.y = frame.origin.y - 211;
+	frame.size.width = 491;
+	frame.size.height = 400;
+	[self.window setFrame:frame display:YES animate:YES];
+	[okButton setHidden:YES];
+	[cancelButton setHidden:YES];
+	[conflictDetailTextField setHidden:YES];
 }
 
 - (IBAction)closeWindow:(id)sender {

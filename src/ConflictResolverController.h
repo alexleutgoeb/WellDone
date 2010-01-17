@@ -8,22 +8,25 @@
 
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/CoreAnimation.h>
-#import "LinkedView.h"
+#import "TaskContainer.h"
 
 
 @interface ConflictResolverController : NSWindowController {
     IBOutlet NSWindow *window;
-    IBOutlet LinkedView *currentView;
 	
 	IBOutlet NSTextField *conflictTextField;
+	IBOutlet NSTextField *conflictDetailTextField;
+	IBOutlet NSButton *okButton;
+	IBOutlet NSButton *cancelButton;
     
     CATransition *transition;
+	
+	NSArray *tasks;
 }
 
-@property (retain) LinkedView *currentView;
+@property (nonatomic, retain) NSArray *tasks;
 
-- (IBAction)nextView:(id)sender;
-- (IBAction)previousView:(id)sender;
+- (IBAction)expandView:(id)sender;
 
 - (IBAction)closeWindow:(id)sender;
 

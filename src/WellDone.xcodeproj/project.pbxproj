@@ -89,7 +89,6 @@
 		FA478BA51103554F00893DBC /* ConflictResolver.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA478BA41103554F00893DBC /* ConflictResolver.xib */; };
 		FA478BBB1103585500893DBC /* syncIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FA478BBA1103585500893DBC /* syncIcon.icns */; };
 		FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA478BD4110359CA00893DBC /* ConflictResolverController.m */; };
-		FA478C0511035D0C00893DBC /* LinkedView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA478C0411035D0C00893DBC /* LinkedView.m */; };
 		FA478C1D11035DB600893DBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA478C1C11035DB600893DBC /* QuartzCore.framework */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
@@ -297,8 +296,6 @@
 		FA478BBA1103585500893DBC /* syncIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = syncIcon.icns; sourceTree = "<group>"; };
 		FA478BD3110359CA00893DBC /* ConflictResolverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConflictResolverController.h; sourceTree = "<group>"; };
 		FA478BD4110359CA00893DBC /* ConflictResolverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictResolverController.m; sourceTree = "<group>"; };
-		FA478C0311035D0C00893DBC /* LinkedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedView.h; sourceTree = "<group>"; };
-		FA478C0411035D0C00893DBC /* LinkedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedView.m; sourceTree = "<group>"; };
 		FA478C1C11035DB600893DBC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
@@ -561,8 +558,6 @@
 		6F5D249210AC588D002E9514 /* View Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FA478C0311035D0C00893DBC /* LinkedView.h */,
-				FA478C0411035D0C00893DBC /* LinkedView.m */,
 				6F0C0A0510FFC4C200AFD545 /* MAAttachedWindow.h */,
 				6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */,
 				6F22C1B910CC01DD00ABFE19 /* SidebarFolderTreeView.h */,
@@ -964,7 +959,6 @@
 				D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */,
 				FA4786FF1101037600893DBC /* WDNSSet+subset.m in Sources */,
 				FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */,
-				FA478C0511035D0C00893DBC /* LinkedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

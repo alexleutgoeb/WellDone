@@ -22,6 +22,7 @@
 #import "Note.h"
 #import "RemindMeTimer.h"
 #import "DateTimePopupController.h"
+#import "ConflictResolverController.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -943,8 +944,12 @@
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
 	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
-	NSAlert *alert = [NSAlert alertWithError:error];
-	[alert runModal];
+	// NSAlert *alert = [NSAlert alertWithError:error];
+	// [alert runModal];
+	
+	ConflictResolverController *cfc = [[ConflictResolverController alloc] init];
+	[cfc showWindow:self];
+	[cfc.window makeKeyAndOrderFront:self];
 }
 
 - (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts {
