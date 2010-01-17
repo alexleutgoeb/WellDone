@@ -116,7 +116,7 @@
 #pragma mark Initialization
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-	/*
+	
 	// restore backup
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 	NSString *backupFileName = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
@@ -149,7 +149,7 @@
 		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
 		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
 	}
-	*/
+	
 	
 	[window makeMainWindow];
 	[self initUserDefaults];
