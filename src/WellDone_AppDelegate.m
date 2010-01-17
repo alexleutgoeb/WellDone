@@ -281,7 +281,6 @@
  * These grouping items are transient entities, meaning they are only stored inmemory in Core Data.
  */
 - (void)initGTDView {
-	showGTDView = NO;
 	
 	NSURL *url = [NSURL URLWithString:@"memory://store"];
 	id memoryStore = [[self persistentStoreCoordinator] persistentStoreForURL:url];
