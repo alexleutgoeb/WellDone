@@ -118,13 +118,32 @@
 	
 	// restore backup
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-	[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
-	NSString *restore = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
+	NSString *backupFileName = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
 	
-	NSLog(@"Restore: %@",restore);
+	NSLog(@"Restore: %@",backupFileName);
 	
-	if ([restore isEqualToString:@"yes"]) {
+	if (backupFileName != nil) {
 		//TODO: restore backup file
+		//NSLog(backupFileName);
+		
+		NSURL *currentDBFileURL = [[NSApp delegate] coreDataDBLocationURL];
+		NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
+		
+		NSError *error;	
+		NSFileManager *fm = [NSFileManager defaultManager];
+
+		NSString *currentDBFile = [[self applicationSupportDirectory] stringByAppendingPathComponent: @"WellDone.welldonedoc"];
+		if (![fm removeItemAtPath:currentDBFile error:&error]) {
+			[[NSAlert alertWithError:error] runModal];
+		} else {
+			if (![fm copyItemAtURL:backupFileURL toURL:currentDBFileURL error:&error]){
+				[[NSAlert alertWithError:error] runModal];
+			} else {
+				[defaults setObject:nil forKey:@"restoreBackupAtStart"];
+				NSLog(@"Backup restored.");
+			}
+
+		}
 		
 		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
 		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
