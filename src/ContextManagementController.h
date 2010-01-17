@@ -7,10 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "Context.h"
 
 @interface ContextManagementController : NSWindowController {
 	NSManagedObjectContext *moc;
+	IBOutlet NSTableView* myTableView;
+	IBOutlet NSArrayController* arrayController;
 }
+- (IBAction) deleteSelectedContext:(id)sender;
+@property (nonatomic, retain, readonly) NSArrayController *arrayController;
+
+
 
 @end
