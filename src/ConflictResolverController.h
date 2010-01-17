@@ -18,16 +18,26 @@
 	IBOutlet NSTextField *conflictDetailTextField;
 	IBOutlet NSButton *okButton;
 	IBOutlet NSButton *cancelButton;
+	IBOutlet NSBox *borderBox;
+	IBOutlet NSButton *cancelSolveButton;
+	IBOutlet NSButton *continueSolveButton;
+	IBOutlet NSTextField *progressTextField;
+	IBOutlet NSSegmentedControl *segmentedChooser;
+	
+	IBOutlet NSTextField *localTitle;
+	IBOutlet NSTextField *remoteTitle;
     
     CATransition *transition;
 	
 	NSArray *tasks;
+	
+	NSInteger activeConflict;
 }
 
 @property (nonatomic, retain) NSArray *tasks;
 
 - (IBAction)expandView:(id)sender;
-
 - (IBAction)closeWindow:(id)sender;
+- (IBAction)solveConflict:(id)sender;
 
 @end
