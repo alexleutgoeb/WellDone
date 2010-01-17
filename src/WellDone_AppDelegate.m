@@ -22,6 +22,7 @@
 #import "Note.h"
 #import "RemindMeTimer.h"
 #import "DateTimePopupController.h"
+#import "ConflictResolverController.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -57,6 +58,7 @@
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore;
 - (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
 - (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore;
+- (void) initGTDitemDone:(id)memoryStore;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
@@ -116,19 +118,39 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 	
 	// restore backup
+	/*
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-	[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
-	NSString *restore = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
+	NSString *backupFileName = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
 	
-	NSLog(@"Restore: %@",restore);
+	NSLog(@"Restore: %@",backupFileName);
 	
-	if ([restore isEqualToString:@"yes"]) {
+	if (backupFileName != nil) {
 		//TODO: restore backup file
+		//NSLog(backupFileName);
+		
+		NSURL *currentDBFileURL = [[NSApp delegate] coreDataDBLocationURL];
+		NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
+		
+		NSError *error;	
+		NSFileManager *fm = [NSFileManager defaultManager];
+
+		NSString *currentDBFile = [[self applicationSupportDirectory] stringByAppendingPathComponent: @"WellDone.welldonedoc"];
+		if (![fm removeItemAtPath:currentDBFile error:&error]) {
+			[[NSAlert alertWithError:error] runModal];
+		} else {
+			if (![fm copyItemAtURL:backupFileURL toURL:currentDBFileURL error:&error]){
+				[[NSAlert alertWithError:error] runModal];
+			} else {
+				[defaults setObject:nil forKey:@"restoreBackupAtStart"];
+				NSLog(@"Backup restored.");
+			}
+
+		}
 		
 		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
 		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
 	}
-	
+	*/
 	
 	[window makeMainWindow];
 	[self initUserDefaults];
@@ -261,7 +283,6 @@
  * These grouping items are transient entities, meaning they are only stored inmemory in Core Data.
  */
 - (void)initGTDView {
-	showGTDView = NO;
 	
 	NSURL *url = [NSURL URLWithString:@"memory://store"];
 	id memoryStore = [[self persistentStoreCoordinator] persistentStoreForURL:url];
@@ -291,20 +312,29 @@
 	
 	if (loadSection) {
 		gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.section setValue:@"Today" forKey:@"title"];
+		[gtdListController.section setValue:@"Today" forKey:@"name"];
+		[gtdListController.section setValue:[[NSNumber alloc] initWithInt:1] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
-		
+
 		gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
+		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"name"];
+		[gtdListController.sectionNext3Days setValue:[[NSNumber alloc] initWithInt:2] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
 		
 		gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
+		[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"name"];
+		[gtdListController.sectionNext7Days setValue:[[NSNumber alloc] initWithInt:3] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext7Days toPersistentStore:memoryStore];
 		
 		gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
-		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
+		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"name"];
+		[gtdListController.sectionUpcoming setValue:[[NSNumber alloc] initWithInt:4] forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
+		
+		gtdListController.sectionDone = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+		[gtdListController.sectionDone setValue:@"Done" forKey:@"name"];
+		[gtdListController.sectionDone setValue:[[NSNumber alloc] initWithInt:5] forKey:@"title"];
+		[[self managedObjectContext] assignObject:gtdListController.sectionDone toPersistentStore:memoryStore];
 		
 		loadSection = NO;
 	}
@@ -313,6 +343,7 @@
 	[self initGTDitemThreeDays:todaysDateEnd inThreeDaysDate:inThreeDays inStore:memoryStore];
 	[self initGTDitemSevenDays:inThreeDays inSevenDaysDate:inSevenDays inStore:memoryStore];
 	[self initGTDitemUpcoming:inSevenDays inStore:memoryStore];
+	[self initGTDitemDone:memoryStore];
 	
 }
 
@@ -321,7 +352,7 @@
 	
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@", todaysDate, todaysDateEnd];	
+	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@ and deletedByApp = false", todaysDate, todaysDateEnd];	
 	[request setEntity:entityDescription];
 	[request setPredicate:predicateToday];
 	
@@ -340,7 +371,7 @@
 	
 	NSEntityDescription *entityDescriptionNext3Days = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext3Days = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", todaysDate, inThreeDays];
+	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp = false", todaysDate, inThreeDays];
 	[requestNext3Days setEntity:entityDescriptionNext3Days];
 	[requestNext3Days setPredicate:predicateNext3Days];
 	
@@ -359,7 +390,7 @@
 	
 	NSEntityDescription *entityDescriptionNext7Day = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext7Days = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", inThreeDays, inSevenDays];	
+	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp = false", inThreeDays, inSevenDays];	
 	[requestNext7Days setEntity:entityDescriptionNext7Day];
 	[requestNext7Days setPredicate:predicateNext7Days];
 	
@@ -378,7 +409,7 @@
 	
 	NSEntityDescription *entityDescriptionUpcoming = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestUpcoming = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"dueDate > %@ or dueDate = null", inSevenDays];	
+	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"(dueDate > %@ or dueDate = null) and deletedByApp = false", inSevenDays];	
 	[requestUpcoming setEntity:entityDescriptionUpcoming];
 	[requestUpcoming setPredicate:predicateUpcoming];
 	
@@ -388,6 +419,25 @@
 	}
 	
 	if (itemsUpcoming == nil) {
+		NSLog(@"ERROR fetchRequest Tasks == nil!");
+	}
+}
+
+- (void) initGTDitemDone:(id)memoryStore {
+	NSError *error;
+	
+	NSEntityDescription *entityDescriptionDone = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *requestDone = [[NSFetchRequest alloc] init];
+	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true and deletedByApp = false"];	
+	[requestDone setEntity:entityDescriptionDone];
+	[requestDone setPredicate:predicateDone];
+	
+	NSArray *itemsDone = [managedObjectContext executeFetchRequest:requestDone error:&error];
+	for (id item in itemsDone) {
+		[item setValue:gtdListController.sectionDone forKey:@"section"];
+	}
+	
+	if (itemsDone == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
 }
@@ -408,6 +458,8 @@
 		showGTDView = YES;
 		[sender highlight:YES];
 		[sender setFont:[NSFont boldSystemFontOfSize:13]];
+		[self initGTDView];
+
 	}
 }
 
@@ -879,10 +931,20 @@
 				[entity isKindOfClass:[Folder class]] || 
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
+				
 				// TODO: Check for some properties (ie NOT order)
 				if ([[entity changedValues] count] > 0) {
 					DLog(@"Updated values: %@", [[entity changedValues] description]);
-					[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+					
+					if ([entity isKindOfClass:[Task class]]) {
+						if (![[entity changedValues] objectForKey:@"modifiedDate"]) {
+							[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+						}
+					}
+					else {
+						[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+					}
+					
 				}
 			}
 		}
@@ -904,6 +966,11 @@
 
 - (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts {
 	DLog(@"Sync finihsed with conflict(s): %i", [conflicts count]);
+	
+	if (conflictResolverController == nil)
+		conflictResolverController = [[ConflictResolverController alloc] init];
+	conflictResolverController.tasks = conflicts;
+	[conflictResolverController.window makeKeyAndOrderFront:self];
 }
 
 /*
@@ -918,6 +985,7 @@
  Implementation of dealloc, to release the retained variables.
  */
 - (void)dealloc {
+	[conflictResolverController release];
 	[syncController removeObserver:syncController forKeyPath:@"status"];
 	[syncController release];
 	[syncMenuItem release];

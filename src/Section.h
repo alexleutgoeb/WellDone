@@ -2,7 +2,7 @@
 //  Section.h
 //  WellDone
 //
-//  Created by Andrea F. on 14.01.10.
+//  Created by Andrea F. on 17.01.10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,17 +14,18 @@
 {
 }
 
-@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * title;
 @property (nonatomic, retain) NSSet* childTasks;
 
 @end
 
 
 @interface Section (CoreDataGeneratedAccessors)
-- (void)addChildrenObject:(Task *)value;
-- (void)removeChildrenObject:(Task *)value;
-- (void)addChildren:(NSSet *)value;
-- (void)removeChildren:(NSSet *)value;
-@end
+- (void)addChildTasksObject:(Task *)value;
+- (void)removeChildTasksObject:(Task *)value;
+- (void)addChildTasks:(NSSet *)value;
+- (void)removeChildTasks:(NSSet *)value;
 
+@end
 

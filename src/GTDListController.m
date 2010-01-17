@@ -33,7 +33,14 @@
 #define DUEDATE_ID @"dueDate"
 #define TAGS_ID @"tags"
 
-@synthesize subViewControllers, section, sectionNext3Days, sectionNext7Days, sectionUpcoming, treeController;
+@synthesize subViewControllers;
+@synthesize section; 
+@synthesize sectionNext3Days;
+@synthesize sectionNext7Days;
+@synthesize sectionUpcoming;
+@synthesize sectionDone;
+@synthesize treeController;
+@synthesize gtdOutlineView;
 
 - (id) init
 {
@@ -60,11 +67,12 @@
 - (void) awakeFromNib {
 	NSLog(@"Drag&Drop: awakeFromNib called");
 	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];	
-	[ dragType retain ]; 
-	[ gtdOutlineView registerForDraggedTypes:dragType ];
+	[dragType retain ]; 
+	[gtdOutlineView registerForDraggedTypes:dragType ];
+	
 	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
-	[ sortDesc release ];
+	[treeController setSortDescriptors:[NSArray arrayWithObject:sortDesc]];
+	[sortDesc release ];
 
 	
 	iTasks = [[NSMutableArray alloc] init];
@@ -72,8 +80,7 @@
 	[iGroupRowCell setEditable:NO];
 	[iGroupRowCell setSelectable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];	
-	[gtdOutlineView expandItem:iGroupRowCell];
-	
+	[gtdOutlineView expandItem:section];
 	// Initialize listening to notifications by managedObjectContext
 	NSNotificationCenter *nc;
 	nc = [NSNotificationCenter defaultCenter];
@@ -151,6 +158,7 @@
 	for (selectedTask in selectedTasks) {
 		if ([selectedTask isKindOfClass: [Task class]]) {
 			[selectedTask setDeletedByApp:[NSNumber numberWithBool:YES]];
+
 			//[myview reloadData]; 
 			[treeController fetch:nil];
 		}
@@ -426,7 +434,7 @@
     id result = nil;
 	NSTreeNode *node = item;
 	if ([[node representedObject] isKindOfClass: [Section class]]) {
-		result = [[node representedObject] title];
+		result = [[node representedObject] name];
 	} else if ([[node representedObject] isKindOfClass: [Task class]]) {
         if ((tableColumn == nil) || [[tableColumn identifier] isEqualToString:TASK_ID]) {
             result = [[node representedObject] title];

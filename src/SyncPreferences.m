@@ -89,7 +89,7 @@
 
 
 - (NSImage *)paneIcon {
-    return [NSImage imageNamed:NSImageNameBonjour];
+    return [NSImage imageNamed:@"syncIcon"];
 }
 
 

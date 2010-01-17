@@ -75,10 +75,10 @@
 		D11C58BA10FA9FA300CC204F /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D11C58B910FA9FA300CC204F /* SearchItem.m */; };
 		D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D515910FF9B6B00D8DBD1 /* ContextView.m */; };
 		D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D544010FFD3EB00D8DBD1 /* Context.m */; };
-		D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D14F4A1C10FF79E0007F1CE0 /* Section.m */; };
 		D164971C10D2E17B00DEB20A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D164971B10D2E17B00DEB20A /* DateCell.m */; };
 		D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B51A7510F68FFE0053C847 /* ContextViewController.m */; };
 		D1B51A7810F690360053C847 /* ContextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B51A7710F690360053C847 /* ContextView.xib */; };
+		D1F25AAA1103A99700A3BBAA /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F25AA91103A99700A3BBAA /* Section.m */; };
 		D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */; };
 		D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F2E93810B8A838009D4B4B /* FolderManagementController.m */; };
 		FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA438BB510FB6CC60000224E /* SystemConfiguration.framework */; };
@@ -86,6 +86,10 @@
 		FA43913810FD2A9B0000224E /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = FA43913710FD2A9B0000224E /* welcome.png */; };
 		FA4781A010FF669700893DBC /* TaskContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA47819F10FF669700893DBC /* TaskContainer.m */; };
 		FA4786FF1101037600893DBC /* WDNSSet+subset.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4786FE1101037600893DBC /* WDNSSet+subset.m */; };
+		FA478BA51103554F00893DBC /* ConflictResolver.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA478BA41103554F00893DBC /* ConflictResolver.xib */; };
+		FA478BBB1103585500893DBC /* syncIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FA478BBA1103585500893DBC /* syncIcon.icns */; };
+		FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA478BD4110359CA00893DBC /* ConflictResolverController.m */; };
+		FA478C1D11035DB600893DBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA478C1C11035DB600893DBC /* QuartzCore.framework */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
@@ -270,13 +274,13 @@
 		D14D515910FF9B6B00D8DBD1 /* ContextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextView.m; sourceTree = "<group>"; };
 		D14D543F10FFD3EB00D8DBD1 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		D14D544010FFD3EB00D8DBD1 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
-		D14F4A1B10FF79E0007F1CE0 /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
-		D14F4A1C10FF79E0007F1CE0 /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D164971A10D2E17B00DEB20A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		D164971B10D2E17B00DEB20A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		D1B51A7410F68FFE0053C847 /* ContextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextViewController.h; sourceTree = "<group>"; };
 		D1B51A7510F68FFE0053C847 /* ContextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextViewController.m; sourceTree = "<group>"; };
 		D1B51A7710F690360053C847 /* ContextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContextView.xib; sourceTree = "<group>"; };
+		D1F25AA81103A99700A3BBAA /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		D1F25AA91103A99700A3BBAA /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderManagement.xib; sourceTree = "<group>"; };
 		D1F2E93710B8A838009D4B4B /* FolderManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderManagementController.h; sourceTree = "<group>"; };
 		D1F2E93810B8A838009D4B4B /* FolderManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderManagementController.m; sourceTree = "<group>"; };
@@ -288,6 +292,11 @@
 		FA47819F10FF669700893DBC /* TaskContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContainer.m; sourceTree = "<group>"; };
 		FA4786FD1101037600893DBC /* WDNSSet+subset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WDNSSet+subset.h"; sourceTree = "<group>"; };
 		FA4786FE1101037600893DBC /* WDNSSet+subset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WDNSSet+subset.m"; sourceTree = "<group>"; };
+		FA478BA41103554F00893DBC /* ConflictResolver.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConflictResolver.xib; sourceTree = "<group>"; };
+		FA478BBA1103585500893DBC /* syncIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = syncIcon.icns; sourceTree = "<group>"; };
+		FA478BD3110359CA00893DBC /* ConflictResolverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConflictResolverController.h; sourceTree = "<group>"; };
+		FA478BD4110359CA00893DBC /* ConflictResolverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictResolverController.m; sourceTree = "<group>"; };
+		FA478C1C11035DB600893DBC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
@@ -351,6 +360,7 @@
 				FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */,
 				FA56EB6410EBB95300228C43 /* Security.framework in Frameworks */,
 				FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */,
+				FA478C1D11035DB600893DBC /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +428,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				FA478C1C11035DB600893DBC /* QuartzCore.framework */,
 			);
 			name = WellDone;
 			sourceTree = "<group>";
@@ -455,6 +466,7 @@
 				D1B51A7710F690360053C847 /* ContextView.xib */,
 				6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */,
 				6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */,
+				FA478BA41103554F00893DBC /* ConflictResolver.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -537,6 +549,8 @@
 				6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */,
 				6F0C0A1E10FFC88800AFD545 /* DateTimePopupController.h */,
 				6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */,
+				FA478BD3110359CA00893DBC /* ConflictResolverController.h */,
+				FA478BD4110359CA00893DBC /* ConflictResolverController.m */,
 			);
 			name = "ViewController Classes";
 			sourceTree = "<group>";
@@ -569,10 +583,10 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D1F25AA81103A99700A3BBAA /* Section.h */,
+				D1F25AA91103A99700A3BBAA /* Section.m */,
 				D14D543F10FFD3EB00D8DBD1 /* Context.h */,
 				D14D544010FFD3EB00D8DBD1 /* Context.m */,
-				D14F4A1B10FF79E0007F1CE0 /* Section.h */,
-				D14F4A1C10FF79E0007F1CE0 /* Section.m */,
 				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
 				FA90D3F010C4124D00309192 /* Folder.h */,
 				FA90D3F110C4124D00309192 /* Folder.m */,
@@ -625,6 +639,7 @@
 		FA48B85F10D4139E0032F1D8 /* ImageRes */ = {
 			isa = PBXGroup;
 			children = (
+				FA478BBA1103585500893DBC /* syncIcon.icns */,
 				FA43913710FD2A9B0000224E /* welcome.png */,
 				FA48B86010D4139E0032F1D8 /* SyncIcons */,
 			);
@@ -835,6 +850,8 @@
 				6F03A47510FC698B0020CCA9 /* CLValueTransformers.rtfd in Resources */,
 				FA43913810FD2A9B0000224E /* welcome.png in Resources */,
 				6F0C0A2910FFCF6700AFD545 /* DateTimePopup.xib in Resources */,
+				FA478BA51103554F00893DBC /* ConflictResolver.xib in Resources */,
+				FA478BBB1103585500893DBC /* syncIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,11 +953,12 @@
 				B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */,
 				FA4781A010FF669700893DBC /* TaskContainer.m in Sources */,
 				D14D515A10FF9B6B00D8DBD1 /* ContextView.m in Sources */,
-				D14F4A1D10FF79E0007F1CE0 /* Section.m in Sources */,
 				6F0C0A0810FFC4C200AFD545 /* MAAttachedWindow.m in Sources */,
 				6F0C0A2110FFC88800AFD545 /* DateTimePopupController.m in Sources */,
 				D14D544110FFD3EB00D8DBD1 /* Context.m in Sources */,
 				FA4786FF1101037600893DBC /* WDNSSet+subset.m in Sources */,
+				FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */,
+				D1F25AAA1103A99700A3BBAA /* Section.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -286,27 +286,6 @@
 											<int key="NSCellFlags2">-2147481600</int>
 											<string key="NSContents">Text Cell</string>
 											<reference key="NSSupport" ref="413097696"/>
-											<object class="NSDateFormatter" key="NSFormatter" id="181063869">
-												<object class="NSMutableDictionary" key="NS.attributes">
-													<bool key="EncodedWithXMLCoder">YES</bool>
-													<object class="NSArray" key="dict.sortedKeys">
-														<bool key="EncodedWithXMLCoder">YES</bool>
-														<string>dateFormat</string>
-														<string>dateStyle</string>
-														<string>formatterBehavior</string>
-														<string>timeStyle</string>
-													</object>
-													<object class="NSMutableArray" key="dict.values">
-														<bool key="EncodedWithXMLCoder">YES</bool>
-														<string>dMMMy</string>
-														<integer value="1"/>
-														<integer value="1040"/>
-														<integer value="0"/>
-													</object>
-												</object>
-												<string key="NS.format">dMMMy</string>
-												<bool key="NS.natural">NO</bool>
-											</object>
 											<string key="NSPlaceholderString">dd/MM/yyyy hh:ss</string>
 											<reference key="NSControlView" ref="848461419"/>
 											<reference key="NSBackgroundColor" ref="1036994668"/>
@@ -447,19 +426,23 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSArray" key="dict.sortedKeys">
 						<bool key="EncodedWithXMLCoder">YES</bool>
+						<string>dateFormat</string>
+						<string>dateFormat_10_0</string>
 						<string>dateStyle</string>
 						<string>formatterBehavior</string>
 						<string>timeStyle</string>
 					</object>
 					<object class="NSMutableArray" key="dict.values">
 						<bool key="EncodedWithXMLCoder">YES</bool>
+						<string>d.MMM.y</string>
+						<string>%d.%m.%1y %I:%M</string>
 						<integer value="1"/>
-						<integer value="1040"/>
+						<integer value="1000"/>
 						<integer value="1"/>
 					</object>
 				</object>
-				<string key="NS.format">dd.MM.yy HH:mm</string>
-				<bool key="NS.natural">NO</bool>
+				<string key="NS.format">%d.%m.%1y %I:%M</string>
+				<bool key="NS.natural">YES</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -728,7 +711,6 @@
 						<reference key="object" ref="1032802298"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="181063869"/>
 						</object>
 						<reference key="parent" ref="566750403"/>
 					</object>
@@ -752,11 +734,6 @@
 						<reference key="parent" ref="240286088"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">422</int>
-						<reference key="object" ref="181063869"/>
-						<reference key="parent" ref="1032802298"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">420</int>
 						<reference key="object" ref="773189773"/>
 						<reference key="parent" ref="0"/>
@@ -773,8 +750,6 @@
 					<string>330.IBPluginDependency</string>
 					<string>420.IBDateFormatterBehaviorMetadataKey</string>
 					<string>420.IBPluginDependency</string>
-					<string>422.IBDateFormatterBehaviorMetadataKey</string>
-					<string>422.IBPluginDependency</string>
 					<string>63.CustomClassName</string>
 					<string>63.IBPluginDependency</string>
 					<string>64.IBEditorWindowLastContentRect</string>
@@ -800,13 +775,11 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="1"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="2"/>
+					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>DebugTreeController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{411, 149}, {611, 296}}</string>
+					<string>{{37, 163}, {611, 296}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1279,6 +1252,27 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">Foundation.framework/Headers/NSURLDownload.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">QuartzCore.framework/Headers/CAAnimation.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">QuartzCore.framework/Headers/CALayer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">QuartzCore.framework/Headers/CIImageProvider.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

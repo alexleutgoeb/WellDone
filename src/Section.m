@@ -2,7 +2,7 @@
 //  Section.m
 //  WellDone
 //
-//  Created by Andrea F. on 14.01.10.
+//  Created by Andrea F. on 17.01.10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,9 +12,8 @@
 
 @implementation Section 
 
+@dynamic name;
 @dynamic title;
 @dynamic childTasks;
 
-
 @end
-
