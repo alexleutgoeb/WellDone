@@ -93,6 +93,9 @@
 	if (![context save:&error]) {
 		// Update to handle the error appropriately.
 		DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
+		NSDate *modifiedDate = [container.gtdTask.date_modified addTimeInterval:2];
+		container.remoteTask.lastsyncDate = modifiedDate;
+		container.remoteTask.localTask.modifiedDate = modifiedDate;
 	}
 	
 	activeConflict++;
