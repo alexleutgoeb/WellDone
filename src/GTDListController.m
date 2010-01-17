@@ -151,6 +151,7 @@
 	for (selectedTask in selectedTasks) {
 		if ([selectedTask isKindOfClass: [Task class]]) {
 			[selectedTask setDeletedByApp:[NSNumber numberWithBool:YES]];
+
 			//[myview reloadData]; 
 			[treeController fetch:nil];
 		}

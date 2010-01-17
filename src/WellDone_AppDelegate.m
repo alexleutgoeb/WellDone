@@ -346,7 +346,7 @@
 	
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@", todaysDate, todaysDateEnd];	
+	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@ and deletedByApp == 0", todaysDate, todaysDateEnd];	
 	[request setEntity:entityDescription];
 	[request setPredicate:predicateToday];
 	
@@ -365,7 +365,7 @@
 	
 	NSEntityDescription *entityDescriptionNext3Days = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext3Days = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", todaysDate, inThreeDays];
+	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp == 0", todaysDate, inThreeDays];
 	[requestNext3Days setEntity:entityDescriptionNext3Days];
 	[requestNext3Days setPredicate:predicateNext3Days];
 	
@@ -384,7 +384,7 @@
 	
 	NSEntityDescription *entityDescriptionNext7Day = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext7Days = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@", inThreeDays, inSevenDays];	
+	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp == 0", inThreeDays, inSevenDays];	
 	[requestNext7Days setEntity:entityDescriptionNext7Day];
 	[requestNext7Days setPredicate:predicateNext7Days];
 	
@@ -403,7 +403,7 @@
 	
 	NSEntityDescription *entityDescriptionUpcoming = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestUpcoming = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"dueDate > %@ or dueDate = null", inSevenDays];	
+	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"(dueDate > %@ or dueDate = null) and deletedByApp == 0", inSevenDays];	
 	[requestUpcoming setEntity:entityDescriptionUpcoming];
 	[requestUpcoming setPredicate:predicateUpcoming];
 	
@@ -422,7 +422,7 @@
 	
 	NSEntityDescription *entityDescriptionDone = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestDone = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true"];	
+	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true and deletedByApp == 0"];	
 	[requestDone setEntity:entityDescriptionDone];
 	[requestDone setPredicate:predicateDone];
 	
@@ -452,6 +452,7 @@
 		showGTDView = YES;
 		[sender highlight:YES];
 		[sender setFont:[NSFont boldSystemFontOfSize:13]];
+		[self initGTDView];
 	}
 }
 
