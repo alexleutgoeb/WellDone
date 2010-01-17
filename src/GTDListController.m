@@ -80,7 +80,6 @@
 	[iGroupRowCell setEditable:NO];
 	[iGroupRowCell setSelectable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];	
-	[gtdOutlineView expandItem:section];
 	// Initialize listening to notifications by managedObjectContext
 	NSNotificationCenter *nc;
 	nc = [NSNotificationCenter defaultCenter];
@@ -117,6 +116,9 @@
 	 }*/
 	
 	NSTreeNode *node = item;
+	if ([[node representedObject] isKindOfClass: [Section class]]) {
+		[gtdOutlineView expandItem:item expandChildren:NO];
+	}
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
 		Task *task = [node representedObject];
 		if ([task.completed boolValue] == YES) {
