@@ -367,10 +367,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B465D95810FF2FBA0055E308 /* RemindMe Timer */,
-				6F03A45710FC69790020CCA9 /* Value Transformers */,
-				42375F3610F5F26A00A48318 /* Backup */,
-				D164971910D2E16F00DEB20A /* Custom Cells */,
 				77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */,
 				6F5D249210AC588D002E9514 /* View Classes */,
@@ -378,6 +374,8 @@
 				FABE3F9210C1A323000D72E9 /* Logic Classes */,
 				FACF441C10D2EAD700B0237A /* Preferences Classes */,
 				7756732906782D8800D1FEB8 /* Models */,
+				6F03A45710FC69790020CCA9 /* Value Transformers */,
+				FA56EB5710EBB89C00228C43 /* Helper Classes */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -416,10 +414,7 @@
 		29B97314FDCFA39411CA2CEA /* WellDone */ = {
 			isa = PBXGroup;
 			children = (
-				42B57FBB10D157A400EF6391 /* ValueTransformer */,
-				FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				FA56EB5710EBB89C00228C43 /* Helper Classes */,
 				FACCD7BF10A050B900A36C87 /* TestClasses */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -442,8 +437,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FA56EC6A10EE9CE300228C43 /* Localizable.strings */,
+				FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */,
 				FA48B85F10D4139E0032F1D8 /* ImageRes */,
+				FA56EC6A10EE9CE300228C43 /* Localizable.strings */,
 				FA56EC0710EBCA9900228C43 /* icon.icns */,
 				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
 				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
@@ -486,18 +482,11 @@
 			name = Backup;
 			sourceTree = "<group>";
 		};
-		42B57FBB10D157A400EF6391 /* ValueTransformer */ = {
+		6F03A45710FC69790020CCA9 /* Value Transformers */ = {
 			isa = PBXGroup;
 			children = (
 				4263AABC10D1495200C5FD7B /* TaskValueTransformer.h */,
 				4263AABD10D1495200C5FD7B /* TaskValueTransformer.m */,
-			);
-			name = ValueTransformer;
-			sourceTree = "<group>";
-		};
-		6F03A45710FC69790020CCA9 /* Value Transformers */ = {
-			isa = PBXGroup;
-			children = (
 				6F03A45910FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.h */,
 				6F03A45A10FC698B0020CCA9 /* CLDateToWeekdayValueTransformer.m */,
 				6F03A45B10FC698B0020CCA9 /* CLIsFaultBoolValueTransformer.h */,
@@ -553,6 +542,7 @@
 		6F5D249210AC588D002E9514 /* View Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D164971910D2E16F00DEB20A /* Custom Cells */,
 				6F0C0A0510FFC4C200AFD545 /* MAAttachedWindow.h */,
 				6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */,
 				6F22C1B910CC01DD00ABFE19 /* SidebarFolderTreeView.h */,
@@ -665,10 +655,9 @@
 		FABE3F9210C1A323000D72E9 /* Logic Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FABE3F9310C1A33E000D72E9 /* SyncManager.h */,
-				FABE3F9410C1A33E000D72E9 /* SyncManager.m */,
-				FA48B62510D3DADF0032F1D8 /* SyncController.h */,
-				FA48B62610D3DADF0032F1D8 /* SyncController.m */,
+				42375F3610F5F26A00A48318 /* Backup */,
+				B465D95810FF2FBA0055E308 /* RemindMe Timer */,
+				FAD06D6B1103C966006B1A34 /* Sync */,
 			);
 			name = "Logic Classes";
 			sourceTree = "<group>";
@@ -710,6 +699,17 @@
 				FA6A310010FA250400A77477 /* GeneralPreferences.m */,
 			);
 			name = "Preferences Classes";
+			sourceTree = "<group>";
+		};
+		FAD06D6B1103C966006B1A34 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				FABE3F9310C1A33E000D72E9 /* SyncManager.h */,
+				FABE3F9410C1A33E000D72E9 /* SyncManager.m */,
+				FA48B62510D3DADF0032F1D8 /* SyncController.h */,
+				FA48B62610D3DADF0032F1D8 /* SyncController.m */,
+			);
+			name = Sync;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
