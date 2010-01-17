@@ -312,22 +312,27 @@
 	if (loadSection) {
 		gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.section setValue:@"Today" forKey:@"title"];
+		[gtdListController.section setValue:[[NSNumber alloc] initWithInt:1] forKey:@"position"];
 		[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
 
 		gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
+		[gtdListController.sectionNext3Days setValue:[[NSNumber alloc] initWithInt:2] forKey:@"position"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
 		
 		gtdListController.sectionNext7Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.sectionNext7Days setValue:@"The next 7 Days" forKey:@"title"];
+		[gtdListController.sectionNext7Days setValue:[[NSNumber alloc] initWithInt:3] forKey:@"position"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext7Days toPersistentStore:memoryStore];
 		
 		gtdListController.sectionUpcoming = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
+		[gtdListController.sectionUpcoming setValue:[[NSNumber alloc] initWithInt:4] forKey:@"position"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
 		
 		gtdListController.sectionDone = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.sectionDone setValue:@"Done" forKey:@"title"];
+		[gtdListController.sectionDone setValue:[[NSNumber alloc] initWithInt:5] forKey:@"position"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionDone toPersistentStore:memoryStore];
 		
 		loadSection = NO;
@@ -346,7 +351,7 @@
 	
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@ and deletedByApp == 0", todaysDate, todaysDateEnd];	
+	NSPredicate *predicateToday = [NSPredicate predicateWithFormat:@"dueDate >= %@ and dueDate <= %@ and deletedByApp = false", todaysDate, todaysDateEnd];	
 	[request setEntity:entityDescription];
 	[request setPredicate:predicateToday];
 	
@@ -365,7 +370,7 @@
 	
 	NSEntityDescription *entityDescriptionNext3Days = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext3Days = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp == 0", todaysDate, inThreeDays];
+	NSPredicate *predicateNext3Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp = false", todaysDate, inThreeDays];
 	[requestNext3Days setEntity:entityDescriptionNext3Days];
 	[requestNext3Days setPredicate:predicateNext3Days];
 	
@@ -384,7 +389,7 @@
 	
 	NSEntityDescription *entityDescriptionNext7Day = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestNext7Days = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp == 0", inThreeDays, inSevenDays];	
+	NSPredicate *predicateNext7Days = [NSPredicate predicateWithFormat:@"dueDate > %@ and dueDate <= %@ and deletedByApp = false", inThreeDays, inSevenDays];	
 	[requestNext7Days setEntity:entityDescriptionNext7Day];
 	[requestNext7Days setPredicate:predicateNext7Days];
 	
@@ -403,7 +408,7 @@
 	
 	NSEntityDescription *entityDescriptionUpcoming = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestUpcoming = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"(dueDate > %@ or dueDate = null) and deletedByApp == 0", inSevenDays];	
+	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"(dueDate > %@ or dueDate = null) and deletedByApp = false", inSevenDays];	
 	[requestUpcoming setEntity:entityDescriptionUpcoming];
 	[requestUpcoming setPredicate:predicateUpcoming];
 	
@@ -422,7 +427,7 @@
 	
 	NSEntityDescription *entityDescriptionDone = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestDone = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true and deletedByApp == 0"];	
+	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true and deletedByApp = false"];	
 	[requestDone setEntity:entityDescriptionDone];
 	[requestDone setPredicate:predicateDone];
 	

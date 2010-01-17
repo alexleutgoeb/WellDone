@@ -69,7 +69,7 @@
 	dragType = [NSArray arrayWithObjects: @"factorialDragType", nil];	
 	[ dragType retain ]; 
 	[ gtdOutlineView registerForDraggedTypes:dragType ];
-	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+	NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
 	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
 	[ sortDesc release ];
 
