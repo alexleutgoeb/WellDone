@@ -925,10 +925,20 @@
 				[entity isKindOfClass:[Folder class]] || 
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
+				
 				// TODO: Check for some properties (ie NOT order)
 				if ([[entity changedValues] count] > 0) {
 					DLog(@"Updated values: %@", [[entity changedValues] description]);
-					[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+					
+					if ([entity isKindOfClass:[Task class]]) {
+						if (![[entity changedValues] objectForKey:@"modifiedDate"]) {
+							[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+						}
+					}
+					else {
+						[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+					}
+					
 				}
 			}
 		}
@@ -944,16 +954,17 @@
 
 - (void)syncController:(SyncController *)sc didSyncWithError:(NSError *)error {
 	DLog(@"Sync finihsed with error: %@", [error localizedDescription]);
-	// NSAlert *alert = [NSAlert alertWithError:error];
-	// [alert runModal];
-	
-	ConflictResolverController *cfc = [[ConflictResolverController alloc] init];
-	[cfc showWindow:self];
-	[cfc.window makeKeyAndOrderFront:self];
+	NSAlert *alert = [NSAlert alertWithError:error];
+	[alert runModal];
 }
 
 - (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts {
 	DLog(@"Sync finihsed with conflict(s): %i", [conflicts count]);
+	ConflictResolverController *cfc = [[ConflictResolverController alloc] init];
+	cfc.tasks = conflicts;
+	[cfc showWindow:self];
+	[cfc.window makeKeyAndOrderFront:self];
+	[cfc release];
 }
 
 /*
