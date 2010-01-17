@@ -52,11 +52,11 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	
 	//TODO: check the path ending
 	backupPath = [backupPath stringByAppendingString:@"/"];
-	//NSLog(backupPath);
+	NSLog(backupPath);
     NSFileManager *fm = [NSFileManager defaultManager];
     
 	NSURL *currentDBFile = [[NSApp delegate] coreDataDBLocationURL];
-
+	
 	// checks if the backup directory exisits and creates it if not
 	if (![fm fileExistsAtPath:backupPath]){ 
 		// create the new file (if the folder does not exist, the method creates it). Errors are handled in the NSError error and nil is returned in case of problems
@@ -75,12 +75,13 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	
 	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
 
-	if ([fm copyItemAtPath:[currentDBFile absoluteString] toPath:[backupFileURL absoluteString] error:&*error]){
+	//NSLog(@"%@",[currentDBFile absoluteString]);
+	//NSLog(@"%@",[backupFileURL absoluteString]);
+	if ([fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&*error]){
 		return [backupFileURL absoluteString];
 	}else {
 		return nil;
 	}
-
 }
 
 
@@ -91,31 +92,24 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 }
 
 
-- (IBAction)restoreBackupAction:(id)sender {
-	int buttonPressed = NSRunCriticalAlertPanel(
-									@"Restore latest backup?",
-									@"Your changes since the last backup will be lost.",
-									@"Cancel",
-									@"Restore",
-									nil);
+- (IBAction)restoreBackupAction:(id)sender {	
+	NSOpenPanel *op = [NSOpenPanel openPanel];
 	
-	NSLog(@"Button pressed: %d",buttonPressed);
-	
-	if (buttonPressed == 0) {
-		// restore button pressed
-		
+	if ([op runModal] == NSOKButton)
+	{
+		NSString *filename = [op filename];
+			
 		NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-		[defaults setObject:@"yes" forKey:@"restoreBackupAtStart"];
-		
-		
-		NSRunCriticalAlertPanel(
-								@"Backup will be restored after restart.",
-								@"WellDone will reset to the latest backup next time you start the program.",
-								@"OK",
-								nil,
-								nil);
-		
-		// TODO: restart app
+		[defaults setObject:filename forKey:@"restoreBackupAtStart"];
+			
+		int buttonPressed = NSRunCriticalAlertPanel(
+													@"Please restart WellDone!",
+													@"WellDone will restore to your selected backup after restart.",
+													@"Ok",
+													nil,
+													nil);
+			
+		// TODO: restart app			
 	}
 }
 
