@@ -964,9 +964,7 @@
 	if (conflictResolverController == nil)
 		conflictResolverController = [[ConflictResolverController alloc] init];
 	conflictResolverController.tasks = conflicts;
-	[conflictResolverController showWindow:self];
 	[conflictResolverController.window makeKeyAndOrderFront:self];
-	[conflictResolverController release];
 }
 
 /*

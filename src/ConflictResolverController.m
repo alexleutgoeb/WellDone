@@ -31,22 +31,21 @@
 	return self;
 }
 
-- (void)windowDidLoad {
+- (void)awakeFromNib {
 	DLog(@"Creating conflict resolver window...");
 	
-	NSInteger c = [tasks count];
 	[borderBox setHidden:YES];
+	NSInteger c = [tasks count];
 	[conflictTextField setStringValue:[NSString stringWithFormat:@"There %@ %i sync conflict%@.", (c == 1) ? @"is" : @"are", c, (c == 1) ? @"" : @"s"]];
 	[progressTextField setStringValue:[NSString stringWithFormat:@"%i of %i", activeConflict + 1, c]];
 	
     NSView *contentView = [[self window] contentView];
     [contentView setWantsLayer:YES];
 	
+	[self setActiveConflictView];
 }
 
 - (IBAction)expandView:(id)sender {
-	[self setActiveConflictView];
-
 	NSRect frame = self.window.frame;
 	frame.origin.y = frame.origin.y - 233;
 	frame.size.width = 491;
@@ -60,6 +59,29 @@
 
 - (IBAction)closeWindow:(id)sender {
 	[self close];
+	
+	if ([okButton isHidden]) {
+		NSRect frame = self.window.frame;
+		frame.origin.y = frame.origin.y + 233;
+		frame.size.width = 491;
+		frame.size.height = 189;
+		[self.window setFrame:frame display:YES animate:NO];
+		[okButton setHidden:NO];
+		[cancelButton setHidden:NO];
+		[conflictDetailTextField setHidden:NO];
+		[borderBox setHidden:YES];
+	}
+}
+
+- (void)setTasks:(NSArray *)theTasks {
+	[tasks release];
+	tasks = nil;
+	if (theTasks != nil)
+		tasks = [theTasks retain];
+	
+	activeConflict = 0;
+	NSInteger c = [tasks count];
+	[conflictTextField setStringValue:[NSString stringWithFormat:@"There %@ %i sync conflict%@.", (c == 1) ? @"is" : @"are", c, (c == 1) ? @"" : @"s"]];	
 }
 
 - (void)setActiveConflictView {
@@ -81,9 +103,8 @@
 	if ([segmentedChooser selectedSegment] == 0) {
 		// Chose local task
 		DLog(@"Overwrite remote task by local one on next sync...");
-		NSDate *modifiedDate = [container.gtdTask.date_modified addTimeInterval:2];
-		container.remoteTask.lastsyncDate = modifiedDate;
-		container.remoteTask.localTask.modifiedDate = modifiedDate;
+		container.remoteTask.lastsyncDate = [container.gtdTask.date_modified addTimeInterval:1];
+		container.remoteTask.localTask.modifiedDate = [container.gtdTask.date_modified addTimeInterval:2];
 	}
 	else {
 		// Chose remote task
