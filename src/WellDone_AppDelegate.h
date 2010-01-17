@@ -22,6 +22,7 @@
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "DateTimePopupController.h"
+#import "ConflictResolverController.h"
 
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 #define kNewDayNotification @"kNewDayNotification"
@@ -62,6 +63,7 @@
 	ContextViewController *contextViewController;
 	HUDTaskEditorController *hudTaskEditorController;
 	SyncController *syncController;
+	ConflictResolverController *conflictResolverController;
 	SS_PrefsController *preferencesController;
 	
 	// Data model support

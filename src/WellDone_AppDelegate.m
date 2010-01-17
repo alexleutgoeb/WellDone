@@ -960,11 +960,13 @@
 
 - (void)syncControllerDidSyncWithConflicts:(SyncController *)sc conflicts:(NSArray *)conflicts {
 	DLog(@"Sync finihsed with conflict(s): %i", [conflicts count]);
-	ConflictResolverController *cfc = [[ConflictResolverController alloc] init];
-	cfc.tasks = conflicts;
-	[cfc showWindow:self];
-	[cfc.window makeKeyAndOrderFront:self];
-	[cfc release];
+	
+	if (conflictResolverController == nil)
+		conflictResolverController = [[ConflictResolverController alloc] init];
+	conflictResolverController.tasks = conflicts;
+	[conflictResolverController showWindow:self];
+	[conflictResolverController.window makeKeyAndOrderFront:self];
+	[conflictResolverController release];
 }
 
 /*
@@ -979,6 +981,7 @@
  Implementation of dealloc, to release the retained variables.
  */
 - (void)dealloc {
+	[conflictResolverController release];
 	[syncController removeObserver:syncController forKeyPath:@"status"];
 	[syncController release];
 	[syncMenuItem release];
