@@ -33,7 +33,14 @@
 #define DUEDATE_ID @"dueDate"
 #define TAGS_ID @"tags"
 
-@synthesize subViewControllers, section, sectionNext3Days, sectionNext7Days, sectionUpcoming, sectionDone, treeController;
+@synthesize subViewControllers;
+@synthesize section; 
+@synthesize sectionNext3Days;
+@synthesize sectionNext7Days;
+@synthesize sectionUpcoming;
+@synthesize sectionDone;
+@synthesize treeController;
+@synthesize gtdOutlineView;
 
 - (id) init
 {
@@ -72,8 +79,7 @@
 	[iGroupRowCell setEditable:NO];
 	[iGroupRowCell setSelectable:NO];
 	[iGroupRowCell setLineBreakMode:NSLineBreakByTruncatingTail];	
-	[gtdOutlineView expandItem:iGroupRowCell];
-	
+	[gtdOutlineView expandItem:section];
 	// Initialize listening to notifications by managedObjectContext
 	NSNotificationCenter *nc;
 	nc = [NSNotificationCenter defaultCenter];

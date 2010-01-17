@@ -312,7 +312,7 @@
 		gtdListController.section = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.section setValue:@"Today" forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.section toPersistentStore:memoryStore];
-		
+
 		gtdListController.sectionNext3Days = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
 		[gtdListController.sectionNext3Days setValue:@"The next 3 Days" forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionNext3Days toPersistentStore:memoryStore];
@@ -452,6 +452,7 @@
 		[sender highlight:YES];
 		[sender setFont:[NSFont boldSystemFontOfSize:13]];
 		[self initGTDView];
+
 	}
 }
 

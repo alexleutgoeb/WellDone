@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Task.h"
 #import	"Section.h"
+#import "GTDListView.h"
 
 /*
  *Basically objects returned in the dataSource methods will return _NSArrayControllerTreeNode objects, a private controller class. 
@@ -35,7 +36,7 @@
 	NSArray* dragType;
 	_NSArrayControllerTreeNodeGTD* draggedNode;
 	NSMutableArray *subViewControllers;
-	IBOutlet NSOutlineView *gtdOutlineView;
+	IBOutlet GTDListView *gtdOutlineView;
 	NSTextFieldCell *iGroupRowCell;
 	NSMutableArray *iTasks;
 	//IBOutlet NSOutlineView* myview;
@@ -58,6 +59,7 @@
 @property (nonatomic, retain) Section *sectionNext7Days;
 @property (nonatomic, retain) Section *sectionUpcoming;
 @property (nonatomic, retain) Section *sectionDone;
+@property (nonatomic, retain) GTDListView *gtdOutlineView;
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 - (void)setTaskDone:(NSTextFieldCell*)cell;
 - (void)setTaskUndone:(NSTextFieldCell*)cell;
