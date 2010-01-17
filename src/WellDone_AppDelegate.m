@@ -932,12 +932,16 @@
 				[entity isKindOfClass:[Task class]] ||
 				[entity isKindOfClass:[Context class]]) {
 				
-				// TODO: Check for some properties (ie NOT order)
 				if ([[entity changedValues] count] > 0) {
 					DLog(@"Updated values: %@", [[entity changedValues] description]);
 					
 					if ([entity isKindOfClass:[Task class]]) {
 						if (![[entity changedValues] objectForKey:@"modifiedDate"]) {
+							[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
+						}
+					}
+					else if ([entity isKindOfClass:[Folder class]]) {
+						if (![[entity changedValues] objectForKey:@"order"]) {
 							[entity setPrimitiveValue:[NSDate date] forKey:@"modifiedDate"];
 						}
 					}
