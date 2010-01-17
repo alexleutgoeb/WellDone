@@ -81,6 +81,9 @@
 	if ([segmentedChooser selectedSegment] == 0) {
 		// Chose local task
 		DLog(@"Overwrite remote task by local one on next sync...");
+		NSDate *modifiedDate = [container.gtdTask.date_modified addTimeInterval:2];
+		container.remoteTask.lastsyncDate = modifiedDate;
+		container.remoteTask.localTask.modifiedDate = modifiedDate;
 	}
 	else {
 		// Chose remote task
@@ -93,9 +96,6 @@
 	if (![context save:&error]) {
 		// Update to handle the error appropriately.
 		DLog(@"Error while saving sync context: %@, %@", error, [error userInfo]);
-		NSDate *modifiedDate = [container.gtdTask.date_modified addTimeInterval:2];
-		container.remoteTask.lastsyncDate = modifiedDate;
-		container.remoteTask.localTask.modifiedDate = modifiedDate;
 	}
 	
 	activeConflict++;
