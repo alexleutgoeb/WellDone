@@ -99,26 +99,6 @@
 		aManagedObjectContext = [self syncFolders:aManagedObjectContext withSyncService:syncService];
 		aManagedObjectContext = [self syncContexts:aManagedObjectContext withSyncService:syncService];
 		aManagedObjectContext = [self syncTasks:aManagedObjectContext withSyncService:syncService andConflicts:*&conflicts];
-								 
-		/*if (lastDates != nil && error == nil) {
-				
-			// folder sync
-			
-			// TODO: check if remote folders have changed since last sync, dummy var:
-			BOOL remoteFoldersHaveChanged = YES;
-			
-			if (remoteFoldersHaveChanged) {
-				// pull folders from server
-				NSArray *remoteFolders = [syncService getFolders:&error];
-				if (remoteFolders != nil && error == nil) {
-					// check remote folders and local folders
-					
-				}
-			}
-			else {
-				// remote folders not changed, send local changes to remote if exist
-			}
-		}*/
 		
 		return aManagedObjectContext;
 	}
@@ -409,7 +389,7 @@
 	
 	// Load all possible tags in a dictionary named possibleTags
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:aManagedObjectContext];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:aManagedObjectContext];
 	[fetchRequest setEntity:entity];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deletedByApp == %@", [NSNumber numberWithInt:0]];
 	[fetchRequest setPredicate:predicate];
@@ -479,7 +459,7 @@
 					DLog(@"Gtd task:   %@", gtdTask.date_modified);
 					DLog(@"Last sync:  %@", remoteTask.lastsyncDate);
 					
-					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0) {
+					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0.1) {
 						// Update of remote task by local task
 						DLog(@"Update remote task by local task (newer)...");
 						gtdTask.title = localTask.title;
@@ -521,7 +501,7 @@
 						}
 					}
 					
-					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
+					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0.1 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
 						// Update of local task by remote one
 						DLog(@"Update local task by remote task (newer)...");
 						// Set local task properties
