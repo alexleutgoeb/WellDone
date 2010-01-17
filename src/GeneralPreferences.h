@@ -11,7 +11,11 @@
 
 
 @interface GeneralPreferences : NSViewController <SS_PreferencePaneProtocol> {
-
+	IBOutlet NSTextField *backupPath;
 }
+
+@property (nonatomic, retain) NSTextField *backupPath;
+
+- (IBAction)doOpen:(id)pId; 
 
 @end

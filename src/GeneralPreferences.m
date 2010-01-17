@@ -11,6 +11,8 @@
 
 @implementation GeneralPreferences
 
+@synthesize backupPath;
+
 - (id)init {
 	if (self = [super initWithNibName:@"GeneralPreferences" bundle:nil]) {
 		
@@ -61,6 +63,34 @@
 
 - (BOOL)allowsVerticalResizing {
     return NO;
+}
+
+
+#pragma mark -
+#pragma mark ib actions
+
+- (IBAction)doOpen:(id)pId; {
+	
+	int result;
+
+    NSOpenPanel *oPanel = [NSOpenPanel openPanel];	
+	
+    [oPanel setAllowsMultipleSelection:NO];
+	[oPanel setCanChooseFiles:NO];
+	[oPanel setCanChooseDirectories:YES];
+	
+    result = [oPanel runModalForDirectory:NSHomeDirectory() file:nil types:nil];
+	
+	
+    if (result == NSOKButton) {
+		
+        NSArray *filesToOpen = [oPanel filenames];
+		
+        NSString *aFile = [filesToOpen objectAtIndex:0];	
+		NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+		[defaults setObject:aFile forKey:@"backupPath"];
+		[backupPath setStringValue:aFile];
+	}
 }
 
 @end
