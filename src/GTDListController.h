@@ -40,7 +40,7 @@
 	NSMutableArray *iTasks;
 	//IBOutlet NSOutlineView* myview;
 	NSManagedObjectContext *moc;
-	Section *section, *sectionNext3Days, *sectionNext7Days, *sectionUpcoming;
+	Section *section, *sectionNext3Days, *sectionNext7Days, *sectionUpcoming, *sectionDone;
 	
 	// holds the control which is being edited
 	NSControl *editingControl;
@@ -57,6 +57,7 @@
 @property (nonatomic, retain) Section *sectionNext3Days;
 @property (nonatomic, retain) Section *sectionNext7Days;
 @property (nonatomic, retain) Section *sectionUpcoming;
+@property (nonatomic, retain) Section *sectionDone;
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
 - (void)setTaskDone:(NSTextFieldCell*)cell;
 - (void)setTaskUndone:(NSTextFieldCell*)cell;

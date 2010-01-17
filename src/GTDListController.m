@@ -33,7 +33,7 @@
 #define DUEDATE_ID @"dueDate"
 #define TAGS_ID @"tags"
 
-@synthesize subViewControllers, section, sectionNext3Days, sectionNext7Days, sectionUpcoming, treeController;
+@synthesize subViewControllers, section, sectionNext3Days, sectionNext7Days, sectionUpcoming, sectionDone, treeController;
 
 - (id) init
 {

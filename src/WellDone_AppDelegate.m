@@ -57,6 +57,7 @@
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore;
 - (void) initGTDitemSevenDays:(NSDate *)inThreeDays inSevenDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore; 
 - (void) initGTDitemUpcoming:(NSDate *)inSevenDays inStore:(id)memoryStore;
+- (void) initGTDitemDone:(id)memoryStore;
 
 - (void) replacePlaceholderView:(NSView**)placeHolder withViewOfController:(NSViewController*)viewController;
 
@@ -306,6 +307,10 @@
 		[gtdListController.sectionUpcoming setValue:@"Upcoming" forKey:@"title"];
 		[[self managedObjectContext] assignObject:gtdListController.sectionUpcoming toPersistentStore:memoryStore];
 		
+		gtdListController.sectionDone = [[NSEntityDescription insertNewObjectForEntityForName:@"Section" inManagedObjectContext:[self managedObjectContext]] retain];
+		[gtdListController.sectionDone setValue:@"Done" forKey:@"title"];
+		[[self managedObjectContext] assignObject:gtdListController.sectionDone toPersistentStore:memoryStore];
+		
 		loadSection = NO;
 	}
 	
@@ -313,6 +318,7 @@
 	[self initGTDitemThreeDays:todaysDateEnd inThreeDaysDate:inThreeDays inStore:memoryStore];
 	[self initGTDitemSevenDays:inThreeDays inSevenDaysDate:inSevenDays inStore:memoryStore];
 	[self initGTDitemUpcoming:inSevenDays inStore:memoryStore];
+	[self initGTDitemDone:memoryStore];
 	
 }
 
@@ -388,6 +394,25 @@
 	}
 	
 	if (itemsUpcoming == nil) {
+		NSLog(@"ERROR fetchRequest Tasks == nil!");
+	}
+}
+
+- (void) initGTDitemDone:(id)memoryStore {
+	NSError *error;
+	
+	NSEntityDescription *entityDescriptionDone = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *requestDone = [[NSFetchRequest alloc] init];
+	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true"];	
+	[requestDone setEntity:entityDescriptionDone];
+	[requestDone setPredicate:predicateDone];
+	
+	NSArray *itemsDone = [managedObjectContext executeFetchRequest:requestDone error:&error];
+	for (id item in itemsDone) {
+		[item setValue:gtdListController.sectionDone forKey:@"section"];
+	}
+	
+	if (itemsDone == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
 }
