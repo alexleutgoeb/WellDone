@@ -26,9 +26,17 @@
 	
 	IBOutlet NSTextField *localTitle;
 	IBOutlet NSTextField *remoteTitle;
+	IBOutlet NSTextField *localFolder;
+	IBOutlet NSTextField *remoteFolder;
+	IBOutlet NSTextField *localDue;
+	IBOutlet NSTextField *remoteDue;
+	IBOutlet NSTextField *localTags;
+	IBOutlet NSTextField *remoteTags;
+	IBOutlet NSTextField *localContext;
+	IBOutlet NSTextField *remoteContext;
+	IBOutlet NSTextField *localRminder;
+	IBOutlet NSTextField *remoteReminder;
     
-    CATransition *transition;
-	
 	NSArray *tasks;
 	
 	NSInteger activeConflict;
