@@ -11,13 +11,11 @@
 
 @implementation CoreDataBackup
 
-
 // workaround for error domain initialization
 NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 
 - (IBAction)createBackupAction:(id)sender {
 
-	
 	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
 //	NSString *location = [[NSApp delegate] applicationSupportDirectory ]; 
 	NSString *location = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
@@ -84,14 +82,6 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 	}
 }
 
-
-- (BOOL)replaceDatabaseFileWithBackupFile:(NSString *)backupFilePath{
-
-
-	return NO;
-}
-
-
 - (IBAction)restoreBackupAction:(id)sender {	
 	NSOpenPanel *op = [NSOpenPanel openPanel];
 	
@@ -108,9 +98,46 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 													@"Ok",
 													nil,
 													nil);
-			
-		// TODO: restart app			
+		// restart the app
+		[NSApp relaunch:nil];
 	}
+}
+
+
+- (IBAction)doAutoBackup:(id)sender {
+	[self handleAutoBackupTimer];
+
+}
+
+- (void)handleAutoBackupTimer{
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	NSNumber *automaticBackup = (NSNumber *)[defaults objectForKey:@"automaticBackup"];//TODO: fehlerbehandlung
+	NSNumber *timeinterVal = (NSNumber *) [defaults objectForKey:@"automaticBackupValue"];
+	NSTimer *timer = [[NSApp delegate] autoBackupTimer] ;	
+	
+	if ([automaticBackup intValue] == 0) return;
+
+	if (timer != nil){
+		[timer invalidate];
+	}
+	timer = [NSTimer scheduledTimerWithTimeInterval: ([timeinterVal intValue] * 60) target:self selector:@selector(createBackupActionInBackround:) userInfo:nil repeats: YES];
+	[[NSApp delegate] setAutoBackupTimer:timer];
+}
+
+
+- (void)createBackupActionInBackround:(NSTimer*)timer {	
+	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	NSString *location = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
+	NSError *error;	
+	NSString *filelocation = [self backupDatabaseFile:location error:&error];
+	if (filelocation != nil){
+		NSLog([@"AutoBackup was successful. You can find the Backupfile here: " stringByAppendingPathComponent: filelocation]);
+		}else {
+		NSLog(@"AutoBackup faild: %@", error);
+	}
+	
+	
+
 }
 
 @end

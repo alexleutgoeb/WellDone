@@ -11,6 +11,10 @@
 #import "GtdTask.h"
 #import "TaskContainer.h"
 #import "WellDone_AppDelegate.h"
+#import "RemoteFolder.h"
+#import "RemoteContext.h"
+#import "Folder.h"
+#import "Context.h"
 
 
 @interface ConflictResolverController ()
@@ -82,6 +86,7 @@
 	activeConflict = 0;
 	NSInteger c = [tasks count];
 	[conflictTextField setStringValue:[NSString stringWithFormat:@"There %@ %i sync conflict%@.", (c == 1) ? @"is" : @"are", c, (c == 1) ? @"" : @"s"]];	
+	[self setActiveConflictView];
 }
 
 - (void)setActiveConflictView {
@@ -91,8 +96,78 @@
 	
 	[localTitle setStringValue:localTask.title];
 	[remoteTitle setStringValue:remoteTask.title];
+
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateStyle:NSDateFormatterShortStyle];
+	[formatter setTimeStyle:NSDateFormatterShortStyle];
+	[localDue setStringValue:[formatter stringFromDate:localTask.dueDate]];
+	[remoteDue setStringValue:[formatter stringFromDate:remoteTask.date_due]];
+	[formatter release];
 	
-	// TODO: set other fields
+	if (localTask.folder != nil)
+		[localFolder setStringValue:localTask.folder.name];
+	else
+		[localFolder setStringValue:@"Inbox"];
+	
+	if (remoteTask.folder > 0) {
+		NSManagedObjectContext *aManagedObjectContext = [localTask managedObjectContext];
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"RemoteFolder" inManagedObjectContext:aManagedObjectContext];
+		[fetchRequest setEntity:entity];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", remoteTask.folder, container.remoteTask.serviceIdentifier];
+		[fetchRequest setPredicate:predicate];
+		NSError *error = nil;
+		NSArray *allFolder = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+		if (allFolder != nil && [allFolder count] == 1) {
+			// Found context
+			[remoteFolder setStringValue:[[[allFolder objectAtIndex:0] localFolder] name]];
+		}
+		else {
+			// Error, context should be in database, annoying...
+		}
+		[fetchRequest release];
+	}
+	else
+		[remoteFolder setStringValue:@"Inbox"];
+	
+	if (localTask.context != nil)
+		[localContext setStringValue:localTask.context.title];
+	else
+		[localContext setStringValue:@"-"];
+	
+	if (remoteTask.context > 0) {
+		NSManagedObjectContext *aManagedObjectContext = [localTask managedObjectContext];
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"RemoteContext" inManagedObjectContext:aManagedObjectContext];
+		[fetchRequest setEntity:entity];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteUid == %i AND serviceIdentifier like %@", remoteTask.context, container.remoteTask.serviceIdentifier];
+		[fetchRequest setPredicate:predicate];
+		NSError *error = nil;
+		NSArray *allContext = [aManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+		if (allContext != nil && [allContext count] == 1) {
+			// Found context
+			[remoteContext setStringValue:[[[allContext objectAtIndex:0] localContext] title]];
+		}
+		else {
+			// Error, context should be in database, annoying...
+		}
+		[fetchRequest release];
+	}
+	else
+		[remoteContext setStringValue:@"-"];
+	
+	[localTags setStringValue:[[localTask.tags allObjects] componentsJoinedByString:@", "]];
+	[remoteTags setStringValue:[remoteTask.tags componentsJoinedByString:@", "]];
+	
+	if (localTask.reminder != nil && [localTask.reminder intValue] > 0)
+		[localRminder setStringValue:[NSString stringWithFormat:@"%@ min", localTask.reminder]];
+	else
+		[localRminder setStringValue:@"-"];
+	
+	if (remoteTask.reminder > 0)
+		[remoteReminder setStringValue:[NSString stringWithFormat:@"%@ min", remoteTask.reminder]];
+	else
+		[remoteReminder setStringValue:@"-"];
 }
 
 - (IBAction)solveConflict:(id)sender {

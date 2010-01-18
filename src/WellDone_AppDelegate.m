@@ -23,6 +23,7 @@
 #import "RemindMeTimer.h"
 #import "DateTimePopupController.h"
 #import "ConflictResolverController.h"
+#import "CoreDataBackup.h"
 
 
 #define LEFT_VIEW_INDEX 0
@@ -111,7 +112,7 @@
 @synthesize syncMenuItem, syncTextMenuItem;
 @synthesize secondsTimer, dateFormatter, today;
 @synthesize gtdListController;
-
+@synthesize autoBackupTimer;
 #pragma mark -
 #pragma mark Initialization
 
@@ -207,6 +208,10 @@
 	// Remindme timer
 	RemindMeTimer *reminderMeTimer = [[RemindMeTimer alloc] init];
 	[reminderMeTimer startTimer];
+	
+	// autoback timer
+	CoreDataBackup *coreDataBackup = [[CoreDataBackup alloc] init];
+	[coreDataBackup handleAutoBackupTimer];
 	
 	// Seconds timer
 	dateFormatter = [[NSDateFormatter alloc] init];
