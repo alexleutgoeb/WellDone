@@ -15,5 +15,7 @@
 - (IBAction)createBackupAction:(id)sender;
 - (IBAction)restoreBackupAction:(id)sender;
 - (id)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error;
+- (IBAction)doAutoBackup:(id)sender;
+- (void)handleAutoBackupTimer;
 
 @end

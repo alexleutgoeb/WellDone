@@ -76,6 +76,7 @@
 	BOOL loadSection;
 	NSDate *today;
 	NSTimer *secondsTimer;
+	NSTimer *autoBackupTimer;
 	NSDateFormatter *dateFormatter;
 	BOOL isOnline;
 	SCNetworkReachabilityRef reachRef;
@@ -89,6 +90,7 @@
 @property (nonatomic, retain, readonly) ContextViewController *contextViewController;
 @property (nonatomic, retain, readonly) NSURL *coreDataDBLocationURL;
 @property (nonatomic, retain, readonly) NSURL *backupDBLocationURL;
+@property (nonatomic, retain, readwrite) NSTimer *autoBackupTimer;
 @property (nonatomic, assign) BOOL isOnline;
 
 // View manipulation
