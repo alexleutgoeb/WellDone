@@ -85,11 +85,6 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 }
 
 
-- (BOOL)replaceDatabaseFileWithBackupFile:(NSString *)backupFilePath{
-
-
-	return NO;
-}
 
 
 - (IBAction)restoreBackupAction:(id)sender {	
@@ -108,8 +103,8 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 													@"Ok",
 													nil,
 													nil);
-			
-		// TODO: restart app			
+		// restart the app
+		[NSApp relaunch:nil];
 	}
 }
 
