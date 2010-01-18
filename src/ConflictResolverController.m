@@ -100,8 +100,15 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateStyle:NSDateFormatterShortStyle];
 	[formatter setTimeStyle:NSDateFormatterShortStyle];
-	[localDue setStringValue:[formatter stringFromDate:localTask.dueDate]];
-	[remoteDue setStringValue:[formatter stringFromDate:remoteTask.date_due]];
+	if (localTask.dueDate != nil)
+		[localDue setStringValue:[formatter stringFromDate:localTask.dueDate]];
+	else
+		[localDue setStringValue:@"-"];
+
+	if (remoteTask.date_due != nil)
+		[remoteDue setStringValue:[formatter stringFromDate:remoteTask.date_due]];
+	else	
+		[remoteDue setStringValue:@"-"];
 	[formatter release];
 	
 	if (localTask.folder != nil)
