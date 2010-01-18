@@ -69,6 +69,13 @@
 		B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B465D95A10FF2FE10055E308 /* RemindMeTimer.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 		B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */; };
+		BF2911E7110515F200C5C449 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
+		BF2911EA1105160900C5C449 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE3F9410C1A33E000D72E9 /* SyncManager.m */; };
+		BF2912091105196600C5C449 /* TaskContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA47819F10FF669700893DBC /* TaskContainer.m */; };
+		BF29120C1105199200C5C449 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
+		BF29122D110519FE00C5C449 /* libToodledoAPIMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA649BF510C30D790051F758 /* libToodledoAPIMac.a */; };
+		BF2912EF11051A9100C5C449 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */; };
+		BF2912F811051BD100C5C449 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA56EB6310EBB95300228C43 /* Security.framework */; };
 		BFCC7FEC10E95932000757D8 /* SyncManagerTestCases.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCC7FEB10E95932000757D8 /* SyncManagerTestCases.m */; };
 		D110F46A10B8D72300304B4C /* TagManagement.xib in Resources */ = {isa = PBXBuildFile; fileRef = D110F46910B8D72300304B4C /* TagManagement.xib */; };
 		D110F47110B8D92600304B4C /* TagManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = D110F47010B8D92600304B4C /* TagManagementController.m */; };
@@ -142,6 +149,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = CF04581710E2F5C400DED3CF;
 			remoteInfo = libToodledoAPIiPhone;
+		};
+		BF2911A111050FB200C5C449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FA649B9610C30B250051F758 /* libToodledoAPIMac */;
+			remoteInfo = libToodledoAPIMac;
 		};
 		FA649BF410C30D790051F758 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -271,6 +285,7 @@
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 		B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListOutlineView.h; sourceTree = "<group>"; };
 		B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListOutlineView.m; sourceTree = "<group>"; };
+		BF2911FF110518D600C5C449 /* libToodledoAPIMac.a-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libToodledoAPIMac.a-Info.plist"; sourceTree = "<group>"; };
 		BFCC7FEA10E95932000757D8 /* SyncManagerTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManagerTestCases.h; sourceTree = "<group>"; };
 		BFCC7FEB10E95932000757D8 /* SyncManagerTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManagerTestCases.m; sourceTree = "<group>"; };
 		D110F46910B8D72300304B4C /* TagManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagManagement.xib; sourceTree = "<group>"; };
@@ -369,6 +384,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2912F811051BD100C5C449 /* Security.framework in Frameworks */,
+				BF29122D110519FE00C5C449 /* libToodledoAPIMac.a in Frameworks */,
 				424209B810CFB98E00DB9F3F /* SenTestingKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +464,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				FA478C1C11035DB600893DBC /* QuartzCore.framework */,
+				BF2911FF110518D600C5C449 /* libToodledoAPIMac.a-Info.plist */,
 			);
 			name = WellDone;
 			sourceTree = "<group>";
@@ -774,6 +792,7 @@
 			);
 			dependencies = (
 				428DE20410F8A1420032348A /* PBXTargetDependency */,
+				BF2911A211050FB200C5C449 /* PBXTargetDependency */,
 			);
 			name = UnitTestCases;
 			productName = UnitTestCases;
@@ -931,6 +950,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2912EF11051A9100C5C449 /* SFHFKeychainUtils.m in Sources */,
+				BF29120C1105199200C5C449 /* SyncService.m in Sources */,
+				BF2912091105196600C5C449 /* TaskContainer.m in Sources */,
+				BF2911EA1105160900C5C449 /* SyncManager.m in Sources */,
+				BF2911E7110515F200C5C449 /* SyncController.m in Sources */,
 				4217271410F61182001490F5 /* CoreDataBackup.m in Sources */,
 				424209B910CFB99800DB9F3F /* templateTestCases.m in Sources */,
 				BFCC7FEC10E95932000757D8 /* SyncManagerTestCases.m in Sources */,
@@ -1027,6 +1051,11 @@
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* WellDone */;
 			targetProxy = 428DE20310F8A1420032348A /* PBXContainerItemProxy */;
+		};
+		BF2911A211050FB200C5C449 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libToodledoAPIMac;
+			targetProxy = BF2911A111050FB200C5C449 /* PBXContainerItemProxy */;
 		};
 		FA649C2810C30E7F0051F758 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1187,14 +1216,18 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				GCC_PREFIX_HEADER = WellDone_Prefix.pch;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Extern/toodledo-objc/src/build/${BUILD_STYLE}/usr/local/include";
 				INFOPLIST_FILE = "UnitTestCases-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
@@ -1215,7 +1248,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;

@@ -7,11 +7,36 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-
+#import "GtdApi.h"
+#import "SyncController.h"
+#import "SyncManager.h"
 
 @interface SyncManagerTestCases : SenTestCase {
-	
+	// Data model support
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    NSManagedObjectModel *managedObjectModel;
+    NSManagedObjectContext *managedObjectContext;
+	SyncController *sc;
+	SyncManager *sm;
+	id<GtdApi> api;	
+	//TDSimpleParser *simpleParser;
+	//TDFoldersParser *folderParser;
 }
+
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+
+/**
+ init db for tests
+ */
+- (NSPersistentStoreCoordinator *) persistentStoreCoordinator;
+
+- (NSManagedObjectContext *) managedObjectContext;
+
+- (NSManagedObjectModel *)managedObjectModel;
+
+- (NSString *)applicationSupportDirectory;
 
 //Folder tests
 
