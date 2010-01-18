@@ -60,7 +60,7 @@
 	[sidebar addChild:rootNodeInbox 
 				  key:nodeInbox
 			  caption:@"Inbox"
-				 icon:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]	
+				 icon:[NSImage imageNamed:@"inbox.png"]	
 				 data: nil
 			   action:@selector(handleInboxSelection:) 
 			   target:self];
