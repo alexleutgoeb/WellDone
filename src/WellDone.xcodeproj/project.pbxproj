@@ -154,7 +154,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = FA649B9610C30B250051F758 /* libToodledoAPIMac */;
+			remoteGlobalIDString = FA649B9610C30B250051F758;
 			remoteInfo = libToodledoAPIMac;
 		};
 		FA649BF410C30D790051F758 /* PBXContainerItemProxy */ = {
