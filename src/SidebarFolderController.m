@@ -337,7 +337,7 @@
 	if ([[sender data] isKindOfClass:[Folder class]]) {
 		[simpController setTaskListFolderFilter:(Folder *)[sender data]];
 		[gtdController setTaskListFolderFilter:(Folder *)[sender data]];
-		[self sendFolderNameIndicatorChange:[[sender data] name]];
+		[self sendFolderNameIndicatorChange:[(Folder *)[sender data] name]];
 	}
 }
 

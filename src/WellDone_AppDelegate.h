@@ -23,7 +23,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "DateTimePopupController.h"
 #import "ConflictResolverController.h"
-#import "FolderNameIndicatorView.h"
+
 
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 #define kNewDayNotification @"kNewDayNotification"
@@ -34,7 +34,6 @@
 	// Main layout
 	IBOutlet NSWindow *window;
 	IBOutlet NSSplitView *splitView;
-	IBOutlet FolderNameIndicatorView *folderNameIndicatorView;
 	
 	// Placeholder views
  	IBOutlet NSView* sidebarTaskPlaceholderView;
