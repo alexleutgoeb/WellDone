@@ -118,41 +118,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 	
-	// restore backup
-	/*
-	NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
-	NSString *backupFileName = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
-	
-	NSLog(@"Restore: %@",backupFileName);
-	
-	if (backupFileName != nil) {
-		//TODO: restore backup file
-		//NSLog(backupFileName);
-		
-		NSURL *currentDBFileURL = [[NSApp delegate] coreDataDBLocationURL];
-		NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
-		
-		NSError *error;	
-		NSFileManager *fm = [NSFileManager defaultManager];
-
-		NSString *currentDBFile = [[self applicationSupportDirectory] stringByAppendingPathComponent: @"WellDone.welldonedoc"];
-		if (![fm removeItemAtPath:currentDBFile error:&error]) {
-			[[NSAlert alertWithError:error] runModal];
-		} else {
-			if (![fm copyItemAtURL:backupFileURL toURL:currentDBFileURL error:&error]){
-				[[NSAlert alertWithError:error] runModal];
-			} else {
-				[defaults setObject:nil forKey:@"restoreBackupAtStart"];
-				NSLog(@"Backup restored.");
-			}
-
-		}
-		
-		//NSString *original = [[NSApp delegate] applicationSupportDirectory ]; 
-		//NSString *backup = (NSString *)[defaults objectForKey:@"backupPath"];//TODO: fehlerbehandlung
-	}
-	*/
-	
 	[window makeMainWindow];
 	[self initUserDefaults];
 	[self initPreferences];
@@ -687,6 +652,43 @@
 - (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
 
     if (persistentStoreCoordinator) return persistentStoreCoordinator;
+	
+    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
+	coreDataDBLocationURL = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"WellDone.welldonedoc"]];
+
+	// restore backup if the user selected this before the app was shot down the last time
+	 NSUserDefaults *defaults = [[NSUserDefaultsController sharedUserDefaultsController] defaults];
+	 NSString *backupFileName = (NSString *)[defaults objectForKey:@"restoreBackupAtStart"];//TODO: fehlerbehandlung
+	 
+	if (backupFileName != nil){		
+		NSLog(@"Restore: %@",backupFileName);
+		
+			NSString *currentDBFile = [[[NSApp delegate] coreDataDBLocationURL] path];
+			NSAlert *alert = [[NSAlert alloc] init];
+			NSError *error;	
+			NSFileManager *fm = [NSFileManager defaultManager];
+						
+			if (![fm removeItemAtPath:currentDBFile error:&error]) {
+				[[NSAlert alertWithError:error] runModal];
+			} else {
+				if (![fm copyItemAtPath:backupFileName toPath:currentDBFile error:&error]){
+					[defaults setObject:nil forKey:@"restoreBackupAtStart"];
+					NSString *message = NSLocalizedString(@"Backup could not be restored, could not copy backupfile (it may not exist anymore or there might be problems with permissions)", @"Backup could not be restored, could not copy backupfile (it may not exist anymore or there might be problems with permissions)");
+					[alert setMessageText:message];	
+					[alert runModal];	
+					
+				} else {
+					[defaults setObject:nil forKey:@"restoreBackupAtStart"];
+			
+					NSString *message = NSLocalizedString(@"Backup was restored successful", @"Backup was restored successful");
+					[alert setMessageText:message];	
+					[alert runModal];
+					
+					NSLog(@"Backup restored.");
+				}				
+			}
+	}	
+	
 
     NSManagedObjectModel *mom = [self managedObjectModel];
     if (!mom) {
@@ -696,7 +698,6 @@
     }
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
     NSError *error = nil;
     
     if ( ![fileManager fileExistsAtPath:applicationSupportDirectory isDirectory:NULL] ) {
@@ -707,7 +708,7 @@
 		}
     }
     
-	coreDataDBLocationURL = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"WellDone.welldonedoc"]];
+	//coreDataDBLocationURL = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"WellDone.welldonedoc"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
 												  configuration:nil 

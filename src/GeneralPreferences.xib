@@ -101,22 +101,23 @@
 											<string key="NSKeyEquivalent"/>
 											<int key="NSPeriodicDelay">400</int>
 											<int key="NSPeriodicInterval">75</int>
-											<object class="NSMenuItem" key="NSMenuItem" id="74909260">
+											<object class="NSMenuItem" key="NSMenuItem" id="597114218">
 												<reference key="NSMenu" ref="558525558"/>
-												<string key="NSTitle">5 min</string>
+												<string key="NSTitle">90 min</string>
 												<string key="NSKeyEquiv"/>
+												<int key="NSKeyEquivModMask">1048576</int>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<int key="NSState">1</int>
-												<object class="NSCustomResource" key="NSOnImage" id="258489244">
+												<object class="NSCustomResource" key="NSOnImage" id="775230017">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSMenuCheckmark</string>
 												</object>
-												<object class="NSCustomResource" key="NSMixedImage" id="86742536">
+												<object class="NSCustomResource" key="NSMixedImage" id="895484341">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSMenuMixedState</string>
 												</object>
 												<string key="NSAction">_popUpItemAction:</string>
-												<int key="NSTag">5</int>
+												<int key="NSTag">90</int>
 												<reference key="NSTarget" ref="325688080"/>
 											</object>
 											<bool key="NSMenuItemRespectAlignment">YES</bool>
@@ -124,14 +125,25 @@
 												<string key="NSTitle">autoSyncPeriod</string>
 												<object class="NSMutableArray" key="NSMenuItems">
 													<bool key="EncodedWithXMLCoder">YES</bool>
+													<object class="NSMenuItem" id="74909260">
+														<reference key="NSMenu" ref="558525558"/>
+														<string key="NSTitle">5 min</string>
+														<string key="NSKeyEquiv"/>
+														<int key="NSMnemonicLoc">2147483647</int>
+														<reference key="NSOnImage" ref="775230017"/>
+														<reference key="NSMixedImage" ref="895484341"/>
+														<string key="NSAction">_popUpItemAction:</string>
+														<int key="NSTag">5</int>
+														<reference key="NSTarget" ref="325688080"/>
+													</object>
 													<object class="NSMenuItem" id="836721257">
 														<reference key="NSMenu" ref="558525558"/>
 														<string key="NSTitle">30 min</string>
 														<string key="NSKeyEquiv"/>
 														<int key="NSKeyEquivModMask">1048576</int>
 														<int key="NSMnemonicLoc">2147483647</int>
-														<reference key="NSOnImage" ref="258489244"/>
-														<reference key="NSMixedImage" ref="86742536"/>
+														<reference key="NSOnImage" ref="775230017"/>
+														<reference key="NSMixedImage" ref="895484341"/>
 														<string key="NSAction">_popUpItemAction:</string>
 														<int key="NSTag">30</int>
 														<reference key="NSTarget" ref="325688080"/>
@@ -145,40 +157,17 @@
 														<string key="NSKeyEquiv"/>
 														<int key="NSKeyEquivModMask">1048576</int>
 														<int key="NSMnemonicLoc">2147483647</int>
-														<reference key="NSOnImage" ref="258489244"/>
-														<reference key="NSMixedImage" ref="86742536"/>
+														<reference key="NSOnImage" ref="775230017"/>
+														<reference key="NSMixedImage" ref="895484341"/>
 														<string key="NSAction">_popUpItemAction:</string>
 														<int key="NSTag">60</int>
 														<reference key="NSTarget" ref="325688080"/>
 													</object>
-													<object class="NSMenuItem" id="597114218">
-														<reference key="NSMenu" ref="558525558"/>
-														<string key="NSTitle">90 min</string>
-														<string key="NSKeyEquiv"/>
-														<int key="NSKeyEquivModMask">1048576</int>
-														<int key="NSMnemonicLoc">2147483647</int>
-														<reference key="NSOnImage" ref="258489244"/>
-														<reference key="NSMixedImage" ref="86742536"/>
-														<string key="NSAction">_popUpItemAction:</string>
-														<int key="NSTag">90</int>
-														<reference key="NSTarget" ref="325688080"/>
-													</object>
-													<object class="NSMenuItem" id="831174343">
-														<reference key="NSMenu" ref="558525558"/>
-														<string key="NSTitle">2 min</string>
-														<string key="NSKeyEquiv"/>
-														<int key="NSMnemonicLoc">2147483647</int>
-														<reference key="NSOnImage" ref="258489244"/>
-														<reference key="NSMixedImage" ref="86742536"/>
-														<string key="NSAction">_popUpItemAction:</string>
-														<int key="NSTag">2</int>
-														<reference key="NSTarget" ref="325688080"/>
-													</object>
-													<reference ref="74909260"/>
+													<reference ref="597114218"/>
 												</object>
 												<reference key="NSMenuFont" ref="557398192"/>
 											</object>
-											<int key="NSSelectedIndex">4</int>
+											<int key="NSSelectedIndex">3</int>
 											<int key="NSPreferredEdge">1</int>
 											<bool key="NSUsesItemFromMenu">YES</bool>
 											<bool key="NSAltersState">YES</bool>
@@ -613,7 +602,6 @@
 							<reference ref="836721257"/>
 							<reference ref="755681683"/>
 							<reference ref="597114218"/>
-							<reference ref="831174343"/>
 							<reference ref="74909260"/>
 						</object>
 						<reference key="parent" ref="325688080"/>
@@ -681,11 +669,6 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">768</int>
-						<reference key="object" ref="831174343"/>
-						<reference key="parent" ref="558525558"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">769</int>
 						<reference key="object" ref="74909260"/>
 						<reference key="parent" ref="558525558"/>
@@ -720,7 +703,6 @@
 					<string>761.IBPluginDependency</string>
 					<string>762.IBPluginDependency</string>
 					<string>763.IBPluginDependency</string>
-					<string>768.IBPluginDependency</string>
 					<string>769.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -741,8 +723,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{896, 391}, {114, 103}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{896, 411}, {114, 83}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1242,27 +1223,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">Foundation.framework/Headers/NSURLDownload.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">QuartzCore.framework/Headers/CAAnimation.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">QuartzCore.framework/Headers/CALayer.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">QuartzCore.framework/Headers/CIImageProvider.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
