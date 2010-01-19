@@ -550,7 +550,7 @@ shouldEditTableColumn:(NSTableColumn *)tableColumn
 			Folder *folderToChange = [node data];
 			[folderToChange setName:object];
 			[myController saveChangesToStore];
-			
+			[myController sendFolderNameIndicatorChange:object];
 			// Set caption on folder node in view
 			[node setCaption:object];
 		}

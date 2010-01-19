@@ -23,6 +23,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "DateTimePopupController.h"
 #import "ConflictResolverController.h"
+#import "FolderNameIndicatorView.h"
 
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 #define kNewDayNotification @"kNewDayNotification"
@@ -33,6 +34,7 @@
 	// Main layout
 	IBOutlet NSWindow *window;
 	IBOutlet NSSplitView *splitView;
+	IBOutlet FolderNameIndicatorView *folderNameIndicatorView;
 	
 	// Placeholder views
  	IBOutlet NSView* sidebarTaskPlaceholderView;
@@ -50,6 +52,7 @@
 	NSMenuItem *syncMenuItem;
 	NSMenuItem *syncTextMenuItem;
 	IBOutlet NSTextField* quickAddTask;
+	IBOutlet NSTextField* folderNameIndicator;
 	NSStatusItem *menuBarItem;
 	
 	// Controllers
@@ -103,6 +106,7 @@
 - (IBAction)showPreferencesWindow:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
 - (void)initGTDView;
+- (void)changeFolderNameIndicator:(NSString*)folderName;
 
 // Data manipulation
 - (IBAction)startSync:(id)sender;

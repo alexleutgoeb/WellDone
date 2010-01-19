@@ -409,6 +409,9 @@
 - (void) reloadTaskListWithFilters {
 	NSPredicate *predicate = [self generateTaskListSearchPredicate];
 	[treeController setFetchPredicate:predicate];
+	NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
+	[treeController setSortDescriptors:[NSArray arrayWithObject:sorter]];
+	
 	NSPredicate *retrievedPredicate = [treeController fetchPredicate];
 	NSLog(@"Predicate in treecontroller: %@", [retrievedPredicate predicateFormat]);
 }

@@ -39,4 +39,5 @@
 - (void) setSimpController:(SimpleListController *) simpleListController;
 - (Folder *) selectedFolder;
 - (void) addDraggedTaskToFolder: (Folder *) folder;
+- (void)sendFolderNameIndicatorChange:(NSString *)name;
 @end

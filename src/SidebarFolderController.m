@@ -7,6 +7,7 @@
 //
 
 #import "SidebarFolderController.h"
+#import "WellDone_AppDelegate.h"
 
 #define rootNodeInbox			@"1"
 #define nodeInbox				@"1.1"
@@ -118,6 +119,7 @@
 	if (![moc save:&error]) {
 		NSLog(@"Error saving changes - error:%@",error);
 	}
+	
 }
 
 /*
@@ -332,13 +334,20 @@
 
 - (IBAction) handleFolderSelection:(id) sender {
 	NSLog(@"Selected Folder '%@'", [sender caption]);
-	if ([[sender data] isKindOfClass:[Folder class]])
+	if ([[sender data] isKindOfClass:[Folder class]]) {
 		[simpController setTaskListFolderFilter:(Folder *)[sender data]];
+		[self sendFolderNameIndicatorChange:[[sender data] name]];
+	}
+}
+
+- (void)sendFolderNameIndicatorChange:(NSString *)name {
+	[[NSApp delegate] changeFolderNameIndicator:name];
 }
 
 - (IBAction) handleInboxSelection:(id) sender {
 	NSLog(@"Selected Inbox!");
 	[simpController setTaskListFolderFilter:nil];
+	[[NSApp delegate] changeFolderNameIndicator:@"Inbox"];
 }
 
 - (void) setSimpController:(SimpleListController *) simpleListController {

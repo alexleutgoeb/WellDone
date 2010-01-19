@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="3"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -126,7 +126,7 @@
 													<int key="NSPeriodicDelay">200</int>
 													<int key="NSPeriodicInterval">25</int>
 												</object>
-												<int key="NSResizingMask">3</int>
+												<int key="NSResizingMask">2</int>
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
@@ -205,7 +205,7 @@
 													<reference key="NSBackgroundColor" ref="682717110"/>
 													<reference key="NSTextColor" ref="318393595"/>
 												</object>
-												<int key="NSResizingMask">3</int>
+												<int key="NSResizingMask">2</int>
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
@@ -236,7 +236,7 @@
 													<reference key="NSBackgroundColor" ref="682717110"/>
 													<reference key="NSTextColor" ref="318393595"/>
 												</object>
-												<int key="NSResizingMask">3</int>
+												<int key="NSResizingMask">2</int>
 												<bool key="NSIsResizeable">YES</bool>
 												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="475774575"/>
@@ -253,13 +253,8 @@
 											<characters key="NSComponents">0.02 0.02 0.1 0 1</characters>
 										</object>
 										<object class="NSColor" key="NSGridColor">
-											<int key="NSColorSpace">6</int>
-											<string key="NSCatalogName">System</string>
-											<string key="NSColorName">gridColor</string>
-											<object class="NSColor" key="NSColor">
-												<int key="NSColorSpace">3</int>
-												<bytes key="NSWhite">MC41AA</bytes>
-											</object>
+											<int key="NSColorSpace">1</int>
+											<bytes key="NSRGB">MC41NzI1NDkwMTk2IDAuNDIzNTI5NDExOCAwLjI1NDkwMTk2MDgAA</bytes>
 										</object>
 										<double key="NSRowHeight">20</double>
 										<int key="NSTvFlags">-767557632</int>
@@ -645,7 +640,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{312, 66}, {610, 636}}</string>
+					<string>{{456, 161}, {610, 636}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{217, 442}, {480, 272}}</string>

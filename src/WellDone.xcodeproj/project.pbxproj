@@ -45,6 +45,8 @@
 		6F22C1E710CC044100ABFE19 /* SidebarFolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */; };
 		6F22C29E10CC1A2A00ABFE19 /* SidebarFolderNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */; };
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
+		6F3F02E51105BF220019D69D /* FolderNameIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F02E41105BF220019D69D /* FolderNameIndicatorView.m */; };
+		6F3F02E61105BF220019D69D /* FolderNameIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F02E41105BF220019D69D /* FolderNameIndicatorView.m */; };
 		6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
 		6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
 		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
@@ -251,6 +253,8 @@
 		6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarFolderNode.m; sourceTree = "<group>"; };
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
+		6F3F02E31105BF220019D69D /* FolderNameIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderNameIndicatorView.h; sourceTree = "<group>"; };
+		6F3F02E41105BF220019D69D /* FolderNameIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderNameIndicatorView.m; sourceTree = "<group>"; };
 		6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUDTaskEditor.xib; sourceTree = "<group>"; };
 		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
 		6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioritySplitViewDelegate.m; sourceTree = "<group>"; };
@@ -599,6 +603,8 @@
 				6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */,
 				D14D515810FF9B6B00D8DBD1 /* ContextView.h */,
 				D14D515910FF9B6B00D8DBD1 /* ContextView.m */,
+				6F3F02E31105BF220019D69D /* FolderNameIndicatorView.h */,
+				6F3F02E41105BF220019D69D /* FolderNameIndicatorView.m */,
 			);
 			name = "View Classes";
 			sourceTree = "<group>";
@@ -957,6 +963,7 @@
 				6F03A46F10FC698B0020CCA9 /* RadiansToDegreesTransformer.m in Sources */,
 				6F0C0A0710FFC4C200AFD545 /* MAAttachedWindow.m in Sources */,
 				6F0C0A2010FFC88800AFD545 /* DateTimePopupController.m in Sources */,
+				6F3F02E61105BF220019D69D /* FolderNameIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,6 +1031,7 @@
 				FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */,
 				D1F25AAA1103A99700A3BBAA /* Section.m in Sources */,
 				422B8577110451750018785A /* NSApplication_Relaunch.m in Sources */,
+				6F3F02E51105BF220019D69D /* FolderNameIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

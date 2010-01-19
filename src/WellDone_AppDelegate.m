@@ -492,6 +492,9 @@
 	[simpleListController setTaskListSearchFilter:[field stringValue]];
 }
 
+- (void)changeFolderNameIndicator:(NSString*)folderName {
+	[folderNameIndicator setObjectValue:folderName];
+}
 
 #pragma mark -
 #pragma mark Data manipulation
