@@ -99,7 +99,6 @@
 		FA478BA51103554F00893DBC /* ConflictResolver.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA478BA41103554F00893DBC /* ConflictResolver.xib */; };
 		FA478BBB1103585500893DBC /* syncIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FA478BBA1103585500893DBC /* syncIcon.icns */; };
 		FA478BD5110359CA00893DBC /* ConflictResolverController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA478BD4110359CA00893DBC /* ConflictResolverController.m */; };
-		FA478C1D11035DB600893DBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA478C1C11035DB600893DBC /* QuartzCore.framework */; };
 		FA48B62710D3DADF0032F1D8 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62610D3DADF0032F1D8 /* SyncController.m */; };
 		FA48B62E10D3DEDC0032F1D8 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48B62D10D3DEDC0032F1D8 /* SyncService.m */; };
 		FA48B86210D4139E0032F1D8 /* syncservice.toodledo-objc.png in Resources */ = {isa = PBXBuildFile; fileRef = FA48B86110D4139E0032F1D8 /* syncservice.toodledo-objc.png */; };
@@ -154,7 +153,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = FA649B9610C30B250051F758 /* libToodledoAPIMac */;
+			remoteGlobalIDString = FA649B9610C30B250051F758;
 			remoteInfo = libToodledoAPIMac;
 		};
 		FA649BF410C30D790051F758 /* PBXContainerItemProxy */ = {
@@ -285,7 +284,6 @@
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
 		B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListOutlineView.h; sourceTree = "<group>"; };
 		B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListOutlineView.m; sourceTree = "<group>"; };
-		BF2911FF110518D600C5C449 /* libToodledoAPIMac.a-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libToodledoAPIMac.a-Info.plist"; sourceTree = "<group>"; };
 		BFCC7FEA10E95932000757D8 /* SyncManagerTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManagerTestCases.h; sourceTree = "<group>"; };
 		BFCC7FEB10E95932000757D8 /* SyncManagerTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManagerTestCases.m; sourceTree = "<group>"; };
 		D110F46910B8D72300304B4C /* TagManagement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagManagement.xib; sourceTree = "<group>"; };
@@ -324,7 +322,6 @@
 		FA478BBA1103585500893DBC /* syncIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = syncIcon.icns; sourceTree = "<group>"; };
 		FA478BD3110359CA00893DBC /* ConflictResolverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConflictResolverController.h; sourceTree = "<group>"; };
 		FA478BD4110359CA00893DBC /* ConflictResolverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictResolverController.m; sourceTree = "<group>"; };
-		FA478C1C11035DB600893DBC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FA48B62510D3DADF0032F1D8 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		FA48B62610D3DADF0032F1D8 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		FA48B62C10D3DEDB0032F1D8 /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
@@ -399,7 +396,6 @@
 				FA649C2210C30E700051F758 /* libToodledoAPIMac.a in Frameworks */,
 				FA56EB6410EBB95300228C43 /* Security.framework in Frameworks */,
 				FA438BB610FB6CC60000224E /* SystemConfiguration.framework in Frameworks */,
-				FA478C1D11035DB600893DBC /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,8 +459,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				FA478C1C11035DB600893DBC /* QuartzCore.framework */,
-				BF2911FF110518D600C5C449 /* libToodledoAPIMac.a-Info.plist */,
 			);
 			name = WellDone;
 			sourceTree = "<group>";
