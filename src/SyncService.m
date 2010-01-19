@@ -55,7 +55,7 @@
 		api = [[ApiClass alloc] initWithUsername:user password:pwd error:&initError];
 		
 		if (api == nil || initError != nil) {
-			DLog(@"Error while activating sync service: %@", *error);
+			DLog(@"Error while activating sync service: %@", initError);
 			
 			// Check error and create custom error object
 			if ([initError code] == GtdApiMissingCredentialsError) {
