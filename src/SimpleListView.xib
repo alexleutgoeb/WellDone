@@ -350,7 +350,6 @@
 								<int key="NSTvFlags">1514143744</int>
 								<reference key="NSDelegate"/>
 								<reference key="NSDataSource"/>
-								<int key="NSGridStyleMask">1</int>
 								<object class="NSArray" key="NSSortDescriptors">
 									<bool key="EncodedWithXMLCoder">YES</bool>
 									<reference ref="1067406360"/>
@@ -391,7 +390,7 @@
 						<int key="NSsFlags">1</int>
 						<reference key="NSTarget" ref="858312636"/>
 						<string key="NSAction">_doScroller:</string>
-						<double key="NSPercent">0.99836601307189543</double>
+						<double key="NSPercent">0.5</double>
 					</object>
 					<object class="NSClipView" id="538321996">
 						<reference key="NSNextResponder" ref="858312636"/>
