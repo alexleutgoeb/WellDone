@@ -79,7 +79,7 @@
 	}*/
 	
 	NSTreeNode *node = item;
-	if ([acell respondsToSelector:@selector(setTextColor:)]) {
+	if ([acell respondsToSelector:@selector(setTextColor:)] && ![acell isKindOfClass:[NSTokenFieldCell class]]) {
 		Task *task = [node representedObject];
 		if ([task.completed boolValue] == YES) {
 			[self setTaskDone:acell];
