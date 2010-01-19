@@ -77,12 +77,16 @@
 				return @"Never";
 			else
 				return [lastDate prettyDate];
+			break;
 		case SyncControllerOffline:
 			return @"Offline";
+			break;
 		case SyncControllerFailed:
 			return @"Failed";
+			break;
 		case SyncControllerInit:
 			return @"Initializing...";
+			break;
 		default:
 			return @"Syncing...";
 	}
@@ -100,7 +104,7 @@
 	BOOL isActive = NO;
 	BOOL online = [[NSApp delegate] isOnline];
 	BOOL needsOnline = NO;
-	self.status = SyncControllerBusy;
+	self.status = SyncControllerInit;
 	
 	NSUserDefaults *userPreferences = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *defaultServices = [NSMutableDictionary dictionaryWithDictionary:[userPreferences objectForKey:@"syncServices"]];
@@ -166,7 +170,7 @@
 
 - (BOOL)enableSyncService:(NSString *)anIdentifier withUser:(NSString *)aUser pwd:(NSString *)aPwd error:(NSError **)anError {
 	BOOL returnValue = NO;
-	self.status = SyncControllerBusy;
+	self.status = SyncControllerInit;
 	
 	SyncService *service = [syncServices objectForKey:anIdentifier];
 		
@@ -199,7 +203,7 @@
 
 - (BOOL)disableSyncService:(NSString *)anIdentifier {
 	BOOL returnValue = NO;
-	self.status = SyncControllerBusy;
+	self.status = SyncControllerInit;
 	
 	SyncService *service = [syncServices objectForKey:anIdentifier];
 	
