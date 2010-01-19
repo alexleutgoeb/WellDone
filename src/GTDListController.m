@@ -57,8 +57,8 @@
 	
 	if (self != nil)
 	{		
-		//moc = [[NSApp delegate] managedObjectContext];
-		moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
+		moc = [[NSApp delegate] managedObjectContext];
+		//moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 		taskListFilterPredicate = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	return self;
@@ -117,7 +117,8 @@
 	
 	NSTreeNode *node = item;
 	if ([[node representedObject] isKindOfClass: [Section class]]) {
-		[gtdOutlineView expandItem:item expandChildren:NO];
+		//[node setExpanded: YES];
+		
 	}
 	if ([acell respondsToSelector:@selector(setTextColor:)]) {
 		Task *task = [node representedObject];
@@ -313,17 +314,26 @@
  * It reacts to some of these changes with updates to the folder tree view.
  */
 - (void) reactToMOCSave:(NSNotification *)notification {
-	NSLog(@"reactToMOCSave");
+	NSLog(@"GTDListController: reactToMOCChange");
 	id object; 
 	NSDictionary *userInfo = [notification userInfo];
-
 	
 	NSEnumerator *updatedObjects = [[userInfo objectForKey:NSUpdatedObjectsKey] objectEnumerator];
 	while (object = [updatedObjects nextObject]) {
 		if ([object isKindOfClass: [Task class]]) {
 			NSLog(@"Will update Task with name: %@", [object title]);
+			
 			[[[NSApplication sharedApplication] delegate] initGTDView];
+			//[treeController fetch:nil];
 			[gtdOutlineView reloadData];
+			int rowcount = [gtdOutlineView numberOfRows];
+			int counter;
+			for (counter = 0; counter < rowcount; counter++) {
+				NSTreeNode *node = [gtdOutlineView itemAtRow:counter];
+				if ([[node representedObject] isKindOfClass:[Section class]] ) {
+					[gtdOutlineView expandItem:node];
+				}
+			}
 		}
 	}
 	
@@ -331,8 +341,20 @@
 	while (object = [insertedObjects nextObject]) {
 		if ([object isKindOfClass: [Task class]]) {
 			NSLog(@"Will insert Task with name: %@", [object title]);
+			//[nc removeObserver:self];
 			[[[NSApplication sharedApplication] delegate] initGTDView];
+			//[nc addObserver:self selector:@selector(reactToMOCSave:)
+			//		   name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+			//[treeController fetch:nil];
 			[gtdOutlineView reloadData];
+			int rowcount = [gtdOutlineView numberOfRows];
+			int counter;
+			for (counter = 0; counter < rowcount; counter++) {
+				NSTreeNode *node = [gtdOutlineView itemAtRow:counter];
+				if ([[node representedObject] isKindOfClass:[Section class]] ) {
+					[gtdOutlineView expandItem:node];
+				}
+			}
 		}
 	}
 	
@@ -340,11 +362,22 @@
 	while (object = [deletedObjects nextObject]) {
 		if ([object isKindOfClass: [Task class]]) {
 			NSLog(@"Will delete Task with name: %@", [object title]);
+			//[nc removeObserver:self];
 			[[[NSApplication sharedApplication] delegate] initGTDView];
+			//[nc addObserver:self selector:@selector(reactToMOCSave:)
+			// 		   name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+			//[treeController fetch:nil];
 			[gtdOutlineView reloadData];
+			int rowcount = [gtdOutlineView numberOfRows];
+			int counter;
+			for (counter = 0; counter < rowcount; counter++) {
+				NSTreeNode *node = [gtdOutlineView itemAtRow:counter];
+				if ([[node representedObject] isKindOfClass:[Section class]] ) {
+					[gtdOutlineView expandItem:node];
+				}
+			}
 		}
 	}
-	
 }
 
 //------------------------------------
@@ -396,6 +429,8 @@
 	NSLog(@"Drag&Drop: isSubCategoryOf called");
 	// Depends on your interpretation of subCategory ....
 	if ( cat == possibleSub ) {	return YES; }
+	
+	if ([possibleSub isKindOfClass:[Section class]]) { return NO; }
 	
 	NSManagedObject* possSubParent = [possibleSub valueForKey:@"parentTask"];	
 	
@@ -472,6 +507,12 @@
 			[[node representedObject] setCompleted:object];
 		} else if ([[tableColumn identifier] isEqualToString:DUEDATE_ID]) {
 			[[node representedObject] setDueDate:object];
+		}
+		NSError *error = nil;
+		if (![moc save:&error]) {
+			DLog(@"Error deleting selected Tasks, don't know what to do.");
+		} else {
+			DLog(@"Removed selected Tasks.");
 		}
     }    
 }

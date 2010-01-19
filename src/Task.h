@@ -12,6 +12,7 @@
 @class Folder;
 @class RemoteTask;
 @class Tag;
+@class Section;
 
 @interface Task :  NSManagedObject  
 {
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) NSDate * startDate;
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) Folder * folder;
+@property (nonatomic, retain) Section * section;
 @property (nonatomic, retain) Context * context;
 @property (nonatomic, retain) Task * parentTask;
 @property (nonatomic, retain) NSSet* tags;

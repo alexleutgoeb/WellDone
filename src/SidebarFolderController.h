@@ -10,12 +10,14 @@
 #import "SidebarFolderTreeView.h"
 #import "SidebarFolderNode.h"
 #import "SimpleListController.h"
+#import "GTDListController.h"
 
 
 @interface SidebarFolderController : NSViewController {
 	IBOutlet SidebarFolderTreeView *sidebar;
 	NSManagedObjectContext *moc;
 	SimpleListController *simpController;
+	GTDListController *gtdController;
 }
 
 - (void) initFolderListFromStore;
@@ -37,6 +39,7 @@
 - (IBAction) handleInboxSelection:(id) sender;
 
 - (void) setSimpController:(SimpleListController *) simpleListController;
+- (void) setGTDController:(GTDListController *) gtdListController;
 - (Folder *) selectedFolder;
 - (void) addDraggedTaskToFolder: (Folder *) folder;
 - (void)sendFolderNameIndicatorChange:(NSString *)name;

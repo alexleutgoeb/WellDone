@@ -226,6 +226,9 @@
 	[sidebarFolderController setSimpController:simpleListController];
 	hudTaskEditorController.simpController = simpleListController;
 	
+	// Wire up some controllers with the GTDListController
+	[sidebarFolderController setGTDController:gtdListController];
+	
 	// Replace the placeholder views with the actual views from the controllers.
  	[self replacePlaceholderView:&sidebarFolderPlaceholderView withViewOfController:sidebarFolderController];	
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
@@ -235,6 +238,7 @@
 	[[simpleListController treeController] fetch:nil];
 	loadSection = YES;
 	[self initGTDView];
+	
 	
 	// Fix the ordering for the HUD-Window, so that it will really be shown on the first button-click:
 	[[hudTaskEditorController window] orderOut:nil];
@@ -309,12 +313,32 @@
 		loadSection = NO;
 	}
 	
+	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	[request setEntity:entityDescription];
+	NSError *error;
+	NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+	for (Task *task in items) {
+		task.section = nil;
+	}
+	
 	[self initGTDitemToday:todaysDate todayEnd:todaysDateEnd inStore:memoryStore];
 	[self initGTDitemThreeDays:todaysDateEnd inThreeDaysDate:inThreeDays inStore:memoryStore];
 	[self initGTDitemSevenDays:inThreeDays inSevenDaysDate:inSevenDays inStore:memoryStore];
 	[self initGTDitemUpcoming:inSevenDays inStore:memoryStore];
 	[self initGTDitemDone:memoryStore];
 	
+	[gtdListController.gtdOutlineView reloadData];
+	
+	int rowcount = [gtdListController.gtdOutlineView numberOfRows];
+	int counter;
+	for (counter = 0; counter < rowcount; counter++) {
+		NSTreeNode *node = [gtdListController.gtdOutlineView itemAtRow:counter];
+		if ([[node representedObject] isKindOfClass:[Section class]] ) {
+			[gtdListController.gtdOutlineView expandItem:node];
+		}
+	}
+
 }
 
 - (void) initGTDitemToday:(NSDate *)todaysDate todayEnd:(NSDate *)todaysDateEnd inStore:(id)memoryStore {
@@ -334,6 +358,7 @@
 	if (items == nil) {
 		NSLog(@"ERROR fetchRequest Tasks == nil!");
 	}
+	
 }
 
 - (void) initGTDitemThreeDays:(NSDate *)todaysDate inThreeDaysDate:(NSDate *)inThreeDays inStore:(id)memoryStore { 
@@ -379,13 +404,14 @@
 	
 	NSEntityDescription *entityDescriptionUpcoming = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestUpcoming = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"(dueDate > %@ or dueDate = null) and deletedByApp = false", inSevenDays];	
+	NSPredicate *predicateUpcoming = [NSPredicate predicateWithFormat:@"(dueDate > %@ or dueDate = null) and deletedByApp == 0", inSevenDays];	
 	[requestUpcoming setEntity:entityDescriptionUpcoming];
 	[requestUpcoming setPredicate:predicateUpcoming];
 	
 	NSArray *itemsUpcoming = [managedObjectContext executeFetchRequest:requestUpcoming error:&error];
 	for (id item in itemsUpcoming) {
 		[item setValue:gtdListController.sectionUpcoming forKey:@"section"];
+		DLog(@"Upcoming: adding task %@", item);
 	}
 	
 	if (itemsUpcoming == nil) {
@@ -398,7 +424,7 @@
 	
 	NSEntityDescription *entityDescriptionDone = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	NSFetchRequest *requestDone = [[NSFetchRequest alloc] init];
-	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true and deletedByApp = false"];	
+	NSPredicate *predicateDone = [NSPredicate predicateWithFormat:@"completed = true and deletedByApp == 0"];	
 	[requestDone setEntity:entityDescriptionDone];
 	[requestDone setPredicate:predicateDone];
 	

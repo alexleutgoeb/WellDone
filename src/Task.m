@@ -12,6 +12,7 @@
 #import "Folder.h"
 #import "RemoteTask.h"
 #import "Tag.h"
+#import "Section.h"
 
 @implementation Task 
 
@@ -35,6 +36,7 @@
 @dynamic tags;
 @dynamic childTasks;
 @dynamic remoteTasks;
+@dynamic section;
 
 - (void)awakeFromInsert {
 	[super awakeFromInsert];
