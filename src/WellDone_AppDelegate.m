@@ -411,7 +411,7 @@
 	NSArray *itemsUpcoming = [managedObjectContext executeFetchRequest:requestUpcoming error:&error];
 	for (id item in itemsUpcoming) {
 		[item setValue:gtdListController.sectionUpcoming forKey:@"section"];
-		DLog(@"Upcoming: adding task %@", item);
+		//DLog(@"Upcoming: adding task %@", item);
 	}
 	
 	if (itemsUpcoming == nil) {

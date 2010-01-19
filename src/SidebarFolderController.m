@@ -336,7 +336,7 @@
 	NSLog(@"Selected Folder '%@'", [sender caption]);
 	if ([[sender data] isKindOfClass:[Folder class]]) {
 		[simpController setTaskListFolderFilter:(Folder *)[sender data]];
-		[gtdController setTaskListFolderFilter:(Folder *)[sender data]];
+		//[gtdController setTaskListFolderFilter:(Folder *)[sender data]];
 		[self sendFolderNameIndicatorChange:[(Folder *)[sender data] name]];
 	}
 }
@@ -348,7 +348,7 @@
 - (IBAction) handleInboxSelection:(id) sender {
 	NSLog(@"Selected Inbox!");
 	[simpController setTaskListFolderFilter:nil];
-	[gtdController setTaskListFolderFilter:nil];
+	//[gtdController setTaskListFolderFilter:nil];
 	[[NSApp delegate] changeFolderNameIndicator:@"Inbox"];
 }
 
