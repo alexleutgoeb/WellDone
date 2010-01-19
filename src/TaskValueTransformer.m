@@ -24,7 +24,7 @@
 
 - (id) transformedValue:(id) value
 {
-	NSLog(@"transformedValue: FORWARD");
+	//DLog(@"transformedValue: FORWARD");
 	
 	if (value == nil) return nil;
 	
