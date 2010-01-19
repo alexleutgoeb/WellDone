@@ -473,7 +473,9 @@
 							gtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
 						if([localTask.completed boolValue] == YES)
 							gtdTask.completed = [NSDate date];
-
+						else
+							gtdTask.completed = nil;
+						
 						RemoteFolder *remoteFolder = [[localTask.folder.remoteFolders subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
 						if (remoteFolder)
 							gtdTask.folder = [remoteFolder.remoteUid intValue];
@@ -650,6 +652,8 @@
 				newGtdTask.tags = [[localTask.tags valueForKey:@"text"] allObjects];
 			if([localTask.completed boolValue] == YES)
 				newGtdTask.completed = [NSDate date];
+			else
+				newGtdTask.completed = nil;
 			
 			RemoteFolder *remoteFolder = [[localTask.folder.remoteFolders subsetWithKey:@"serviceIdentifier" value:syncService.identifier] anyObject];
 			if (remoteFolder)
