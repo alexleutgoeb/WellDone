@@ -534,6 +534,14 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
+	int rowcount = [gtdOutlineView numberOfRows];
+	int counter;
+	for (counter = 0; counter < rowcount; counter++) {
+		NSTreeNode *node = [gtdOutlineView itemAtRow:counter];
+		if ([[node representedObject] isKindOfClass:[Section class]] ) {
+			[gtdOutlineView expandItem:node];
+		}
+	}
 	id representedObject = [item representedObject];
     return ([item isKindOfClass:[Section class]] || [representedObject isKindOfClass:[Section class]]);
 }
