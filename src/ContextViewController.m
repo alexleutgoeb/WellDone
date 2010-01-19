@@ -24,6 +24,7 @@
 }
 
 - (void) awakeFromNib {
+	moc = [[[NSApplication sharedApplication] delegate] managedObjectContext];
 	[checkBoxFilter setState:NSOffState];
 	[self toggleFilteringByContext:nil];
 

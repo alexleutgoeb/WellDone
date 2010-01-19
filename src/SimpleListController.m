@@ -93,14 +93,15 @@
 				// DLog(@"Set cell with value '%@' and date '%@' UNDONE...", [task title], [task dueDate]);
 			}
 		}
+		// This is a fix for a bug in NSOutlineView, where selected cells behave strange
+		// when the highlighting mode is set to SourceList:
+		[acell setStringValue:[acell stringValue]];
 	}
 	else {
 		// DLog (@"COULD NOT STYLE CELL FOR COLUMN %@", [tableColumn identifier]);
 	}
 
-	// This is a fix for a bug in NSOutlineView, where selected cells behave strange
-	// when the highlighting mode is set to SourceList:
-	[acell setStringValue:[acell stringValue]];
+
 }
 
 /*
@@ -281,7 +282,7 @@
 	[ treeController setSortDescriptors:[NSArray arrayWithObject: sortDesc]];
 	[ sortDesc release ];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelectedRow:)  name:NSOutlineViewSelectionDidChangeNotification object:myview];
+	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelectedRow:)  name:NSOutlineViewSelectionDidChangeNotification object:myview];
 }	
 
 
