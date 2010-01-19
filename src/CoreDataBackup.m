@@ -38,7 +38,7 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 // make a copy of the core data file
 - (id)backupDatabaseFile:(NSString *)backupPath error:(NSError **)error {
 
-	// moc speichern
+	// save moc
 	NSManagedObjectContext *moc;
 	moc = [[NSApp delegate] managedObjectContext];
 	NSError *err = nil;
@@ -48,14 +48,15 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 		DLog(@"Saved moc for backup.");
 	}
 	
-	//TODO: check the path ending
+	// create backupfile name and directory (if it does not exist)
 	backupPath = [backupPath stringByAppendingString:@"/"];
-	NSLog(backupPath);
-    NSFileManager *fm = [NSFileManager defaultManager];
-    
-	NSURL *currentDBFile = [[NSApp delegate] coreDataDBLocationURL];
+	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+	[dateFormat setDateFormat:@"YYYY-MM-DD_HH_MM_SS"];
+	NSString *backupFileName = [backupPath stringByAppendingString:[ [dateFormat stringFromDate:[NSDate date]] stringByAppendingString:@"_WellDone.welldonedoc"]];
 	
-	// checks if the backup directory exisits and creates it if not
+	NSString *currentDBFile = [[[NSApp delegate] coreDataDBLocationURL] path];
+
+	NSFileManager *fm = [NSFileManager defaultManager];
 	if (![fm fileExistsAtPath:backupPath]){ 
 		// create the new file (if the folder does not exist, the method creates it). Errors are handled in the NSError error and nil is returned in case of problems
 		if (![fm createDirectoryAtPath:backupPath withIntermediateDirectories:YES attributes:nil error:&*error]){
@@ -63,23 +64,10 @@ NSString *const CoreDataBackupError = @"CoreDataBackupErrorDomain";
 		}	
 	}
 	
-	// create a file name out of the backupPath
-	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-	[dateFormat setDateFormat:@"YYYY-MM-DD_HH_MM_SS"];
-	NSString *fileEnding;
-	fileEnding = [ [dateFormat stringFromDate:[NSDate date]] stringByAppendingString:@"_WellDone.welldonedoc"];
-
-	NSString *backupFileName = [backupPath stringByAppendingString:fileEnding];
-	
-	NSURL *backupFileURL = [NSURL fileURLWithPath: backupFileName];
-
-	//NSLog(@"%@",[currentDBFile absoluteString]);
-	//NSLog(@"%@",[backupFileURL absoluteString]);
-	if ([fm copyItemAtURL:currentDBFile toURL:backupFileURL error:&*error]){
-		return [backupFileURL absoluteString];
-	}else {
-		return nil;
+	if ([fm copyItemAtPath:currentDBFile toPath:backupFileName error:error]){
+		return backupFileName;
 	}
+	return nil;
 }
 
 - (IBAction)restoreBackupAction:(id)sender {	
