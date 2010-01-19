@@ -114,6 +114,9 @@
 - (SyncController *)sharedSyncController;
 - (NSString *)applicationSupportDirectory;
 
+// relauch
+- (void)relaunch:(id)sender;
+
 @end
 
 void networkStatusDidChange(SCNetworkReachabilityRef name, SCNetworkConnectionFlags flags, void * info);
