@@ -260,7 +260,6 @@
 										<int key="NSTvFlags">-767557632</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
-										<int key="NSGridStyleMask">1</int>
 										<int key="NSColumnAutoresizingStyle">4</int>
 										<int key="NSDraggingSourceMaskForLocal">15</int>
 										<int key="NSDraggingSourceMaskForNonLocal">0</int>
@@ -292,7 +291,7 @@
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="161659408"/>
 								<string key="NSAction">_doScroller:</string>
-								<double key="NSPercent">0.99836333878887074</double>
+								<double key="NSPercent">0.5</double>
 							</object>
 							<object class="NSClipView" id="406140520">
 								<reference key="NSNextResponder" ref="161659408"/>
@@ -640,7 +639,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{478, 109}, {610, 636}}</string>
+					<string>{{311, 109}, {610, 636}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{217, 442}, {480, 272}}</string>
