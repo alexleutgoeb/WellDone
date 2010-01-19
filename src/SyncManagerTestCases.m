@@ -15,7 +15,7 @@
 @implementation SyncManagerTestCases
 
 - (void)setUp {
-	//DLog(@"hola");
+	DLog(@"hola");
 
 	NSString *user = @"michael.petritsch@gmail.com";
 	NSString *pwd = @"123temppw";
@@ -121,17 +121,17 @@
 
 //Folder tests
 
--(void)FolderSyncWithLocalModifiedDateGreaterLastSync {
+-(void)testFolderSyncWithLocalModifiedDateGreaterLastSync {
 
 }
 
 
--(void)FolderSyncWithLocalModifiedDateLessOrEqualLastSync {
+-(void)testFolderSyncWithLocalModifiedDateLessOrEqualLastSync {
 	
 }
 
 
--(void)FolderCreatedLocal {
+-(void)testFolderCreatedLocal {
 	
 	Folder *lFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:managedObjectContext];
 	lFolder.name = @"testFolder";
@@ -143,6 +143,8 @@
 	
 	STAssertTrue([lFolder.name isEqualToString:gtdFolder.title], @"lFolder.name != gtdFolder.title. Expected %i, got %i", lFolder.name, gtdFolder.title);
 	
+	//TODO: folder wieder löschen
+	
 	//Folder localFolder = [[new Folder alloc] init];
 	//RemoteFolder remoteFolder = [[new RemoteFolder alloc] init];
 	
@@ -151,17 +153,17 @@
 }
 
 
--(void)FolderCreatedRemote {
+-(void)testFolderCreatedRemote {
 	
 }
 
 
--(void)FolderDeleteLocal {
+-(void)testFolderDeletedLocal {
 	
 }
 
 
--(void)FolderDeleteRemote {
+-(void)testFolderDeletedRemote {
 	
 }
 
@@ -169,32 +171,32 @@
 //Context tests
 
 
--(void)ContextSyncWithLocalModifiedDateGreaterLastSync {
+-(void)testContextSyncWithLocalModifiedDateGreaterLastSync {
 	
 }
 
 
--(void)ContextSyncWithLocalModifiedDateLessOrEqualLastSync {
+-(void)testContextSyncWithLocalModifiedDateLessOrEqualLastSync {
 	
 }
 
 
--(void)ContextCreatedLocal {
+-(void)testContextCreatedLocal {
 	
 }
 
 
--(void)ContextCreatedRemote {
+-(void)testContextCreatedRemote {
 	
 }
 
 
--(void)ContextDeleteLocal {
+-(void)testContextDeletedLocal {
 	
 }
 
 
--(void)ContextDeleteRemote {
+-(void)testContextDeletedRemote {
 	
 }
 
@@ -202,42 +204,42 @@
 //Note tests
 
 
--(void)NoteSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified {
+-(void)testNoteSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified {
 	
 }
 
 
--(void)NoteSyncWithLocalAndRemoteDatesLessOrEqualLastSync {
+-(void)testNoteSyncWithLocalAndRemoteDatesLessOrEqualLastSync {
 	
 }
 
 
--(void)NoteSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified {
+-(void)testNoteSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified {
 	
 }
 
 
--(void)NoteSyncWithLocalAndRemoteGreaterLastSync {
+-(void)testNoteSyncWithLocalAndRemoteGreaterLastSync {
 	
 }
 
 
--(void)NoteCreatedLocal {
+-(void)testNoteCreatedLocal {
 	
 }
 
 
--(void)NoteCreatedRemote {
+-(void)testNoteCreatedRemote {
 	
 }
 
 
--(void)NoteDeleteLocal {
+-(void)testNoteDeletedLocal {
 	
 }
 
 
--(void)NoteDeleteRemote {
+-(void)testNoteDeletedRemote {
 	
 }
 
@@ -245,42 +247,42 @@
 //Task tests
 
 
--(void)TaskSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified {
+-(void)testTaskSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified {
 	
 }
 
 
--(void)TaskSyncWithLocalAndRemoteDatesLessOrEqualLastSync {
+-(void)testTaskSyncWithLocalAndRemoteDatesLessOrEqualLastSync {
 	
 }
 
 
--(void)TaskSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified {
+-(void)testTaskSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified {
 	
 }
 
 
--(void)TaskSyncWithLocalAndRemoteGreaterLastSync {
+-(void)testTaskSyncWithLocalAndRemoteGreaterLastSync {
 	
 }
 
 
--(void)TaskCreatedLocal {
+-(void)testTaskCreatedLocal {
 	
 }
 
 
--(void)TaskCreatedRemote {
+-(void)testTaskCreatedRemote {
 	
 }
 
 
--(void)TaskDeleteLocal {
+-(void)testTaskDeletedLocal {
 	
 }
 
 
--(void)TaskDeleteRemote {
+-(void)testTaskDeletedRemote {
 	
 }
 

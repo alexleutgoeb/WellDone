@@ -44,37 +44,37 @@
  if modifiedDate of localFolder greater than lastsyncDate of remoteFolder
  then overwrite GtdFolder Data with localFolder data
  */
--(void)FolderSyncWithLocalModifiedDateGreaterLastSync;
+-(void)testFolderSyncWithLocalModifiedDateGreaterLastSync;
 
 /**
  if modifiedDate of localFolder less or equal lastsyncDate of remoteFolder
  then overwrite localFolder Data with GtdFolder data
  */
--(void)FolderSyncWithLocalModifiedDateLessOrEqualLastSync;
+-(void)testFolderSyncWithLocalModifiedDateLessOrEqualLastSync;
 
 /**
  if a new folder got created locally
  then create it remotely
  */
--(void)FolderCreatedLocal;
+-(void)testFolderCreatedLocal;
 
 /**
  if a new folder got created remotely
  then create it locally
  */
--(void)FolderCreatedRemote;
+-(void)testFolderCreatedRemote;
 
 /**
  if a folder got deleted locally
  then delete it remotely
  */
--(void)FolderDeletedLocal;
+-(void)testFolderDeletedLocal;
 
 /**
  if a folder got deleted remotely
  then delete it locally
  */
--(void)FolderDeletedRemote;
+-(void)testFolderDeletedRemote;
 
 
 //Context tests
@@ -83,37 +83,37 @@
  if modifiedDate of localContext greater than lastsyncDate of remoteContext
  then overwrite GtdContext Data with localContext data
  */
--(void)ContextSyncWithLocalModifiedDateGreaterLastSync;
+-(void)testContextSyncWithLocalModifiedDateGreaterLastSync;
 
 /**
  if modifiedDate of localContext less or equal lastsyncDate of remoteContext
  then overwrite localContext Data with GtdContext data
  */
--(void)ContextSyncWithLocalModifiedDateLessOrEqualLastSync;
+-(void)testContextSyncWithLocalModifiedDateLessOrEqualLastSync;
 
 /**
  if new context got created locally
  then create it remotely
  */
--(void)ContextCreatedLocal;
+-(void)testContextCreatedLocal;
 
 /**
  if new context got created remotely
  then create it locally
  */
--(void)ContextCreatedRemote;
+-(void)testContextCreatedRemote;
 
 /**
  if context got deleted locally
  then delete it remotely
  */
--(void)ContextDeletedLocal;
+-(void)testContextDeletedLocal;
 
 /**
  if context got deleted remotely
  then delete it locally
  */
--(void)ContextDeletedRemote;
+-(void)testContextDeletedRemote;
 
 
 //Note tests
@@ -122,49 +122,49 @@
  if (modifiedDate of localNote) > lastsyncDate of remoteNote >= (date_modified of gtdNote)
  then overwrite GtdNote data with localNote data
  */
--(void)NoteSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified;
+-(void)testNoteSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified;
 
 /**
  if (modifiedDate of localNote) <= lastsyncDate of remoteNote >= (date_modified of gtdNote)
  then do not change localNote data or gtdNote data
  */
--(void)NoteSyncWithLocalAndRemoteDatesLessOrEqualLastSync;
+-(void)testNoteSyncWithLocalAndRemoteDatesLessOrEqualLastSync;
 
 /**
  if (modifiedDate of localNote) <= lastsyncDate of remoteNote < (date_modified of gtdNote)
  then overwrite localNote data with gtdNote data
  */
--(void)NoteSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified;
+-(void)testNoteSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified;
 
 /**
  if (modifiedDate of localNote) > lastsyncDate of remoteNote < (date_modified of gtdNote)
  then let the user decide
  */
--(void)NoteSyncWithLocalAndRemoteGreaterLastSync;
+-(void)testNoteSyncWithLocalAndRemoteGreaterLastSync;
 
 /**
  if a new note got created locally
  then create it remotely
  */
--(void)NoteCreatedLocal;
+-(void)testNoteCreatedLocal;
 
 /**
  if a new note got created remotely
  then create it locally
  */
--(void)NoteCreatedRemote;
+-(void)testNoteCreatedRemote;
 
 /**
  if a note got deleted locally
  then delete it remotely
  */
--(void)NoteDeletedLocal;
+-(void)testNoteDeletedLocal;
 
 /**
  if a note got deleted remotely
  then delete it locally
  */
--(void)NoteDeletedRemote;
+-(void)testNoteDeletedRemote;
 
 
 //Task tests
@@ -173,48 +173,48 @@
  if (modifiedDate of localTask) > lastsyncDate of remoteTask >= (date_modified of gtdTask)
  then overwrite gtdTask data with localTask data
  */
--(void)TaskSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified;
+-(void)testTaskSyncWithLocalModifiedDateGreaterLastSyncGreaterOrEqualRemoteDate_Modified;
 
 /**
  if (modifiedDate of localTask) <= lastsyncDate of remoteTask >= (date_modified of gtdTask)
  then do not change localTask data or gtdTask data
  */
--(void)TaskSyncWithLocalAndRemoteDatesLessOrEqualLastSync;
+-(void)testTaskSyncWithLocalAndRemoteDatesLessOrEqualLastSync;
 
 /**
  if (modifiedDate of localTask) <= lastsyncDate of remoteTask < (date_modified of gtdTask)
  then overwrite localNote data with gtdNote data
  */
--(void)TaskSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified;
+-(void)testTaskSyncWithLocalModifiedDateLessOrEqualLastSyncLessRemoteDateModified;
 
 /**
  if (modifiedDate of localTask) > lastsyncDate of remoteTask < (date_modified of gtdTask)
  then let the user decide
  */
--(void)TaskSyncWithLocalAndRemoteGreaterLastSync;
+-(void)testTaskSyncWithLocalAndRemoteGreaterLastSync;
 
 /**
  if a new task got created locally
  then create it remotely
  */
--(void)TaskCreatedLocal;
+-(void)testTaskCreatedLocal;
 
 /**
  if a new task got created remotely
  then create it locally
  */
--(void)TaskCreatedRemote;
+-(void)testTaskCreatedRemote;
 
 /**
  if a task got deleted locally
  then delete it remotely
  */
--(void)TaskDeletedLocal;
+-(void)testTaskDeletedLocal;
 
 /**
  if a task got deleted remotely
  then delete it locally
  */
--(void)TaskDeletedRemote;
+-(void)testTaskDeletedRemote;
 
 @end
