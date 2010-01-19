@@ -453,8 +453,10 @@
 					DLog(@"Local task: %@", localTask.modifiedDate);
 					DLog(@"Gtd task:   %@", gtdTask.date_modified);
 					DLog(@"Last sync:  %@", remoteTask.lastsyncDate);
-					
-					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0.1) {
+	
+					if([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9 && 
+						-0.5 <= [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] &&
+					   [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0.5) {
 						// Update of remote task by local task
 						DLog(@"Update remote task by local task (newer)...");
 						gtdTask.title = localTask.title;
@@ -498,7 +500,9 @@
 						}
 					}
 					
-					else if ([localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0.1 && [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
+					else if (-0.5 <= [localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] && 
+							 [localTask.modifiedDate timeIntervalSinceDate:remoteTask.lastsyncDate] <= 0.5 && 
+							 [gtdTask.date_modified timeIntervalSinceDate:remoteTask.lastsyncDate] > 0.9) {
 						// Update of local task by remote one
 						DLog(@"Update local task by remote task (newer)...");
 						// Set local task properties
