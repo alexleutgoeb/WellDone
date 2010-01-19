@@ -133,7 +133,7 @@
 
 -(void)testFolderCreatedLocal {
 	
-	Folder *lFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:managedObjectContext];
+	/*Folder *lFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:managedObjectContext];
 	lFolder.name = @"testFolder";
 	[sm syncFolders:managedObjectContext withSyncService:api];
 	
@@ -149,7 +149,7 @@
 	//RemoteFolder remoteFolder = [[new RemoteFolder alloc] init];
 	
 	//localFolder.title = "test";
-	//localFolder.modifiedDate = [NSDate date];
+	//localFolder.modifiedDate = [NSDate date];*/
 }
 
 
