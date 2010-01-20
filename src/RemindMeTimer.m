@@ -43,14 +43,17 @@
 		if ([result count] == 0) return;
 		else {
 			NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-			[dateFormat setDateFormat:@"DD/MM/YYYY HH:MM"];
+			[dateFormat setDateFormat:@"DD/MM/YY HH:MM"];
 			
 			NSLog(@"reminding following tasks:");
 			NSString *msg = @"Upcoming event(s): ";
 			for (Task *task in result) {
 				NSLog(@"%@",[task title]);
-				[task setReminder:0];
-				msg = [NSString stringWithFormat: @"%@\n%@ - %@",msg,[task title] ,[dateFormat stringFromDate:[task startDate]]];
+								NSLog(@"%@",[task startDate]);
+				//NSString *temp = [dateFormat stringFromDate:[task startDate]];
+
+				//[task setReminder:0]; 
+				msg = [NSString stringWithFormat: @"%@\n%@ ",msg,[task title]];
 			}
 			
 			if (![moc save:&error]) {
