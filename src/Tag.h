@@ -16,16 +16,5 @@
 
 @property (nonatomic, retain) NSNumber * deletedByApp;
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSSet* tasks;
 
 @end
-
-
-@interface Tag (CoreDataGeneratedAccessors)
-- (void)addTasksObject:(Task *)value;
-- (void)removeTasksObject:(Task *)value;
-- (void)addTasks:(NSSet *)value;
-- (void)removeTasks:(NSSet *)value;
-
-@end
-

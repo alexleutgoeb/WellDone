@@ -61,6 +61,7 @@
 - (Tag *) getTagByName: (NSString *)tagName;
 - (void) setTaskListFolderFilter:(Folder*) folderToFilterFor;
 - (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor;
+- (void)setTaskListTagFilter:(NSArray*)tagsToFilterFor;
 - (void) setTaskListSearchFilter:(NSString*) searchText;
 - (NSPredicate *) generateTaskListSearchPredicate;
 - (void) reloadTaskListWithFilters;

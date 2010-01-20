@@ -52,6 +52,7 @@
 	NSMenuItem *syncTextMenuItem;
 	IBOutlet NSTextField* quickAddTask;
 	IBOutlet NSTextField* folderNameIndicator;
+	IBOutlet NSPopUpButton *tagMenuButton;
 	NSStatusItem *menuBarItem;
 	
 	// Controllers
@@ -104,6 +105,7 @@
 - (void)showContextManagement:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
 - (IBAction)filterTaskListByTitle:(id)sender;
+- (IBAction)tagSelectionChanged:(id)sender;
 - (void)initGTDView;
 - (void)changeFolderNameIndicator:(NSString*)folderName;
 

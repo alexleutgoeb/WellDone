@@ -14,15 +14,10 @@
 
 @dynamic deletedByApp;
 @dynamic text;
-@dynamic tasks;
 
 - (void)awakeFromInsert {
 	[super awakeFromInsert];
 	self.deletedByApp = [NSNumber numberWithBool:NO];
-}
-
-- (NSString *)description {
-	return self.text;
 }
 
 @end

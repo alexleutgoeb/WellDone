@@ -17,7 +17,7 @@
 #define kFilterPredicateFolder	@"FilterPredicateFolder"
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
-
+#define kFilterPredicateTag		@"FilterPredicateTag"
 
 @interface SimpleListController ()
 
@@ -401,6 +401,12 @@
 	[taskListFilterPredicate setValue:contextsToFilterFor forKey:kFilterPredicateContext];
 	[self reloadTaskListWithFilters];
 }
+
+- (void)setTaskListTagFilter:(NSArray*)tagsToFilterFor {
+	[taskListFilterPredicate setValue:tagsToFilterFor forKey:kFilterPredicateTag];
+	[self reloadTaskListWithFilters];
+}
+
 - (void) setTaskListSearchFilter:(NSString*) searchText {
 	[taskListFilterPredicate setValue:searchText forKey:kFilterPredicateSearch];
 	[self reloadTaskListWithFilters];
@@ -422,6 +428,7 @@
 	NSString *searchText = [taskListFilterPredicate objectForKey: kFilterPredicateSearch];
 	NSArray *contexts = [taskListFilterPredicate objectForKey: kFilterPredicateContext];
 	Folder *folder = [taskListFilterPredicate objectForKey: kFilterPredicateFolder];
+	NSArray *tags = [taskListFilterPredicate objectForKey:kFilterPredicateTag];
 	NSMutableArray *predicateArguments = [NSMutableArray arrayWithCapacity:10];
 	
 	// will show inbox folder if the folder is not set:
@@ -446,6 +453,12 @@
 		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND context IN %@"];
 		generatedPredicateString = extension;
 		[predicateArguments addObject:contexts];
+	}
+	
+	if (tags != nil && [tags count] > 0) {
+		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND tags contains %@"];
+		generatedPredicateString = extension;
+		[predicateArguments addObject:[tags objectAtIndex:0]];
 	}
 
 	

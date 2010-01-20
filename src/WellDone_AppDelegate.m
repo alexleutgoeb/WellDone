@@ -522,6 +522,17 @@
 	[folderNameIndicator setObjectValue:folderName];
 }
 
+- (IBAction)tagSelectionChanged:(id)sender {
+	// NSArray *selected = [tagMenuButton selectedItem];
+	if ([[tagMenuButton selectedItem] representedObject] != nil) {
+		DLog(@"%@", [[tagMenuButton selectedItem] representedObject]);
+		[simpleListController setTaskListTagFilter:[NSArray arrayWithObject:[[tagMenuButton selectedItem] representedObject]]];
+	}
+	else {
+		[simpleListController setTaskListTagFilter:[NSArray array]];
+	}
+}
+
 #pragma mark -
 #pragma mark Data manipulation
 
