@@ -748,7 +748,6 @@
 					<string>330.IBPluginDependency</string>
 					<string>420.IBDateFormatterBehaviorMetadataKey</string>
 					<string>420.IBPluginDependency</string>
-					<string>63.CustomClassName</string>
 					<string>63.IBPluginDependency</string>
 					<string>64.IBEditorWindowLastContentRect</string>
 					<string>64.IBPluginDependency</string>
@@ -774,7 +773,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>DebugTreeController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{332, 525}, {611, 296}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -814,14 +812,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">DateCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">DebugTreeController</string>
-					<string key="superclassName">NSTreeController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">DebugTreeController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

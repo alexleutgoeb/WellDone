@@ -7,7 +7,6 @@
 //
 
 #import "WellDone_AppDelegate.h"
-#import "SidebarTaskController.h"
 #import "SimpleListController.h"
 #import "GTDListController.h"
 #import "SidebarFolderController.h"
@@ -216,7 +215,6 @@
 	
 	simpleListController = [[SimpleListController alloc] init];
 	gtdListController = [[GTDListController alloc] init];
-	sidebarTaskController = [[SidebarTaskController alloc] init];
 	sidebarFolderController = [[SidebarFolderController alloc] init];
 	contextViewController = [[ContextViewController alloc] init];
 	hudTaskEditorController = [[HUDTaskEditorController alloc] init];

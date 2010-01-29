@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
+		2F7446990DB6B7EA00F9684A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainWindow.xib */; };
 		4217271410F61182001490F5 /* CoreDataBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = 42375F4910F5F9BC00A48318 /* CoreDataBackup.m */; };
 		422B8569110450330018785A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		422B8572110450940018785A /* Relaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 422B8571110450940018785A /* Relaunch.m */; };
@@ -47,10 +47,8 @@
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
 		6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
-		6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */; };
 		6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
-		6FB0A92C10FA5A6000990D07 /* DebugTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
 		6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB8A94110B0143F00B0F240 /* GTDListController.m */; };
 		6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB8A94510B0194E00B0F240 /* GTDListView.xib */; };
@@ -63,8 +61,6 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BE2AA10B2FFC000B288EE /* SimpleListController.m */; };
-		B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4317EBB10B1544900C9841F /* SidebarTask.xib */; };
-		B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4317ED910B163F900C9841F /* SidebarTaskController.m */; };
 		B465D95B10FF2FE10055E308 /* RemindMeTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B465D95A10FF2FE10055E308 /* RemindMeTimer.m */; };
 		B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */; };
 		B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */; };
@@ -206,7 +202,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* WellDone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellDone_Prefix.pch; sourceTree = "<group>"; };
 		42262EC8109C818B005E4997 /* templateTestCases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = templateTestCases.h; sourceTree = "<group>"; };
 		42262EC9109C818B005E4997 /* templateTestCases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = templateTestCases.m; sourceTree = "<group>"; };
@@ -254,11 +250,7 @@
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
 		6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUDTaskEditor.xib; sourceTree = "<group>"; };
-		6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioritySplitViewDelegate.h; sourceTree = "<group>"; };
-		6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioritySplitViewDelegate.m; sourceTree = "<group>"; };
 		6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
-		6FB0A92A10FA5A6000990D07 /* DebugTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTreeController.h; sourceTree = "<group>"; };
-		6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugTreeController.m; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
 		6FB8A94110B0143F00B0F240 /* GTDListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListController.m; sourceTree = "<group>"; };
@@ -275,9 +267,6 @@
 		8D1107320486CEB800E47090 /* WellDone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellDone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B41BE2A910B2FFC000B288EE /* SimpleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleListController.h; sourceTree = "<group>"; };
 		B41BE2AA10B2FFC000B288EE /* SimpleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleListController.m; sourceTree = "<group>"; };
-		B4317EBB10B1544900C9841F /* SidebarTask.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTask.xib; sourceTree = "<group>"; };
-		B4317ED810B163F900C9841F /* SidebarTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTaskController.h; sourceTree = "<group>"; };
-		B4317ED910B163F900C9841F /* SidebarTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTaskController.m; sourceTree = "<group>"; };
 		B465D95910FF2FE10055E308 /* RemindMeTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindMeTimer.h; sourceTree = "<group>"; };
 		B465D95A10FF2FE10055E308 /* RemindMeTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindMeTimer.m; sourceTree = "<group>"; };
 		B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WellDone.xcdatamodel; sourceTree = "<group>"; };
@@ -332,7 +321,7 @@
 		FA56EB6310EBB95300228C43 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FA56EB9010EBBFC200228C43 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		FA56EB9110EBBFC200228C43 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
-		FA56EC0710EBCA9900228C43 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		FA56EC0710EBCA9900228C43 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		FA56EC6010EE9CC100228C43 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FA6A30FB10FA231700A77477 /* GeneralPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralPreferences.xib; sourceTree = "<group>"; };
 		FA6A30FF10FA250400A77477 /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
@@ -408,12 +397,10 @@
 			children = (
 				77C8280B06725ACE000B614F /* WellDone_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* WellDone_AppDelegate.m */,
+				7756732906782D8800D1FEB8 /* Model Classes */,
 				6F5D249210AC588D002E9514 /* View Classes */,
-				6F5D249110AC5873002E9514 /* ViewController Classes */,
+				6F5D249110AC5873002E9514 /* Controller Classes */,
 				FABE3F9210C1A323000D72E9 /* Logic Classes */,
-				FACF441C10D2EAD700B0237A /* Preferences Classes */,
-				7756732906782D8800D1FEB8 /* Models */,
-				6F03A45710FC69790020CCA9 /* Value Transformers */,
 				FA56EB5710EBB89C00228C43 /* Helper Classes */,
 			);
 			name = Classes;
@@ -455,9 +442,9 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
 				FACCD7BF10A050B900A36C87 /* TestClasses */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -476,29 +463,16 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */,
+				2F7446970DB6B7EA00F9684A /* MainWindow.xib */,
+				6FA4B7571112FDA900C16AF9 /* Task XIB */,
+				6FA4B7581112FDD800C16AF9 /* Folder XIB */,
+				6FA4B75B1112FE4000C16AF9 /* Context XIB */,
+				6FA4B7591112FDE900C16AF9 /* Admin XIB */,
+				6F3D490C111301D9000728F1 /* Preferences XIB */,
+				6FA4B75A1112FE1900C16AF9 /* Popup XIB */,
 				FA48B85F10D4139E0032F1D8 /* ImageRes */,
-				FA56EC6A10EE9CE300228C43 /* Localizable.strings */,
-				FA56EC0710EBCA9900228C43 /* icon.icns */,
-				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
-				B4317EBB10B1544900C9841F /* SidebarTask.xib */,
-				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
-				4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
-				6FB162D910AD8CF200961A94 /* SimpleListView.xib */,
-				6FB8A94510B0194E00B0F240 /* GTDListView.xib */,
-				D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */,
-				D110F46910B8D72300304B4C /* TagManagement.xib */,
-				D110F48410B8DA6800304B4C /* ContextManagement.xib */,
-				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
-				FA6A30FB10FA231700A77477 /* GeneralPreferences.xib */,
-				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
-				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
-				D1B51A7710F690360053C847 /* ContextView.xib */,
-				6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */,
-				6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */,
-				FA478BA41103554F00893DBC /* ConflictResolver.xib */,
+				6FA4B75C1112FEF500C16AF9 /* Other Res */,
+				FABE3FE410C1A869000D72E9 /* ToodledoAPI.xcodeproj */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -524,7 +498,7 @@
 			name = Backup;
 			sourceTree = "<group>";
 		};
-		6F03A45710FC69790020CCA9 /* Value Transformers */ = {
+		6F03A45710FC69790020CCA9 /* ValueTransformers */ = {
 			isa = PBXGroup;
 			children = (
 				4263AABC10D1495200C5FD7B /* TaskValueTransformer.h */,
@@ -545,94 +519,236 @@
 				6F03A46610FC698B0020CCA9 /* RadiansToDegreesTransformer.h */,
 				6F03A46710FC698B0020CCA9 /* RadiansToDegreesTransformer.m */,
 			);
-			name = "Value Transformers";
+			name = ValueTransformers;
 			sourceTree = "<group>";
 		};
-		6F5D249110AC5873002E9514 /* ViewController Classes */ = {
+		6F3D490C111301D9000728F1 /* Preferences XIB */ = {
 			isa = PBXGroup;
 			children = (
-				6FCE286E10B6FE42002355CF /* TestDataGeneratorController.h */,
-				6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */,
+				FA6A30FB10FA231700A77477 /* GeneralPreferences.xib */,
+				FACF445110D2EC9300B0237A /* SyncPreferences.xib */,
+				FA56E4EC10E7E0C400228C43 /* ServicePreferencesSheet.xib */,
+			);
+			name = "Preferences XIB";
+			sourceTree = "<group>";
+		};
+		6F5D249110AC5873002E9514 /* Controller Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6FA4B6F31112F98D00C16AF9 /* Task C */,
+				6FA4B7451112FCDE00C16AF9 /* Folder C */,
+				6FA4B7471112FD1A00C16AF9 /* Context C */,
+				6FA4B6FA1112F9BF00C16AF9 /* Admin C */,
+				FACF441C10D2EAD700B0237A /* Preferences C */,
+				6FA4B7441112FC9200C16AF9 /* Popup C */,
+			);
+			name = "Controller Classes";
+			sourceTree = "<group>";
+		};
+		6F5D249210AC588D002E9514 /* View Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6FA4B71D1112FB8500C16AF9 /* Task V */,
+				6FA4B71E1112FBC200C16AF9 /* Folder V */,
+				6FA4B7461112FD0400C16AF9 /* Context V */,
+				6F03A45710FC69790020CCA9 /* ValueTransformers */,
+			);
+			name = "View Classes";
+			sourceTree = "<group>";
+		};
+		6FA4B6F31112F98D00C16AF9 /* Task C */ = {
+			isa = PBXGroup;
+			children = (
 				B41BE2A910B2FFC000B288EE /* SimpleListController.h */,
 				B41BE2AA10B2FFC000B288EE /* SimpleListController.m */,
 				6FB8A94010B0143F00B0F240 /* GTDListController.h */,
 				6FB8A94110B0143F00B0F240 /* GTDListController.m */,
-				B4317ED810B163F900C9841F /* SidebarTaskController.h */,
-				B4317ED910B163F900C9841F /* SidebarTaskController.m */,
+				6FE405CB10FB69F9002ECF9C /* HUDTaskEditorController.h */,
+				6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */,
+			);
+			name = "Task C";
+			sourceTree = "<group>";
+		};
+		6FA4B6FA1112F9BF00C16AF9 /* Admin C */ = {
+			isa = PBXGroup;
+			children = (
 				D1F2E93710B8A838009D4B4B /* FolderManagementController.h */,
 				D1F2E93810B8A838009D4B4B /* FolderManagementController.m */,
 				D110F46F10B8D92600304B4C /* TagManagementController.h */,
 				D110F47010B8D92600304B4C /* TagManagementController.m */,
 				D110F48A10B8DBDB00304B4C /* ContextManagementController.h */,
 				D110F48B10B8DBDB00304B4C /* ContextManagementController.m */,
-				6F22C1E410CC044100ABFE19 /* SidebarFolderController.h */,
-				6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */,
-				FA56E4F010E7E2B100228C43 /* ServicePreferencesSheetController.h */,
-				FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */,
-				D1B51A7410F68FFE0053C847 /* ContextViewController.h */,
-				D1B51A7510F68FFE0053C847 /* ContextViewController.m */,
-				6FE405CB10FB69F9002ECF9C /* HUDTaskEditorController.h */,
-				6FE405CC10FB69F9002ECF9C /* HUDTaskEditorController.m */,
-				6F0C0A1E10FFC88800AFD545 /* DateTimePopupController.h */,
-				6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */,
-				FA478BD3110359CA00893DBC /* ConflictResolverController.h */,
-				FA478BD4110359CA00893DBC /* ConflictResolverController.m */,
 			);
-			name = "ViewController Classes";
+			name = "Admin C";
 			sourceTree = "<group>";
 		};
-		6F5D249210AC588D002E9514 /* View Classes */ = {
+		6FA4B71D1112FB8500C16AF9 /* Task V */ = {
 			isa = PBXGroup;
 			children = (
-				D164971910D2E16F00DEB20A /* Custom Cells */,
+				B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */,
+				B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */,
+				6F2E521810B01F7B005B118B /* GTDListView.h */,
+				6F2E521910B01F7B005B118B /* GTDListView.m */,
+				D164971A10D2E17B00DEB20A /* DateCell.h */,
+				D164971B10D2E17B00DEB20A /* DateCell.m */,
 				6F0C0A0510FFC4C200AFD545 /* MAAttachedWindow.h */,
 				6F0C0A0610FFC4C200AFD545 /* MAAttachedWindow.m */,
+			);
+			name = "Task V";
+			sourceTree = "<group>";
+		};
+		6FA4B71E1112FBC200C16AF9 /* Folder V */ = {
+			isa = PBXGroup;
+			children = (
 				6F22C1B910CC01DD00ABFE19 /* SidebarFolderTreeView.h */,
 				6F22C1B410CC01DD00ABFE19 /* SidebarFolderTreeView.m */,
 				6F22C1B710CC01DD00ABFE19 /* SidebarBadgeCell.h */,
 				6F22C1B510CC01DD00ABFE19 /* SidebarBadgeCell.m */,
 				6F22C1B810CC01DD00ABFE19 /* SidebarFolderNode.h */,
 				6F22C29D10CC1A2A00ABFE19 /* SidebarFolderNode.m */,
-				6F2E521810B01F7B005B118B /* GTDListView.h */,
-				6F2E521910B01F7B005B118B /* GTDListView.m */,
-				B4E873FD10BAA52D004E1BA0 /* SimpleListOutlineView.h */,
-				B4E873FE10BAA52D004E1BA0 /* SimpleListOutlineView.m */,
-				6FAEAF3510BD66C0006F5394 /* PrioritySplitViewDelegate.h */,
-				6FAEAF3610BD66C0006F5394 /* PrioritySplitViewDelegate.m */,
-				6FB0A92A10FA5A6000990D07 /* DebugTreeController.h */,
-				6FB0A92B10FA5A6000990D07 /* DebugTreeController.m */,
+			);
+			name = "Folder V";
+			sourceTree = "<group>";
+		};
+		6FA4B7441112FC9200C16AF9 /* Popup C */ = {
+			isa = PBXGroup;
+			children = (
+				6FCE286E10B6FE42002355CF /* TestDataGeneratorController.h */,
+				6FCE286F10B6FE42002355CF /* TestDataGeneratorController.m */,
+				6F0C0A1E10FFC88800AFD545 /* DateTimePopupController.h */,
+				6F0C0A1F10FFC88800AFD545 /* DateTimePopupController.m */,
+				FA478BD3110359CA00893DBC /* ConflictResolverController.h */,
+				FA478BD4110359CA00893DBC /* ConflictResolverController.m */,
+			);
+			name = "Popup C";
+			sourceTree = "<group>";
+		};
+		6FA4B7451112FCDE00C16AF9 /* Folder C */ = {
+			isa = PBXGroup;
+			children = (
+				6F22C1E410CC044100ABFE19 /* SidebarFolderController.h */,
+				6F22C1E510CC044100ABFE19 /* SidebarFolderController.m */,
+			);
+			name = "Folder C";
+			sourceTree = "<group>";
+		};
+		6FA4B7461112FD0400C16AF9 /* Context V */ = {
+			isa = PBXGroup;
+			children = (
 				D14D515810FF9B6B00D8DBD1 /* ContextView.h */,
 				D14D515910FF9B6B00D8DBD1 /* ContextView.m */,
 			);
-			name = "View Classes";
+			name = "Context V";
 			sourceTree = "<group>";
 		};
-		7756732906782D8800D1FEB8 /* Models */ = {
+		6FA4B7471112FD1A00C16AF9 /* Context C */ = {
 			isa = PBXGroup;
 			children = (
-				D1F25AA81103A99700A3BBAA /* Section.h */,
-				D1F25AA91103A99700A3BBAA /* Section.m */,
+				D1B51A7410F68FFE0053C847 /* ContextViewController.h */,
+				D1B51A7510F68FFE0053C847 /* ContextViewController.m */,
+			);
+			name = "Context C";
+			sourceTree = "<group>";
+		};
+		6FA4B7571112FDA900C16AF9 /* Task XIB */ = {
+			isa = PBXGroup;
+			children = (
+				6FB162D910AD8CF200961A94 /* SimpleListView.xib */,
+				6FB8A94510B0194E00B0F240 /* GTDListView.xib */,
+				6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */,
+			);
+			name = "Task XIB";
+			sourceTree = "<group>";
+		};
+		6FA4B7581112FDD800C16AF9 /* Folder XIB */ = {
+			isa = PBXGroup;
+			children = (
+				6F22C18C10CBFEF600ABFE19 /* FolderSourceListView.xib */,
+			);
+			name = "Folder XIB";
+			sourceTree = "<group>";
+		};
+		6FA4B7591112FDE900C16AF9 /* Admin XIB */ = {
+			isa = PBXGroup;
+			children = (
+				D1F2E93010B8A3EC009D4B4B /* FolderManagement.xib */,
+				D110F46910B8D72300304B4C /* TagManagement.xib */,
+				D110F48410B8DA6800304B4C /* ContextManagement.xib */,
+			);
+			name = "Admin XIB";
+			sourceTree = "<group>";
+		};
+		6FA4B75A1112FE1900C16AF9 /* Popup XIB */ = {
+			isa = PBXGroup;
+			children = (
+				6FCE287210B6FE53002355CF /* TestDataGenerator.xib */,
+				6F0C0A2810FFCF6700AFD545 /* DateTimePopup.xib */,
+				FA478BA41103554F00893DBC /* ConflictResolver.xib */,
+			);
+			name = "Popup XIB";
+			sourceTree = "<group>";
+		};
+		6FA4B75B1112FE4000C16AF9 /* Context XIB */ = {
+			isa = PBXGroup;
+			children = (
+				D1B51A7710F690360053C847 /* ContextView.xib */,
+			);
+			name = "Context XIB";
+			sourceTree = "<group>";
+		};
+		6FA4B75C1112FEF500C16AF9 /* Other Res */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* WellDone-Info.plist */,
+				4242098A10CFB7A000DB9F3F /* UnitTestCases-Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				FA56EC6A10EE9CE300228C43 /* Localizable.strings */,
+			);
+			name = "Other Res";
+			sourceTree = "<group>";
+		};
+		6FA4B7731112FFE400C16AF9 /* Coredata Entities */ = {
+			isa = PBXGroup;
+			children = (
 				D14D543F10FFD3EB00D8DBD1 /* Context.h */,
 				D14D544010FFD3EB00D8DBD1 /* Context.m */,
-				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
 				FA90D3F010C4124D00309192 /* Folder.h */,
 				FA90D3F110C4124D00309192 /* Folder.m */,
 				FA90D3F210C4124D00309192 /* Note.h */,
 				FA90D3F310C4124D00309192 /* Note.m */,
+				D1F25AA81103A99700A3BBAA /* Section.h */,
+				D1F25AA91103A99700A3BBAA /* Section.m */,
 				FA90D3F410C4124D00309192 /* Tag.h */,
 				FA90D3F510C4124D00309192 /* Tag.m */,
 				FA90D3F610C4124D00309192 /* Task.h */,
 				FA90D3F710C4124D00309192 /* Task.m */,
+			);
+			name = "Coredata Entities";
+			sourceTree = "<group>";
+		};
+		6FA4B7741113000E00C16AF9 /* Remote Coredata Entities */ = {
+			isa = PBXGroup;
+			children = (
 				FA90D3F810C4124D00309192 /* RemoteContext.h */,
 				FA90D3F910C4124D00309192 /* RemoteContext.m */,
+				FA90D40010C4124D00309192 /* RemoteFolder.h */,
+				FA90D40110C4124D00309192 /* RemoteFolder.m */,
+				FA90D3FE10C4124D00309192 /* RemoteNote.h */,
+				FA90D3FF10C4124D00309192 /* RemoteNote.m */,
 				FA90D4A210C41E8400309192 /* RemoteObject.h */,
 				FA90D4A310C41E8400309192 /* RemoteObject.m */,
 				FA90D3FA10C4124D00309192 /* RemoteTask.h */,
 				FA90D3FB10C4124D00309192 /* RemoteTask.m */,
-				FA90D3FE10C4124D00309192 /* RemoteNote.h */,
-				FA90D3FF10C4124D00309192 /* RemoteNote.m */,
-				FA90D40010C4124D00309192 /* RemoteFolder.h */,
-				FA90D40110C4124D00309192 /* RemoteFolder.m */,
+			);
+			name = "Remote Coredata Entities";
+			sourceTree = "<group>";
+		};
+		7756732906782D8800D1FEB8 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B4A9746510A78E2D00B06BBC /* WellDone.xcdatamodel */,
+				6FA4B7731112FFE400C16AF9 /* Coredata Entities */,
+				6FA4B7741113000E00C16AF9 /* Remote Coredata Entities */,
 				FA48B62C10D3DEDB0032F1D8 /* SyncService.h */,
 				FA48B62D10D3DEDC0032F1D8 /* SyncService.m */,
 				D11C58AE10FA9D8000CC204F /* SearchQuery.h */,
@@ -642,7 +758,7 @@
 				FA47819E10FF669700893DBC /* TaskContainer.h */,
 				FA47819F10FF669700893DBC /* TaskContainer.m */,
 			);
-			name = Models;
+			name = "Model Classes";
 			sourceTree = "<group>";
 		};
 		B465D95810FF2FBA0055E308 /* RemindMe Timer */ = {
@@ -654,18 +770,10 @@
 			name = "RemindMe Timer";
 			sourceTree = "<group>";
 		};
-		D164971910D2E16F00DEB20A /* Custom Cells */ = {
-			isa = PBXGroup;
-			children = (
-				D164971A10D2E17B00DEB20A /* DateCell.h */,
-				D164971B10D2E17B00DEB20A /* DateCell.m */,
-			);
-			name = "Custom Cells";
-			sourceTree = "<group>";
-		};
 		FA48B85F10D4139E0032F1D8 /* ImageRes */ = {
 			isa = PBXGroup;
 			children = (
+				FA56EC0710EBCA9900228C43 /* icon.icns */,
 				FAD0791111067305006B1A34 /* tags.png */,
 				FAD077241106558A006B1A34 /* bg_gradient.png */,
 				FAD06DA21103E505006B1A34 /* inbox.png */,
@@ -730,18 +838,20 @@
 			name = TestClasses;
 			sourceTree = "<group>";
 		};
-		FACF441C10D2EAD700B0237A /* Preferences Classes */ = {
+		FACF441C10D2EAD700B0237A /* Preferences C */ = {
 			isa = PBXGroup;
 			children = (
-				FACF444910D2EB5700B0237A /* SS_PreferencePaneProtocol.h */,
-				FACF444A10D2EB5700B0237A /* SS_PrefsController.h */,
-				FACF444B10D2EB5700B0237A /* SS_PrefsController.m */,
-				FACF445410D2ED0900B0237A /* SyncPreferences.h */,
-				FACF445510D2ED0900B0237A /* SyncPreferences.m */,
 				FA6A30FF10FA250400A77477 /* GeneralPreferences.h */,
 				FA6A310010FA250400A77477 /* GeneralPreferences.m */,
+				FACF445410D2ED0900B0237A /* SyncPreferences.h */,
+				FACF445510D2ED0900B0237A /* SyncPreferences.m */,
+				FA56E4F010E7E2B100228C43 /* ServicePreferencesSheetController.h */,
+				FA56E4F110E7E2B100228C43 /* ServicePreferencesSheetController.m */,
+				FACF444A10D2EB5700B0237A /* SS_PrefsController.h */,
+				FACF444B10D2EB5700B0237A /* SS_PrefsController.m */,
+				FACF444910D2EB5700B0237A /* SS_PreferencePaneProtocol.h */,
 			);
-			name = "Preferences Classes";
+			name = "Preferences C";
 			sourceTree = "<group>";
 		};
 		FAD06D6B1103C966006B1A34 /* Sync */ = {
@@ -888,10 +998,9 @@
 			files = (
 				42FA16F911045C0C00754404 /* relaunch in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
+				2F7446990DB6B7EA00F9684A /* MainWindow.xib in Resources */,
 				6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */,
 				6FB8A94610B0194E00B0F240 /* GTDListView.xib in Resources */,
-				B4317EBC10B1544900C9841F /* SidebarTask.xib in Resources */,
 				6FCE287310B6FE53002355CF /* TestDataGenerator.xib in Resources */,
 				D1F2E93110B8A3EC009D4B4B /* FolderManagement.xib in Resources */,
 				D110F46A10B8D72300304B4C /* TagManagement.xib in Resources */,
@@ -980,14 +1089,12 @@
 				B4A9746610A78E2D00B06BBC /* WellDone.xcdatamodel in Sources */,
 				6FB8A94210B0143F00B0F240 /* GTDListController.m in Sources */,
 				6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */,
-				B4317EDA10B163F900C9841F /* SidebarTaskController.m in Sources */,
 				B41BE2AB10B2FFC000B288EE /* SimpleListController.m in Sources */,
 				6FCE287010B6FE42002355CF /* TestDataGeneratorController.m in Sources */,
 				D1F2E93910B8A838009D4B4B /* FolderManagementController.m in Sources */,
 				D110F47110B8D92600304B4C /* TagManagementController.m in Sources */,
 				D110F48C10B8DBDB00304B4C /* ContextManagementController.m in Sources */,
 				B4E873FF10BAA52D004E1BA0 /* SimpleListOutlineView.m in Sources */,
-				6FAEAF3710BD66C0006F5394 /* PrioritySplitViewDelegate.m in Sources */,
 				FABE3F9510C1A33E000D72E9 /* SyncManager.m in Sources */,
 				FA90D40410C4124D00309192 /* Folder.m in Sources */,
 				FA90D40510C4124D00309192 /* Note.m in Sources */,
@@ -1009,7 +1116,6 @@
 				FA56EB9210EBBFC200228C43 /* SFHFKeychainUtils.m in Sources */,
 				42375F4A10F5F9BC00A48318 /* CoreDataBackup.m in Sources */,
 				D1B51A7610F68FFE0053C847 /* ContextViewController.m in Sources */,
-				6FB0A92C10FA5A6000990D07 /* DebugTreeController.m in Sources */,
 				FA6A310110FA250400A77477 /* GeneralPreferences.m in Sources */,
 				6FE405CE10FB69F9002ECF9C /* HUDTaskEditorController.m in Sources */,
 				D11C58B010FA9D8000CC204F /* SearchQuery.m in Sources */,
@@ -1069,12 +1175,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		2F7446970DB6B7EA00F9684A /* MainMenu.xib */ = {
+		2F7446970DB6B7EA00F9684A /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2F7446980DB6B7EA00F9684A /* English */,
 			);
-			name = MainMenu.xib;
+			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 		FA56EC6A10EE9CE300228C43 /* Localizable.strings */ = {

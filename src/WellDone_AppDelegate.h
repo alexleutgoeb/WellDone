@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SidebarTaskController.h"
 #import "SimpleListController.h"
 #import "GTDListController.h"
 #import "SidebarFolderController.h"
@@ -56,7 +55,6 @@
 	NSStatusItem *menuBarItem;
 	
 	// Controllers
-	SidebarTaskController *sidebarTaskController;
 	SimpleListController *simpleListController;
 	SidebarFolderController *sidebarFolderController;
 	GTDListController *gtdListController;
