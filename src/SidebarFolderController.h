@@ -36,6 +36,7 @@
 - (void) saveFolderOrderingToStore;
 
 - (IBAction) handleFolderSelection:(id) sender;
+- (IBAction) handleAllFoldersSelection:(id) sender;
 - (IBAction) handleInboxSelection:(id) sender;
 
 - (void) setSimpController:(SimpleListController *) simpleListController;

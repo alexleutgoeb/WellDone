@@ -43,6 +43,8 @@
 	self.createDate = [NSDate date];
 	self.modifiedDate = [NSDate date];
 	self.deletedByApp = [NSNumber numberWithBool:NO];
+	self.completed = [NSNumber numberWithBool:NO];
+	self.starred = [NSNumber numberWithBool:NO];
 }
 
 - (NSString *)description {

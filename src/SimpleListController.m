@@ -14,6 +14,7 @@
 #import "WellDone_AppDelegate.h"
 
 #define kTasksPBoardType @"TasksPBoardType"
+#define kFilterPredicateFolderFilterEnabled	@"FilterPredicateFolderFilterEnabled"
 #define kFilterPredicateFolder	@"FilterPredicateFolder"
 #define kFilterPredicateSearch	@"FilterPredicateSearch"
 #define kFilterPredicateContext	@"FilterPredicateContext"
@@ -392,56 +393,78 @@
 	return NULL;
 }
 
+- (void) setTaskListFolderFilterEnabled:(NSNumber*) enabled reloadList:(bool)reload {
+	[taskListFilterPredicate setValue:enabled forKey:kFilterPredicateFolderFilterEnabled];
+	if (reload)
+		[self reloadTaskListWithFilters:YES];
+}
+
+
 - (void) setTaskListFolderFilter:(Folder*) folderToFilterFor {
+	[self setTaskListFolderFilterEnabled:[NSNumber numberWithBool: YES] reloadList:NO];
 	[taskListFilterPredicate setValue:folderToFilterFor forKey:kFilterPredicateFolder];
-	[self reloadTaskListWithFilters];
+	[self reloadTaskListWithFilters:NO];
 }
 
 - (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor {
 	[taskListFilterPredicate setValue:contextsToFilterFor forKey:kFilterPredicateContext];
-	[self reloadTaskListWithFilters];
+	[self reloadTaskListWithFilters:NO];
 }
 
 - (void)setTaskListTagFilter:(NSArray*)tagsToFilterFor {
 	[taskListFilterPredicate setValue:tagsToFilterFor forKey:kFilterPredicateTag];
-	[self reloadTaskListWithFilters];
+	[self reloadTaskListWithFilters:NO];
 }
 
 - (void) setTaskListSearchFilter:(NSString*) searchText {
 	[taskListFilterPredicate setValue:searchText forKey:kFilterPredicateSearch];
-	[self reloadTaskListWithFilters];
+	[self reloadTaskListWithFilters:NO];
 }
 
-- (void) reloadTaskListWithFilters {
+- (void) reloadTaskListWithFilters:(BOOL) orderByDates {
 	NSPredicate *predicate = [self generateTaskListSearchPredicate];
 	[treeController setFetchPredicate:predicate];
-	NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
-	[treeController setSortDescriptors:[NSArray arrayWithObject:sorter]];
-	
-	NSPredicate *retrievedPredicate = [treeController fetchPredicate];
-	NSLog(@"Predicate in treecontroller: %@", [retrievedPredicate predicateFormat]);
+	NSSortDescriptor *sorterCompleted = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
+	if (orderByDates) {
+		NSSortDescriptor *sorterDueDate = [[NSSortDescriptor alloc] initWithKey:@"dueDate" ascending:YES];
+		NSSortDescriptor *sorterStartDate = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES];
+		[treeController setSortDescriptors:[NSArray arrayWithObjects:sorterCompleted, sorterDueDate, sorterStartDate, nil]];
+	}
+	else {
+		[treeController setSortDescriptors:[NSArray arrayWithObject:sorterCompleted]];
+	}
+
 }
 
 - (NSPredicate *) generateTaskListSearchPredicate {
 	//NSString *generatedPredicateString = @"parentTask == nil";
-	NSString *generatedPredicateString = @"";
+	NSString *generatedPredicateString = @"parentTask == nil AND deletedByApp == 0";
+	BOOL folderFilterEnabled = [[taskListFilterPredicate objectForKey: kFilterPredicateFolderFilterEnabled] boolValue];
 	NSString *searchText = [taskListFilterPredicate objectForKey: kFilterPredicateSearch];
 	NSArray *contexts = [taskListFilterPredicate objectForKey: kFilterPredicateContext];
 	Folder *folder = [taskListFilterPredicate objectForKey: kFilterPredicateFolder];
 	NSArray *tags = [taskListFilterPredicate objectForKey:kFilterPredicateTag];
 	NSMutableArray *predicateArguments = [NSMutableArray arrayWithCapacity:10];
 	
-	// will show inbox folder if the folder is not set:
-	if (folder == nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == nil AND parentTask == nil AND deletedByApp == 0"];
-		generatedPredicateString = extension;
-	}
 	
-	if (folder != nil) {
-		NSString *extension = [generatedPredicateString stringByAppendingString:@"folder == %@ AND parentTask == nil AND deletedByApp == 0"];
-		generatedPredicateString = extension;
-		[predicateArguments addObject:folder];
+	if (folderFilterEnabled == YES) {
+		// will show inbox folder if the folder is not set:
+		if (folder == nil) {
+			NSString *extension = [generatedPredicateString stringByAppendingString:@" AND folder == nil"];
+			generatedPredicateString = extension;
+		}
+
+		if (folder != nil) {
+			NSString *extension = [generatedPredicateString stringByAppendingString:@" AND folder == %@"];
+			generatedPredicateString = extension;
+			[predicateArguments addObject:folder];
+		}
 	}
+	else {
+		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND dueDate != nil"];
+		generatedPredicateString = extension;
+	}
+
 	
 	if (searchText != nil && ![searchText isEqualToString:@""]) {
 		NSString *extension = [generatedPredicateString stringByAppendingString:@" AND title contains[cd] %@"];

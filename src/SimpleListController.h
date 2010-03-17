@@ -59,13 +59,15 @@
 - (void)setTaskOverdue:(NSTextFieldCell*)cell;
 - (NSArray *) getCurrentTags;
 - (Tag *) getTagByName: (NSString *)tagName;
+- (void) setTaskListFolderFilterEnabled:(NSNumber*) enabled reloadList:(bool)reload;
 - (void) setTaskListFolderFilter:(Folder*) folderToFilterFor;
 - (void) setTaskListContextFilter:(NSArray*) contextsToFilterFor;
 - (void)setTaskListTagFilter:(NSArray*)tagsToFilterFor;
 - (void) setTaskListSearchFilter:(NSString*) searchText;
 - (NSPredicate *) generateTaskListSearchPredicate;
-- (void) reloadTaskListWithFilters;
+- (void) reloadTaskListWithFilters:(BOOL) orderByDates;
 - (void) deleteSelectedTask;
 - (Task *) getDraggedTask;
 - (void)userSelectedRow:(id)sender;
+
 @end

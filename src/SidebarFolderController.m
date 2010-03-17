@@ -9,6 +9,8 @@
 #import "SidebarFolderController.h"
 #import "WellDone_AppDelegate.h"
 
+#define rootNodeAllFolders		@"0"
+#define nodeUpNext			@"0.1"
 #define rootNodeInbox			@"1"
 #define nodeInbox				@"1.1"
 #define rootNodeTaskFolders		@"2"
@@ -57,6 +59,16 @@
  * Initialize all root nodes which group items in the source list view.
  */
 - (void) initRootNodes {
+	
+	[sidebar addSection:rootNodeAllFolders caption:@"ALL"];
+	[sidebar addChild:rootNodeAllFolders 
+				  key:nodeUpNext
+			  caption:@"Up Next"
+				 icon:[NSImage imageNamed:@"folders-all.png"]
+				 data: nil
+			   action:@selector(handleAllFoldersSelection:) 
+			   target:self];
+	
 	[sidebar addSection:rootNodeInbox caption:@"INBOX"];
 	[sidebar addChild:rootNodeInbox 
 				  key:nodeInbox
@@ -72,10 +84,11 @@
 
 	
 	// Expand all sections' nodes
+	[sidebar expandItem:rootNodeAllFolders];
 	[sidebar expandItem:rootNodeInbox];
 	[sidebar expandItem:rootNodeTaskFolders];
 	
-	[sidebar selectItem:nodeInbox];
+	[sidebar selectItem:nodeUpNext];
 }
 
 /*
@@ -343,6 +356,14 @@
 
 - (void)sendFolderNameIndicatorChange:(NSString *)name {
 	[[NSApp delegate] changeFolderNameIndicator:name];
+}
+
+- (IBAction) handleAllFoldersSelection:(id) sender {
+	NSLog(@"Selected all-folders folder!");
+	[simpController setTaskListFolderFilterEnabled:[NSNumber numberWithBool: NO] reloadList:YES];
+	//TODO
+	//[gtdController setTaskListFiltersEnabled:0 reloadList:YES];
+	[[NSApp delegate] changeFolderNameIndicator:@"All Folders"];
 }
 
 - (IBAction) handleInboxSelection:(id) sender {

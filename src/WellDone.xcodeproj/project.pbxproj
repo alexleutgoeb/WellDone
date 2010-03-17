@@ -47,6 +47,7 @@
 		6F2E521B10B01F7B005B118B /* GTDListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E521910B01F7B005B118B /* GTDListView.m */; };
 		6F9A5B2E10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
 		6F9A5B2F10FBA0B800CE21CB /* HUDTaskEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */; };
+		6FA2D6F01150FDBA007502BB /* folders-all.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA2D6EF1150FDBA007502BB /* folders-all.png */; };
 		6FAF89DB10BD621800478F02 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6FAF8A1710BD627F00478F02 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */; };
 		6FB162DB10AD8CF200961A94 /* SimpleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB162D910AD8CF200961A94 /* SimpleListView.xib */; };
@@ -250,6 +251,7 @@
 		6F2E521810B01F7B005B118B /* GTDListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListView.h; sourceTree = "<group>"; };
 		6F2E521910B01F7B005B118B /* GTDListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDListView.m; sourceTree = "<group>"; };
 		6F9A5B2D10FBA0B800CE21CB /* HUDTaskEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUDTaskEditor.xib; sourceTree = "<group>"; };
+		6FA2D6EF1150FDBA007502BB /* folders-all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folders-all.png"; sourceTree = "<group>"; };
 		6FAF89D910BD621800478F02 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		6FB162D910AD8CF200961A94 /* SimpleListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleListView.xib; sourceTree = "<group>"; };
 		6FB8A94010B0143F00B0F240 /* GTDListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDListController.h; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 		FA48B85F10D4139E0032F1D8 /* ImageRes */ = {
 			isa = PBXGroup;
 			children = (
+				6FA2D6EF1150FDBA007502BB /* folders-all.png */,
 				FA56EC0710EBCA9900228C43 /* icon.icns */,
 				FAD0791111067305006B1A34 /* tags.png */,
 				FAD077241106558A006B1A34 /* bg_gradient.png */,
@@ -1022,6 +1025,7 @@
 				FAD06DA31103E505006B1A34 /* inbox.png in Resources */,
 				FAD077251106558A006B1A34 /* bg_gradient.png in Resources */,
 				FAD0791211067305006B1A34 /* tags.png in Resources */,
+				6FA2D6F01150FDBA007502BB /* folders-all.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

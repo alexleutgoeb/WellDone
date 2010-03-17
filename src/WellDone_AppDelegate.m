@@ -232,7 +232,7 @@
 	[self replacePlaceholderView:&simpleListPlaceholderView withViewOfController:simpleListController];
 	[self replacePlaceholderView:&contextPlaceholderView withViewOfController:contextViewController];
 
-	[simpleListController reloadTaskListWithFilters];
+	[simpleListController reloadTaskListWithFilters:YES];
 	[[simpleListController treeController] fetch:nil];
 	loadSection = YES;
 	[self initGTDView];
